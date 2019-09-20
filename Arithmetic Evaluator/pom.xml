@@ -12,6 +12,8 @@
     <properties>
         <struts2.version>2.5.14.1</struts2.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+   		<maven.compiler.target>1.8</maven.compiler.target>
     </properties>
 
     <dependencies>
@@ -77,6 +79,13 @@
             <artifactId>dwr</artifactId>
             <version>1.1-beta-3</version>
         </dependency>
+        
+        <!-- Mysql connector -->
+        <dependency>
+    		<groupId>mysql</groupId>
+    		<artifactId>mysql-connector-java</artifactId>
+    		<version>8.0.14</version>
+		</dependency>
     </dependencies>
 
     <build>
