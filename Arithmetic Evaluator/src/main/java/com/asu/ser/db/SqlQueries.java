@@ -7,5 +7,5 @@ public class SqlQueries {
 	
 	//TABLE USERS
 	//public static final String SELECT_USER = "select * from Users where ID = %s";
-
+    public static final String INSERT_USER = "INSERT INTO TABLE USERS (FIRST_NAME, LAST_NAME, DOB, EMAIL_ID, PASSWORD) VALUES (?,?,?,?,?)";
 }

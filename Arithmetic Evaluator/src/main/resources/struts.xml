@@ -12,6 +12,17 @@
 
 		<default-action-ref name="index" />
 
+		<action name="admin/signup_page">
+			<result>/WEB-INF/jsp/admin_signup.jsp</result>
+		</action>
+
+		<action name="admin/signup" class="com.asu.ser.db.usermanagement.UserManagementAction" method="signUp">
+			<result name="success">/WEB-INF/jsp/dashboard.jsp</result>
+			<result name="error">/WEB-INF/jsp/admin_signup.jsp</result>
+		</action>
+
+
+		<!-- To be deleted -->
 		<action name="index" class="com.asu.ser.IndexAction">
 			<result>/WEB-INF/jsp/index.jsp</result>
 		</action>
@@ -20,15 +31,7 @@
 			<result name="input">/jsp/index.jsp</result>
 			<result>/WEB-INF/jsp/helloWorld.jsp</result>
 		</action>
-		
-		<action name="admin/signup_page" class="com.asu.ser.usermanagement" method ="">
-			<result>/WEB-INF/jsp/admin_signup.jsp</result>
-		</action>
-
-		<action name="admin/signup_page" class="com.asu.ser.usermanagement" method ="">
-			<result name="success">/WEB-INF/jsp/dashboard.jsp</result>
-			<result name="error">/WEB-INF/jsp/admin_signup.jsp</result>
-		</action>
+		<!-- To be deleted end -->
 
 	</package>
 
