@@ -1,6 +1,17 @@
 
+BACKEND CODING:
 
 1. Function names and variable names - user camel case.
 2. Static variable - All caps, use underscore "_" to separate words.
 3. Use open brackets "{" in the same line as function name.
 4. Use proper well defined name for variables.
+
+
+FRONT ENG CODING:
+
+1. Use only external css files. Don't have any inline style tags.
+2. Name css class/headers properly.
+3. If a component has a common design and will be used throughout the application, name them properly.
+4. User camelCase for naming.
+5. Try to move common java script function to common.js
+6. Have id and name for each text element, as id will be required by jQuery for fetching data, and name will be used in backend when submitting a form.
