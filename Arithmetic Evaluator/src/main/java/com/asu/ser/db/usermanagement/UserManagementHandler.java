@@ -4,7 +4,9 @@ import com.asu.ser.db.DataSource;
 
 public class UserManagementHandler {
 
-    public void signUpUser(String firstName, String lastName, String dob, String emailID, String password) throws Exception {
-        DataSource.insertAdminUser(firstName, lastName, dob, emailID, password);
+    public void signUpAdminUser(String emailID, String password, String firstName, String lastName, String institutionName) throws Exception {
+        Integer userID = DataSource.insertUser(emailID, password, firstName, lastName);
+        Integer institutionID = DataSource.insertInstitution(institutionName);
+        DataSource.insertUserTOInstitution(userID, institutionID);
     }
 }
