@@ -17,10 +17,9 @@
 		</action>
 
 		<action name="admin/signup" class="com.asu.ser.db.usermanagement.UserManagementAction" method="signUp">
-			<result name="success">/WEB-INF/jsp/dashboard.jsp</result>
+			<result name="success">/WEB-INF/jsp/index.jsp</result>
 			<result name="error">/WEB-INF/jsp/admin_signup.jsp</result>
 		</action>
-
 
 		<!-- To be deleted -->
 		<action name="index" class="com.asu.ser.IndexAction">
