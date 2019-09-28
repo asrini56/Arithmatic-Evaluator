@@ -11,7 +11,7 @@ body{
 .form{
     position: relative;
     z-index: 1;
-    background: rgba(7, 40, 195, 0.05);
+    background-color: white;
     max-width: 360px;
     margin: 0 auto 30px;
     padding:0px;
@@ -60,7 +60,7 @@ img.avatar {
 
 
 .btn-grp button:hover{
-  background-color:#337B7C;
+  background-color:#6E7C9A;
 }
 
 .form button:hover,.form button:active{
@@ -127,7 +127,7 @@ img.avatar {
 
 .modal-header {
   padding: 2px 16px;
-  background-color: skyblue;
+  background-color: #4C669F;
   color: white;
 }
 
