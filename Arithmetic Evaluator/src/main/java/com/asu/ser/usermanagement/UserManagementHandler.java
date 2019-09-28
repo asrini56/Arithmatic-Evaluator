@@ -1,4 +1,4 @@
-package com.asu.ser.db.usermanagement;
+package com.asu.ser.usermanagement;
 
 import com.asu.ser.db.DataSource;
 

@@ -1,3 +1,4 @@
+<%@taglib prefix="s" uri="/struts-tags" %>
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -50,7 +51,7 @@ p    {color: antiquewhite;}
     </div>
     <div class="modal-body">
       <p style="color: black">not registered? contact admin!</p>
-      <p style="color: black"> Want to create institution? <a href="admin/signup_page">Create</a></p>
+      <p style="color: black"> Want to create institution? <a href="admin/signup_page.action">Create</a></p>
     </div>
    
   </div>
