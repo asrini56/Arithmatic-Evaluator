@@ -46,16 +46,10 @@ public class DataSource {
         Connection connection = DataSourceConnector.getConnection();
         PreparedStatement statement = connection.prepareStatement(SqlQueries.INSERT_USER_TO_INSTITUTION, Statement.RETURN_GENERATED_KEYS);
         statement.setInt(1, userID);
-        statement.setInt(1, institutionID);
-        Integer lastInsertId = null;
+        statement.setInt(2, institutionID);
         int rowsInserted = statement.executeUpdate();
-        if(rowsInserted != 0){
-            ResultSet rs = statement.getGeneratedKeys();
-            rs.next();
-            lastInsertId = rs.getInt(1);
-        }
         statement.close();
-        return lastInsertId;
+        return rowsInserted;
     }
 
     public static List<Integer> selectInstitutionID(String institutionName) throws Exception{
