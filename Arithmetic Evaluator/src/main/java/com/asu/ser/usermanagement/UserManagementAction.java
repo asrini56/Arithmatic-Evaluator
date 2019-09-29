@@ -39,6 +39,19 @@ public class UserManagementAction {
         return Action.SUCCESS;
     }
 
+    public String login(){ UserManagementHandler userManagementHandler = new UserManagementHandler();
+        try {
+            this.message = userManagementHandler.loginUser(emailID, password);
+            if(!StringUtils.equalsIgnoreCase(message, "success")){
+                return Action.ERROR;
+            }
+        } catch (Exception e) {
+            this.message = "Error while logging in. Please try again.";
+            return Action.ERROR;
+        }
+        return Action.SUCCESS;
+    }
+
     private boolean validEmailID(String emailID) {
         return true;
     }

@@ -1,5 +1,7 @@
 package com.asu.ser.db;
 
+import com.asu.ser.model.User;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -19,12 +21,30 @@ public class DataSource {
         Integer lastInsertId = null;
         int rowsInserted = statement.executeUpdate();
         if(rowsInserted != 0){
-            ResultSet rs = statement.getGeneratedKeys();
-            rs.next();
-            lastInsertId = rs.getInt(1);
+            ResultSet resultSet = statement.getGeneratedKeys();
+            resultSet.next();
+            lastInsertId = resultSet.getInt(1);
         }
         statement.close();
         return lastInsertId;
+    }
+
+    public static List<User> selectUser(String emailID) throws Exception {
+        Connection connection = DataSourceConnector.getConnection();
+        PreparedStatement statement = connection.prepareStatement(SqlQueries.SELECT_USER_USING_EMAIL_PASSWORD);
+        statement.setString(1, emailID);
+        ResultSet resultSet= statement.executeQuery();
+        List<User> userList = new ArrayList<>();
+        while(resultSet.next()){
+            User user = new User();
+            user.setEmailId(resultSet.getString("email_id"));
+            user.setPassword(resultSet.getString("password"));
+            user.setFirstName(resultSet.getString("first_name"));
+            user.setLastName(resultSet.getString("last_name"));
+            userList.add(user);
+        }
+        statement.close();
+        return userList;
     }
 
     public static Integer insertInstitution(String institutionName) throws Exception {
@@ -34,9 +54,9 @@ public class DataSource {
         Integer lastInsertId = null;
         int rowsInserted = statement.executeUpdate();
         if(rowsInserted != 0){
-            ResultSet rs = statement.getGeneratedKeys();
-            rs.next();
-            lastInsertId = rs.getInt(1);
+            ResultSet resultSet = statement.getGeneratedKeys();
+            resultSet.next();
+            lastInsertId = resultSet.getInt(1);
         }
         statement.close();
         return lastInsertId;

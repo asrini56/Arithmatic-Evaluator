@@ -13,6 +13,12 @@ p    {color: antiquewhite;}
 .button1 {border-radius: 50%;}
 
 </style>
+<script>
+//Function to submit the login form
+function loginFunction() {
+  document.getElementById("register-form").submit();
+}
+</script>
 </head>
 <body> 
     
@@ -26,14 +32,14 @@ p    {color: antiquewhite;}
 </nav>
        <div class="login-page">
            <div class="form">
-               <form class="register-form">
+               <form class="register-form" action="login.action">
                    <div class="imgcontainer">
     <img src="https://icon-library.net/images/head-icon/head-icon-11.jpg" alt="Avatar" class="avatar">
   </div>
     <p></p>
-               <input type="text" placeholder="user name"/>
-               <input type="password" placeholder="password"/>
-                <button>LOGIN</button>                   
+               <input name ="emailID" type="text" placeholder="user name"/>
+               <input name="password" type="password" placeholder="password"/>
+                <button name="login" onclick="loginFunction()">LOGIN</button>
 
                    
                                       
