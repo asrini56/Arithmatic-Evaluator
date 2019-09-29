@@ -25,11 +25,12 @@ public class DataSourceConnector {
 			con.close();
 		}
 		
-		File propertyFile = Util.getFileFromResources(DB_PROPERTY_FILE);
+		//File propertyFile = Util.getFileFromResources(DB_PROPERTY_FILE);
 		
 		//Uncomment below  two lines to test using java directly.
-		//String currentDirectory = System.getProperty("user.dir");
-		//File propertyFile = new File(currentDirectory + "/src/main/resources/" + DB_PROPERTY_FILE);
+		String currentDirectory = System.getProperty("user.dir");
+		System.out.println("Current dir is " + currentDirectory);
+		File propertyFile = new File(currentDirectory + "/src/main/resources/" + DB_PROPERTY_FILE);
 
 		try (InputStream input = new FileInputStream(propertyFile)) {
 			Properties prop = new Properties();

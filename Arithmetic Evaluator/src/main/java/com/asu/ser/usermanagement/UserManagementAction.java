@@ -1,4 +1,4 @@
-package com.asu.ser.db.usermanagement;
+package com.asu.ser.usermanagement;
 
 import com.asu.ser.db.DataSource;
 import com.opensymphony.xwork2.Action;
@@ -30,7 +30,7 @@ public class UserManagementAction {
                 message = "Institution is already created. Please login using Email ID and Password, or Click Reset Password.";
                 return Action.ERROR;
             } else {
-                userManagementHandler.signUpAdminUser(emailID, password, StringUtils.trimToNull(firstName), StringUtils.trimToNull(lastName), StringUtils.trimToNull(institutionName));
+                userManagementHandler.signUpAdminUser(emailID, password, null, null, StringUtils.trimToNull(institutionName));
             }
         } catch (Exception e) {
             this.message = "Failed to create Admin Account!!!";
