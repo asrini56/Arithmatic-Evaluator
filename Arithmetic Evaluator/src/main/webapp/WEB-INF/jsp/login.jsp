@@ -8,8 +8,8 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
    
 <style>
-    h2   {color: white;}
-p    {color: antiquewhite;}
+    h2   {color: black;}
+p    {color: black;}
 .button1 {border-radius: 50%;}
 
 </style>
@@ -38,7 +38,7 @@ p    {color: antiquewhite;}
                    
                                       
 <!-- Trigger/Open The Modal -->
-<a style="color: aliceblue" href="#" id="myBtn">Not Registered. Click here!</a>
+<a style="color: black" href="#" id="myBtn">Not Registered. Click here!</a>
 
 <!-- The Modal -->
 <div id="myModal" class="modal">
