@@ -4,23 +4,31 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import org.apache.struts2.ServletActionContext;
 
 public class AuthenticationUtil {
 
 	private static final Map<String, String> USER_TOKENS = new HashMap<>();
-	private static final String ATTR_NAME_USER_TOKEN = "USER_TOKEN";
 	
-	public static String setTokenForUser(String username, HttpServletRequest request) {
+	
+	public static String setTokenForUser(String userName) {
 		String token = TokenGenerator.generateToken();
-		USER_TOKENS.put(username, token);
-		request.setAttribute(ATTR_NAME_USER_TOKEN, token);
+		USER_TOKENS.put(userName, token);
+		HttpServletRequest request = ServletActionContext.getRequest();
+		request.setAttribute(AuthenticationConstants.ATTR_NAME_USERNAME, userName);
+		request.setAttribute(AuthenticationConstants.ATTR_NAME_USER_TOKEN, token);
 		return token;
 	}
 	
-	public static void reomveTokenForUser(String username) {
-		USER_TOKENS.remove(username);
+	public static void reomveTokenForUser(String userName) {
+		USER_TOKENS.remove(userName);
+		HttpServletRequest request = ServletActionContext.getRequest();
+		request.removeAttribute(AuthenticationConstants.ATTR_NAME_USER_TOKEN);
 	}
-	public static boolean validateUser(String userName, String token) {
+	
+	public static boolean validateUser(String userName) {
+		HttpServletRequest request = ServletActionContext.getRequest();
+		String token = (String) request.getAttribute(AuthenticationConstants.ATTR_NAME_USER_TOKEN);
 		String storedToken = USER_TOKENS.getOrDefault(userName, "");
 		return storedToken.equals(token);
 	}
