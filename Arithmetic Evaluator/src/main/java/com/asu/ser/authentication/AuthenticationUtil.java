@@ -33,4 +33,8 @@ public class AuthenticationUtil {
 		return storedToken.equals(token);
 	}
 
+	public static String getLoggedInUser() {
+		HttpServletRequest request = ServletActionContext.getRequest();
+		return (String) request.getAttribute(AuthenticationConstants.ATTR_NAME_USERNAME);
+	}
 }

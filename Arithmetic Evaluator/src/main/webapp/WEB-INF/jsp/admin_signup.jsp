@@ -104,7 +104,7 @@ myInput.onkeyup = function() {
   }
 }
 
-<script>
+
 function submitFunction() {
   document.getElementById("myForm").submit();
 }
