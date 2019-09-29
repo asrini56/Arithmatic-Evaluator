@@ -12,3 +12,10 @@ function sendAjaxRequest(url, successCallBackFn) {
 		}
 	});
 }
+
+
+function checkAndAlertError(message) {
+	if(message.includes("fail") || message.includes("error")) {
+		alert(message);
+	}
+}

@@ -147,6 +147,8 @@ img.avatar {
     background: #4C669F;
 }
       </style>
+      <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+      
       <script type="text/javascript">
          function dragStart(ev) {
             ev.dataTransfer.effectAllowed='move';
@@ -163,8 +165,12 @@ img.avatar {
          }
          function dragDrop(ev) {
             var src = ev.dataTransfer.getData("Text");
-            ev.target.appendChild(document.getElementById(src));
             ev.stopPropagation();
+            console.log(src);
+            $addButtonDiv = $("#boxA").clone();
+            $addButtonDiv.attr('id', 'abc');
+        	$( "#clone" ).append($addButtonDiv.wrap('<div>').parent().html());
+        	ev.target.appendChild(document.getElementById('abc'));
             return false;
          }
       </script>
@@ -210,7 +216,7 @@ img.avatar {
 
      	<div id="boxA" draggable="true" ondragstart="return dragStart(event) "><button type="button" class="btn btn-default btn-sm" style=background-color:#438687>
           <span class="glyphicon glyphicon-plus"></span> ADDITION
-          </button>
+        </button>
 	  </div>
 
 	<br><br>
@@ -224,7 +230,9 @@ img.avatar {
   </nav>
   <nav>
 	<h1>Canvas</h1>
+	<div id="clone">
 	<div id="boxB" ondragenter="return dragEnter(event)" ondrop="return dragDrop(event)" ondragover="return dragOver(event)" ondragstart="return dragStart(event)">
+	</div>
 	</div>
 	<button type="button" class="btn btn-success" style=float:right>Submit</button>
   </nav>	

@@ -6,19 +6,23 @@ import com.opensymphony.xwork2.conversion.annotations.Conversion;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
+import java.util.regex.Pattern;
 
 @Conversion()
 public class UserManagementAction {
 
-    private static String emailID;
-    private static String password;
-    private static String firstName;
-    private static String lastName;
-    private static String message;
-    private static String institutionName;
+    private String emailID;
+    private String password;
+    private String firstName;
+    private String lastName;
+    private String message;
+    private String institutionName;
+    private List<Teacher> teachers;
+
+    private static final String REGEX = "^(.+)@(.+)$";
+    private static final Pattern PATTERN = Pattern.compile(REGEX);
 
     public String signUp(){
-        UserManagementHandler userManagementHandler = new UserManagementHandler();
         try {
             if(!validEmailID(emailID)){
                 message = "Invalid Email ID. Please enter a valid Email ID.";
@@ -26,14 +30,14 @@ public class UserManagementAction {
             } else if(!validPassword(password)){
                 message = "Invalid Password. Please enter a valid Password.";
                 return Action.ERROR;
-            } else if(isInstitutionPresent(institutionName)){
+            } else if(UserManagementHandler.isInstitutionPresent(institutionName)){
                 message = "Institution is already created. Please login using Email ID and Password, or Click Reset Password.";
                 return Action.ERROR;
             } else {
-                userManagementHandler.signUpAdminUser(emailID, password, null, null, StringUtils.trimToNull(institutionName));
+            	UserManagementHandler.signUpAdminUser(emailID, password, null, null, StringUtils.trimToNull(institutionName));
             }
         } catch (Exception e) {
-            this.message = "Failed to create Admin Account!!!";
+            message = "Failed to create Admin Account!!!";
             return Action.ERROR;
         }
         return Action.SUCCESS;
@@ -52,8 +56,37 @@ public class UserManagementAction {
         return Action.SUCCESS;
     }
 
+    public String addTeacher() {
+    	try {
+    		if(!validEmailID(emailID)){
+                message = "Invalid Email ID. Please enter a valid Email ID.";
+                return Action.ERROR;
+            } else if(!validPassword(password)){
+                message = "Invalid Password. Please enter a valid Password.";
+                return Action.ERROR;
+            } else {
+            	UserManagementHandler.addTeacher(firstName, lastName, emailID);
+            }
+    	} catch (Exception e) {
+			e.printStackTrace();
+			message = "Failed to add teacher " + e.getMessage();
+			return Action.ERROR;
+		}
+    	return Action.SUCCESS;
+    }
+
+    public String fetchTeachers() {
+    	try {
+    		teachers = UserManagementHandler.fetchTeachers();
+    	}catch (Exception e) {
+    		e.printStackTrace();
+    		message = "Failed to fetch teachers - " + e.getMessage();
+		}
+    	return Action.SUCCESS;
+    }
+
     private boolean validEmailID(String emailID) {
-        return true;
+    	return PATTERN.matcher(emailID).matches();
     }
 
     private boolean validPassword(String password) {
@@ -112,4 +145,12 @@ public class UserManagementAction {
     public void setInstitutionName(String institutionName) {
         this.institutionName = institutionName;
     }
+
+	public List<Teacher> getTeachers() {
+		return teachers;
+	}
+
+	public void setTeachers(List<Teacher> teachers) {
+		this.teachers = teachers;
+	}
 }
