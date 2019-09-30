@@ -26,13 +26,17 @@
         </action>
 
         <action name="admin/signup" class="com.asu.ser.usermanagement.UserManagementAction" method="signUp">
-            <result name="success">/jsp/admin_signup.jsp</result>
+            <result name="success">/jsp/math_operations.jsp</result>
             <result name="error">/jsp/admin_signup.jsp</result>
         </action>
 
         <action name="login" class="com.asu.ser.usermanagement.UserManagementAction" method="login">
-            <result name="success">/jsp/admin_signup.jsp</result>
-            <result name="error">/jsp/admin_signup.jsp</result>
+            <result name="success">/jsp/math_operations.jsp</result>
+            <result name="error">/jsp/login.jsp</result>
+        </action>
+
+        <action name="admin/listTeachers" class="com.asu.ser.usermanagement.UserManagementAction" method="fetchTeachers">
+            <result name="success">/jsp/math_operations.jsp</result>
         </action>
 
     </package>
