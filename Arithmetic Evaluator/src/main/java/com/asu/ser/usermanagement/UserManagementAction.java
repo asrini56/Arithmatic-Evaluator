@@ -43,9 +43,9 @@ public class UserManagementAction {
         return Action.SUCCESS;
     }
 
-    public String login(){ UserManagementHandler userManagementHandler = new UserManagementHandler();
+    public String login(){
         try {
-            this.message = userManagementHandler.loginUser(emailID, password);
+            this.message = UserManagementHandler.loginUser(emailID, password);
             if(!StringUtils.equalsIgnoreCase(message, "success")){
                 return Action.ERROR;
             }
@@ -91,11 +91,6 @@ public class UserManagementAction {
 
     private boolean validPassword(String password) {
         return true;
-    }
-
-    public boolean isInstitutionPresent(String institutionName) throws Exception {
-        List<Integer> institutionIdList = DataSource.selectInstitutionID(institutionName);
-        return !institutionIdList.isEmpty();
     }
 
     public String getPassword() {

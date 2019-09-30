@@ -36,7 +36,7 @@ public class UserManagementHandler {
         DataSource.insertUserTOInstitution(userID, institutionID);
     }
 
-    public String loginUser(String emailID, String password) throws Exception {
+    public static String loginUser(String emailID, String password) throws Exception {
         String message = "";
         List<User> userList = DataSource.selectUser(emailID);
         if(userList.isEmpty()){
