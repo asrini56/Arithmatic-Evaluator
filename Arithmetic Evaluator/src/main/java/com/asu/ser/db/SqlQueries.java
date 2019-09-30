@@ -18,7 +18,7 @@ public class SqlQueries {
     // END USER TABLE QUERIES
 
     // START USER_TO_ROLE, ROLES TABLE QUERIES
-    public static final String FETCH_ALL_ROLES = "SELECT ID, ROLE from roles";
+    public static final String FETCH_ALL_ROLES = "SELECT role_id, role_name from roles";
 
     public static final String INSERT_USER_TO_ROLE = "INSERT INTO user_to_role (user_id, role_id) values (? , ?)";
     public static final String FETCH_USER_ROLE = "SELECT role_id from user_to_role where user_id = ?";
