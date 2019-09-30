@@ -35,6 +35,10 @@
             <result type="dispatcher">/jsp/admin_signup.jsp</result>
         </action>
         
+	<action name="admin/listTeachers_page">
+            <result type="dispatcher">/jsp/teacher.jsp</result>
+        </action>
+        
         <action name="grade1/operations_page">
             <result type="dispatcher">/jsp/math_operations.jsp</result>
         </action>
@@ -50,7 +54,7 @@
         </action>
 
         <action name="admin/listTeachers" class="com.asu.ser.usermanagement.UserManagementAction" method="fetchTeachers">
-            <result name="success">/jsp/math_operations.jsp</result>
+            <result type="json"/>
         </action>
         
         <action name="grade1/operations/evaluvate" class="com.asu.ser.operations.OperationsAction" method="evaluvateExpression">
