@@ -1,1 +1,3 @@
 1. https://www.mkyong.com/java/java-read-a-file-from-resources-folder
+2. https://stackoverflow.com/questions/3422673/how-to-evaluate-a-math-expression-given-in-string-form
+3. http://mathparser.org/

@@ -10,19 +10,33 @@
     <constant name="struts.enable.DynamicMethodInvocation" value="false"/>
 
     <package name="myPackage" extends="struts-default">
+    
+		<result-types>
+			<result-type name="json" default="true"
+				class="org.apache.struts2.json.JSONResult">
+				<param name="excludeNullProperties">true</param>
+				<param name="defaultEncoding">UTF-8</param>
+			</result-type>
+			<result-type name="stream"
+				class="org.apache.struts2.dispatcher.StreamResult">
+				<param name="contentType">application/json</param>
+				<param name="contentCharSet">UTF-8</param>
+				<param name="contentDisposition">attachment;filename=test.txt</param>
+			</result-type>
+		</result-types>
 
         <default-action-ref name="index" />
 
 	    <action name="login_page">
-            <result>/jsp/login.jsp</result>
+            <result type="dispatcher">/jsp/login.jsp</result>
         </action>
 
         <action name="admin/signup_page">
-            <result>/jsp/admin_signup.jsp</result>
+            <result type="dispatcher">/jsp/admin_signup.jsp</result>
         </action>
         
         <action name="grade1/operations_page">
-            <result>/jsp/math_operations.jsp</result>
+            <result type="dispatcher">/jsp/math_operations.jsp</result>
         </action>
 
         <action name="admin/signup" class="com.asu.ser.usermanagement.UserManagementAction" method="signUp">
@@ -33,6 +47,10 @@
         <action name="login" class="com.asu.ser.usermanagement.UserManagementAction" method="login">
             <result name="success">/jsp/admin_signup.jsp</result>
             <result name="error">/jsp/admin_signup.jsp</result>
+        </action>
+        
+        <action name="grade1/operations/evaluvate" class="com.asu.ser.operations.OperationsAction" method="evaluvateExpression">
+            <result type="json"/>
         </action>
 
     </package>

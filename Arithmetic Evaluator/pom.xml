@@ -37,6 +37,13 @@
             <artifactId>struts2-spring-plugin</artifactId>
             <version>${struts2.version}</version>
         </dependency>
+        
+        <dependency>
+    		<groupId>org.apache.struts</groupId>
+    		<artifactId>struts2-json-plugin</artifactId>
+			<version>2.5.20</version>
+		</dependency>
+        
 
         <!-- Servlet & Jsp -->
         <dependency>
@@ -57,6 +64,12 @@
 			<groupId>javax.mail</groupId>
 			<artifactId>javax.mail-api</artifactId>
 			<version>1.6.0</version>
+		</dependency>
+
+		<dependency>
+    		<groupId>org.mariuszgromada.math</groupId>
+    		<artifactId>MathParser.org-mXparser</artifactId>
+   			<version>4.1.1</version>
 		</dependency>
     </dependencies>
 

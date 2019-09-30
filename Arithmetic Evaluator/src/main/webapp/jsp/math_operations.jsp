@@ -89,7 +89,7 @@
     				<button type="button" style="background-color:#438687">10</button>
 				</div>
 				
-				<br/> <br/> <br/> <br>
+				<br/> <br/> <br/> <br> <hr>
 				<div style="margin-left:7%">
 					<div id="add" class="operationsBox" draggable="true" ondragenter="return dragEnter(event)" ondragstart="return dragStart(event)" ondrop="return dragDrop(event)" ondragover="return dragOver(event)">
     					<button type="button" style="background-color:#438687">+</button>
@@ -112,7 +112,7 @@
 		</div>	
 		
 		<div class="deleteAction">
-			<span class="deleteBtnHover">Select a button to delete it</span>
+			<!--  <span class="deleteBtnHover">Select a button to delete it</span>-->
 			<button type="button" id="delete" class="btn btn-success canvasButton deleteButton" onClick="deleteSelectedButton()" >Delete Button</button>
 		</div>
 		<br><br>
@@ -121,12 +121,15 @@
 
   <nav>
     <h1 class="splitHeading">Result</h1>
+    <div class="expressionResultDiv" ><span id="expressionResult"></span></div>
    </nav>
 </section>
 
 <footer>
   <p style=text-align:right><span class="glyphicon glyphicon-copyright-mark"></span>  Copyright</p>
 </footer>
+
+<script src="../js/common.js"></script>
 <script>
 var cloneCount = 0;
 var selectedBtn;
@@ -165,13 +168,19 @@ function dragStart(ev) {
  function evaluvate(){
 	 var expression = "";
 	 $( ".performOperation" ).each(function( index ) {
-		 // console.log( index + ": " + $( this ).text() );
-		 console.log($( this ).text().trim());
-		 console.log("----------------");
 		 expression += $( this ).text().trim();
 		});
 	 
+	 expression = expression.replace("x", "*");
 	 console.log("Final Expression is " + expression);
+	 var url="operations/evaluvate.action?expression=" + expression;
+	 sendAjaxRequest(url, function(resp){
+		console.log(resp);
+		var result = resp.response;
+		console.log(result);
+		$("#expressionResult").html(result);
+	 });
+	 
  }
 
  function selectedButton(id){
