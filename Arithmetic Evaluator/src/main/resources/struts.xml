@@ -14,21 +14,21 @@
         <default-action-ref name="index" />
 
 	    <action name="login_page">
-            <result>/WEB-INF/jsp/login.jsp</result>
+            <result>/jsp/login.jsp</result>
         </action>
 
         <action name="admin/signup_page">
-            <result>/WEB-INF/jsp/admin_signup.jsp</result>
+            <result>/jsp/admin_signup.jsp</result>
         </action>
 
         <action name="admin/signup" class="com.asu.ser.usermanagement.UserManagementAction" method="signUp">
-            <result name="success">/WEB-INF/jsp/admin_signup.jsp</result>
-            <result name="error">/WEB-INF/jsp/admin_signup.jsp</result>
+            <result name="success">/jsp/admin_signup.jsp</result>
+            <result name="error">/jsp/admin_signup.jsp</result>
         </action>
 
         <action name="login" class="com.asu.ser.usermanagement.UserManagementAction" method="login">
-            <result name="success">/WEB-INF/jsp/admin_signup.jsp</result>
-            <result name="error">/WEB-INF/jsp/admin_signup.jsp</result>
+            <result name="success">/jsp/admin_signup.jsp</result>
+            <result name="error">/jsp/admin_signup.jsp</result>
         </action>
 
     </package>
