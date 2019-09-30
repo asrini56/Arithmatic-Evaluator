@@ -20,6 +20,10 @@
         <action name="admin/signup_page">
             <result>/jsp/admin_signup.jsp</result>
         </action>
+        
+        <action name="grade1/operations_page">
+            <result>/jsp/math_operations.jsp</result>
+        </action>
 
         <action name="admin/signup" class="com.asu.ser.usermanagement.UserManagementAction" method="signUp">
             <result name="success">/jsp/admin_signup.jsp</result>
