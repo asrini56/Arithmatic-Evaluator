@@ -8,6 +8,7 @@ body{
     height:100vh;
     background-size: cover;
     background-size: center;
+    background-color: aliceblue;
 }
 .login-page{
     width: 610px;
@@ -82,16 +83,16 @@ img.avatar {
     		</div>
  		 </div>
 	</nav>
-       	<div class="set-password-page">
+       	<div class="set-password-page"><br><br><br>
            	<div class="form">
                <form class="set-password-form">
                    	<div class="imgcontainer">
     					<img src="https://icon-library.net/images/head-icon/head-icon-11.jpg" alt="Avatar" class="avatar">
   					</div>
-   
+   					<br><br><br>
                		<input type="password" placeholder="new password"/>
                		<input type="password" placeholder="confirm password"/>
-                	<button>Set Password</button>                   
+                	<button>Set Password</button><br><br><br>                   
                 </form>
            	</div>
       	</div>
