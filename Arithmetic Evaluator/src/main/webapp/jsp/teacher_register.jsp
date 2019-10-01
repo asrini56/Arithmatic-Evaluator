@@ -62,27 +62,26 @@ a {
 
 
 </style>
+
+<script>
+function submitForm() {
+  document.getElementById("teacherRegisterForm").submit();
+}
+</script>
 </head>
 <body>
 
-<form action="/action_page.php">
+<form name="teacherRegisterForm" action="addTeachers.action">
   <div class="container">
     <h1>Register</h1>
     <p>Please fill in this form to create a teacher account.</p>
     <hr>
-    <input type="text" placeholder="Enter First Name" name="firstname" required>
-    <input type="text" placeholder="Enter Middle Name" name="middlename">
-    <input type="text" placeholder="Enter Last Name" name="lastname" required>
- <input type="text" placeholder="Enter Email" name="email" required>
-
-    
-    <input type="password" placeholder="Enter Password" name="psw" required>
-
-
-    <input type="password" placeholder="Confirm Password" name="psw-confirm" required>
+    <input type="text" placeholder="Enter First Name" name="firstName" required>
+    <input type="text" placeholder="Enter Last Name" name="lastName" required>
+    <input type="text" placeholder="Enter Email" name="emailID" required>
     <hr>
 
-    <button type="submit" class="registerbtn">Register Teacher</button>
+    <button type="submit" class="registerbtn" onclick="submitForm()">Register Teacher</button>
   </div>
   
 </form>

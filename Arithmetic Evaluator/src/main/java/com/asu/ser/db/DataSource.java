@@ -168,6 +168,20 @@ public class DataSource {
         return roleID;
     }
 
+    public static String fetchUserRoleName(String emailID) throws Exception {
+        Connection connection = DataSourceConnector.getConnection();
+        PreparedStatement statement = connection.prepareStatement(SqlQueries.FETCH_USER_ROLE_NAME);
+        statement.setString(1, emailID);
+        ResultSet resultSet = statement.executeQuery();
+        String roleName = null;
+        while(resultSet.next()){
+            roleName = resultSet.getString("role_name");
+        }
+        resultSet.close();
+        statement.close();
+        return roleName;
+    }
+
     public static List<Teacher> fetchTeachers(int institutionID) throws Exception {
         Connection connection = DataSourceConnector.getConnection();
         PreparedStatement statement = connection.prepareStatement(SqlQueries.FETCH_TEACHERS_DETAILS);

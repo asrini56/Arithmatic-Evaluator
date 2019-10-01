@@ -22,13 +22,14 @@ public class SqlQueries {
 
     public static final String INSERT_USER_TO_ROLE = "INSERT INTO user_to_role (user_id, role_id) values (? , ?)";
     public static final String FETCH_USER_ROLE = "SELECT role_id from user_to_role where user_id = ?";
+    public static final String FETCH_USER_ROLE_NAME = "SELECT role_name from roles where role_id in (SELECT role_id from user_to_role inner join users on users.user_id = user_to_role.user_id where users.email_id = ?)";
 
     // END USER_TO_ROLE, ROLES TABLE QUERIES
 
     // START INSTITUTION RELATED TABLES QUERIES
     public static final String INSERT_INSTITUTION = "INSERT INTO institutions (institution_name) VALUES (?)";
     public static final String SELECT_INSTITUTION_ID_USING_NAME = "SELECT institution_id from institutions WHERE institution_name = ?";
-    public static final String FETCH_INSTITUTION_ID_USING_USER_EMAIL_ID = "SELECT institution_id from user_to_institution inner join users on users.id = user_to_institution.user_id where users.email_id = ?";
+    public static final String FETCH_INSTITUTION_ID_USING_USER_EMAIL_ID = "SELECT institution_id from user_to_institution inner join users on users.user_id = user_to_institution.user_id where users.email_id = ?";
 
     public static final String INSERT_USER_TO_INSTITUTION = "INSERT INTO user_to_institution (user_id, institution_id) VALUES (?,?)";
     // END INSTITUTION RELATED TABLE QUERIES
