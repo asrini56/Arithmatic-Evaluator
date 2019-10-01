@@ -35,8 +35,12 @@
             <result type="dispatcher">/jsp/admin_signup.jsp</result>
         </action>
         
-	<action name="admin/listTeachers_page">
+	    <action name="admin/listTeachers_page">
             <result type="dispatcher">/jsp/teacher.jsp</result>
+        </action>
+
+        <action name="admin/addTeacher_page">
+            <result type="dispatcher">/jsp/teacher_register.jsp</result>
         </action>
         
         <action name="grade1/operations_page">

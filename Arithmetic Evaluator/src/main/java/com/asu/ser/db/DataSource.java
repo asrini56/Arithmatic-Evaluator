@@ -184,6 +184,7 @@ public class DataSource {
             teacher.setEmail(emailID);
             teacher.setFirstName(firstName);
             teacher.setLastName(lastName);
+            teachers.add(teacher);
         }
         resultSet.close();
         statement.close();
