@@ -4,26 +4,19 @@
 <title>Teacher List</title>
 <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
 <link rel="stylesheet" type="text/css" href="css/style.css" />
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="../js/common.js"></script>
 <script type="text/javascript">
 	function callMyAction() {
-	alert("Successful callMyAction!!");
-		$.ajax({
-			type : "GET",
-			url : "http://localhost:8080/arithmetic-evaluator/admin/listTeachers.action",
-			success : function(itr) {
-			alert("Successful ajax call!!");
-				var x = "<ol>";
-				$.each(itr.teachers, function() {
-					x += "<li>" + this + "</li>";
-				});
-				x += "</ol>";
-				$("#teacher1").html(x);
-			},
-			error : function(itr) {
-				alert("No values found..!!");
-			}
-		});
-	}
+    	 var url="listTeachers.action";
+    	 sendAjaxRequest(url, function(resp){
+    		console.log(resp);
+    		var result = resp.response;
+    		console.log(result);
+    		$("#teacher1").html(result);
+    	 });
+
+     }
 </script>
 </head>
 <body style="margin-left: 15%;">

@@ -77,6 +77,7 @@ public class UserManagementAction {
 
     public String fetchTeachers() {
     	try {
+    	    System.out.println("Inside fetch teachers!!!");
     		teachers = UserManagementHandler.fetchTeachers();
     	}catch (Exception e) {
     		e.printStackTrace();
