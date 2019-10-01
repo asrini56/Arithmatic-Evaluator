@@ -1,84 +1,84 @@
-<!DOCTYPE html>
 <html>
-<head>
-<title>Teacher List</title>
-</head>
-<body>
-<style>
-    body{
-        background-color: darkgrey;
-    }
-    table, th, td {
-        border: 1px solid black;
-    border-collapse: collapse;
-    }
-    th, td {
-        padding: 5px;
-        text-align: center;
-    }
-    th{
-        background-color: #4C669F;
-    }
-.button1{
-    font-family: "Roboto", sans-serif;
-    text-transform: uppercase;
-    outline: 0;
-    background: #6E7C9A;
-    width: 100%;
-    border: 0;
-    padding: 15px;
-    color: #FFFFFF;
-    font-size: 14px;
-    cursor: pointer;
-
-}
-
-table {
-  font-family: arial, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-}
-
-td, th {
-  border: 1px solid #dddddd;
-  text-align: left;
-  padding: 8px;
-}
-
-tr:nth-child(even) {
-  background-color: #dddddd;
-}
-</style>
-
+   <head>
+	<title>Arithmetic Evaluator</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="../js/common.js"></script>
-<script type="text/javascript">
-	window.onload = function() {
-	     var url="listTeachers.action";
-    	 sendAjaxRequest(url, function(resp){
-            var x = "<table>";
-            x+="<tr><th>EMAIL</th><th>FIRST NAME</th><th>LAST NAME</th></tr>"
-    	    $.each(resp.teachers, function() {
-    	        x+= "<tr>";
-                x += "<td>" + this.email + "</td>";
-                x += "<td>" + this.firstName + "</td>";
-                x += "<td>" + this.lastName + "</td>";
-                x += "</tr>";
-            });
-            x += "</table>";
-    		$("#teacher1").html(x);
-    	 });
+<link rel="stylesheet" href="../css/teachers.css">
+<link rel="stylesheet" href="../css/operations.css">
 
-     };
+</head>
+   <body>
+		<nav class="navbar navbar-inverse" style="margin-bottom:0px !important">
+  			<div class="container-fluid">
+    			<div class="navbar-header">
+      				<a class="navbar-brand" href="1.html">Arithmetic Evaluator</a>
+    			</div>
+    			<ul class="nav navbar-nav">
+      				<li class="" style="border-right:1px;border-right-color: white;"><a href="1.html">Home</a></li>
+      				<li class="active" style="border-right:1px;border-right-color: white;"><a href="1.html">Teachers</a></li>
+    			</ul>
+    			<ul class="nav navbar-nav navbar-right">
+      				<li><a href="addTeacher_page.action">Create Teacher Account</a></li>
+    			</ul>
+  			</div>
 
- function buttonclick(){
-         window.location="addTeacher_page.action";
-     }
-</script>
-	<h1 align="center">List of Teachers</h1>
-	<div id="teacher1" style="color: green; font-size: 25px;"></div>
-	<br><br><br>
-        <button type="submit" class="button button1" onclick="buttonclick()" >Create Teacher</button>
+			<div id="myModal" class="modal">
+  			<div class="modal-content">
+    			<span class="close">&times;</span>
+    			<div class="form">
+					<form class="register-form">
+						<div class="imgcontainer">
+    						<img src="https://icon-library.net/images/head-icon/head-icon-11.jpg" alt="Avatar" class="avatar">
+  						</div>
+               			<input type="text" placeholder="user name"/>
+               			<input type="password" placeholder="password"/>
+                		<button>LOGIN</button>                   
+				   	 <span class="acc"> Not Registered? <a href="#">Create an institute</a></span>
+    
+					</form>
+  				</div>
+			</div>
+			</div>
+		</nav>
+	
+		<section>
+			<div class="table-users" id="teacher1"></div>
+		</section>
 
-</body>
+		<footer style="bottom:0px; position:absolute; width:100%">
+  			<p style="text-align:center"><span class="glyphicon glyphicon-copyright-mark"></span>  Copyright</p>
+		</footer>
+		
+	<script src="../js/common.js"></script>
+	<script type="text/javascript">
+		window.onload = function() {
+	    	var url="listTeachers.action";
+    	 	sendAjaxRequest(url, function(resp){
+    	 		var tableContent = '<div class="header">Institution Teachers</div>' +
+    	 							'<table cellspacing="0">' + 
+    	 								'<tr>' +
+    	 	      							'<th>First Name</th>' +
+    	 	      							'<th>Last Name</th>' +
+    	 	      							'<th>Email-ID</th>' +
+    	 	    						'</tr>';
+    	 		
+				$.each(resp.teachers, function() {
+    	 	    tableContent += '<tr>';
+    	 	   	tableContent += '<td>' + this.firstName + '</td>';
+    	 	  	tableContent += '<td>' + this.lastName + '</td>';
+    	 	   	tableContent += '<td>' + this.email + '</td>';
+    	 	   	tableContent += "</tr>";
+    	 	    });
+				tableContent += "</table>";
+    			$("#teacher1").html(tableContent);
+    	 	});
+     	};
+
+ 		function buttonclick(){
+         	window.location="addTeacher_page.action";
+     	}
+ 	</script>
+	</body>
 </html>

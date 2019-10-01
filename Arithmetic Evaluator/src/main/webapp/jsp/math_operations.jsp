@@ -125,9 +125,9 @@
    </nav>
 </section>
 
-<footer>
-  <p style=text-align:right><span class="glyphicon glyphicon-copyright-mark"></span>  Copyright</p>
-</footer>
+	<footer style="bottom:0px; position:absolute; width:100%">
+		<p style="text-align:center"><span class="glyphicon glyphicon-copyright-mark"></span>  Copyright</p>
+	</footer>
 
 <script src="../js/common.js"></script>
 <script>

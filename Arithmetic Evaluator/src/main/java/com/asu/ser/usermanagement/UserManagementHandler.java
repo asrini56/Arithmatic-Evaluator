@@ -85,6 +85,7 @@ public class UserManagementHandler {
     	String loggedInUser = AuthenticationUtil.getLoggedInUser();
     	Integer institutionID = DataSource.fetchUsersInstitutionID(loggedInUser);
     	return DataSource.fetchTeachers(1);
+    	//return DataSource.fetchTeachers(institutionID);
     }
 
     public static boolean isInstitutionPresent(String institutionName) throws Exception {
