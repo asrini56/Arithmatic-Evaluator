@@ -29,7 +29,7 @@ public class DataSourceConnector {
 		
 		//Uncomment below  two lines to test using java directly.
 		String currentDirectory = System.getProperty("user.dir");
-		System.out.println("Current dir is " + currentDirectory);
+		//System.out.println("Current dir is " + currentDirectory);
 		File propertyFile = new File(currentDirectory + "/src/main/resources/" + DB_PROPERTY_FILE);
 
 		try (InputStream input = new FileInputStream(propertyFile)) {

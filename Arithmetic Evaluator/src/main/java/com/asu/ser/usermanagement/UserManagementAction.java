@@ -1,5 +1,6 @@
 package com.asu.ser.usermanagement;
 
+import com.asu.ser.authentication.AuthenticationUtil;
 import com.asu.ser.db.DataSource;
 import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.conversion.annotations.Conversion;
@@ -43,26 +44,24 @@ public class UserManagementAction {
         return Action.SUCCESS;
     }
 
-    public String login(){ UserManagementHandler userManagementHandler = new UserManagementHandler();
+    public String login(){
         try {
-            this.message = userManagementHandler.loginUser(emailID, password);
-            if(!StringUtils.equalsIgnoreCase(message, "success")){
-                return Action.ERROR;
+            this.message = UserManagementHandler.loginUser(emailID, password);
+            if(StringUtils.equalsIgnoreCase(message, "success")){
+                AuthenticationUtil.setTokenForUser(emailID);
+                return UserManagementHandler.getRoleNameForUser(emailID);
             }
         } catch (Exception e) {
             this.message = "Error while logging in. Please try again.";
             return Action.ERROR;
         }
-        return Action.SUCCESS;
+        return Action.ERROR;
     }
 
     public String addTeacher() {
     	try {
     		if(!validEmailID(emailID)){
                 message = "Invalid Email ID. Please enter a valid Email ID.";
-                return Action.ERROR;
-            } else if(!validPassword(password)){
-                message = "Invalid Password. Please enter a valid Password.";
                 return Action.ERROR;
             } else {
             	UserManagementHandler.addTeacher(firstName, lastName, emailID);
@@ -77,7 +76,7 @@ public class UserManagementAction {
 
     public String fetchTeachers() {
     	try {
-    		teachers = UserManagementHandler.fetchTeachers();
+    	    teachers = UserManagementHandler.fetchTeachers();
     	}catch (Exception e) {
     		e.printStackTrace();
     		message = "Failed to fetch teachers - " + e.getMessage();
@@ -91,11 +90,6 @@ public class UserManagementAction {
 
     private boolean validPassword(String password) {
         return true;
-    }
-
-    public boolean isInstitutionPresent(String institutionName) throws Exception {
-        List<Integer> institutionIdList = DataSource.selectInstitutionID(institutionName);
-        return !institutionIdList.isEmpty();
     }
 
     public String getPassword() {

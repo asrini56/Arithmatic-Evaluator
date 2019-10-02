@@ -34,21 +34,45 @@
         <action name="admin/signup_page">
             <result type="dispatcher">/jsp/admin_signup.jsp</result>
         </action>
+
+        <action name="admin/dashboard_page">
+            <result type="dispatcher">/jsp/admin_dashboard.jsp</result>
+        </action>
         
+	    <action name="admin/listTeachers_page">
+            <result type="dispatcher">/jsp/teacher.jsp</result>
+        </action>
+
+        <action name="admin/addTeacher_page">
+            <result type="dispatcher">/jsp/teacher_register.jsp</result>
+        </action>
+
         <action name="grade1/operations_page">
             <result type="dispatcher">/jsp/math_operations.jsp</result>
         </action>
 
         <action name="admin/signup" class="com.asu.ser.usermanagement.UserManagementAction" method="signUp">
-            <result name="success">/jsp/admin_signup.jsp</result>
-            <result name="error">/jsp/admin_signup.jsp</result>
+            <result name="success" type="dispatcher">/jsp/admin_dashboard.jsp</result>
+            <result name="error" type="dispatcher">/jsp/admin_signup.jsp</result>
         </action>
 
         <action name="login" class="com.asu.ser.usermanagement.UserManagementAction" method="login">
-            <result name="success">/jsp/admin_signup.jsp</result>
-            <result name="error">/jsp/admin_signup.jsp</result>
+            <result name="admin" type="dispatcher">/jsp/admin_dashboard.jsp</result>
+            <result name="teacher" type="dispatcher">/jsp/admin_dashboard.jsp</result>
+            <result name="student" type="dispatcher">/jsp/math_operations.jsp</result>
+            <result name="success" type="dispatcher">/jsp/math_operations.jsp</result>
+            <result name="error" type="dispatcher">/jsp/login.jsp</result>
         </action>
-        
+
+        <action name="admin/listTeachers" class="com.asu.ser.usermanagement.UserManagementAction" method="fetchTeachers">
+            <result type="json"/>
+        </action>
+
+        <action name="admin/addTeachers" class="com.asu.ser.usermanagement.UserManagementAction" method="addTeacher">
+            <result name="success" type="dispatcher">/jsp/admin_dashboard.jsp</result>
+            <result name="error" type="dispatcher">/jsp/login.jsp</result>
+        </action>
+
         <action name="grade1/operations/evaluvate" class="com.asu.ser.operations.OperationsAction" method="evaluvateExpression">
             <result type="json"/>
         </action>
