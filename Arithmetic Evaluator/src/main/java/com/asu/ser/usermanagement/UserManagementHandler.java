@@ -90,7 +90,7 @@ public class UserManagementHandler {
 
     public static boolean isInstitutionPresent(String institutionName) throws Exception {
         Integer institutionID = DataSource.fetchInstitutionID(institutionName);
-        return institutionID == null ? false : true;
+        return institutionID != null;
     }
 
 	public static void sendTeacherAccountPasswordEmail(String firstName, String lastName, String teacherEmailID,
@@ -103,4 +103,7 @@ public class UserManagementHandler {
 
     }
 
+	public static String getRoleNameForUser(String emailID) throws Exception {
+		return DataSource. fetchUserRoleName(emailID);
+	}
 }
