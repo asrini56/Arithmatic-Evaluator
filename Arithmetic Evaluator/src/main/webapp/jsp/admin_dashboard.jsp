@@ -83,7 +83,7 @@ body {
 	
 	<div class="grid-container">
 		<header class="header">
-			<nav class="navbar navbar-inverse" style="margin-bottom:0px !important">
+			<nav class="navbar navbar-inverse" style="margin-bottom:0px !important; ">
   				<div class="container-fluid">
     				<div class="navbar-header">
       					<a class="navbar-brand titleText" href="#">Arithmetic Evaluator</a>

@@ -88,7 +88,7 @@
 
         <action name="admin/addTeachers" class="com.asu.ser.usermanagement.UserManagementAction" method="addTeacher">
             <result name="success" type="redirect">
-                <param name = "location">admin/dashboard_page.action</param >
+                <param name = "location">admin/listTeachers_page.action</param >
             </result>
             <result name="error" type="redirect">
                 <param name = "location">login_page.action</param>

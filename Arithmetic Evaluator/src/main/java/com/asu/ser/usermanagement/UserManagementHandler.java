@@ -101,6 +101,7 @@ public class UserManagementHandler {
     		}
     		DataSource.insertUserToRole(teacherUserID, teacherRoleID);
     		DataSource.insertUserTOInstitution(teacherUserID, institutionID);
+    		sendTeacherAccountPasswordEmail(firstName, lastName, emailID, password, loggedInUser);
     	} catch (Exception e) {
     		if(teacherUserID > 0) {
     			DataSource.deleteUser(userID);

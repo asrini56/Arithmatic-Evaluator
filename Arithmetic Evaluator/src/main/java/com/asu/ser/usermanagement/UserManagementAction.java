@@ -1,7 +1,6 @@
 package com.asu.ser.usermanagement;
 
 import com.asu.ser.authentication.AuthenticationUtil;
-import com.asu.ser.db.DataSource;
 import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.conversion.annotations.Conversion;
 import org.apache.commons.lang3.StringUtils;
@@ -77,24 +76,31 @@ public class UserManagementAction {
     }
 
     public String addTeacher() {
-        if(AuthenticationUtil.getLoggedInUser().isEmpty()){
+    	String loggedInUser = AuthenticationUtil.getLoggedInUser();
+        if(loggedInUser == null || loggedInUser.isEmpty()){
             message = "Please log in to access the page.";
-            return Action.ERROR;
+            System.out.println(message);
+            return Action.LOGIN;
         }
     	try {
+    		System.out.println("Creating teacher " + firstName + " " + lastName);
     		if(!validEmailID(emailID)){
                 message = "Invalid Email ID. Please enter a valid Email ID.";
+                System.out.println(message);
                 return Action.ERROR;
             } else {
             	UserManagementHandler.addTeacher(firstName, lastName, emailID);
+            	System.out.println("Successfully created teacher! ");
             }
     	} catch (Exception e) {
 			e.printStackTrace();
 			message = "Failed to add teacher " + e.getMessage();
 			if(e.getMessage().equals("No user logged in")) {
 				message = "Login as admin to add teacher";
+				System.out.println(message);
 				return Action.LOGIN;
 			}
+			System.out.println(message);
 			return Action.ERROR;
 		}
     	return Action.SUCCESS;
