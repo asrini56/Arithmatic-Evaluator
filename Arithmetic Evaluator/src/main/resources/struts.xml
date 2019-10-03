@@ -46,11 +46,7 @@
         <action name="admin/addTeacher_page">
             <result type="dispatcher">/jsp/teacher_register.jsp</result>
         </action>
-<<<<<<< HEAD
-        
-=======
 
->>>>>>> 2d559843cc149bba50f4817d771f870dac0f3ec1
         <action name="grade1/operations_page">
             <result type="dispatcher">/jsp/math_operations.jsp</result>
         </action>
