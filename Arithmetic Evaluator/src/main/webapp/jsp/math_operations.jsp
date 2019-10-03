@@ -14,12 +14,18 @@
     			<div class="navbar-header">
       				<a class="navbar-brand" href="1.html">Arithmetic Evaluator</a>
     			</div>
-    			<ul class="nav navbar-nav">
-      				<li class="active"><a href="1.html">Home</a></li>
-    			</ul>
     			<ul class="nav navbar-nav navbar-right">
-      				<li><a href="test.html"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-      				<li><a href= "#" id="myBtn"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+    				<li class="active"><a href="#">Home</a></li>
+    				<li>
+    					<div class="dropdown">
+ 							<a href="#" class="dropbtn">
+        						<span class="glyphicon glyphicon-user" style="padding-top:16%; margin-right:30px;"></span>
+        					</a>
+  							<div class="dropdown-content">
+    							<a href= "#" id="myBtn"><span class="glyphicon glyphicon-log-in"></span> Login</a>
+  							</div>
+						</div>
+      				</li>
     			</ul>
   			</div>
 
