@@ -6,6 +6,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+<link rel="stylesheet" href="../css/operations.css">
 <style>
 body, html {
   height: 100%;
@@ -79,37 +81,34 @@ footer {
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="1.html">Arithmetic Evaluator</a>
+      <a class="navbar-brand" href="#">Arithmetic Evaluator</a>
     </div>
     <ul class="nav navbar-nav">
-      <li class="active"><a href="1.html">Home</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <li><a href="test.html"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
       <li><a href= "#" id="myBtn"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-    </ul>
-  </div>
+          </ul>
+        </div>
 
 <!-- The Modal -->
-<div id="myModal" class="modal">
-
+      <div id="myModal" class="modal">
   <!-- Modal content -->
-  <div class="modal-content">
-    <span class="close">&times;</span>
-    <div class="form">
-               <form class="register-form">
-                   <div class="imgcontainer">
-    <img src="https://icon-library.net/images/head-icon/head-icon-11.jpg" alt="Avatar" class="avatar">
-  </div>
-    <p></p>
-               <input type="text" placeholder="user name"/>
-               <input type="password" placeholder="password"/>
-                <button>LOGIN</button>                   
-
-    <span class="acc"> Not Registered? <a href="#">Create an institute</a></span>
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <div class="form">
+          <form class="register-form">
+            <div class="imgcontainer">
+                <img src="https://icon-library.net/images/head-icon/head-icon-11.jpg" alt="Avatar" class="avatar">
+              </div>
+                    <input type="text" placeholder="user name"/>
+                    <input type="password" placeholder="password"/>
+                    <button>LOGIN</button>                   
+             <span class="acc"> Not Registered? <a href="#">Create an institute</a></span>
     
-               </form>
-  </div>
+          </form>
+          </div>
+      </div>
 
 </nav><br><br><br><br><br><br><br><br><br>
   <div align="center">
@@ -148,6 +147,31 @@ var countdownfunction = setInterval(function() {
     document.getElementById("demo").innerHTML = "EXPIRED";
   }
 }, 1000);
+
+var modal = document.getElementById("myModal");
+
+  // Get the button that opens the modal
+  var btn = document.getElementById("myBtn");
+
+  // Get the <span> element that closes the modal
+  var span = document.getElementsByClassName("close")[0];
+
+  // When the user clicks on the button, open the modal
+  btn.onclick = function() {
+    modal.style.display = "block";
+  }
+
+  // When the user clicks on <span> (x), close the modal
+  span.onclick = function() {
+    modal.style.display = "none";
+  }
+
+  // When the user clicks anywhere outside of the modal, close it
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }
 </script>
 <footer>
   <p style="text-align:center;"><span class="glyphicon glyphicon-copyright-mark"></span>  Copyright</p>
