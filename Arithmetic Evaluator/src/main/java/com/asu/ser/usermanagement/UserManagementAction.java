@@ -46,13 +46,13 @@ public class UserManagementAction {
 
     public String login(){
         try {
-            this.message = UserManagementHandler.loginUser(emailID, password);
+            message = UserManagementHandler.loginUser(emailID, password);
             if(StringUtils.equalsIgnoreCase(message, "success")){
                 AuthenticationUtil.setTokenForUser(emailID);
                 return UserManagementHandler.getRoleNameForUser(emailID);
             }
         } catch (Exception e) {
-            this.message = "Error while logging in. Please try again.";
+            message = "Error while logging in. Please try again.";
             return Action.ERROR;
         }
         return Action.ERROR;
@@ -69,6 +69,10 @@ public class UserManagementAction {
     	} catch (Exception e) {
 			e.printStackTrace();
 			message = "Failed to add teacher " + e.getMessage();
+			if(e.getMessage().equals("No user logged in")) {
+				message = "Login as admin to add teacher";
+				return Action.LOGIN;
+			}
 			return Action.ERROR;
 		}
     	return Action.SUCCESS;

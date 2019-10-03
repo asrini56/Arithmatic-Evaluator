@@ -1,5 +1,6 @@
 function sendAjaxRequest(url, successCallBackFn) {
 	$.ajax({
+		type: "POST",
 		url:url, 
 		success: successCallBackFn,
 		statusCode: {

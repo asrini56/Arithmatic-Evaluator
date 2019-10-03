@@ -62,7 +62,8 @@
 
         <action name="admin/addTeachers" class="com.asu.ser.usermanagement.UserManagementAction" method="addTeacher">
             <result name="success" type="dispatcher">/jsp/admin_dashboard.jsp</result>
-            <result name="error" type="dispatcher">/jsp/login.jsp</result>
+            <result name="login" type="dispatcher">/jsp/login.jsp</result>
+            <result name="error" type="dispatcher">/jsp/teacher_register.jsp</result>
         </action>
 
         <action name="grade1/operations_page">

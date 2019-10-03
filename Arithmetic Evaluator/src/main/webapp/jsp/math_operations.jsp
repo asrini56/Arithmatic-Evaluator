@@ -125,7 +125,7 @@
    </nav>
 </section>
 
-	<footer style="bottom:0px; position:absolute; width:100%">
+	<footer style="bottom:0px; width:100%">
 		<p style="text-align:center"><span class="glyphicon glyphicon-copyright-mark"></span>  Copyright</p>
 	</footer>
 
@@ -172,6 +172,7 @@ function dragStart(ev) {
 		});
 	 
 	 expression = expression.replace("x", "*");
+	 expression = encodeURIComponent(expression);
 	 console.log("Final Expression is " + expression);
 	 var url="operations/evaluvate.action?expression=" + expression;
 	 sendAjaxRequest(url, function(resp){
