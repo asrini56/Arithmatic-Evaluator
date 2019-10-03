@@ -10,6 +10,8 @@ import com.asu.ser.model.User;
 import com.asu.ser.util.MailServer;
 import org.apache.commons.lang3.StringUtils;
 
+import javax.annotation.PostConstruct;
+
 public class UserManagementHandler {
 
 	private static final String ROLE_ADMIN = "admin";
@@ -23,6 +25,16 @@ public class UserManagementHandler {
 			USER_ROLES = new HashMap<>();
 		}
 
+	}
+
+	@PostConstruct
+	public void init(){
+		try {
+			USER_ROLES = DataSource.fetchRoles();
+		} catch(Exception e) {
+			e.printStackTrace();
+			USER_ROLES = new HashMap<>();
+		}
 	}
 
     public static void signUpAdminUser(String emailID, String password, String firstName, String lastName, String institutionName) throws Exception {
@@ -96,8 +108,7 @@ public class UserManagementHandler {
     public static List<Teacher> fetchTeachers() throws Exception {
     	String loggedInUser = AuthenticationUtil.getLoggedInUser();
     	Integer institutionID = DataSource.fetchUsersInstitutionID(loggedInUser);
-    	return DataSource.fetchTeachers(1);
-    	//return DataSource.fetchTeachers(institutionID);
+    	return DataSource.fetchTeachers(institutionID);
     }
 
     public static boolean isInstitutionPresent(String institutionName) throws Exception {

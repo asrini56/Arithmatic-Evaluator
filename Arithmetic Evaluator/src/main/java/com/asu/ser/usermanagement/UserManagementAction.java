@@ -61,7 +61,19 @@ public class UserManagementAction {
         return Action.ERROR;
     }
 
+    public String logout(){
+        if(AuthenticationUtil.getLoggedInUser().isEmpty()){
+            return Action.ERROR;
+        }
+        AuthenticationUtil.reomveTokenForUser(emailID);
+        return Action.SUCCESS;
+    }
+
     public String addTeacher() {
+        if(AuthenticationUtil.getLoggedInUser().isEmpty()){
+            message = "Please log in to access the page.";
+            return Action.ERROR;
+        }
     	try {
     		if(!validEmailID(emailID)){
                 message = "Invalid Email ID. Please enter a valid Email ID.";
@@ -78,6 +90,10 @@ public class UserManagementAction {
     }
 
     public String fetchTeachers() {
+        if(AuthenticationUtil.getLoggedInUser().isEmpty()){
+            message = "Please log in to access the page.";
+            return Action.ERROR;
+        }
     	try {
     	    teachers = UserManagementHandler.fetchTeachers();
     	}catch (Exception e) {
