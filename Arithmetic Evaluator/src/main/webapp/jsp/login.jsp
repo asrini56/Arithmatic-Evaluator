@@ -53,7 +53,7 @@ function loginFunction() {
   <!-- Modal content -->
   <div class="modal-content">
     <div class="modal-header">
-      <span class="close">&times;</span>90
+      <span class="close">&times;</span>
       <h2>Create an account!</h2>
     </div>
     <div class="modal-body">

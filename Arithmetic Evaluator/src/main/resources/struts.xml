@@ -38,38 +38,48 @@
         <action name="admin/dashboard_page">
             <result type="dispatcher">/jsp/admin_dashboard.jsp</result>
         </action>
-        
+
 	    <action name="admin/listTeachers_page">
             <result type="dispatcher">/jsp/teacher.jsp</result>
         </action>
 
         <action name="admin/addTeacher_page">
             <result type="dispatcher">/jsp/teacher_register.jsp</result>
+        </action>
+
+        <action name="grade1/operations_page">
+            <result type="dispatcher">/jsp/math_operations.jsp</result>
+        </action>
+
+        <action name="teacher/resetPassword_page">
+            <result type="dispatcher">/jsp/set_teacher_pwd.jsp</result>
         </action>
 
         <action name="admin/signup" class="com.asu.ser.usermanagement.UserManagementAction" method="signUp">
-            <result name="success" type="dispatcher">/jsp/admin_dashboard.jsp</result>
-            <result name="error" type="dispatcher">/jsp/admin_signup.jsp</result>
+            <result name="success" type="redirect">
+                <param name = "location">admin/dashboard_page.action</param >
+            </result>
+            <result name="error" type="redirect">
+                <param name="location">admin/signup_page.action</param>
+            </result>
         </action>
 
         <action name="login" class="com.asu.ser.usermanagement.UserManagementAction" method="login">
-            <result name="admin" type="dispatcher">/jsp/admin_dashboard.jsp</result>
-            <result name="teacher" type="dispatcher">/jsp/admin_dashboard.jsp</result>
-            <result name="student" type="dispatcher">/jsp/math_operations.jsp</result>
-            <result name="success" type="dispatcher">/jsp/math_operations.jsp</result>
-            <result name="error" type="dispatcher">/jsp/login.jsp</result>
-        </action>
-
-        <action name="admin/dashboard_page">
-            <result type="dispatcher">/jsp/admin_dashboard.jsp</result>
-        </action>
-
-        <action name="admin/addTeacher_page">
-            <result type="dispatcher">/jsp/teacher_register.jsp</result>
-        </action>
-
-	    <action name="admin/listTeachers_page">
-            <result type="dispatcher">/jsp/teacher.jsp</result>
+            <result name="admin" type="redirect">
+                <param name = "location">admin/dashboard_page.action</param >
+            </result>
+            <result name="teacher" type="redirect">
+                <param name = "location">grade1/operations_page.action</param >
+            </result>
+            <result name="student" type="redirect">
+                <param name = "location">grade1/operations_page.action</param >
+            </result>
+            <result name="success" type="redirect">
+                <param name = "location">grade1/operations_page.action</param >
+            </result>
+            <result name="error" type="redirect">
+                <param name = "location">login_page.action</param>
+            </result>
         </action>
 
         <action name="admin/listTeachers" class="com.asu.ser.usermanagement.UserManagementAction" method="fetchTeachers">
@@ -77,15 +87,23 @@
         </action>
 
         <action name="admin/addTeachers" class="com.asu.ser.usermanagement.UserManagementAction" method="addTeacher">
-            <result name="success" type="dispatcher">/jsp/admin_dashboard.jsp</result>
-            <result name="login" type="dispatcher">/jsp/login.jsp</result>
-            <result name="error" type="dispatcher">/jsp/teacher_register.jsp</result>
+            <result name="success" type="redirect">
+                <param name = "location">admin/dashboard_page.action</param >
+            </result>
+            <result name="error" type="redirect">
+                <param name = "location">login_page.action</param>
+            </result>
         </action>
 
-        <action name="grade1/operations_page">
-            <result type="dispatcher">/jsp/math_operations.jsp</result>
+        <action name="teacher/resetPassword" class="com.asu.ser.usermanagement.UserManagementAction" method="resetPassword">
+            <result name="success" type="dispatcher">
+                <param name = "location">login_page.action</param>
+            </result>
+            <result name="error" type="dispatcher">
+                <param name="location">teacher/resetPassword_page.action</param>
+            </result>
         </action>
-        
+
         <action name="grade6/operations_page">
             <result type="dispatcher">/jsp/6th_operations.jsp</result>
         </action>

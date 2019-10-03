@@ -85,17 +85,23 @@ img.avatar {
 	</nav>
        	<div class="set-password-page"><br><br><br>
            	<div class="form">
-               <form class="set-password-form">
+               <form id="set-password-form" action="resetPassword.action">
                    	<div class="imgcontainer">
     					<img src="https://icon-library.net/images/head-icon/head-icon-11.jpg" alt="Avatar" class="avatar">
   					</div>
    					<br><br><br>
-   					<input type="text" placeholder="old password"/>
-               		<input type="password" placeholder="new password"/>
-               		<input type="password" placeholder="confirm password"/>
-                	<button>Set Password</button><br><br><br>                   
+   					<input type="text" name = "emailID" placeholder="Email ID"/>
+   					<input type="text" name = "oldPassword" placeholder="old password"/>
+               		<input type="password" name = "newPassword" placeholder="new password"/>
+               		<input type="password" name = "confirmPassword" placeholder="confirm password"/>
+                	<button onclick="submitFunction()">Set Password</button><br><br><br>
                 </form>
            	</div>
       	</div>
+<script>
+function submitFunction() {
+  document.getElementById("set-password-form").submit();
+}
+</script>
 </body> 
 </html>

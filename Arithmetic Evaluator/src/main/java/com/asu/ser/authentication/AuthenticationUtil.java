@@ -16,9 +16,7 @@ public class AuthenticationUtil {
 	public static String setTokenForUser(String userName) {
 		String token = TokenGenerator.generateToken();
 		USER_TOKENS.put(userName, token);
-		
-		HttpServletRequest request = ServletActionContext.getRequest();
-		HttpSession session = request.getSession();
+		HttpSession session = ServletActionContext.getRequest().getSession();
 		session.setAttribute(AuthenticationConstants.ATTR_NAME_USERNAME, userName);
 		session.setAttribute(AuthenticationConstants.ATTR_NAME_USER_TOKEN, token);
 		return token;
@@ -26,23 +24,19 @@ public class AuthenticationUtil {
 	
 	public static void reomveTokenForUser(String userName) {
 		USER_TOKENS.remove(userName);
-		HttpServletRequest request = ServletActionContext.getRequest();
-		HttpSession session = request.getSession();
+		HttpSession session = ServletActionContext.getRequest().getSession();
 		session.removeAttribute(AuthenticationConstants.ATTR_NAME_USER_TOKEN);
 	}
 	
 	public static boolean validateUser(String userName) {
-		HttpServletRequest request = ServletActionContext.getRequest();
-		HttpSession session = request.getSession();
+		HttpSession session = ServletActionContext.getRequest().getSession();
 		String token = (String) session.getAttribute(AuthenticationConstants.ATTR_NAME_USER_TOKEN);
 		String storedToken = USER_TOKENS.getOrDefault(userName, "");
 		return storedToken.equals(token);
 	}
 
 	public static String getLoggedInUser() {
-		HttpServletRequest request = ServletActionContext.getRequest();
-		HttpSession session = request.getSession();
-		System.out.println("Getting logged in user " + request.getAttributeNames());
+		HttpSession session = ServletActionContext.getRequest().getSession();
 		return (String) session.getAttribute(AuthenticationConstants.ATTR_NAME_USERNAME);
 	}
 }
