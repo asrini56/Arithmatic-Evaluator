@@ -140,9 +140,9 @@
 
 <script>
 
-/*function buttonclick(){
-window.location="teacher_register.jsp.html";
-}*/
+function buttonclick(){
+    window.location="listTeachers_page.action";
+}
 </script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

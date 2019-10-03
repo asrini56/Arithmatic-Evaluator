@@ -22,6 +22,7 @@ public class SqlQueries {
 
     public static final String INSERT_USER_TO_ROLE = "INSERT INTO user_to_role (user_id, role_id) values (? , ?)";
     public static final String FETCH_USER_ROLE = "SELECT role_id from user_to_role where user_id = ?";
+    public static final String FETCH_USER_ROLE_NAME = "SELECT role_name from roles where role_id in (SELECT role_id from user_to_role inner join users on users.user_id = user_to_role.user_id where users.email_id = ?)";
 
     // END USER_TO_ROLE, ROLES TABLE QUERIES
 
