@@ -53,7 +53,7 @@ function loginFunction() {
   <!-- Modal content -->
   <div class="modal-content">
     <div class="modal-header">
-      <span class="close">&times;</span>
+      <span class="close">&times;</span>90
       <h2>Create an account!</h2>
     </div>
     <div class="modal-body">
@@ -69,10 +69,10 @@ function loginFunction() {
    <p>TRY AS</p>
            </div>
   <div class="btn-grp">
-              <button style="margin: 5px" class="button button1">  IST GRADE STUDENT </button>
-                <button style="margin: 5px" class="button button1">  6TH GRADE STUDENT</button>
+              <button style="margin: 5px" class="button button1" onclick="Function1grade()">  IST GRADE STUDENT </button>
+                <button style="margin: 5px" class="button button1" onclick="Function6grade()">  6TH GRADE STUDENT</button>
  
-  <button style="margin: 5px" class="button button1">  9TH GRADE STUDENT</button>
+  <button style="margin: 5px" class="button button1" onclick="Function9grade()">  9TH GRADE STUDENT</button>
   </div>
       </div>
 <script>
@@ -108,9 +108,21 @@ window.onclick = function(event) {
     modal.style.display = "none";
   }
 }
-var ctx = "<%=request.getContextPath()%>"
 
+function Function1grade(){
+	window.location.assign("grade1/operations_page.action")
+}
+
+function Function6grade(){
+	window.location.assign("grade6/operations_page.action")
+}
+
+function Function9grade(){
+	window.location.assign("grade9/operations_page.action")
+}
+var ctx = "<%=request.getContextPath()%>"
 history.pushState(null, null, ctx +"/login_page.action");
+
 </script>
 </body> 
 </html>
