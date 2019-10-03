@@ -19,6 +19,9 @@ public class UserManagementAction {
     private String message;
     private String institutionName;
     private List<Teacher> teachers;
+    private String oldPassword;
+    private String newPassword;
+    private String confirmPassword;
 
     private static final String REGEX = "^(.+)@(.+)$";
     private static final Pattern PATTERN = Pattern.compile(REGEX);
@@ -46,13 +49,13 @@ public class UserManagementAction {
 
     public String login(){
         try {
-            this.message = UserManagementHandler.loginUser(emailID, password);
+            message = UserManagementHandler.loginUser(emailID, password);
             if(StringUtils.equalsIgnoreCase(message, "success")){
                 AuthenticationUtil.setTokenForUser(emailID);
                 return UserManagementHandler.getRoleNameForUser(emailID);
             }
         } catch (Exception e) {
-            this.message = "Error while logging in. Please try again.";
+            message = "Error while logging in. Please try again.";
             return Action.ERROR;
         }
         return Action.ERROR;
@@ -82,6 +85,26 @@ public class UserManagementAction {
     		message = "Failed to fetch teachers - " + e.getMessage();
 		}
     	return Action.SUCCESS;
+    }
+
+    public String resetPassword() throws Exception {
+        if(!newPassword.equals(confirmPassword)){
+            message = "Passwords does not match. Please re-enter a new password.";
+            return Action.ERROR;
+        } else if(!validPassword(newPassword)){
+            message = "Invalid Password. Please enter a valid Password.";
+            return Action.ERROR;
+        } else{
+            message = UserManagementHandler.loginUser(emailID, oldPassword);
+            if(StringUtils.equalsIgnoreCase(message, "success")){
+                AuthenticationUtil.setTokenForUser(emailID);
+                message = UserManagementHandler.resetPassword(emailID, newPassword);
+                if(StringUtils.equalsIgnoreCase(message, "success")){
+                    return Action.SUCCESS;
+                }
+            }
+        }
+        return Action.ERROR;
     }
 
     private boolean validEmailID(String emailID) {
@@ -147,4 +170,28 @@ public class UserManagementAction {
 	public void setTeachers(List<Teacher> teachers) {
 		this.teachers = teachers;
 	}
+
+    public String getOldPassword() {
+        return oldPassword;
+    }
+
+    public void setOldPassword(String oldPassword) {
+        this.oldPassword = oldPassword;
+    }
+
+    public String getNewPassword() {
+        return newPassword;
+    }
+
+    public void setNewPassword(String newPassword) {
+        this.newPassword = newPassword;
+    }
+
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
+    }
 }

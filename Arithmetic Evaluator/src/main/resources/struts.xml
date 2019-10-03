@@ -38,7 +38,7 @@
         <action name="admin/dashboard_page">
             <result type="dispatcher">/jsp/admin_dashboard.jsp</result>
         </action>
-        
+
 	    <action name="admin/listTeachers_page">
             <result type="dispatcher">/jsp/teacher.jsp</result>
         </action>
@@ -51,6 +51,10 @@
             <result type="dispatcher">/jsp/math_operations.jsp</result>
         </action>
 
+        <action name="teacher/resetPassword_page">
+            <result type="dispatcher">/jsp/set_teacher_pwd.jsp</result>
+        </action>
+
         <action name="admin/signup" class="com.asu.ser.usermanagement.UserManagementAction" method="signUp">
             <result name="success" type="dispatcher">/jsp/admin_dashboard.jsp</result>
             <result name="error" type="dispatcher">/jsp/admin_signup.jsp</result>
@@ -58,7 +62,7 @@
 
         <action name="login" class="com.asu.ser.usermanagement.UserManagementAction" method="login">
             <result name="admin" type="dispatcher">/jsp/admin_dashboard.jsp</result>
-            <result name="teacher" type="dispatcher">/jsp/admin_dashboard.jsp</result>
+            <result name="teacher" type="dispatcher">/jsp/math_operations.jsp</result>
             <result name="student" type="dispatcher">/jsp/math_operations.jsp</result>
             <result name="success" type="dispatcher">/jsp/math_operations.jsp</result>
             <result name="error" type="dispatcher">/jsp/login.jsp</result>
@@ -71,6 +75,11 @@
         <action name="admin/addTeachers" class="com.asu.ser.usermanagement.UserManagementAction" method="addTeacher">
             <result name="success" type="dispatcher">/jsp/admin_dashboard.jsp</result>
             <result name="error" type="dispatcher">/jsp/login.jsp</result>
+        </action>
+
+        <action name="teacher/resetPassword" class="com.asu.ser.usermanagement.UserManagementAction" method="resetPassword">
+            <result name="success" type="dispatcher">/jsp/login.jsp</result>
+            <result name="error" type="dispatcher">/jsp/set_teacher_pwd.jsp</result>
         </action>
 
         <action name="grade1/operations/evaluvate" class="com.asu.ser.operations.OperationsAction" method="evaluvateExpression">

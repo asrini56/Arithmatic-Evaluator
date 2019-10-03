@@ -45,11 +45,23 @@ public class UserManagementHandler {
         } else if(StringUtils.equals(userList.get(0).getPassword(), password)) {
             message = "Success";
         } else {
-            message = "Incorrect Password. Please provide correct password or try to reset password.";
+            message = "Incorrect Password. Please provide correct password.";
             return message;
         }
         return message;
     }
+
+	public static String resetPassword(String emailID, String password) throws Exception {
+		String message = "";
+		Integer rowsAffected = DataSource.resetPassword(emailID, password);
+		if(rowsAffected>0){
+			message = "Success";
+			return message;
+		} else {
+			message = "Failed to update Password.";
+			return message;
+		}
+	}
 
     public static void addTeacher(String firstName, String lastName, String emailID) throws Exception {
     	String loggedInUser = AuthenticationUtil.getLoggedInUser();
