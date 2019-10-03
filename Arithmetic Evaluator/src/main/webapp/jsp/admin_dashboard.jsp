@@ -1,7 +1,7 @@
 <html>
 <head>
     <title>admin's dashboard</title>
-    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
  <style>
      body {font-family: Arial, Helvetica, sans-serif;}
@@ -107,14 +107,14 @@
     
       <div class="main-cards">
   <div class="w3-card-4" onclick="buttonclick()" style="height: 500px"> 
-         <img src="teachers.jpg" alt="Alps" style="width:100%">
+         <img src="../image/teachers.jpg" alt="Alps" style="width:100%">
     <div class="w3-container w3-center" style="background-color: whitesmoke">
       <p>TEACHERS</p>
     </div>
 </div>
 
       <div class="w3-card-4" style= "height:500px">
-    <img src="students.jpg" alt="Alps" style="width:100%">
+    <img src="../image/students.jpg" alt="Alps" style="width:100%">
     <div class="w3-container w3-center" style="background-color: whitesmoke">
       <p>STUDENTS</p>
     </div>
@@ -140,9 +140,9 @@
 
 <script>
 
-/*function buttonclick(){
-window.location="teacher_register.jsp.html";
-}*/
+function buttonclick(){
+    window.location="listTeachers_page.action";
+}
 </script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
