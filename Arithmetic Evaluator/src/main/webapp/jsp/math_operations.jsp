@@ -12,10 +12,10 @@
 		<nav class="navbar navbar-inverse" style="margin-bottom:0px !important">
   			<div class="container-fluid">
     			<div class="navbar-header">
-      				<a class="navbar-brand" href="1.html">Arithmetic Evaluator</a>
+      				<a class="navbar-brand titleText" href="#">Arithmetic Evaluator</a>
     			</div>
     			<ul class="nav navbar-nav navbar-right">
-    				<li class="active"><a href="#">Home</a></li>
+    				<li class="active fontSansSerif"><a href="#">Home</a></li>
     				<li>
     					<div class="dropdown">
  							<a href="#" class="dropbtn">

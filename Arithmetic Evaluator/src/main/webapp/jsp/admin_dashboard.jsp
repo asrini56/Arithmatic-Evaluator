@@ -2,6 +2,7 @@
 <head>
 <title>admin's dashboard</title>
 <link rel="stylesheet" href="/arithmetic-evaluator/css/dashboard.css">
+<link rel="stylesheet" href="/arithmetic-evaluator/css/operations.css">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -85,8 +86,21 @@ body {
 			<nav class="navbar navbar-inverse" style="margin-bottom:0px !important">
   				<div class="container-fluid">
     				<div class="navbar-header">
-      					<a class="navbar-brand" href="1.html">Arithmetic Evaluator</a>
+      					<a class="navbar-brand titleText" href="#">Arithmetic Evaluator</a>
     				</div>
+    				<ul class="nav navbar-nav navbar-right">
+    				<li class="active fontSansSerif"><a href="#">Dashboard</a></li>
+    				<li>
+    					<div class="dropdown">
+ 							<a href="#" class="dropbtn">
+        						<span class="glyphicon glyphicon-user" style="padding-top:16%; margin-right:30px;"></span>
+        					</a>
+  							<div class="dropdown-content">
+    							<a href= "#" id="myBtn"><span class="glyphicon glyphicon-log-in"></span> Login</a>
+  							</div>
+						</div>
+      				</li>
+    			</ul>
 				</div>
 			</nav>
 		</header>
@@ -120,7 +134,7 @@ body {
 	<script>
 
 function goToListTeachersPage(){
-    window.location="admin/listTeachers_page.action";
+    window.location="/arithmetic-evaluator/admin/listTeachers_page.action";
 }
 
 function goToListStudentsPage(){

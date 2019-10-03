@@ -47,6 +47,17 @@ footer {
   text-align: center;
   color: white;
 }
+
+.titleText {
+	font-family: fantasy !important;
+	font-size: x-large !important;
+	
+}
+
+.fontSansSerif {
+	font-family: sans-serif !important;
+	font-size: large;
+}
 /* The Modal (background) */
 .modal {
   display: none; /* Hidden by default */

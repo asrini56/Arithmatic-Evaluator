@@ -24,24 +24,31 @@ public class UserManagementAction {
     private static final Pattern PATTERN = Pattern.compile(REGEX);
 
     public String signUp(){
+    	String returnType = Action.SUCCESS;
         try {
+        	System.out.println("Creating admin user  " + emailID + " for institution " + institutionName );
+        	
             if(!validEmailID(emailID)){
                 message = "Invalid Email ID. Please enter a valid Email ID.";
-                return Action.ERROR;
+                System.out.println(message);
+                returnType = Action.ERROR;
             } else if(!validPassword(password)){
                 message = "Invalid Password. Please enter a valid Password.";
-                return Action.ERROR;
+                returnType = Action.ERROR;
             } else if(UserManagementHandler.isInstitutionPresent(institutionName)){
                 message = "Institution is already created. Please login using Email ID and Password, or Click Reset Password.";
-                return Action.ERROR;
+                returnType = Action.ERROR;
             } else {
             	UserManagementHandler.signUpAdminUser(emailID, password, null, null, StringUtils.trimToNull(institutionName));
+            	message = "Account successfully created!";
             }
         } catch (Exception e) {
+        	e.printStackTrace();
             message = "Failed to create Admin Account!!!";
-            return Action.ERROR;
+            returnType = Action.ERROR;
         }
-        return Action.SUCCESS;
+        System.out.println(message);
+        return returnType;
     }
 
     public String login(){
