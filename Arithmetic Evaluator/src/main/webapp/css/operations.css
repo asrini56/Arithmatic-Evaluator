@@ -47,6 +47,17 @@ footer {
   text-align: center;
   color: white;
 }
+
+.titleText {
+	font-family: fantasy !important;
+	font-size: x-large !important;
+	
+}
+
+.fontSansSerif {
+	font-family: sans-serif !important;
+	font-size: large;
+}
 /* The Modal (background) */
 .modal {
   display: none; /* Hidden by default */
@@ -213,3 +224,39 @@ background-color:grey;
 	line-height: 1; 
 	text-align: center;
 }
+
+.dropbtn {
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  margin-left:30px;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  margin-right:10px;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 20px 20px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #ddd;}
+
+.dropdown:hover .dropdown-content {display: block;}
+
+.dropdown:hover .dropbtn {background-color: #3e8e41;}

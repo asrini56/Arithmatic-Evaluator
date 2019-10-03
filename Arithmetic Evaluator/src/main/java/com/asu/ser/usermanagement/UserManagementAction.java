@@ -19,46 +19,68 @@ public class UserManagementAction {
     private String message;
     private String institutionName;
     private List<Teacher> teachers;
+    private String oldPassword;
+    private String newPassword;
+    private String confirmPassword;
 
     private static final String REGEX = "^(.+)@(.+)$";
     private static final Pattern PATTERN = Pattern.compile(REGEX);
 
     public String signUp(){
+    	String returnType = Action.SUCCESS;
         try {
+        	System.out.println("Creating admin user  " + emailID + " for institution " + institutionName );
+        	
             if(!validEmailID(emailID)){
                 message = "Invalid Email ID. Please enter a valid Email ID.";
-                return Action.ERROR;
+                System.out.println(message);
+                returnType = Action.ERROR;
             } else if(!validPassword(password)){
                 message = "Invalid Password. Please enter a valid Password.";
-                return Action.ERROR;
+                returnType = Action.ERROR;
             } else if(UserManagementHandler.isInstitutionPresent(institutionName)){
                 message = "Institution is already created. Please login using Email ID and Password, or Click Reset Password.";
-                return Action.ERROR;
+                returnType = Action.ERROR;
             } else {
             	UserManagementHandler.signUpAdminUser(emailID, password, null, null, StringUtils.trimToNull(institutionName));
+            	message = "Account successfully created!";
             }
         } catch (Exception e) {
+        	e.printStackTrace();
             message = "Failed to create Admin Account!!!";
-            return Action.ERROR;
+            returnType = Action.ERROR;
         }
-        return Action.SUCCESS;
+        System.out.println(message);
+        return returnType;
     }
 
     public String login(){
         try {
-            this.message = UserManagementHandler.loginUser(emailID, password);
+            message = UserManagementHandler.loginUser(emailID, password);
             if(StringUtils.equalsIgnoreCase(message, "success")){
                 AuthenticationUtil.setTokenForUser(emailID);
                 return UserManagementHandler.getRoleNameForUser(emailID);
             }
         } catch (Exception e) {
-            this.message = "Error while logging in. Please try again.";
+            message = "Error while logging in. Please try again.";
             return Action.ERROR;
         }
         return Action.ERROR;
     }
 
+    public String logout(){
+        if(AuthenticationUtil.getLoggedInUser().isEmpty()){
+            return Action.ERROR;
+        }
+        AuthenticationUtil.reomveTokenForUser(emailID);
+        return Action.SUCCESS;
+    }
+
     public String addTeacher() {
+        if(AuthenticationUtil.getLoggedInUser().isEmpty()){
+            message = "Please log in to access the page.";
+            return Action.ERROR;
+        }
     	try {
     		if(!validEmailID(emailID)){
                 message = "Invalid Email ID. Please enter a valid Email ID.";
@@ -69,12 +91,20 @@ public class UserManagementAction {
     	} catch (Exception e) {
 			e.printStackTrace();
 			message = "Failed to add teacher " + e.getMessage();
+			if(e.getMessage().equals("No user logged in")) {
+				message = "Login as admin to add teacher";
+				return Action.LOGIN;
+			}
 			return Action.ERROR;
 		}
     	return Action.SUCCESS;
     }
 
     public String fetchTeachers() {
+        if(AuthenticationUtil.getLoggedInUser().isEmpty()){
+            message = "Please log in to access the page.";
+            return Action.ERROR;
+        }
     	try {
     	    teachers = UserManagementHandler.fetchTeachers();
     	}catch (Exception e) {
@@ -82,6 +112,26 @@ public class UserManagementAction {
     		message = "Failed to fetch teachers - " + e.getMessage();
 		}
     	return Action.SUCCESS;
+    }
+
+    public String resetPassword() throws Exception {
+        if(!newPassword.equals(confirmPassword)){
+            message = "Passwords does not match. Please re-enter a new password.";
+            return Action.ERROR;
+        } else if(!validPassword(newPassword)){
+            message = "Invalid Password. Please enter a valid Password.";
+            return Action.ERROR;
+        } else{
+            message = UserManagementHandler.loginUser(emailID, oldPassword);
+            if(StringUtils.equalsIgnoreCase(message, "success")){
+                AuthenticationUtil.setTokenForUser(emailID);
+                message = UserManagementHandler.resetPassword(emailID, newPassword);
+                if(StringUtils.equalsIgnoreCase(message, "success")){
+                    return Action.SUCCESS;
+                }
+            }
+        }
+        return Action.ERROR;
     }
 
     private boolean validEmailID(String emailID) {
@@ -147,4 +197,28 @@ public class UserManagementAction {
 	public void setTeachers(List<Teacher> teachers) {
 		this.teachers = teachers;
 	}
+
+    public String getOldPassword() {
+        return oldPassword;
+    }
+
+    public void setOldPassword(String oldPassword) {
+        this.oldPassword = oldPassword;
+    }
+
+    public String getNewPassword() {
+        return newPassword;
+    }
+
+    public void setNewPassword(String newPassword) {
+        this.newPassword = newPassword;
+    }
+
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
+    }
 }

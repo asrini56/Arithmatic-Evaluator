@@ -51,6 +51,16 @@ public class DataSource {
         return userList;
     }
 
+    public static Integer resetPassword(String emailID, String password) throws Exception {
+        Connection connection = DataSourceConnector.getConnection();
+        PreparedStatement statement = connection.prepareStatement(SqlQueries.UPDATE_PASSWORD_USING_EMAIL);
+        statement.setString(1, password);
+        statement.setString(2, emailID);
+        Integer rowsAffected = statement.executeUpdate();
+        statement.close();
+        return rowsAffected;
+    }
+
     public static void insertUserToRole(int userID, int roleID) throws Exception {
         Connection connection = DataSourceConnector.getConnection();
         PreparedStatement statement = connection.prepareStatement(SqlQueries.INSERT_USER_TO_ROLE);

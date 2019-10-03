@@ -6,6 +6,7 @@ public class SqlQueries {
 	// START USER TABLE QUERIES//
     public static final String INSERT_USER = "INSERT INTO users (email_id, password, first_name, last_name) VALUES (?,?,?,?)";
     public static final String SELECT_USER_USING_EMAIL_PASSWORD = "SELECT email_id, password, first_name, last_name from users WHERE email_id = ?";
+    public static final String UPDATE_PASSWORD_USING_EMAIL = "UPDATE users SET password = ? WHERE email_id = ?";
 
     public static final String FETCH_USER_ID_FROM_EMAIL = "SELECT user_id from users where email_id = ?";
 
