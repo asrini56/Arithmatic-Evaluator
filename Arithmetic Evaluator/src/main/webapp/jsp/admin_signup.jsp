@@ -8,12 +8,13 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
+
 <body bgcolor="white">
 
 <header>
 <h1 style="color:black" align="center">Arithmetic Evaluator</h1>
 </header>
-<form  id="myForm" style="border:1px solid black">
+<form  id="myForm" action="signup.action" style="border:1px solid black" method="post">
   <div class="container">
     <h1 style="color:black">Sign Up Page</h1>
     <h2 style="color:black">Please fill the form</h2>
@@ -23,7 +24,7 @@
 
 
     <label for="emailID"><b style="color:black">Email</b></label>
-    <input type="text" placeholder="Enter Email" name="emailID" required>
+    <input type="text" placeholder="Enter Email" name="emailIDid" required>
 
     <label for="password"><b style="color:black">Password</b></label>
     <input type="password" id="password" name="password" placeholder="Enter Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
@@ -34,24 +35,22 @@
   <p id="capital" class="invalid">A <b>capital (uppercase)</b> letter</p>
   <p id="number" class="invalid">A <b>number</b></p>
   <p id="length" class="invalid">Minimum <b>8 characters</b></p>
-  
 </div>
      <div class="clearfix">
       <button type="button" class="cancelbtn">Cancel</button>
-      <button class="signupbtn" onclick="submitFunction()">Sign Up</button>
+      <button type="submit" class="signupbtn" onclick="submitFunction()">Sign Up</button>
     </div>
   </div>
 </form>
 <script>
+function myFunction() {
+  alert("Sign up complete!");
+}
 
-$( document ).ready(function() {
-	var message = "${message}";
-	if(message) {
-		alert(message);
-	}
-});
-
-//* /* * var myInput = document.getElementById("password");
+//var msg = "${message}";
+//if(!msg){
+ //   alert(msg);
+//}
 var myInput = document.getElementById("password");
 var letter = document.getElementById("letter");
 var capital = document.getElementById("capital");
@@ -112,7 +111,7 @@ myInput.onkeyup = function() {
 
 
 function submitFunction() {
-	document.getElementById("myForm").submit();
+  document.getElementById("myForm").submit();
 }
 
 
