@@ -2,6 +2,7 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <style>
 body {
   font-family: Arial, Helvetica, sans-serif;
@@ -64,6 +65,13 @@ a {
 </style>
 
 <script>
+$( document ).ready(function() {
+	var message = "${message}";
+	if(message) {
+		alert(message);
+	}
+});
+
 function submitForm() {
   document.getElementById("teacherRegisterForm").submit();
 }

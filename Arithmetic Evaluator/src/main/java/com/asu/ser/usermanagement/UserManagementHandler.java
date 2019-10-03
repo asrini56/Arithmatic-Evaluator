@@ -60,6 +60,7 @@ public class UserManagementHandler {
             message = "Incorrect Password. Please provide correct password.";
             return message;
         }
+        System.out.println("Trying to login user " + emailID + " status " + message);
         return message;
     }
 
@@ -77,6 +78,9 @@ public class UserManagementHandler {
 
     public static void addTeacher(String firstName, String lastName, String emailID) throws Exception {
     	String loggedInUser = AuthenticationUtil.getLoggedInUser();
+    	if(loggedInUser == null || loggedInUser.isEmpty()) {
+    		throw new Exception("No user logged in");
+    	}
     	int userID = DataSource.fetchUserID(loggedInUser);
     	int userRoleID = DataSource.fetchUserRole(userID);
     	int adminRoleID = USER_ROLES.get(ROLE_ADMIN);

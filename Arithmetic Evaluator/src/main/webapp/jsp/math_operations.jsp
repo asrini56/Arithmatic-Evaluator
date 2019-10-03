@@ -14,12 +14,18 @@
     			<div class="navbar-header">
       				<a class="navbar-brand" href="1.html">Arithmetic Evaluator</a>
     			</div>
-    			<ul class="nav navbar-nav">
-      				<li class="active"><a href="1.html">Home</a></li>
-    			</ul>
     			<ul class="nav navbar-nav navbar-right">
-      				<li><a href="test.html"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-      				<li><a href= "#" id="myBtn"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+    				<li class="active"><a href="#">Home</a></li>
+    				<li>
+    					<div class="dropdown">
+ 							<a href="#" class="dropbtn">
+        						<span class="glyphicon glyphicon-user" style="padding-top:16%; margin-right:30px;"></span>
+        					</a>
+  							<div class="dropdown-content">
+    							<a href= "#" id="myBtn"><span class="glyphicon glyphicon-log-in"></span> Login</a>
+  							</div>
+						</div>
+      				</li>
     			</ul>
   			</div>
 
@@ -125,7 +131,7 @@
    </nav>
 </section>
 
-	<footer style="bottom:0px; position:absolute; width:100%">
+	<footer style="bottom:0px; width:100%">
 		<p style="text-align:center"><span class="glyphicon glyphicon-copyright-mark"></span>  Copyright</p>
 	</footer>
 
@@ -172,6 +178,7 @@ function dragStart(ev) {
 		});
 	 
 	 expression = expression.replace("x", "*");
+	 expression = encodeURIComponent(expression);
 	 console.log("Final Expression is " + expression);
 	 var url="operations/evaluvate.action?expression=" + expression;
 	 sendAjaxRequest(url, function(resp){

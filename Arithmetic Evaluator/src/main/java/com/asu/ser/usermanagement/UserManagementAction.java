@@ -84,6 +84,10 @@ public class UserManagementAction {
     	} catch (Exception e) {
 			e.printStackTrace();
 			message = "Failed to add teacher " + e.getMessage();
+			if(e.getMessage().equals("No user logged in")) {
+				message = "Login as admin to add teacher";
+				return Action.LOGIN;
+			}
 			return Action.ERROR;
 		}
     	return Action.SUCCESS;

@@ -5,7 +5,7 @@
 <title>login form</title>
     <link rel="stylesheet" href="css/login_css.css">
     <link rel="stylesheet" href="../css/login_css.css">
-   
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
    
 <style>
@@ -33,7 +33,7 @@ function loginFunction() {
 </nav>
        <div class="login-page">
            <div class="form">
-               <form class="register-form" action="login.action">
+               <form class="register-form" action="login.action" method="post">
                    <div class="imgcontainer">
     <img src="https://icon-library.net/images/head-icon/head-icon-11.jpg" alt="Avatar" class="avatar">
   </div>
@@ -69,13 +69,20 @@ function loginFunction() {
    <p>TRY AS</p>
            </div>
   <div class="btn-grp">
-              <button style="margin: 5px" class="button button1">  IST GRADE STUDENT </button>
-                <button style="margin: 5px" class="button button1">  6TH GRADE STUDENT</button>
+              <button style="margin: 5px" class="button button1" onclick="Function1grade()">  IST GRADE STUDENT </button>
+                <button style="margin: 5px" class="button button1" onclick="Function6grade()">  6TH GRADE STUDENT</button>
  
-  <button style="margin: 5px" class="button button1">  9TH GRADE STUDENT</button>
+  <button style="margin: 5px" class="button button1" onclick="Function9grade()">  9TH GRADE STUDENT</button>
   </div>
       </div>
 <script>
+$( document ).ready(function() {
+	var message = "${message}";
+	if(message) {
+		alert(message);
+	}
+});
+
 // Get the modal
 var modal = document.getElementById("myModal");
 
@@ -101,6 +108,21 @@ window.onclick = function(event) {
     modal.style.display = "none";
   }
 }
+
+function Function1grade(){
+	window.location.assign("grade1/operations_page.action")
+}
+
+function Function6grade(){
+	window.location.assign("grade6/operations_page.action")
+}
+
+function Function9grade(){
+	window.location.assign("grade9/operations_page.action")
+}
+var ctx = "<%=request.getContextPath()%>"
+history.pushState(null, null, ctx +"/login_page.action");
+
 </script>
 </body> 
 </html>
