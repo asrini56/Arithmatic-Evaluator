@@ -1,7 +1,6 @@
 package com.asu.ser.usermanagement;
 
 import com.asu.ser.authentication.AuthenticationUtil;
-import com.asu.ser.db.DataSource;
 import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.conversion.annotations.Conversion;
 import org.apache.commons.lang3.StringUtils;
@@ -23,8 +22,10 @@ public class UserManagementAction {
     private String newPassword;
     private String confirmPassword;
 
-    private static final String REGEX = "^(.+)@(.+)$";
-    private static final Pattern PATTERN = Pattern.compile(REGEX);
+    private static final String EMAIL_REGEX = "^(.+)@(.+)$";
+    private static final Pattern EMAIL_PATTERN = Pattern.compile(EMAIL_REGEX);
+    private static final String PASSWORD_REGEX = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$";
+    private static final Pattern PASSWORD_PATTERN = Pattern.compile(PASSWORD_REGEX);
 
     public String signUp(){
     	String returnType = Action.SUCCESS;
@@ -69,7 +70,7 @@ public class UserManagementAction {
     }
 
     public String logout(){
-        if(AuthenticationUtil.getLoggedInUser().isEmpty()){
+        if(StringUtils.isEmpty(AuthenticationUtil.getLoggedInUser())){
             return Action.ERROR;
         }
         AuthenticationUtil.reomveTokenForUser(emailID);
@@ -77,9 +78,9 @@ public class UserManagementAction {
     }
 
     public String addTeacher() {
-        if(AuthenticationUtil.getLoggedInUser().isEmpty()){
+        if(StringUtils.isEmpty(AuthenticationUtil.getLoggedInUser())){
             message = "Please log in to access the page.";
-            return Action.ERROR;
+            return "login";
         }
     	try {
     		if(!validEmailID(emailID)){
@@ -101,7 +102,7 @@ public class UserManagementAction {
     }
 
     public String fetchTeachers() {
-        if(AuthenticationUtil.getLoggedInUser().isEmpty()){
+        if(StringUtils.isEmpty(AuthenticationUtil.getLoggedInUser())){
             message = "Please log in to access the page.";
             return Action.ERROR;
         }
@@ -135,11 +136,11 @@ public class UserManagementAction {
     }
 
     private boolean validEmailID(String emailID) {
-    	return PATTERN.matcher(emailID).matches();
+    	return EMAIL_PATTERN.matcher(emailID).matches();
     }
 
     private boolean validPassword(String password) {
-        return true;
+        return PASSWORD_PATTERN.matcher(password).matches();
     }
 
     public String getPassword() {

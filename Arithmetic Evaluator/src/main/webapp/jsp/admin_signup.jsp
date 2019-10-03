@@ -13,34 +13,35 @@
 <header>
 <h1 style="color:black" align="center">Arithmetic Evaluator</h1>
 </header>
-<form  id="myForm" style="border:1px solid black">
-  <div class="container">
-    <h1 style="color:black">Sign Up Page</h1>
-    <h2 style="color:black">Please fill the form</h2>
-    <hr>
-    <label for="InstitutionName"><b style="color:black">Institution Name</b></label>
-    <input type="text" placeholder="Institution Name" name="institutionName" required>
+<form  id="myForm" action="signup.action" style="border:1px solid black">
+    <div class="container">
+        <h1 style="color:black">Sign Up Page</h1>
+        <h2 style="color:black">Please fill the form</h2>
+        <hr>
+        <label for="InstitutionName"><b style="color:black">Institution Name</b></label>
+        <input type="text" placeholder="Institution Name" name="institutionName" required>
 
 
-    <label for="emailID"><b style="color:black">Email</b></label>
-    <input type="text" placeholder="Enter Email" name="emailID" required>
+        <label for="emailID"><b style="color:black">Email</b></label>
+        <input type="text" placeholder="Enter Email" name="emailID" required>
 
-    <label for="password"><b style="color:black">Password</b></label>
-    <input type="password" id="password" name="password" placeholder="Enter Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
+        <label for="password"><b style="color:black">Password</b></label>
+        <input type="password" id="password" name="password" placeholder="Enter Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
 
-    <div id="message" style="background-color:white">
-  <h3>Password must contain the following:</h3>
-  <p id="letter" class="invalid">A <b>lowercase</b> letter</p>
-  <p id="capital" class="invalid">A <b>capital (uppercase)</b> letter</p>
-  <p id="number" class="invalid">A <b>number</b></p>
-  <p id="length" class="invalid">Minimum <b>8 characters</b></p>
-  
-</div>
-     <div class="clearfix">
-      <button type="button" class="cancelbtn">Cancel</button>
-      <button class="signupbtn" onclick="submitFunction()">Sign Up</button>
+        <div id="message" style="background-color:white">
+          <h3>Password must contain the following:</h3>
+          <p id="letter" class="invalid">A <b>lowercase</b> letter</p>
+          <p id="capital" class="invalid">A <b>capital (uppercase)</b> letter</p>
+          <p id="number" class="invalid">A <b>number</b></p>
+          <p id="length" class="invalid">Minimum <b>8 characters</b></p>
+        </div>
+
     </div>
-  </div>
+
+     <div class="clearfix">
+          <button type="button" class="cancelbtn" onclick="cancelFunction()">Cancel</button>
+          <button class="signupbtn" onclick="submitFunction()">Sign Up</button>
+    </div>
 </form>
 <script>
 
@@ -51,7 +52,6 @@ $( document ).ready(function() {
 	}
 });
 
-//* /* * var myInput = document.getElementById("password");
 var myInput = document.getElementById("password");
 var letter = document.getElementById("letter");
 var capital = document.getElementById("capital");
@@ -115,6 +115,9 @@ function submitFunction() {
 	document.getElementById("myForm").submit();
 }
 
+function cancelFunction() {
+	window.location="/arithmetic-evaluator/login_page.action";
+}
 
 </script>
 </body>
