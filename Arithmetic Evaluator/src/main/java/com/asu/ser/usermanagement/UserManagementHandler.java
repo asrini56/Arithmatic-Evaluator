@@ -96,7 +96,7 @@ public class UserManagementHandler {
     public static List<Teacher> fetchTeachers() throws Exception {
     	String loggedInUser = AuthenticationUtil.getLoggedInUser();
     	Integer institutionID = DataSource.fetchUsersInstitutionID(loggedInUser);
-    	return DataSource.fetchTeachers(institutionID);
+    	return DataSource.fetchTeachers(1);
     }
 
     public static boolean isInstitutionPresent(String institutionName) throws Exception {
