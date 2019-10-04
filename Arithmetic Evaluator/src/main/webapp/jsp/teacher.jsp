@@ -53,6 +53,12 @@
 		
 	<script src="../js/common.js"></script>
 	<script type="text/javascript">
+	$( document ).ready(function() {
+		var message = "${message}";
+		if(message) {
+			alert(message);
+		}
+	});
 		window.onload = function() {
 	    	var url="listTeachers.action";
     	 	sendAjaxRequest(url, function(resp){

@@ -40,7 +40,7 @@ public class UserManagementAction {
                 message = "Invalid Password. Please enter a valid Password.";
                 returnType = Action.ERROR;
             } else if(UserManagementHandler.isInstitutionPresent(institutionName)){
-                message = "Institution is already created. Please login using Email ID and Password, or Click Reset Password.";
+                message = "Institution name exists. Kindly try another name";
                 returnType = Action.ERROR;
             } else {
             	UserManagementHandler.signUpAdminUser(emailID, password, null, null, StringUtils.trimToNull(institutionName));
@@ -91,7 +91,8 @@ public class UserManagementAction {
                 return Action.ERROR;
             } else {
             	UserManagementHandler.addTeacher(firstName, lastName, emailID);
-            	System.out.println("Successfully created teacher! ");
+            	message = "Successfully created teacher account- " + (firstName + lastName) + ". A mail is sent to them";
+            	System.out.println(message);
             }
     	} catch (Exception e) {
 			e.printStackTrace();
