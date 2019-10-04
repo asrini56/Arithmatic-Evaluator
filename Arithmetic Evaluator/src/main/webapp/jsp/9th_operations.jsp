@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>6th grade Maths page</title>
+	<title>9th grade Maths page</title>
 
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -81,7 +81,7 @@ footer {
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="#">Arithmetic Evaluator</a>
+      <a class="navbar-brand" href="1.html">Arithmetic Evaluator</a>
     </div>
     <ul class="nav navbar-nav">
  
@@ -173,6 +173,7 @@ var modal = document.getElementById("myModal");
 	    modal.style.display = "none";
 	  }
 	}
+
 
 </script>
 <footer>

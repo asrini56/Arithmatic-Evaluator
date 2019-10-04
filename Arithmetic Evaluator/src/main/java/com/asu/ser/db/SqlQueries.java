@@ -6,10 +6,11 @@ public class SqlQueries {
 	// START USER TABLE QUERIES//
     public static final String INSERT_USER = "INSERT INTO users (email_id, password, first_name, last_name) VALUES (?,?,?,?)";
     public static final String SELECT_USER_USING_EMAIL_PASSWORD = "SELECT email_id, password, first_name, last_name from users WHERE email_id = ?";
+    public static final String UPDATE_PASSWORD_USING_EMAIL = "UPDATE users SET password = ? WHERE email_id = ?";
 
     public static final String FETCH_USER_ID_FROM_EMAIL = "SELECT user_id from users where email_id = ?";
 
-    public static final String FETCH_TEACHERS_DETAILS = "SELECT user_id, email_id, first_name, last_name from users inner join user_to_role on "
+    public static final String FETCH_TEACHERS_DETAILS = "SELECT users.user_id, email_id, first_name, last_name from users inner join user_to_role on "
     		+ "user_to_role.user_id = users.user_id inner join roles on roles.role_id = user_to_role.role_id inner join user_to_institution on "
     		+ "user_to_institution.user_id = users.user_id where roles.role_name = 'teacher' and user_to_institution.institution_id = ?";
 

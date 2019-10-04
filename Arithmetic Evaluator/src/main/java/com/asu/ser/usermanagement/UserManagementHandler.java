@@ -10,6 +10,8 @@ import com.asu.ser.model.User;
 import com.asu.ser.util.MailServer;
 import org.apache.commons.lang3.StringUtils;
 
+import javax.annotation.PostConstruct;
+
 public class UserManagementHandler {
 
 	private static final String ROLE_ADMIN = "admin";
@@ -23,6 +25,16 @@ public class UserManagementHandler {
 			USER_ROLES = new HashMap<>();
 		}
 
+	}
+
+	@PostConstruct
+	public void init(){
+		try {
+			USER_ROLES = DataSource.fetchRoles();
+		} catch(Exception e) {
+			e.printStackTrace();
+			USER_ROLES = new HashMap<>();
+		}
 	}
 
     public static void signUpAdminUser(String emailID, String password, String firstName, String lastName, String institutionName) throws Exception {
@@ -45,14 +57,30 @@ public class UserManagementHandler {
         } else if(StringUtils.equals(userList.get(0).getPassword(), password)) {
             message = "Success";
         } else {
-            message = "Incorrect Password. Please provide correct password or try to reset password.";
+            message = "Incorrect Password. Please provide correct password.";
             return message;
         }
+        System.out.println("Trying to login user " + emailID + " status " + message);
         return message;
     }
 
+	public static String resetPassword(String emailID, String password) throws Exception {
+		String message = "";
+		Integer rowsAffected = DataSource.resetPassword(emailID, password);
+		if(rowsAffected>0){
+			message = "Success";
+			return message;
+		} else {
+			message = "Failed to update Password.";
+			return message;
+		}
+	}
+
     public static void addTeacher(String firstName, String lastName, String emailID) throws Exception {
     	String loggedInUser = AuthenticationUtil.getLoggedInUser();
+    	if(loggedInUser == null || loggedInUser.isEmpty()) {
+    		throw new Exception("No user logged in");
+    	}
     	int userID = DataSource.fetchUserID(loggedInUser);
     	int userRoleID = DataSource.fetchUserRole(userID);
     	int adminRoleID = USER_ROLES.get(ROLE_ADMIN);
@@ -73,6 +101,7 @@ public class UserManagementHandler {
     		}
     		DataSource.insertUserToRole(teacherUserID, teacherRoleID);
     		DataSource.insertUserTOInstitution(teacherUserID, institutionID);
+    		sendTeacherAccountPasswordEmail(firstName, lastName, emailID, password, loggedInUser);
     	} catch (Exception e) {
     		if(teacherUserID > 0) {
     			DataSource.deleteUser(userID);
