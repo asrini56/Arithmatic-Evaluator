@@ -13,10 +13,10 @@
 		<nav class="navbar navbar-inverse" style="margin-bottom:0px !important">
   			<div class="container-fluid">
     			<div class="navbar-header">
-      				<a class="navbar-brand" href="1.html">Arithmetic Evaluator</a>
+      				<a class="navbar-brand" href="/arithmetic-evaluator/admin/dashboard_page.action">Arithmetic Evaluator</a>
     			</div>
     			<ul class="nav navbar-nav">
-      				<li class="" style="border-right:1px;border-right-color: white;"><a href="1.html">Home</a></li>
+      				<li class="" style="border-right:1px;border-right-color: white;"><a href="/arithmetic-evaluator/admin/dashboard_page.action">Home</a></li>
       				<li class="active" style="border-right:1px;border-right-color: white;"><a href="1.html">Teachers</a></li>
     			</ul>
     			<ul class="nav navbar-nav navbar-right">

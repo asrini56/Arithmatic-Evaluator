@@ -22,8 +22,10 @@ public class UserManagementAction {
     private String newPassword;
     private String confirmPassword;
 
-    private static final String REGEX = "^(.+)@(.+)$";
-    private static final Pattern PATTERN = Pattern.compile(REGEX);
+    private static final String EMAIL_REGEX = "^(.+)@(.+)$";
+    private static final Pattern EMAIL_PATTERN = Pattern.compile(EMAIL_REGEX);
+    private static final String PASSWORD_REGEX = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$";
+    private static final Pattern PASSWORD_PATTERN = Pattern.compile(PASSWORD_REGEX);
 
     public String signUp(){
     	String returnType = Action.SUCCESS;
@@ -68,7 +70,7 @@ public class UserManagementAction {
     }
 
     public String logout(){
-        if(AuthenticationUtil.getLoggedInUser().isEmpty()){
+        if(StringUtils.isEmpty(AuthenticationUtil.getLoggedInUser())){
             return Action.ERROR;
         }
         AuthenticationUtil.reomveTokenForUser(emailID);
@@ -76,8 +78,7 @@ public class UserManagementAction {
     }
 
     public String addTeacher() {
-    	String loggedInUser = AuthenticationUtil.getLoggedInUser();
-        if(loggedInUser == null || loggedInUser.isEmpty()){
+        if(StringUtils.isEmpty(AuthenticationUtil.getLoggedInUser())){
             message = "Please log in to access the page.";
             System.out.println(message);
             return Action.LOGIN;
@@ -107,7 +108,7 @@ public class UserManagementAction {
     }
 
     public String fetchTeachers() {
-        if(AuthenticationUtil.getLoggedInUser().isEmpty()){
+        if(StringUtils.isEmpty(AuthenticationUtil.getLoggedInUser())){
             message = "Please log in to access the page.";
             return Action.ERROR;
         }
@@ -141,11 +142,11 @@ public class UserManagementAction {
     }
 
     private boolean validEmailID(String emailID) {
-    	return PATTERN.matcher(emailID).matches();
+    	return EMAIL_PATTERN.matcher(emailID).matches();
     }
 
     private boolean validPassword(String password) {
-        return true;
+        return PASSWORD_PATTERN.matcher(password).matches();
     }
 
     public String getPassword() {

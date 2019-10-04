@@ -134,8 +134,7 @@ body {
 	<script>
 
 function goToListTeachersPage(){
-    //window.location="/arithmetic-evaluator/admin/listTeachers_page.action";
-    window.location="listTeachers_page.action";
+    window.location="/arithmetic-evaluator/admin/listTeachers_page.action";
 }
 
 function goToListStudentsPage(){
