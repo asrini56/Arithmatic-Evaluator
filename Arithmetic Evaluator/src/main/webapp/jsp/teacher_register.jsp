@@ -2,17 +2,16 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <link rel="stylesheet" href="../css/operations.css">
-
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 <style>
 body {
   font-family: Arial, Helvetica, sans-serif;
   background-color: white;
 }
 
-.container {
+.container !important{
 
     position: relative;
     z-index: 1;
@@ -101,6 +100,7 @@ function submitForm() {
     			</ul>
         </div>
   </nav>
+ 
 <form name="teacherRegisterForm" action="addTeachers.action">
   <div class="container">
     <h1>Register</h1>

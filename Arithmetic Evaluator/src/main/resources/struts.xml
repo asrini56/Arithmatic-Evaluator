@@ -68,6 +68,10 @@
             <result name="error" type="dispatcher">/jsp/admin_signup.jsp</result>
         </action>
 
+		<action name="admin/dashboard_page">
+			<result type="dispatcher">/jsp/admin_dashboard.jsp</result>
+		</action>
+        
         <action name="login" class="com.asu.ser.usermanagement.UserManagementAction" method="login">
             <result name="admin" type="dispatcher">/jsp/admin_dashboard.jsp</result>
             <result name="teacher" type="dispatcher">/jsp/math_operations.jsp</result>

@@ -96,7 +96,7 @@ body {
         						<span class="glyphicon glyphicon-user" style="padding-top:16%; margin-right:30px;"></span>
         					</a>
   							<div class="dropdown-content">
-    							<a href= "#" id="myBtn"><span class="glyphicon glyphicon-log-in"></span> Login</a>
+    							<a href= "#" id="myBtn"><span class="glyphicon glyphicon-log-in"></span> Logout</a>
   							</div>
 						</div>
       				</li>
@@ -107,7 +107,6 @@ body {
 		<main class="main">
 		<div class="main-header">
 			<div class="main-header__heading">Hello User</div>
-			<div class="main-header__updates">Recent Items</div>
 		</div>
 
 		<div class="main-cards">
