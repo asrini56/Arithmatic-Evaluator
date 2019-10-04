@@ -17,9 +17,9 @@
           	</div>
           	<ul class="nav navbar-nav navbar-right">
     				
-    				<li><a href="dashboard_page.action">Dashboard</a></li>
-    				<li class="active fontSansSerif"><a href="">Teachers</a></li>
-    				<li><a href="addTeacher_page.action">Create Teacher Account</a></li>
+    				<li><a href="/arithmetic-evaluator/admin/dashboard_page.action">Dashboard</a></li>
+    				<li class="active fontSansSerif"><a href="#">Teachers</a></li>
+    				<li><a href="/arithmetic-evaluator/admin/addTeacher_page.action">Create Teacher Account</a></li>
     				<li>
     					<div class="dropdown">
  							<a href="#" class="dropbtn">

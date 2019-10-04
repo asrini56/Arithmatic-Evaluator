@@ -81,12 +81,15 @@ function submitForm() {
 </head>
 <body>
 <nav class="navbar navbar-inverse" style="margin-bottom:0px !important">
-        <div class="container-fluid">
-          <div class="navbar-header">
+       		<div class="container-fluid">
+          	<div class="navbar-header">
               <a class="navbar-brand titleText" href="#">Arithmetic Evaluator</a>
-          </div>
-          <ul class="nav navbar-nav navbar-right">
-    				<li class="active fontSansSerif"><a href="#">Home</a></li>
+          	</div>
+          	<ul class="nav navbar-nav navbar-right">
+    				
+    				<li><a href="/arithmetic-evaluator/admin/dashboard_page.action">Dashboard</a></li>
+    				<li><a href="/arithmetic-evaluator/admin/listTeachers_page.action">Teachers</a></li>
+    				<li class="active fontSansSerif"><a href="addTeacher_page.action">Create Teacher Account</a></li>
     				<li>
     					<div class="dropdown">
  							<a href="#" class="dropbtn">
@@ -98,8 +101,8 @@ function submitForm() {
 						</div>
       				</li>
     			</ul>
-        </div>
-  </nav>
+        	</div>
+  		</nav>
  
 <form name="teacherRegisterForm" action="addTeachers.action">
   <div class="container">
