@@ -96,7 +96,7 @@ function submitForm() {
         						<span class="glyphicon glyphicon-user" style="padding-top:16%; margin-right:30px;"></span>
         					</a>
   							<div class="dropdown-content">
-    							<a href= "#" id="myBtn"><span class="glyphicon glyphicon-log-in"></span> Logout</a>
+    							<a href= "/arithmetic-evaluator/" id="myBtn"><span class="glyphicon glyphicon-log-in"></span> Logout</a>
   							</div>
 						</div>
       				</li>

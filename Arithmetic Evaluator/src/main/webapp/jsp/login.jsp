@@ -25,7 +25,7 @@ function loginFunction() {
     
   <nav class="navbar navbar-inverse">
   			<div class="container-fluid">
-    			<div class="navbar-header">
+    			<div class="navbar-header" style="font-family:fantasy !important; font-size:x-large !important;">
       				<a class="navbar-brand titleText" href="#">Arithmetic Evaluator</a>
     			</div>
   			</div>

@@ -26,7 +26,7 @@
         						<span class="glyphicon glyphicon-user" style="padding-top:16%; margin-right:30px;"></span>
         					</a>
   							<div class="dropdown-content">
-    							<a href= "#" id="myBtn"><span class="glyphicon glyphicon-log-in"></span> Logout</a>
+    							<a href= "/arithmetic-evaluator/" id="myBtn"><span class="glyphicon glyphicon-log-in"></span> Logout</a>
   							</div>
 						</div>
       				</li>
@@ -38,7 +38,7 @@
 			<div class="table-users" id="teacher1"></div>
 		</section>
 
-		<footer style="bottom:0px; position:absolute; width:100%">
+		<footer style="bottom:0px; width:100%; position:fixed;">
   			<p style="text-align:center"><span class="glyphicon glyphicon-copyright-mark"></span>  Copyright</p>
 		</footer>
 		

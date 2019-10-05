@@ -126,7 +126,7 @@ public class UserManagementHandler {
     	String subject = "ArithmenticEvaluvator - Account created";
     	String content = "Your account has been created by user - " + adminEmailID + "\n";
     	content += "Your account email is - " + teacherEmailID + "\n";
-    	content += "Your account password is - " + adminEmailID;
+    	content += "Your account password is - " + password;
     	MailServer.sendMail(teacherEmailID, subject, content);
 
     }
