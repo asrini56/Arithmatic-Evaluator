@@ -34,7 +34,8 @@
         	</div>
   		</nav>
 	
-		<section>
+		<section style="display:inline-block; text-align:center; margin-left:23%">
+			<div id="message" class="alert alert-info display-none"></div>
 			<div class="table-users" id="teacher1"></div>
 		</section>
 
@@ -47,31 +48,54 @@
 	$( document ).ready(function() {
 		var message = "${message}";
 		if(message) {
-			alert(message);
+			$("#message").text(message);
+			$("#message").show();
+			setTimeout(function() {$("#message").hide();}, 5000);
 		}
 	});
-		window.onload = function() {
-	    	var url="listTeachers.action";
-    	 	sendAjaxRequest(url, function(resp){
-    	 		var tableContent = '<div class="header">Institution Teachers</div>' +
-    	 							'<table cellspacing="0">' + 
-    	 								'<tr>' +
-    	 	      							'<th>First Name</th>' +
-    	 	      							'<th>Last Name</th>' +
-    	 	      							'<th>Email-ID</th>' +
-    	 	    						'</tr>';
-    	 		
-				$.each(resp.teachers, function() {
-    	 	    tableContent += '<tr>';
-    	 	   	tableContent += '<td>' + this.firstName + '</td>';
-    	 	  	tableContent += '<td>' + this.lastName + '</td>';
-    	 	   	tableContent += '<td>' + this.email + '</td>';
-    	 	   	tableContent += "</tr>";
-    	 	    });
-				tableContent += "</table>";
-    			$("#teacher1").html(tableContent);
-    	 	});
-     	};
+
+	window.onload = function() {
+		fetchTeachers();
+ 	};
+ 	
+	function fetchTeachers() {
+		var url="listTeachers.action";
+		sendAjaxRequest(url, function(resp){
+	 		var tableContent = '<div class="header">Institution Teachers</div>' +
+	 							'<table cellspacing="0">' + 
+	 								'<tr>' +
+	 	      							'<th>First Name</th>' +
+	 	      							'<th>Last Name</th>' +
+	 	      							'<th>Email-ID</th>' +
+	 	      							'<th></th>' +
+	 	    						'</tr>';
+	 		
+			$.each(resp.teachers, function() {
+	 	    tableContent += '<tr>';
+	 	   	tableContent += '<td>' + this.firstName + '</td>';
+	 	  	tableContent += '<td>' + this.lastName + '</td>';
+	 	   	tableContent += '<td>' + this.email + '</td>';
+	 	    tableContent += '<td> <button onClick="confirmRemoveTeacher(\'' + this.email + '\')">Remove Teacher</button></td>';
+	 	   	tableContent += "</tr>";
+	 	    });
+			tableContent += "</table>";
+			$("#teacher1").html(tableContent);
+	 	});
+	}
+		
+     	
+     	function confirmRemoveTeacher(emailID) {
+     		var deleteTeacher = confirm("Are you sure you want to remove user " + emailID + " ? ");
+     		if(deleteTeacher) {
+     			var url="/arithmetic-evaluator/admin/teacher/remove.action?emailID=" + emailID;
+     			sendAjaxRequest(url, function(resp){
+     				$("#message").text(resp.message);
+     				$("#message").show();
+     				setTimeout(function() {$("#message").hide();}, 4000);
+     				fetchTeachers();
+     			});
+     		}
+     	}
 
  		function buttonclick(){
          	window.location="addTeacher_page.action";

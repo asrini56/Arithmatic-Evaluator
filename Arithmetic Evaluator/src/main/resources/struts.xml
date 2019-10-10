@@ -47,6 +47,10 @@
             <result type="dispatcher">/jsp/teacher_register.jsp</result>
         </action>
 
+		<action name="admin/teacher/remove" class="com.asu.ser.usermanagement.UserManagementAction" method="removeTeacher">
+			 <result type="json"/>
+		</action>
+
         <action name="grade1/operations_page">
             <result type="dispatcher">/jsp/math_operations.jsp</result>
         </action>

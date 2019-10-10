@@ -73,10 +73,6 @@ $( document ).ready(function() {
 		alert(message);
 	}
 });
-
-function submitForm() {
-  document.getElementById("teacherRegisterForm").submit();
-}
 </script>
 </head>
 <body>
@@ -113,8 +109,8 @@ function submitForm() {
     <input type="text" placeholder="Enter Last Name" name="lastName" required>
     <input type="text" placeholder="Enter Email" name="emailID" required>
     <hr>
-    <button class="registerbtn">Cancel</button>
-    <button type="submit" class="registerbtn" onclick="submitForm()">Register Teacher</button>
+    <button class="registerbtn" onclick="location.href =''/arithmetic-evaluator/admin/listTeachers_page.action';">Cancel</button>
+    <button type="submit" class="registerbtn">Register Teacher</button>
   </div>
   
 </form>

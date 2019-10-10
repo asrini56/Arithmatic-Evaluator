@@ -5,6 +5,7 @@ import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.conversion.annotations.Conversion;
 import org.apache.commons.lang3.StringUtils;
 
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -91,9 +92,13 @@ public class UserManagementAction {
                 return Action.ERROR;
             } else {
             	UserManagementHandler.addTeacher(firstName, lastName, emailID);
-            	message = "Successfully created teacher account- " + (firstName + lastName) + ". A mail is sent to them";
+            	message = "Successfully created teacher account for " + emailID + ". Their details is mailed to them.";
             	System.out.println(message);
             }
+    	} catch(SQLIntegrityConstraintViolationException sicve) {
+    		message = "An account with email " + emailID + "already exists";
+    		System.out.println(message);
+			return Action.ERROR;
     	} catch (Exception e) {
 			e.printStackTrace();
 			message = "Failed to add teacher " + e.getMessage();
@@ -119,6 +124,17 @@ public class UserManagementAction {
     		e.printStackTrace();
     		message = "Failed to fetch teachers - " + e.getMessage();
 		}
+    	return Action.SUCCESS;
+    }
+
+    public String removeTeacher() {
+    	try {
+    		UserManagementHandler.removeTeacher(emailID);
+    		message = "Successfully removed teacher " + emailID;
+    	} catch(Exception e) {
+    		message = "Failed to remove teacher " + emailID;
+    		e.printStackTrace();
+    	}
     	return Action.SUCCESS;
     }
 
