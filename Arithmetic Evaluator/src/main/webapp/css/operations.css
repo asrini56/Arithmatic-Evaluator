@@ -28,17 +28,6 @@ nav ul {
   padding: 0;
 }
 
-/* Style the content */
-article {
-  min-width: 100px;
-  min-height: 600px;
-  -webkit-flex: 3;
-  -ms-flex: 3;
-  flex: 3;
-  background-color: #F0FFFF;
-  padding: 10px;
-  border-style: groove;
-}
 
 /* Style the footer */
 footer {
@@ -263,3 +252,7 @@ background-color:grey;
 .dropdown:hover .dropdown-content {display: block;}
 
 .dropdown:hover .dropbtn {background-color: #3e8e41;}
+
+.display-none {
+	display:none;
+}

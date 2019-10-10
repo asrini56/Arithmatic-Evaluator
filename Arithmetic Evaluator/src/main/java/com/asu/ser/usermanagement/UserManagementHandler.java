@@ -104,7 +104,7 @@ public class UserManagementHandler {
     		sendTeacherAccountPasswordEmail(firstName, lastName, emailID, password, loggedInUser);
     	} catch (Exception e) {
     		if(teacherUserID > 0) {
-    			DataSource.deleteUser(userID);
+    			DataSource.deleteUserWithID(userID);
     		}
     		throw e;
     	}
@@ -119,6 +119,20 @@ public class UserManagementHandler {
     public static boolean isInstitutionPresent(String institutionName) throws Exception {
         Integer institutionID = DataSource.fetchInstitutionID(institutionName);
         return institutionID != null;
+    }
+
+    public static void removeTeacher(String teacherEmailID) throws Exception {
+    	String loggedInUser = AuthenticationUtil.getLoggedInUser();
+    	if(loggedInUser == null || loggedInUser.isEmpty()) {
+    		throw new Exception("No user logged in");
+    	}
+    	int userID = DataSource.fetchUserID(loggedInUser);
+    	int userRoleID = DataSource.fetchUserRole(userID);
+    	int adminRoleID = USER_ROLES.get(ROLE_ADMIN);
+    	if(userRoleID != adminRoleID) {
+    		throw new Exception("Illegal operation - user does not have permission to remove teacher");
+    	}
+    	DataSource.deleteUserWithEmailID(teacherEmailID);
     }
 
 	public static void sendTeacherAccountPasswordEmail(String firstName, String lastName, String teacherEmailID,

@@ -215,10 +215,18 @@ public class DataSource {
         return teachers;
     }
 
-    public static void deleteUser(int userID) throws Exception {
+    public static void deleteUserWithID(int userID) throws Exception {
         Connection connection = DataSourceConnector.getConnection();
-        PreparedStatement statement = connection.prepareStatement(SqlQueries.DELETE_USER);
+        PreparedStatement statement = connection.prepareStatement(SqlQueries.DELETE_USER_WITH_ID);
         statement.setInt(1, userID);
+        statement.executeUpdate();
+        statement.close();
+    }
+
+    public static void deleteUserWithEmailID(String emailID) throws Exception {
+        Connection connection = DataSourceConnector.getConnection();
+        PreparedStatement statement = connection.prepareStatement(SqlQueries.DELETE_USER_WITH_EMAIL_ID);
+        statement.setString(1, emailID);
         statement.executeUpdate();
         statement.close();
     }
