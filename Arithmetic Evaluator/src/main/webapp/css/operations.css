@@ -139,7 +139,12 @@ img.avatar {
   border-radius: 50%;
 }
 
-#boxB { background-color:#F0FFFF ;width:450px; height:400px; }
+#boxB { 
+  background-color:#F0FFFF ;
+  width:450px; 
+  height:400px; 
+  overflow: auto;
+}
          
          
 .operationsDiv { 
@@ -165,6 +170,17 @@ background-color:grey;
 	-moz-user-select:none;
 	width:40px; 
 	height:40px;
+}
+.questionsBox {
+  font-size:20px;
+  float:left !important;
+  padding:10px;
+  margin:10px;
+  -moz-user-select:none;
+  width:400px; 
+  height:250px;
+  overflow: auto;
+  border: groove;
 }
 
 .operationsBox {
