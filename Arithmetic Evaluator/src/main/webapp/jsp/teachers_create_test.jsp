@@ -58,11 +58,13 @@
 				<div id="questionbox1" class="questionsBox" draggable="true" ondragenter="return dragEnter(event)" ondragstart="return dragStart(event)" ondrop="return dragDrop(event)" ondragover="return dragOver(event)" ">
      				<form>
      					<h1>Question #</h1>
-     					<input type="textarea" name="question"></input><br><br>
-     					<input type="radio" name="option 1">option 1</input>
-     					<input type="radio" name="option 2">option 2</input><br>
-     					<input type="radio" name="option 3">option 3</input>
-     					<input type="radio" name="option 4">option 4</input>
+     					<input type="textarea" name="question" placeholder="Enter question here.."></input><br><br>
+     					
+     					<input type="radio" name="options"><input type="text" name="option1" placeholder="Option1" /></input><br>
+     					<input type="radio" name="options"><input type="text" name="option2" placeholder="Option2"/></input><br>
+     					<input type="radio" name="options"><input type="text" name="option3" placeholder="Option3"/></input><br>
+     					<input type="radio" name="options"><input type="text" name="option4" placeholder="Option4"/></input><br>
+     					<p> Please choose the right answer!</p>
      				</form>
 				</div>
 
@@ -131,21 +133,7 @@ function dragStart(ev) {
  }
  
  function evaluvate(){
-	 var expression = "";
-	 $( ".performOperation" ).each(function( index ) {
-		 expression += $( this ).text().trim();
-		});
 	 
-	 expression = expression.replace("x", "*");
-	 expression = encodeURIComponent(expression);
-	 console.log("Final Expression is " + expression);
-	 var url="/arithmetic-evaluator/grade1/operations/evaluvate.action?expression=" + expression;
-	 sendAjaxRequest(url, function(resp){
-		console.log(resp);
-		var result = resp.response;
-		console.log(result);
-		$("#expressionResult").html(result);
-	 });
 	 
  }
 
