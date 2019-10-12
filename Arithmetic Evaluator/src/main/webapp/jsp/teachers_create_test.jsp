@@ -51,7 +51,7 @@
 		</nav>
 	<section>
   	<nav>
-		<h1 class="splitHeading"> Operations </h1>
+		<h1 class="splitHeading"> Question Bricks </h1>
 
 			<div id="operationsDiv" class="operationsDiv" ondragenter="return dragEnter(event)" ondrop="return dragDrop(event)" ondragover="return dragOver(event)">
 			
