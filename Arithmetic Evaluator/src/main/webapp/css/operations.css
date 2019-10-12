@@ -178,8 +178,7 @@ background-color:grey;
   margin:10px;
   -moz-user-select:none;
   width:400px; 
-  height:250px;
-  overflow: auto;
+  height:360px;
   border: groove;
 }
 
