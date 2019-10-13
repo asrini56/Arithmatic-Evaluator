@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<link rel="stylesheet" href="../css/teachers.css">
-<link rel="stylesheet" href="../css/operations.css">
+<link rel="stylesheet" href="/arithmetic-evaluator/css/teachers.css">
+<link rel="stylesheet" href="/arithmetic-evaluator/css/style_common.css">
 
 </head>
    <body>
