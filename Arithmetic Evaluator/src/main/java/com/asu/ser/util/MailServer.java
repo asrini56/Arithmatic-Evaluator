@@ -1,6 +1,7 @@
 package com.asu.ser.util;
 
 import java.util.Properties;
+import java.util.logging.Level;
 
 import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
@@ -8,6 +9,8 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class MailServer {
 	
@@ -40,7 +43,8 @@ public class MailServer {
 	            Transport.send(message);
 	        } 
 	        catch (MessagingException e) 
-	        {   e.printStackTrace();
+	        {
+				LOGGER.log(Level.SEVERE, "Error" , e);
 	        }
 	}
 	

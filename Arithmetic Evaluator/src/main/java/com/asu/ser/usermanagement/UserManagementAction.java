@@ -5,6 +5,8 @@ import com.asu.ser.db.DataSource;
 import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.conversion.annotations.Conversion;
 import org.apache.commons.lang3.StringUtils;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import java.util.List;
 import java.util.regex.Pattern;
@@ -22,6 +24,8 @@ public class UserManagementAction {
     private String oldPassword;
     private String newPassword;
     private String confirmPassword;
+
+    private Logger LOGGER = Logger.getLogger(UserManagementAction.class.getName());
 
     private static final String REGEX = "^(.+)@(.+)$";
     private static final Pattern PATTERN = Pattern.compile(REGEX);
@@ -46,8 +50,8 @@ public class UserManagementAction {
             	message = "Account successfully created!";
             }
         } catch (Exception e) {
-        	e.printStackTrace();
             message = "Failed to create Admin Account!!!";
+            LOGGER.log(Level.SEVERE, "Failed to create Admin Account" , e);
             returnType = Action.ERROR;
         }
         System.out.println(message);
@@ -63,6 +67,7 @@ public class UserManagementAction {
             }
         } catch (Exception e) {
             message = "Error while logging in. Please try again.";
+            LOGGER.log(Level.SEVERE, "Error while logging in. Please try again." , e);
             return Action.ERROR;
         }
         return Action.ERROR;
@@ -89,8 +94,9 @@ public class UserManagementAction {
             	UserManagementHandler.addTeacher(firstName, lastName, emailID);
             }
     	} catch (Exception e) {
-			e.printStackTrace();
+
 			message = "Failed to add teacher " + e.getMessage();
+            LOGGER.log(Level.SEVERE, "Failed to add teacher" , e);
 			if(e.getMessage().equals("No user logged in")) {
 				message = "Login as admin to add teacher";
 				return Action.LOGIN;
@@ -108,8 +114,8 @@ public class UserManagementAction {
     	try {
     	    teachers = UserManagementHandler.fetchTeachers();
     	}catch (Exception e) {
-    		e.printStackTrace();
     		message = "Failed to fetch teachers - " + e.getMessage();
+            LOGGER.log(Level.SEVERE, "Failed to fetch teacher" , e);
 		}
     	return Action.SUCCESS;
     }

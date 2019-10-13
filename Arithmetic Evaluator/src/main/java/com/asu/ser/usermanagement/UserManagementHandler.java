@@ -9,6 +9,8 @@ import com.asu.ser.db.DataSource;
 import com.asu.ser.model.User;
 import com.asu.ser.util.MailServer;
 import org.apache.commons.lang3.StringUtils;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.annotation.PostConstruct;
 
@@ -21,7 +23,7 @@ public class UserManagementHandler {
 		try {
 			USER_ROLES = DataSource.fetchRoles();
 		} catch(Exception e) {
-			e.printStackTrace();
+			LOGGER.log(Level.SEVERE, "Error" , e);
 			USER_ROLES = new HashMap<>();
 		}
 
@@ -32,7 +34,7 @@ public class UserManagementHandler {
 		try {
 			USER_ROLES = DataSource.fetchRoles();
 		} catch(Exception e) {
-			e.printStackTrace();
+			LOGGER.log(Level.SEVERE, "Error" , e);
 			USER_ROLES = new HashMap<>();
 		}
 	}
