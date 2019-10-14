@@ -11,48 +11,45 @@
 </head>
    <body>
 		<nav class="navbar navbar-inverse" style="margin-bottom:0px !important">
-  			<div class="container-fluid">
-    			<div class="navbar-header">
-      				<a class="navbar-brand" href="1.html">Arithmetic Evaluator</a>
-    			</div>
-    			<ul class="nav navbar-nav">
-      				<li class="" style="border-right:1px;border-right-color: white;"><a href="1.html">Home</a></li>
-      				<li class="active" style="border-right:1px;border-right-color: white;"><a href="1.html">Teachers</a></li>
+       		<div class="container-fluid">
+          	<div class="navbar-header">
+              <a class="navbar-brand titleText" href="#">Arithmetic Evaluator</a>
+          	</div>
+          	<ul class="nav navbar-nav navbar-right">
+    				
+    				<li><a href="/arithmetic-evaluator/admin/dashboard_page.action">Dashboard</a></li>
+    				<li class="active fontSansSerif"><a href="#">Teachers</a></li>
+    				<li><a href="/arithmetic-evaluator/admin/addTeacher_page.action">Create Teacher Account</a></li>
+    				<li>
+    					<div class="dropdown">
+ 							<a href="#" class="dropbtn">
+        						<span class="glyphicon glyphicon-user" style="padding-top:16%; margin-right:30px;"></span>
+        					</a>
+  							<div class="dropdown-content">
+    							<a href= "/arithmetic-evaluator/" id="myBtn"><span class="glyphicon glyphicon-log-in"></span> Logout</a>
+  							</div>
+						</div>
+      				</li>
     			</ul>
-    			<ul class="nav navbar-nav navbar-right">
-      				<li><a href="addTeacher_page.action">Create Teacher Account</a></li>
-    			</ul>
-  			</div>
-
-			<div id="myModal" class="modal">
-  			<div class="modal-content">
-    			<span class="close">&times;</span>
-    			<div class="form">
-					<form class="register-form">
-						<div class="imgcontainer">
-    						<img src="https://icon-library.net/images/head-icon/head-icon-11.jpg" alt="Avatar" class="avatar">
-  						</div>
-               			<input type="text" placeholder="user name"/>
-               			<input type="password" placeholder="password"/>
-                		<button>LOGIN</button>                   
-				   	 <span class="acc"> Not Registered? <a href="#">Create an institute</a></span>
-    
-					</form>
-  				</div>
-			</div>
-			</div>
-		</nav>
+        	</div>
+  		</nav>
 	
 		<section>
 			<div class="table-users" id="teacher1"></div>
 		</section>
 
-		<footer style="bottom:0px; position:absolute; width:100%">
+		<footer style="bottom:0px; width:100%; position:fixed;">
   			<p style="text-align:center"><span class="glyphicon glyphicon-copyright-mark"></span>  Copyright</p>
 		</footer>
 		
 	<script src="../js/common.js"></script>
 	<script type="text/javascript">
+	$( document ).ready(function() {
+		var message = "${message}";
+		if(message) {
+			alert(message);
+		}
+	});
 		window.onload = function() {
 	    	var url="listTeachers.action";
     	 	sendAjaxRequest(url, function(resp){

@@ -83,7 +83,7 @@ body {
 	
 	<div class="grid-container">
 		<header class="header">
-			<nav class="navbar navbar-inverse" style="margin-bottom:0px !important">
+			<nav class="navbar navbar-inverse" style="margin-bottom:0px !important; ">
   				<div class="container-fluid">
     				<div class="navbar-header">
       					<a class="navbar-brand titleText" href="#">Arithmetic Evaluator</a>
@@ -96,7 +96,7 @@ body {
         						<span class="glyphicon glyphicon-user" style="padding-top:16%; margin-right:30px;"></span>
         					</a>
   							<div class="dropdown-content">
-    							<a href= "#" id="myBtn"><span class="glyphicon glyphicon-log-in"></span> Login</a>
+    							<a href= "/arithmetic-evaluator/" id="myBtn"><span class="glyphicon glyphicon-log-in"></span> Logout</a>
   							</div>
 						</div>
       				</li>
@@ -107,7 +107,6 @@ body {
 		<main class="main">
 		<div class="main-header">
 			<div class="main-header__heading">Hello User</div>
-			<div class="main-header__updates">Recent Items</div>
 		</div>
 
 		<div class="main-cards">
@@ -134,8 +133,7 @@ body {
 	<script>
 
 function goToListTeachersPage(){
-    //window.location="/arithmetic-evaluator/admin/listTeachers_page.action";
-    window.location="listTeachers_page.action";
+    window.location="/arithmetic-evaluator/admin/listTeachers_page.action";
 }
 
 function goToListStudentsPage(){

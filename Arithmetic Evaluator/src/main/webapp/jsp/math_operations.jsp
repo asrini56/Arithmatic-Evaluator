@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-<link rel="stylesheet" href="../css/operations.css">
+<link rel="stylesheet" href="/arithmetic-evaluator/css/operations.css">
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
          
    </head>
@@ -22,7 +22,7 @@
         						<span class="glyphicon glyphicon-user" style="padding-top:16%; margin-right:30px;"></span>
         					</a>
   							<div class="dropdown-content">
-    							<a href= "#" id="myBtn"><span class="glyphicon glyphicon-log-in"></span> Login</a>
+    							<a href= "/arithmetic-evaluator/" id="myBtn"><span class="glyphicon glyphicon-log-in"></span> Logout</a>
   							</div>
 						</div>
       				</li>
@@ -131,11 +131,11 @@
    </nav>
 </section>
 
-	<footer style="bottom:0px; width:100%">
+	<footer style="bottom:0px; width:100%; position:fixed;">
 		<p style="text-align:center"><span class="glyphicon glyphicon-copyright-mark"></span>  Copyright</p>
 	</footer>
 
-<script src="../js/common.js"></script>
+<script src="/arithmetic-evaluator/js/common.js"></script>
 <script>
 var cloneCount = 0;
 var selectedBtn;
@@ -180,7 +180,7 @@ function dragStart(ev) {
 	 expression = expression.replace("x", "*");
 	 expression = encodeURIComponent(expression);
 	 console.log("Final Expression is " + expression);
-	 var url="operations/evaluvate.action?expression=" + expression;
+	 var url="/arithmetic-evaluator/grade1/operations/evaluvate.action?expression=" + expression;
 	 sendAjaxRequest(url, function(resp){
 		console.log(resp);
 		var result = resp.response;

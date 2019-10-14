@@ -54,6 +54,9 @@ footer {
 	
 }
 
+.navbar {
+	border-radius:0px !important;
+}
 .fontSansSerif {
 	font-family: sans-serif !important;
 	font-size: large;
