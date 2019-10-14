@@ -1,13 +1,13 @@
 package com.asu.ser.usermanagement;
 
 import com.asu.ser.authentication.AuthenticationUtil;
-import com.asu.ser.db.DataSource;
 import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.conversion.annotations.Conversion;
 import org.apache.commons.lang3.StringUtils;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -29,6 +29,10 @@ public class UserManagementAction {
 
     private static final String REGEX = "^(.+)@(.+)$";
     private static final Pattern PATTERN = Pattern.compile(REGEX);
+    private static final String EMAIL_REGEX = "^(.+)@(.+)$";
+    private static final Pattern EMAIL_PATTERN = Pattern.compile(EMAIL_REGEX);
+    private static final String PASSWORD_REGEX = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$";
+    private static final Pattern PASSWORD_PATTERN = Pattern.compile(PASSWORD_REGEX);
 
     public String signUp(){
     	String returnType = Action.SUCCESS;
@@ -43,7 +47,7 @@ public class UserManagementAction {
                 message = "Invalid Password. Please enter a valid Password.";
                 returnType = Action.ERROR;
             } else if(UserManagementHandler.isInstitutionPresent(institutionName)){
-                message = "Institution is already created. Please login using Email ID and Password, or Click Reset Password.";
+                message = "Institution name exists. Kindly try another name";
                 returnType = Action.ERROR;
             } else {
             	UserManagementHandler.signUpAdminUser(emailID, password, null, null, StringUtils.trimToNull(institutionName));
@@ -74,7 +78,7 @@ public class UserManagementAction {
     }
 
     public String logout(){
-        if(AuthenticationUtil.getLoggedInUser().isEmpty()){
+        if(StringUtils.isEmpty(AuthenticationUtil.getLoggedInUser())){
             return Action.ERROR;
         }
         AuthenticationUtil.reomveTokenForUser(emailID);
@@ -82,32 +86,43 @@ public class UserManagementAction {
     }
 
     public String addTeacher() {
-        if(AuthenticationUtil.getLoggedInUser().isEmpty()){
+        if(StringUtils.isEmpty(AuthenticationUtil.getLoggedInUser())){
             message = "Please log in to access the page.";
-            return Action.ERROR;
+            System.out.println(message);
+            return Action.LOGIN;
         }
     	try {
+    		System.out.println("Creating teacher " + firstName + " " + lastName);
     		if(!validEmailID(emailID)){
                 message = "Invalid Email ID. Please enter a valid Email ID.";
+                System.out.println(message);
                 return Action.ERROR;
             } else {
             	UserManagementHandler.addTeacher(firstName, lastName, emailID);
+            	message = "Successfully created teacher account for " + emailID + ". Their details is mailed to them.";
+            	System.out.println(message);
             }
+    	} catch(SQLIntegrityConstraintViolationException sicve) {
+    		message = "An account with email " + emailID + "already exists";
+    		System.out.println(message);
+			return Action.ERROR;
     	} catch (Exception e) {
 
 			message = "Failed to add teacher " + e.getMessage();
             LOGGER.log(Level.SEVERE, "Failed to add teacher" , e);
 			if(e.getMessage().equals("No user logged in")) {
 				message = "Login as admin to add teacher";
+				System.out.println(message);
 				return Action.LOGIN;
 			}
+			System.out.println(message);
 			return Action.ERROR;
 		}
     	return Action.SUCCESS;
     }
 
     public String fetchTeachers() {
-        if(AuthenticationUtil.getLoggedInUser().isEmpty()){
+        if(StringUtils.isEmpty(AuthenticationUtil.getLoggedInUser())){
             message = "Please log in to access the page.";
             return Action.ERROR;
         }
@@ -117,6 +132,17 @@ public class UserManagementAction {
     		message = "Failed to fetch teachers - " + e.getMessage();
             LOGGER.log(Level.SEVERE, "Failed to fetch teacher" , e);
 		}
+    	return Action.SUCCESS;
+    }
+
+    public String removeTeacher() {
+    	try {
+    		UserManagementHandler.removeTeacher(emailID);
+    		message = "Successfully removed teacher " + emailID;
+    	} catch(Exception e) {
+    		message = "Failed to remove teacher " + emailID;
+    		e.printStackTrace();
+    	}
     	return Action.SUCCESS;
     }
 
@@ -141,11 +167,11 @@ public class UserManagementAction {
     }
 
     private boolean validEmailID(String emailID) {
-    	return PATTERN.matcher(emailID).matches();
+    	return EMAIL_PATTERN.matcher(emailID).matches();
     }
 
     private boolean validPassword(String password) {
-        return true;
+        return PASSWORD_PATTERN.matcher(password).matches();
     }
 
     public String getPassword() {

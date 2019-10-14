@@ -103,9 +103,10 @@ public class UserManagementHandler {
     		}
     		DataSource.insertUserToRole(teacherUserID, teacherRoleID);
     		DataSource.insertUserTOInstitution(teacherUserID, institutionID);
+    		sendTeacherAccountPasswordEmail(firstName, lastName, emailID, password, loggedInUser);
     	} catch (Exception e) {
     		if(teacherUserID > 0) {
-    			DataSource.deleteUser(userID);
+    			DataSource.deleteUserWithID(userID);
     		}
     		throw e;
     	}
@@ -122,12 +123,26 @@ public class UserManagementHandler {
         return institutionID != null;
     }
 
+    public static void removeTeacher(String teacherEmailID) throws Exception {
+    	String loggedInUser = AuthenticationUtil.getLoggedInUser();
+    	if(loggedInUser == null || loggedInUser.isEmpty()) {
+    		throw new Exception("No user logged in");
+    	}
+    	int userID = DataSource.fetchUserID(loggedInUser);
+    	int userRoleID = DataSource.fetchUserRole(userID);
+    	int adminRoleID = USER_ROLES.get(ROLE_ADMIN);
+    	if(userRoleID != adminRoleID) {
+    		throw new Exception("Illegal operation - user does not have permission to remove teacher");
+    	}
+    	DataSource.deleteUserWithEmailID(teacherEmailID);
+    }
+
 	public static void sendTeacherAccountPasswordEmail(String firstName, String lastName, String teacherEmailID,
 			String password, String adminEmailID) throws Exception {
     	String subject = "ArithmenticEvaluvator - Account created";
     	String content = "Your account has been created by user - " + adminEmailID + "\n";
     	content += "Your account email is - " + teacherEmailID + "\n";
-    	content += "Your account password is - " + adminEmailID;
+    	content += "Your account password is - " + password;
     	MailServer.sendMail(teacherEmailID, subject, content);
 
     }

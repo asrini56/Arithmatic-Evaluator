@@ -4,7 +4,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>login form</title>
     <link rel="stylesheet" href="css/login_css.css">
-    <link rel="stylesheet" href="../css/login_css.css">
+    <link rel="stylesheet" href="../css/operations.css">
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
    
@@ -24,13 +24,12 @@ function loginFunction() {
 <body> 
     
   <nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand">Arithmetic Evaluator</a>
-    </div>
-    
-  </div>
-</nav>
+  			<div class="container-fluid">
+    			<div class="navbar-header" style="font-family:fantasy !important; font-size:x-large !important;">
+      				<a class="navbar-brand titleText" href="#">Arithmetic Evaluator</a>
+    			</div>
+  			</div>
+	</nav>
        <div class="login-page">
            <div class="form">
                <form class="register-form" action="login.action" method="post">
@@ -38,9 +37,9 @@ function loginFunction() {
     <img src="https://icon-library.net/images/head-icon/head-icon-11.jpg" alt="Avatar" class="avatar">
   </div>
     <p></p>
-               <input name ="emailID" type="text" placeholder="user name"/>
-               <input name="password" type="password" placeholder="password"/>
-                <button name="login" onclick="loginFunction()">LOGIN</button>
+               <input name ="emailID" type="text" placeholder="user name" required />
+               <input name="password" type="password" placeholder="password" required/>
+               <button name="login" onclick="loginFunction()">LOGIN</button>
 
                    
                                       

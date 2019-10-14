@@ -1,3 +1,11 @@
 1. https://www.mkyong.com/java/java-read-a-file-from-resources-folder
 2. https://stackoverflow.com/questions/3422673/how-to-evaluate-a-math-expression-given-in-string-form
 3. http://mathparser.org/
+4. https://stackoverflow.com/questions/19605150/regex-for-password-must-contain-at-least-eight-characters-at-least-one-number-a
+5. https://www.w3schools.com/html/default.asp
+6. https://www.w3schools.com/css/default.asp
+7. https://www.w3schools.com/bootstrap/default.asp
+8. https://medium.com/better-programming/build-a-responsive-modern-dashboard-layout-with-css-grid-and-flexbox-bd343776a97e
+9. https://www.w3schools.com/howto/howto_css_modals.asp
+10. https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_modal_img
+11. https://www.w3schools.com/howto/howto_css_login_form.asp
