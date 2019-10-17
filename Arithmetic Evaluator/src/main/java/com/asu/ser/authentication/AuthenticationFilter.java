@@ -10,6 +10,8 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class AuthenticationFilter implements Filter {
@@ -37,7 +39,7 @@ public class AuthenticationFilter implements Filter {
 			}
 			chain.doFilter(servletReq, servletResponse);
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOGGER.log(Level.SEVERE, "Error" , e);
 			response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Failed to authenticate user");
 		}
 		
