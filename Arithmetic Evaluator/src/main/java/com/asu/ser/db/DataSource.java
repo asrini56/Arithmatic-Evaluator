@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.asu.ser.usermanagement.Teacher;
+import com.asu.ser.model.Teacher;
 
 public class DataSource {
 

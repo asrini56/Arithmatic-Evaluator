@@ -77,6 +77,19 @@
     		<artifactId>MathParser.org-mXparser</artifactId>
    			<version>4.1.1</version>
 		</dependency>
+
+        <dependency>
+            <groupId>org.apache.derby</groupId>
+            <artifactId>derby</artifactId>
+            <version>10.11.1.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
+            <version>5.1.9.RELEASE</version>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -85,6 +98,27 @@
                 <groupId>org.apache.tomcat.maven</groupId>
                 <artifactId>tomcat7-maven-plugin</artifactId>
                 <version>2.2</version>
+            </plugin>
+            <plugin>
+                <groupId>com.atlassian.maven.plugins</groupId>
+                <artifactId>maven-clover2-plugin</artifactId>
+                <version>4.0.6</version>
+                <configuration>
+                    <license>
+                        <![CDATA[NnqqSSDjgeqJMxcpKeqormFOOQRLkokLBHaxDRvOWldGSX
+                            mi2KjrNbWwhMS0t8opkrFvpZ2KoGdfmknvq1LDVqNyasAw
+                            nNroTwNOQomorQpoooqtXoRrrMRnOROOrRVtTTwrtTxStX
+                            TvsvROQOmnmnmUUnqnqnrrsmmmmmUUnqnqnrrsmmmmmUU7
+                            J9W3ljjboZbUUnmmmm]]>
+                    </license>
+                    <includes>
+                        <includes>**/*.java</includes>
+                    </includes>
+                    <excludes>
+                        <exclude>**/Authentication*.java</exclude>
+                        <exclude>**/model</exclude>
+                    </excludes>
+                </configuration>
             </plugin>
         </plugins>
     </build>

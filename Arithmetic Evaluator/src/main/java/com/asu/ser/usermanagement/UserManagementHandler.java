@@ -6,6 +6,7 @@ import java.util.Map;
 
 import com.asu.ser.authentication.AuthenticationUtil;
 import com.asu.ser.db.DataSource;
+import com.asu.ser.model.Teacher;
 import com.asu.ser.model.User;
 import com.asu.ser.util.MailServer;
 import org.apache.commons.lang3.StringUtils;
@@ -28,7 +29,7 @@ public class UserManagementHandler {
 	}
 
 	@PostConstruct
-	public void init(){
+	public static void init(){
 		try {
 			USER_ROLES = DataSource.fetchRoles();
 		} catch(Exception e) {

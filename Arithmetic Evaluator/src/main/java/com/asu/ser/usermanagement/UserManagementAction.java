@@ -1,6 +1,7 @@
 package com.asu.ser.usermanagement;
 
 import com.asu.ser.authentication.AuthenticationUtil;
+import com.asu.ser.model.Teacher;
 import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.conversion.annotations.Conversion;
 import org.apache.commons.lang3.StringUtils;
@@ -24,22 +25,19 @@ public class UserManagementAction {
 
     private static final String EMAIL_REGEX = "^(.+)@(.+)$";
     private static final Pattern EMAIL_PATTERN = Pattern.compile(EMAIL_REGEX);
-    private static final String PASSWORD_REGEX = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$";
-    private static final Pattern PASSWORD_PATTERN = Pattern.compile(PASSWORD_REGEX);
+    private static final String PASS_WORD_REGEX = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$";
+    private static final Pattern PASSWORD_PATTERN = Pattern.compile(PASS_WORD_REGEX);
 
     public String signUp(){
     	String returnType = Action.SUCCESS;
         try {
-        	System.out.println("Creating admin user  " + emailID + " for institution " + institutionName );
-        	
-            if(!validEmailID(emailID)){
+            if(StringUtils.isEmpty(emailID) || !validEmailID(emailID)){
                 message = "Invalid Email ID. Please enter a valid Email ID.";
-                System.out.println(message);
                 returnType = Action.ERROR;
-            } else if(!validPassword(password)){
+            } else if(StringUtils.isEmpty(password) || !validPassword(password)){
                 message = "Invalid Password. Please enter a valid Password.";
                 returnType = Action.ERROR;
-            } else if(UserManagementHandler.isInstitutionPresent(institutionName)){
+            } else if(StringUtils.isEmpty(institutionName) || UserManagementHandler.isInstitutionPresent(institutionName)){
                 message = "Institution name exists. Kindly try another name";
                 returnType = Action.ERROR;
             } else {
@@ -51,7 +49,6 @@ public class UserManagementAction {
             message = "Failed to create Admin Account!!!";
             returnType = Action.ERROR;
         }
-        System.out.println(message);
         return returnType;
     }
 
@@ -122,7 +119,7 @@ public class UserManagementAction {
     	return Action.SUCCESS;
     }
 
-    public String resetPassword() throws Exception {
+    public String resetPassword() {
         if(!newPassword.equals(confirmPassword)){
             message = "Passwords does not match. Please re-enter a new password.";
             return Action.ERROR;
@@ -130,13 +127,18 @@ public class UserManagementAction {
             message = "Invalid Password. Please enter a valid Password.";
             return Action.ERROR;
         } else{
-            message = UserManagementHandler.loginUser(emailID, oldPassword);
-            if(StringUtils.equalsIgnoreCase(message, "success")){
-                AuthenticationUtil.setTokenForUser(emailID);
-                message = UserManagementHandler.resetPassword(emailID, newPassword);
-                if(StringUtils.equalsIgnoreCase(message, "success")){
-                    return Action.SUCCESS;
+            try {
+                message = UserManagementHandler.loginUser(emailID, oldPassword);
+                if (StringUtils.equalsIgnoreCase(message, "success")) {
+                    AuthenticationUtil.setTokenForUser(emailID);
+                    message = UserManagementHandler.resetPassword(emailID, newPassword);
+                    if (StringUtils.equalsIgnoreCase(message, "success")) {
+                        return Action.SUCCESS;
+                    }
                 }
+            } catch (Exception e){
+                message = "Error occurred while resetting password. Please try again!!";
+                return Action.ERROR;
             }
         }
         return Action.ERROR;
