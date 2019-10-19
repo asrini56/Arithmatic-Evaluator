@@ -4,8 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
 <link rel="stylesheet" href="/arithmetic-evaluator/css/operations.css">
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
          
    </head>
    <body>
@@ -118,8 +120,8 @@
 		</div>	
 		
 		<div class="deleteAction">
-			<!--  <span class="deleteBtnHover">Select a button to delete it</span>-->
-			<button type="button" id="delete" class="btn btn-success canvasButton deleteButton" onClick="deleteSelectedButton()" >Delete Button</button>
+			
+			<button type="button" id="delete" class="btn btn-success canvasButton deleteButton glyphicon glyphicon-trash" onClick="deleteSelectedButton()" ></button>
 		</div>
 		<br><br>
 		<button type="button" id="submit" onClick="evaluvate()" class="btn btn-success canvasButton">Submit</button>
@@ -182,7 +184,6 @@ function dragStart(ev) {
 	 console.log("Final Expression is " + expression);
 	 var url="/arithmetic-evaluator/grade1/operations/evaluvate.action?expression=" + expression;
 	 sendAjaxRequest(url, function(resp){
-		console.log(resp);
 		var result = resp.response;
 		console.log(result);
 		$("#expressionResult").html(result);
