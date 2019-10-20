@@ -15,6 +15,8 @@ import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 
 public class UserManagementHandler {
+	
+	private static Logger LOGGER = Logger.getLogger(UserManagementHandler.class.getName());
 
 	private static final String ROLE_ADMIN = "admin";
 	private static final String ROLE_TEACHER = "teacher";
@@ -148,6 +150,6 @@ public class UserManagementHandler {
     }
 
 	public static String getRoleNameForUser(String emailID) throws Exception {
-		return DataSource. fetchUserRoleName(emailID);
+		return DataSource.fetchUserRoleName(emailID);
 	}
 }
