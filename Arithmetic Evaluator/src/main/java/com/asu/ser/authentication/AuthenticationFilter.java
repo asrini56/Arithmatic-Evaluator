@@ -10,12 +10,15 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.asu.ser.util.MailServer;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
 public class AuthenticationFilter implements Filter {
-	
+	private static Logger LOGGER = Logger.getLogger(AuthenticationFilter.class.getName());
 	
 
 	@Override

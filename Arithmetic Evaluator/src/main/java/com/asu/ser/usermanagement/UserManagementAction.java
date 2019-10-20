@@ -25,7 +25,7 @@ public class UserManagementAction {
     private String newPassword;
     private String confirmPassword;
 
-    private Logger LOGGER = Logger.getLogger(UserManagementAction.class.getName());
+    private static Logger LOGGER = Logger.getLogger(UserManagementAction.class.getName());
 
     private static final String REGEX = "^(.+)@(.+)$";
     private static final Pattern PATTERN = Pattern.compile(REGEX);
@@ -37,8 +37,7 @@ public class UserManagementAction {
     public String signUp(){
     	String returnType = Action.SUCCESS;
         try {
-        	System.out.println("Creating admin user  " + emailID + " for institution " + institutionName );
-        	
+        	LOGGER.log(Level.INFO, "Creating admin user  " + emailID + " for institution " + institutionName);
             if(!validEmailID(emailID)){
                 message = "Invalid Email ID. Please enter a valid Email ID.";
                 System.out.println(message);
