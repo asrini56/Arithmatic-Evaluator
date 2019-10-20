@@ -24,6 +24,7 @@ public class UserManagementAction {
     private String oldPassword;
     private String newPassword;
     private String confirmPassword;
+    private List<TestDetails> testDetails;
 
     private static Logger LOGGER = Logger.getLogger(UserManagementAction.class.getName());
 
@@ -164,6 +165,21 @@ public class UserManagementAction {
         }
         return Action.ERROR;
     }
+
+    public String fetchTestDetails() {
+        if(StringUtils.isEmpty(AuthenticationUtil.getLoggedInUser())){
+            message = "Please log in to access the page.";
+            return Action.ERROR;
+        }
+        try {
+            testDetails = UserManagementHandler.fetchTestDetails();
+        }catch (Exception e) {
+            message = "Failed to fetch test details - " + e.getMessage();
+            LOGGER.log(Level.SEVERE, "Failed to fetch test details" , e);
+        }
+        return Action.SUCCESS;
+    }
+
 
     private boolean validEmailID(String emailID) {
     	return EMAIL_PATTERN.matcher(emailID).matches();

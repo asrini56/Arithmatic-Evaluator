@@ -120,6 +120,12 @@ public class UserManagementHandler {
     	return DataSource.fetchTeachers(institutionID);
     }
 
+    public static List<TestDetails> fetchTestDetails() throws Exception {
+        String loggedInUser = AuthenticationUtil.getLoggedInUser();
+        Integer institutionID = DataSource.fetchUsersInstitutionID(loggedInUser);
+        return DataSource.fetchTeachers(institutionID);
+    }
+
     public static boolean isInstitutionPresent(String institutionName) throws Exception {
         Integer institutionID = DataSource.fetchInstitutionID(institutionName);
         return institutionID != null;

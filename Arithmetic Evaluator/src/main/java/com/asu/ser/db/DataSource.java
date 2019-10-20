@@ -215,6 +215,26 @@ public class DataSource {
         return teachers;
     }
 
+    public static List<TestDetails> fetchTestDetails(int institutionID) throws Exception {
+        Connection connection = DataSourceConnector.getConnection();
+        PreparedStatement statement = connection.prepareStatement(SqlQueries.FETCH_TEST_DETAILS);
+        statement.setInt(1, institutionID);
+        ResultSet resultSet = statement.executeQuery();
+        List<TestDetails> testDetails = new ArrayList<>();
+        while(resultSet.next()){
+            int ID = resultSet.getInt("id");
+            String name = resultSet.getString("name");
+            int grade = resultSet.getString("grade");
+            TestDetails testDetails = new TestDetails();
+            testDetails.setId(id);
+            testDetails.setName(name);
+            testDetails.add(testDetails);
+        }
+        resultSet.close();
+        statement.close();
+        return testDetails;
+    }
+
     public static void deleteUserWithID(int userID) throws Exception {
         Connection connection = DataSourceConnector.getConnection();
         PreparedStatement statement = connection.prepareStatement(SqlQueries.DELETE_USER_WITH_ID);
