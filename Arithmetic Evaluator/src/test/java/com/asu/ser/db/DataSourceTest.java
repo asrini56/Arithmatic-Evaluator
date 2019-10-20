@@ -137,7 +137,7 @@ public class DataSourceTest extends TestCase {
 
     public void testDeleteUser(){
         try {
-            DataSource.deleteUser(1);
+            DataSource.deleteUserWithID(1);
             assertTrue(true);
         } catch (Exception e) {
             assertTrue(true);
