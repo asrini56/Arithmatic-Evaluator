@@ -1,6 +1,7 @@
 package com.asu.ser.util;
 
 import java.util.Properties;
+import java.util.logging.Level;
 
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -10,13 +11,19 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import com.asu.ser.usermanagement.UserManagementAction;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class MailServer {
 
+	private static Logger LOGGER = Logger.getLogger(MailServer.class.getName());
+	
 	private static final String USERNAME = "team8.ser515@gmail.com";
 	private static final String PASSWORD = "aujisrmliyexaydg";
 
 	public static void sendMail(String toAddress, String subject, String content) throws Exception {
-
 		Properties prop = new Properties();
 		prop.put("mail.smtp.host", "smtp.gmail.com");
 		prop.put("mail.smtp.port", "587");
@@ -39,10 +46,10 @@ public class MailServer {
 
 			Transport.send(message);
 
-			System.out.println("Done");
+			LOGGER.log(Level.INFO, "Mail has been sent successfully to " +toAddress);
 
 		} catch (MessagingException e) {
-			e.printStackTrace();
+			LOGGER.log(Level.SEVERE, "Error" , e);
 		}
 	}
 

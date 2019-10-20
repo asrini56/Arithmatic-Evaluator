@@ -5,7 +5,10 @@ import com.asu.ser.model.Teacher;
 import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.conversion.annotations.Conversion;
 import org.apache.commons.lang3.StringUtils;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -23,6 +26,10 @@ public class UserManagementAction {
     private String newPassword;
     private String confirmPassword;
 
+    private static Logger LOGGER = Logger.getLogger(UserManagementAction.class.getName());
+
+    private static final String REGEX = "^(.+)@(.+)$";
+    private static final Pattern PATTERN = Pattern.compile(REGEX);
     private static final String EMAIL_REGEX = "^(.+)@(.+)$";
     private static final Pattern EMAIL_PATTERN = Pattern.compile(EMAIL_REGEX);
     private static final String PASS_WORD_REGEX = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$";
@@ -31,6 +38,7 @@ public class UserManagementAction {
     public String signUp(){
     	String returnType = Action.SUCCESS;
         try {
+        	LOGGER.log(Level.INFO, "Creating admin user  " + emailID + " for institution " + institutionName);
             if(StringUtils.isEmpty(emailID) || !validEmailID(emailID)){
                 message = "Invalid Email ID. Please enter a valid Email ID.";
                 returnType = Action.ERROR;
@@ -45,8 +53,8 @@ public class UserManagementAction {
             	message = "Account successfully created!";
             }
         } catch (Exception e) {
-        	e.printStackTrace();
             message = "Failed to create Admin Account!!!";
+            LOGGER.log(Level.SEVERE, "Failed to create Admin Account" , e);
             returnType = Action.ERROR;
         }
         return returnType;
@@ -61,6 +69,7 @@ public class UserManagementAction {
             }
         } catch (Exception e) {
             message = "Error while logging in. Please try again.";
+            LOGGER.log(Level.SEVERE, "Error while logging in. Please try again." , e);
             return Action.ERROR;
         }
         return Action.ERROR;
@@ -88,12 +97,17 @@ public class UserManagementAction {
                 return Action.ERROR;
             } else {
             	UserManagementHandler.addTeacher(firstName, lastName, emailID);
-            	message = "Successfully created teacher account- " + (firstName + lastName) + ". A mail is sent to them";
+            	message = "Successfully created teacher account for " + emailID + ". Their details is mailed to them.";
             	System.out.println(message);
             }
+    	} catch(SQLIntegrityConstraintViolationException sicve) {
+    		message = "An account with email " + emailID + "already exists";
+    		System.out.println(message);
+			return Action.ERROR;
     	} catch (Exception e) {
-			e.printStackTrace();
+
 			message = "Failed to add teacher " + e.getMessage();
+            LOGGER.log(Level.SEVERE, "Failed to add teacher" , e);
 			if(e.getMessage().equals("No user logged in")) {
 				message = "Login as admin to add teacher";
 				System.out.println(message);
@@ -113,6 +127,18 @@ public class UserManagementAction {
     	try {
     	    teachers = UserManagementHandler.fetchTeachers();
     	}catch (Exception e) {
+    		message = "Failed to fetch teachers - " + e.getMessage();
+            LOGGER.log(Level.SEVERE, "Failed to fetch teacher" , e);
+		}
+    	return Action.SUCCESS;
+    }
+
+    public String removeTeacher() {
+    	try {
+    		UserManagementHandler.removeTeacher(emailID);
+    		message = "Successfully removed teacher " + emailID;
+    	} catch(Exception e) {
+    		message = "Failed to remove teacher " + emailID;
     		e.printStackTrace();
     		message = "Failed to fetch teachers - " + e.getMessage();
 		}

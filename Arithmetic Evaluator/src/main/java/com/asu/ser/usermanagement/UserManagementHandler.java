@@ -10,10 +10,14 @@ import com.asu.ser.model.Teacher;
 import com.asu.ser.model.User;
 import com.asu.ser.util.MailServer;
 import org.apache.commons.lang3.StringUtils;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.annotation.PostConstruct;
 
 public class UserManagementHandler {
+	
+	private static Logger LOGGER = Logger.getLogger(UserManagementHandler.class.getName());
 
 	private static final String ROLE_ADMIN = "admin";
 	private static final String ROLE_TEACHER = "teacher";
@@ -22,7 +26,7 @@ public class UserManagementHandler {
 		try {
 			USER_ROLES = DataSource.fetchRoles();
 		} catch(Exception e) {
-			e.printStackTrace();
+			LOGGER.log(Level.SEVERE, "Error" , e);
 			USER_ROLES = new HashMap<>();
 		}
 
@@ -33,7 +37,7 @@ public class UserManagementHandler {
 		try {
 			USER_ROLES = DataSource.fetchRoles();
 		} catch(Exception e) {
-			e.printStackTrace();
+			LOGGER.log(Level.SEVERE, "Error" , e);
 			USER_ROLES = new HashMap<>();
 		}
 	}
@@ -105,7 +109,7 @@ public class UserManagementHandler {
     		sendTeacherAccountPasswordEmail(firstName, lastName, emailID, password, loggedInUser);
     	} catch (Exception e) {
     		if(teacherUserID > 0) {
-    			DataSource.deleteUser(userID);
+    			DataSource.deleteUserWithID(userID);
     		}
     		throw e;
     	}
@@ -122,17 +126,31 @@ public class UserManagementHandler {
         return institutionID != null;
     }
 
+    public static void removeTeacher(String teacherEmailID) throws Exception {
+    	String loggedInUser = AuthenticationUtil.getLoggedInUser();
+    	if(loggedInUser == null || loggedInUser.isEmpty()) {
+    		throw new Exception("No user logged in");
+    	}
+    	int userID = DataSource.fetchUserID(loggedInUser);
+    	int userRoleID = DataSource.fetchUserRole(userID);
+    	int adminRoleID = USER_ROLES.get(ROLE_ADMIN);
+    	if(userRoleID != adminRoleID) {
+    		throw new Exception("Illegal operation - user does not have permission to remove teacher");
+    	}
+    	DataSource.deleteUserWithEmailID(teacherEmailID);
+    }
+
 	public static void sendTeacherAccountPasswordEmail(String firstName, String lastName, String teacherEmailID,
 			String password, String adminEmailID) throws Exception {
     	String subject = "ArithmenticEvaluvator - Account created";
     	String content = "Your account has been created by user - " + adminEmailID + "\n";
     	content += "Your account email is - " + teacherEmailID + "\n";
-    	content += "Your account password is - " + adminEmailID;
+    	content += "Your account password is - " + password;
     	MailServer.sendMail(teacherEmailID, subject, content);
 
     }
 
 	public static String getRoleNameForUser(String emailID) throws Exception {
-		return DataSource. fetchUserRoleName(emailID);
+		return DataSource.fetchUserRoleName(emailID);
 	}
 }

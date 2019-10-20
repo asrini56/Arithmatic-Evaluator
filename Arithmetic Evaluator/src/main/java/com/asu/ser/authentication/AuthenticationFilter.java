@@ -11,9 +11,14 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.asu.ser.util.MailServer;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 
 public class AuthenticationFilter implements Filter {
-	
+	private static Logger LOGGER = Logger.getLogger(AuthenticationFilter.class.getName());
 	
 
 	@Override
@@ -37,7 +42,7 @@ public class AuthenticationFilter implements Filter {
 			}
 			chain.doFilter(servletReq, servletResponse);
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOGGER.log(Level.SEVERE, "Error" , e);
 			response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Failed to authenticate user");
 		}
 		
