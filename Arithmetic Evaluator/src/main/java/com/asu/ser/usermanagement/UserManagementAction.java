@@ -40,7 +40,7 @@ public class UserManagementAction {
         	LOGGER.log(Level.INFO, "Creating admin user  " + emailID + " for institution " + institutionName);
             if(!validEmailID(emailID)){
                 message = "Invalid Email ID. Please enter a valid Email ID.";
-                System.out.println(message);
+                LOGGER.log(Level.INFO,message);
                 returnType = Action.ERROR;
             } else if(!validPassword(password)){
                 message = "Invalid Password. Please enter a valid Password.";
@@ -57,7 +57,7 @@ public class UserManagementAction {
             LOGGER.log(Level.SEVERE, "Failed to create Admin Account" , e);
             returnType = Action.ERROR;
         }
-        System.out.println(message);
+        LOGGER.log(Level.INFO,message);
         return returnType;
     }
 
@@ -87,35 +87,35 @@ public class UserManagementAction {
     public String addTeacher() {
         if(StringUtils.isEmpty(AuthenticationUtil.getLoggedInUser())){
             message = "Please log in to access the page.";
-            System.out.println(message);
+            LOGGER.log(Level.INFO,message);
             return Action.LOGIN;
         }
     	try {
-    		System.out.println("Creating teacher " + firstName + " " + lastName);
+    		LOGGER.log(Level.INFO,"Creating teacher " + firstName + " " + lastName);
     		if(!validEmailID(emailID)){
                 message = "Invalid Email ID. Please enter a valid Email ID.";
-                System.out.println(message);
+                LOGGER.log(Level.INFO,message);
                 return Action.ERROR;
             } else {
             	UserManagementHandler.addTeacher(firstName, lastName, emailID);
             	message = "Successfully created teacher account for " + emailID + ". Their details is mailed to them.";
-            	System.out.println(message);
+                LOGGER.log(Level.INFO,message);
             }
     	} catch(SQLIntegrityConstraintViolationException sicve) {
     		message = "An account with email " + emailID + "already exists";
-    		System.out.println(message);
-			return Action.ERROR;
+            LOGGER.log(Level.INFO,message);
+            return Action.ERROR;
     	} catch (Exception e) {
 
 			message = "Failed to add teacher " + e.getMessage();
             LOGGER.log(Level.SEVERE, "Failed to add teacher" , e);
 			if(e.getMessage().equals("No user logged in")) {
 				message = "Login as admin to add teacher";
-				System.out.println(message);
-				return Action.LOGIN;
+                LOGGER.log(Level.INFO,message);
+                return Action.LOGIN;
 			}
-			System.out.println(message);
-			return Action.ERROR;
+            LOGGER.log(Level.INFO,message);
+            return Action.ERROR;
 		}
     	return Action.SUCCESS;
     }

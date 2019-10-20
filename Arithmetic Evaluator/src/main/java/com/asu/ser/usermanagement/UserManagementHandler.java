@@ -64,7 +64,7 @@ public class UserManagementHandler {
             message = "Incorrect Password. Please provide correct password.";
             return message;
         }
-        System.out.println("Trying to login user " + emailID + " status " + message);
+        LOGGER.log(Level.INFO,"Trying to login user " + emailID + " status " + message);
         return message;
     }
 
