@@ -132,4 +132,15 @@
 	width: 30%; /* Could be more or less, depending on screen size */
 }
 
+.questionsBox {
+  font-size:20px;
+  float:left !important;
+  padding:10px;
+  margin:10px;
+  -moz-user-select:none;
+  width:400px; 
+  height:360px;
+  border: groove;
+}
+
 /* The Close Button */
