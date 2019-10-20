@@ -4,67 +4,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<link rel="stylesheet" href="../css/operations.css">
-<style>
-body {
-  font-family: Arial, Helvetica, sans-serif;
-  background-color: white;
-}
-
-.container !important{
-
-    position: relative;
-    z-index: 1;
-    background-color: white;
-    max-width: 480px;
-    margin: 0 auto 30px;
-    padding:100px;
-    text-align: center;
-}
-
-/* Full-width input fields */
-input[type=text], input[type=password] {
-  width: 100%;
-  padding: 15px;
-  margin: 5px 0 22px 0;
-  display: inline-block;
-  border: none;
-  background: #f1f1f1;
-}
-
-input[type=text]:focus, input[type=password]:focus {
-  background-color: #ddd;
-  outline: none;
-}
-
-hr {
-  border: 1px solid #f1f1f1;
-  margin-bottom: 25px;
-}
-
-
-.registerbtn {
-  background-color: #6E7C9A;
-  color: white;
-  padding: 16px 20px;
-  margin: 8px 0;
-  border: none;
-  cursor: pointer;
-  width: 200px;
-  opacity: 0.9;
-}
-
-.registerbtn:hover {
-  opacity: 1;
-}
-
-
-a {
-  color: dodgerblue;
-}
-
-
-</style>
+<link rel="stylesheet" href="/arithmetic-evaluator/css/style_common.css">
+<link rel="stylesheet" href="/arithmetic-evaluator/css/teacher_register.css">
 
 <script>
 $( document ).ready(function() {
@@ -109,11 +50,11 @@ $( document ).ready(function() {
     <input type="text" placeholder="Enter Last Name" name="lastName" required>
     <input type="text" placeholder="Enter Email" name="emailID" required>
     <hr>
-    <button class="registerbtn" onclick="location.href =''/arithmetic-evaluator/admin/listTeachers_page.action';">Cancel</button>
+    <button type="button" class="registerbtn" onclick="location.href ='/arithmetic-evaluator/admin/listTeachers_page.action';" formnovalidate>Cancel</button>
     <button type="submit" class="registerbtn">Register Teacher</button>
   </div>
-  
+  <br/> <br/><br/><br/><br/>
+  <footer class="footer"><span class="glyphicon glyphicon-copyright-mark"></span>  Copyright</footer>
 </form>
-
 </body>
 </html>
