@@ -122,7 +122,15 @@ public class UserManagementHandler {
 
     public static List<TestDetails> fetchTestDetails() throws Exception {
         String loggedInUser = AuthenticationUtil.getLoggedInUser();
-        Integer institutionID = DataSource.fetchUsersInstitutionID(loggedInUser);
+        if(loggedInUser == null || loggedInUser.isEmpty()) {
+            throw new Exception("No user logged in");
+        }
+        int userID = DataSource.fetchUserID(loggedInUser);
+        int userRoleID = DataSource.fetchUserRole(userID);
+        int teacherRoleID = USER_ROLES.get(ROLE_TEACHER);
+        if(userRoleID != teacherRoleID) {
+            throw new Exception("Illegal operation - user does not have permission to remove teacher");
+        }
         return DataSource.fetchTeachers(institutionID);
     }
 
