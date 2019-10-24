@@ -6,19 +6,35 @@ public class TestDetails {
     private Int createdByUserId;
     private Int grade;
 
-    public Integer getId() {return id; }
+    public Integer getId() {
+        return id;
+    }
 
-    public void setId(Integer id) { this.id = id; }
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-    public String getTestName() { return testName; }
+    public String getTestName() {
+        return testName;
+    }
 
-    public void setTestName(String testName) { this.testName = testName; }
+    public void setTestName(String testName) {
+        this.testName = testName;
+    }
 
-    public Int getCreatedByUserId() { return createdByUserId; }
+    public Int getCreatedByUserId() {
+        return createdByUserId;
+    }
 
-    public void setCreatedByUserId(Int createdByUserId) { this.createdByUserId = createdByUserId; }
+    public void setCreatedByUserId(Int createdByUserId) {
+        this.createdByUserId = createdByUserId;
+    }
 
-    public Int getGrade() { return grade; }
+    public Int getGrade() {
+        return grade;
+    }
 
-    public void setGrade(Int grade) { this.grade = grade; }
+    public void setGrade(Int grade) {
+        this.grade = grade;
+    }
 }
