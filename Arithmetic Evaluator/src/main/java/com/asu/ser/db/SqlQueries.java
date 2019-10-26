@@ -14,6 +14,9 @@ public class SqlQueries {
     		+ "user_to_role.user_id = users.user_id inner join roles on roles.role_id = user_to_role.role_id inner join user_to_institution on "
     		+ "user_to_institution.user_id = users.user_id where roles.role_name = 'teacher' and user_to_institution.institution_id = ?";
 
+    //Fetch testdetails
+    public static final String FETCH_TEST_DETAILS ="SELECT id, name, grade from TestDetails where created_by_user_id=?";
+
     public static final String DELETE_USER_WITH_ID = "DELETE from users where user_id = ?";
     public static final String DELETE_USER_WITH_EMAIL_ID = "DELETE from users where email_id = ?";
 

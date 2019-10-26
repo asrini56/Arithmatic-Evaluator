@@ -25,6 +25,7 @@ public class UserManagementAction {
     private String oldPassword;
     private String newPassword;
     private String confirmPassword;
+    private List<TestDetails> testDetails;
 
     private static Logger LOGGER = Logger.getLogger(UserManagementAction.class.getName());
 
@@ -41,6 +42,7 @@ public class UserManagementAction {
         	LOGGER.log(Level.INFO, "Creating admin user  " + emailID + " for institution " + institutionName);
             if(StringUtils.isEmpty(emailID) || !validEmailID(emailID)){
                 message = "Invalid Email ID. Please enter a valid Email ID.";
+                LOGGER.log(Level.INFO,message);
                 returnType = Action.ERROR;
             } else if(StringUtils.isEmpty(password) || !validPassword(password)){
                 message = "Invalid Password. Please enter a valid Password.";
@@ -57,6 +59,7 @@ public class UserManagementAction {
             LOGGER.log(Level.SEVERE, "Failed to create Admin Account" , e);
             returnType = Action.ERROR;
         }
+        LOGGER.log(Level.INFO,message);
         return returnType;
     }
 
@@ -86,35 +89,35 @@ public class UserManagementAction {
     public String addTeacher() {
         if(StringUtils.isEmpty(AuthenticationUtil.getLoggedInUser())){
             message = "Please log in to access the page.";
-            System.out.println(message);
+            LOGGER.log(Level.INFO,message);
             return Action.LOGIN;
         }
     	try {
-    		System.out.println("Creating teacher " + firstName + " " + lastName);
+    		LOGGER.log(Level.INFO,"Creating teacher " + firstName + " " + lastName);
     		if(!validEmailID(emailID)){
                 message = "Invalid Email ID. Please enter a valid Email ID.";
-                System.out.println(message);
+                LOGGER.log(Level.INFO,message);
                 return Action.ERROR;
             } else {
             	UserManagementHandler.addTeacher(firstName, lastName, emailID);
             	message = "Successfully created teacher account for " + emailID + ". Their details is mailed to them.";
-            	System.out.println(message);
+                LOGGER.log(Level.INFO,message);
             }
     	} catch(SQLIntegrityConstraintViolationException sicve) {
     		message = "An account with email " + emailID + "already exists";
-    		System.out.println(message);
-			return Action.ERROR;
+            LOGGER.log(Level.INFO,message);
+            return Action.ERROR;
     	} catch (Exception e) {
 
 			message = "Failed to add teacher " + e.getMessage();
             LOGGER.log(Level.SEVERE, "Failed to add teacher" , e);
 			if(e.getMessage().equals("No user logged in")) {
 				message = "Login as admin to add teacher";
-				System.out.println(message);
-				return Action.LOGIN;
+                LOGGER.log(Level.INFO,message);
+                return Action.LOGIN;
 			}
-			System.out.println(message);
-			return Action.ERROR;
+            LOGGER.log(Level.INFO,message);
+            return Action.ERROR;
 		}
     	return Action.SUCCESS;
     }
@@ -140,7 +143,6 @@ public class UserManagementAction {
     	} catch(Exception e) {
     		message = "Failed to remove teacher " + emailID;
             LOGGER.log(Level.SEVERE, message , e);
-    		message = "Failed to fetch teachers - " + e.getMessage();
 		}
     	return Action.SUCCESS;
     }
@@ -170,6 +172,21 @@ public class UserManagementAction {
         }
         return Action.ERROR;
     }
+
+    public String fetchTestDetails() {
+        if(StringUtils.isEmpty(AuthenticationUtil.getLoggedInUser())){
+            message = "Please log in to access the page.";
+            return Action.ERROR;
+        }
+        try {
+            testDetails = UserManagementHandler.fetchTestDetails();
+        }catch (Exception e) {
+            message = "Failed to fetch test details - " + e.getMessage();
+            LOGGER.log(Level.SEVERE, "Failed to fetch test details" , e);
+        }
+        return Action.SUCCESS;
+    }
+
 
     private boolean validEmailID(String emailID) {
     	return EMAIL_PATTERN.matcher(emailID).matches();
