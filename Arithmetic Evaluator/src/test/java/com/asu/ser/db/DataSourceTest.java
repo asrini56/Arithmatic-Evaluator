@@ -144,4 +144,12 @@ public class DataSourceTest extends TestCase {
         }
     }
 
+    public void testDeleteUserWithEmailID(){
+        try {
+            DataSource.deleteUserWithEmailID("abc@gmail.com");
+        } catch (Exception e) {
+            assertFalse(false);
+        }
+    }
+
 }

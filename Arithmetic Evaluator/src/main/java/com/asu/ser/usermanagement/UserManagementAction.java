@@ -32,8 +32,8 @@ public class UserManagementAction {
     private static final Pattern PATTERN = Pattern.compile(REGEX);
     private static final String EMAIL_REGEX = "^(.+)@(.+)$";
     private static final Pattern EMAIL_PATTERN = Pattern.compile(EMAIL_REGEX);
-    private static final String PASS_WORD_REGEX = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$";
-    private static final Pattern PASSWORD_PATTERN = Pattern.compile(PASS_WORD_REGEX);
+    private static final String PASSWORD_REGEX = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$";
+    private static final Pattern PASSWORD_PATTERN = Pattern.compile(PASSWORD_REGEX);
 
     public String signUp(){
     	String returnType = Action.SUCCESS;
@@ -139,7 +139,7 @@ public class UserManagementAction {
     		message = "Successfully removed teacher " + emailID;
     	} catch(Exception e) {
     		message = "Failed to remove teacher " + emailID;
-    		e.printStackTrace();
+            LOGGER.log(Level.SEVERE, message , e);
     		message = "Failed to fetch teachers - " + e.getMessage();
 		}
     	return Action.SUCCESS;
@@ -164,6 +164,7 @@ public class UserManagementAction {
                 }
             } catch (Exception e){
                 message = "Error occurred while resetting password. Please try again!!";
+                LOGGER.log(Level.SEVERE, message , e);
                 return Action.ERROR;
             }
         }
