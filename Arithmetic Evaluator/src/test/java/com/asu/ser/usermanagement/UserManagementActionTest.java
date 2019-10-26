@@ -20,6 +20,7 @@ public class UserManagementActionTest extends TestCase {
 
     public void testSignUp(){
         UserManagementAction userManagementAction = new UserManagementAction();
+        
         assertEquals(Action.ERROR, userManagementAction.signUp());
     }
 

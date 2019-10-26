@@ -1,7 +1,22 @@
 
 
+/* Style the content */
+article {
+  min-width: 100px;
+  min-height: 600px;
+  -webkit-flex: 3;
+  -ms-flex: 3;
+  flex: 3;
+  background-color: #F0FFFF;
+  padding: 10px;
+  border-style: groove;
+}
 
-#boxB { width:450px; height:400px; }
+#boxB { 
+	width:450px; 
+	height:400px;
+	overflow:auto; 
+}
          
          
 .operationsDiv {

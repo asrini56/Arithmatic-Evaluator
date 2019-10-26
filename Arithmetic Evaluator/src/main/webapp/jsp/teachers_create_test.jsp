@@ -5,17 +5,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 <link rel="stylesheet" href="/arithmetic-evaluator/css/operations.css">
+<link rel="stylesheet" href="/arithmetic-evaluator/css/style_common.css">
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
          
    </head>
    <body>
 		<nav class="navbar navbar-inverse" style="margin-bottom:0px !important">
-  			<div class="container-fluid">
-    			<div class="navbar-header">
-      				<a class="navbar-brand titleText" href="#">Arithmetic Evaluator</a>
-    			</div>
-    			<ul class="nav navbar-nav navbar-right">
-    				<li class="active fontSansSerif"><a href="#">Home</a></li>
+       		<div class="container-fluid">
+          	<div class="navbar-header">
+              <a class="navbar-brand titleText" href="#">Arithmetic Evaluator</a>
+          	</div>
+          	<ul class="nav navbar-nav navbar-right">
+    				
+    				<li><a href="/arithmetic-evaluator/admin/dashboard_page.action">Dashboard</a></li>
+    				<li class="#"><a href="#">Tests</a></li>
+    				<li class="active fontSansSerif"><a href="#">Create Test</a></li>
     				<li>
     					<div class="dropdown">
  							<a href="#" class="dropbtn">
@@ -27,28 +31,8 @@
 						</div>
       				</li>
     			</ul>
-  			</div>
-
-<!-- The Modal -->
-			<div id="myModal" class="modal">
-	<!-- Modal content -->
-  			<div class="modal-content">
-    			<span class="close">&times;</span>
-    			<div class="form">
-					<form class="register-form">
-						<div class="imgcontainer">
-    						<img src="https://icon-library.net/images/head-icon/head-icon-11.jpg" alt="Avatar" class="avatar">
-  						</div>
-               			<input type="text" placeholder="user name"/>
-               			<input type="password" placeholder="password"/>
-                		<button>LOGIN</button>                   
-				   	 <span class="acc"> Not Registered? <a href="#">Create an institute</a></span>
-    
-					</form>
-  				</div>
-			</div>
-			</div>
-		</nav>
+        	</div>
+  		</nav>
 	<section>
   	<nav>
 		<h1 class="splitHeading"> Question Bricks </h1>
@@ -93,8 +77,8 @@
 </section>
 
 	<footer style="bottom:0px; width:100%; position:fixed;">
-		<p style="text-align:center"><span class="glyphicon glyphicon-copyright-mark"></span>  Copyright</p>
-	</footer>
+  			<p style="text-align:center"><span class="glyphicon glyphicon-copyright-mark"></span>  Copyright</p>
+		</footer>
 
 <script src="/arithmetic-evaluator/js/common.js"></script>
 <script>
