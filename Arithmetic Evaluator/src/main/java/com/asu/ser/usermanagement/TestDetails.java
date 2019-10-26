@@ -1,17 +1,17 @@
 package com.asu.ser.usermanagement;
 
 public class TestDetails {
-    private Integer id;
+    private Integer testId;
     private String testName;
-    private Int createdByUserId;
-    private Int grade;
+    private Integer createdByUserId;
+    private Integer gradeId;
 
-    public Integer getId() {
-        return id;
+    public Integer getTestId() {
+        return testId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setTestId(Integer testId) {
+        this.testId = testId;
     }
 
     public String getTestName() {
@@ -22,19 +22,19 @@ public class TestDetails {
         this.testName = testName;
     }
 
-    public Int getCreatedByUserId() {
+    public Integer getCreatedByUserId() {
         return createdByUserId;
     }
 
-    public void setCreatedByUserId(Int createdByUserId) {
+    public void setCreatedByUserId(Integer createdByUserId) {
         this.createdByUserId = createdByUserId;
     }
 
-    public Int getGrade() {
-        return grade;
+    public Integer getGradeId() {
+        return gradeId;
     }
 
-    public void setGrade(Int grade) {
-        this.grade = grade;
+    public void setGradeId(Integer gradeId) {
+        this.gradeId = gradeId;
     }
 }
