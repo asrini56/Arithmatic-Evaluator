@@ -1,4 +1,4 @@
-package com.asu.ser.usermanagement;
+package com.asu.ser.model;
 
 public class Teacher {
 	private Integer id;
