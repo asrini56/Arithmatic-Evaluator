@@ -11,7 +11,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.asu.ser.usermanagement.Teacher;
+import com.asu.ser.model.Teacher;
+import com.asu.ser.usermanagement.TestDetails;
 
 public class DataSource {
 
@@ -220,19 +221,20 @@ public class DataSource {
         PreparedStatement statement = connection.prepareStatement(SqlQueries.FETCH_TEST_DETAILS);
         statement.setInt(1, institutionID);
         ResultSet resultSet = statement.executeQuery();
-        List<TestDetails> testDetails = new ArrayList<>();
+        List<TestDetails> testDetailsList = new ArrayList<>();
         while(resultSet.next()){
-            int ID = resultSet.getInt("id");
-            String name = resultSet.getString("name");
-            int grade = resultSet.getString("grade");
+            int id = resultSet.getInt("test_id");
+            String name = resultSet.getString("test_name");
+            int grade = resultSet.getInt("grade_id");
             TestDetails testDetails = new TestDetails();
-            testDetails.setId(id);
-            testDetails.setName(name);
-            testDetails.add(testDetails);
+            testDetails.setTestId(id);
+            testDetails.setTestName(name);
+            testDetails.setGradeId(grade);
+            testDetailsList.add(testDetails);
         }
         resultSet.close();
         statement.close();
-        return testDetails;
+        return testDetailsList;
     }
 
     public static void deleteUserWithID(int userID) throws Exception {

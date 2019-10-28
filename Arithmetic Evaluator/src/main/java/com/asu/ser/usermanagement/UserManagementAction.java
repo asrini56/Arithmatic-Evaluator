@@ -1,6 +1,7 @@
 package com.asu.ser.usermanagement;
 
 import com.asu.ser.authentication.AuthenticationUtil;
+import com.asu.ser.model.Teacher;
 import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.conversion.annotations.Conversion;
 import org.apache.commons.lang3.StringUtils;
@@ -39,14 +40,14 @@ public class UserManagementAction {
     	String returnType = Action.SUCCESS;
         try {
         	LOGGER.log(Level.INFO, "Creating admin user  " + emailID + " for institution " + institutionName);
-            if(!validEmailID(emailID)){
+            if(StringUtils.isEmpty(emailID) || !validEmailID(emailID)){
                 message = "Invalid Email ID. Please enter a valid Email ID.";
                 LOGGER.log(Level.INFO,message);
                 returnType = Action.ERROR;
-            } else if(!validPassword(password)){
+            } else if(StringUtils.isEmpty(password) || !validPassword(password)){
                 message = "Invalid Password. Please enter a valid Password.";
                 returnType = Action.ERROR;
-            } else if(UserManagementHandler.isInstitutionPresent(institutionName)){
+            } else if(StringUtils.isEmpty(institutionName) || UserManagementHandler.isInstitutionPresent(institutionName)){
                 message = "Institution name exists. Kindly try another name";
                 returnType = Action.ERROR;
             } else {
@@ -141,12 +142,12 @@ public class UserManagementAction {
     		message = "Successfully removed teacher " + emailID;
     	} catch(Exception e) {
     		message = "Failed to remove teacher " + emailID;
-    		e.printStackTrace();
-    	}
+            LOGGER.log(Level.SEVERE, message , e);
+		}
     	return Action.SUCCESS;
     }
 
-    public String resetPassword() throws Exception {
+    public String resetPassword() {
         if(!newPassword.equals(confirmPassword)){
             message = "Passwords does not match. Please re-enter a new password.";
             return Action.ERROR;
@@ -154,13 +155,19 @@ public class UserManagementAction {
             message = "Invalid Password. Please enter a valid Password.";
             return Action.ERROR;
         } else{
-            message = UserManagementHandler.loginUser(emailID, oldPassword);
-            if(StringUtils.equalsIgnoreCase(message, "success")){
-                AuthenticationUtil.setTokenForUser(emailID);
-                message = UserManagementHandler.resetPassword(emailID, newPassword);
-                if(StringUtils.equalsIgnoreCase(message, "success")){
-                    return Action.SUCCESS;
+            try {
+                message = UserManagementHandler.loginUser(emailID, oldPassword);
+                if (StringUtils.equalsIgnoreCase(message, "success")) {
+                    AuthenticationUtil.setTokenForUser(emailID);
+                    message = UserManagementHandler.resetPassword(emailID, newPassword);
+                    if (StringUtils.equalsIgnoreCase(message, "success")) {
+                        return Action.SUCCESS;
+                    }
                 }
+            } catch (Exception e){
+                message = "Error occurred while resetting password. Please try again!!";
+                LOGGER.log(Level.SEVERE, message , e);
+                return Action.ERROR;
             }
         }
         return Action.ERROR;

@@ -15,7 +15,7 @@ public class SqlQueries {
     		+ "user_to_institution.user_id = users.user_id where roles.role_name = 'teacher' and user_to_institution.institution_id = ?";
 
     //Fetch testdetails
-    public static final String FETCH_TEST_DETAILS ="SELECT id, name, grade from TestDetails where created_by_user_id=?";
+    public static final String FETCH_TEST_DETAILS ="SELECT test_id, test_name, grade_id from testDetails where created_by_user_id=?";
 
     public static final String DELETE_USER_WITH_ID = "DELETE from users where user_id = ?";
     public static final String DELETE_USER_WITH_EMAIL_ID = "DELETE from users where email_id = ?";
