@@ -13,12 +13,18 @@ article {
 }
 
 #boxB { 
-	width:450px; 
+	width:400px; 
 	height:400px;
 	overflow:auto; 
 }
-         
-         
+     
+#previewDiv {
+	width:400px; 
+	height:400px;
+	overflow:auto; 
+}    
+
+    
 .operationsDiv {
 	float:left; 
 }

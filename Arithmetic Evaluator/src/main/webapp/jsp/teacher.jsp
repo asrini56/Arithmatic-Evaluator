@@ -39,9 +39,7 @@
 			<div class="table-users" id="teacher1"></div>
 		</section>
 
-		<footer style="bottom:0px; width:100%; position:fixed;">
-  			<p style="text-align:center"><span class="glyphicon glyphicon-copyright-mark"></span>  Copyright</p>
-		</footer>
+		<footer class="footer"><span class="glyphicon glyphicon-copyright-mark"></span>  Copyright</footer>
 		
 	<script src="../js/common.js"></script>
 	<script type="text/javascript">
