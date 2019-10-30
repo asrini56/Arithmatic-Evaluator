@@ -14,6 +14,10 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
    		<maven.compiler.target>1.8</maven.compiler.target>
+        <commons.componentid>chain</commons.componentid>
+        <commons.release.version>1.8</commons.release.version>
+        <project.description>This project aims to help youngsters learn to form valid math expressions. The end user would click on a button, drag it onto a canvas and interpret the formula.</project.description>
+        <commons.jira.id>1.2</commons.jira.id>
     </properties>
 
     <dependencies>
@@ -98,6 +102,11 @@
                 <groupId>org.apache.tomcat.maven</groupId>
                 <artifactId>tomcat7-maven-plugin</artifactId>
                 <version>2.2</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-build-plugin</artifactId>
+                <version>1.11</version>
             </plugin>
             <plugin>
                 <groupId>com.atlassian.maven.plugins</groupId>
