@@ -2,7 +2,7 @@ package com.asu.ser.operations;
 
 import org.mariuszgromada.math.mxparser.Expression;
 
-public class Operations {
+public class OperationsHandler {
 
 	public static String evaluvateExpression(String expression) {
 		Expression e = new Expression(expression);
