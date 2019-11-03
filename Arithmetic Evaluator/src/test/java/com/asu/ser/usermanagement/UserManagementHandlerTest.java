@@ -1,87 +1,89 @@
 package com.asu.ser.usermanagement;
 
+import com.asu.ser.model.Teacher;
 import junit.framework.TestCase;
+
+import java.util.List;
 
 public class UserManagementHandlerTest extends TestCase {
 
     public void testInit(){
         try {
             UserManagementHandler.init();
-            assertTrue(true);
         } catch (Exception e) {
-            assertTrue(true);
+            fail();
         }
     }
 
     public void testSignUpAdminUser(){
         try {
             UserManagementHandler.signUpAdminUser("xcv", "XljlLbVytS2387", "first", "last", "jhs");
-            assertTrue(true);
         } catch (Exception e) {
-            assertTrue(true);
+            assertEquals("Duplicate entry 'xcv' for key 'email_id_Index'", e.getLocalizedMessage());
         }
     }
 
     public void testLoginUser(){
         try {
-            UserManagementHandler.loginUser("xcv", "XljlLbVytS2387");
-            assertTrue(true);
+            String user = UserManagementHandler.loginUser("xcv", "XljlLbVytS2387");
+            assertEquals("Success", user);
         } catch (Exception e) {
-            assertTrue(true);
+            fail();
         }
     }
 
     public void testResetPassword(){
         try {
-            UserManagementHandler.resetPassword("xcv", "XljlLbVytS2387");
-            assertTrue(true);
+            String result = UserManagementHandler.resetPassword("xcv", "XljlLbVytS2387");
+            assertEquals("Success", result);
         } catch (Exception e) {
-            assertTrue(true);
+            fail();
         }
     }
 
     public void testAddTeacher(){
         try {
             UserManagementHandler.addTeacher("first", "last", "jhs@df.sf");
-            assertTrue(true);
         } catch (Exception e) {
-            assertTrue(true);
+            assertNull(e.getMessage());
         }
     }
 
     public void testFetchTeachers(){
         try {
-            UserManagementHandler.fetchTeachers();
-            assertTrue(true);
+            UserManagementHandler.loginUser("akrish84@asu.edu", "Qwertyui9");
+            List<Teacher> teacherList = UserManagementHandler.fetchTeachers();
+            assertFalse(teacherList.isEmpty());
+        } catch(NullPointerException e){
+            assertNull(e.getLocalizedMessage());
         } catch (Exception e) {
-            assertTrue(true);
+            fail();
         }
     }
 
     public void testIsInstitutionPresent(){
         try {
-            UserManagementHandler.isInstitutionPresent("jhs");
-            assertTrue(true);
+            boolean isPresent = UserManagementHandler.isInstitutionPresent("SRM");
+            assertTrue(isPresent);
         } catch (Exception e) {
-            assertTrue(true);
+            fail();
         }
     }
 
     public void testSendTeacherAccountPasswordEmail(){
         try {
             UserManagementHandler.sendTeacherAccountPasswordEmail("xcv", "Xlj", "fir@sdf.st", "lastasdFdf34", "jh@dfg.gs");
-            assertTrue(true);
         } catch (Exception e) {
-            assertTrue(true);
+            fail();
         }
     }
 
     public void testGetRoleNameForUser(){
         try {
-            UserManagementHandler.getRoleNameForUser("xcv@dfg.dfv");
-            assertTrue(true);
+            String role = UserManagementHandler.getRoleNameForUser("abc@gmail.com");
+            assertEquals("admin", role);
         } catch (Exception e) {
-            assertTrue(true);
+            fail();
         }
     }
 
