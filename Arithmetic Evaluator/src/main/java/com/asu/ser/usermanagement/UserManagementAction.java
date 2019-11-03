@@ -280,4 +280,12 @@ public class UserManagementAction {
     public void setConfirmPassword(String confirmPassword) {
         this.confirmPassword = confirmPassword;
     }
+
+    public List<TestDetails> getTestDetails() {
+        return testDetails;
+    }
+
+    public void setTestDetails(List<TestDetails> testDetails) {
+        this.testDetails = testDetails;
+    }
 }

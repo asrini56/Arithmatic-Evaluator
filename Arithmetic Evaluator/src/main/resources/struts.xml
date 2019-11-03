@@ -82,7 +82,7 @@
         
         <action name="login" class="com.asu.ser.usermanagement.UserManagementAction" method="login">
             <result name="admin" type="dispatcher">/jsp/admin_dashboard.jsp</result>
-            <result name="teacher" type="dispatcher">/jsp/math_operations.jsp</result>
+            <result name="teacher" type="dispatcher">/jsp/teachers_dashboard.jsp</result>
             <result name="student" type="dispatcher">/jsp/math_operations.jsp</result>
             <result name="success" type="dispatcher">/jsp/math_operations.jsp</result>
             <result name="error" type="dispatcher">/jsp/login.jsp</result>
@@ -103,11 +103,20 @@
             <result type="json"/>
         </action>
 
+        <action name="teacher/testdetails" class="com.asu.ser.usermanagement.UserManagementAction" method="fetchTestDetails">
+            <result type="json"/>
+        </action>
+
+
+        <action name="teacher/testdetails_page">
+            <result type="dispatcher">/jsp/test_details.jsp</result>
+        </action>
+
         <action name="grade1/operations/evaluvate" class="com.asu.ser.operations.OperationsAction" method="evaluvateExpression">
             <result type="json"/>
         </action>
 
-	 <action name="grade6/operations_page">
+	    <action name="grade6/operations_page">
             <result type="dispatcher">/jsp/6th_operations.jsp</result>
         </action>
 
