@@ -44,10 +44,10 @@
      					<h1>Question #</h1>
      					<input type="textarea" name="question" id="question" placeholder="Enter question here.."></input><br><br>
      					
-     					<input type="radio" name="options" id="answerOpt1"><input type="text" name="option1" id="option1" placeholder="Option1" /></input><br>
-     					<input type="radio" name="options" id="answerOpt1"><input type="text" name="option2" id="option2" placeholder="Option2"/></input><br>
-     					<input type="radio" name="options" id="answerOpt1"><input type="text" name="option3" id="option3" placeholder="Option3"/></input><br>
-     					<input type="radio" name="options" id="answerOpt1"><input type="text" name="option4" id="option4" placeholder="Option4"/></input><br>
+     					<input type="radio" name="options" id="answerOpt1"/><input type="text" name="option1" id="option1" placeholder="Option1" /><br>
+     					<input type="radio" name="options" id="answerOpt2"/><input type="text" name="option2" id="option2" placeholder="Option2"/><br>
+     					<input type="radio" name="options" id="answerOpt3"/><input type="text" name="option3" id="option3" placeholder="Option3"/><br>
+     					<input type="radio" name="options" id="answerOpt4"/><input type="text" name="option4" id="option4" placeholder="Option4"/><br>
      					<p> Please choose the right answer!</p>
      				</form>
 				</div>
@@ -55,15 +55,13 @@
 
     			
   </nav>
-  <nav>
+  <nav style="min-height:1000px !important">
 	<h1 class="splitHeading">Canvas</h1>
 		<div id="message" class="alert alert-info display-none"></div>
-		<div id="boxB" ondragenter="return dragEnter(event)" ondrop="return dragDrop(event)" ondragover="return dragOver(event)" ondragstart="return dragStart(event)">
-		</div>	
-		
+		<div id="boxB" style ="min-height:800px !important" ondragenter="return dragEnter(event)" ondrop="return dragDrop(event)" ondragover="return dragOver(event)" ondragstart="return dragStart(event)">
+		</div>
 		
 		<div class="deleteAction">
-			<!--  <span class="deleteBtnHover">Select a button to delete it</span>-->
 			<button type="button" id="delete" class="btn btn-success canvasButton deleteButton" onClick="deleteSelectedButton()" >Delete Button</button>
 		</div>
 		<br><br>
@@ -85,10 +83,37 @@
     	</div>
     <div class="previewDiv" id="previewDiv">
     </div>
-    <button type="button" id="publish" class="btn btn-success canvasButton">Publish</button>
-   </nav>
-</section>
+    <button type="button" id="publish" onClick="publish()" class="btn btn-success canvasButton">Publish</button>
+   	</nav>
+	</section>
 
+	<div id="myModal" class="saveAssignmentDialog">	
+		<div class="saveAssignmentDialog-content">
+			<span class="saveAssignmentDialog-close">&times;</span>
+			<table>
+				<tr style="height:40px">
+					<td><label>Test Name</label></td> 
+					<td><input type="text" id="testName"/></td>
+				</tr>
+				<tr style="height:40px">
+					<td><label>Test for Grade</label></td> 
+					<td>
+						<select id="testForGrade">
+ 							<option value = "1">Grade 1</option>
+  							<option value ="2">Grade 2</option>
+  							<option value="3">Grade 3</option> 
+						</select>
+					</td>
+				</tr>
+				<tr style="height:40px">
+					<td></td>
+					<td><button type="button" id="preview" onClick="publish()" class="btn btn-success canvasButton">Save Test</button></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	
+		
 	<footer class="footer"><span class="glyphicon glyphicon-copyright-mark"></span>  Copyright</footer>
 
 	<script src="/arithmetic-evaluator/js/common.js"></script>
@@ -110,7 +135,7 @@
 		}
 		function dragDrop(ev) {
 			var src = ev.dataTransfer.getData("Text");
-			console.log(src);
+			
 			$btn = $('#' + src).clone();
 
 			$btn.attr('id', 'id' + cloneCount)
@@ -137,30 +162,40 @@
 				var option4 = $(this).find("#option4").val().trim();
 				var answer = "";
 				
-				console.log(option1 + " " + option2 + " " + option3 + " " + option4)
-				if(option1 === "" || option2 === "" || option3 ==="" || option4 ==="" ) {
-					console.log("Here");
-					$("#message").text("Enter all 4 options for  " + question);
+				if(question === "") {
+					$("#message").text("One of the question's description is empty ");
 					$("#message").show();
 					setTimeout(function() {$("#message").hide();}, 5000);
 					return;
 				}
-				if($(this).find("#answerOpt1").is(':checked')){
-					answer = option1;
-				} else if($(this).find("#answerOpt2").is(':checked')){
-					answer = option2;
-				} else if($(this).find("#answerOpt3").is(':checked')){
-					answer = option3;
-				} else if($(this).find("#answerOpt4").is(':checked')){
-					answer = option4;
-				} else {
-					$("#message").text("Select an answer for " + question);
+				if(option1 === "" || option2 === "" || option3 ==="" || option4 ==="" ) {
+					$("#message").text("Enter all 4 options for the question - " + question);
 					$("#message").show();
 					setTimeout(function() {$("#message").hide();}, 5000);
 					return;
 				}
 				
-				console.log("q " + question + " " + option1 + " ");
+				
+				var radio1Value = $(this).find("#answerOpt1").is(':checked');
+				var radio2Value = $(this).find("#answerOpt2").is(':checked');
+				var radio3Value = $(this).find("#answerOpt3").is(':checked');
+				var radio4Value = $(this).find("#answerOpt4").is(':checked');
+				
+				if(radio1Value){
+					answer = option1;
+				} else if(radio2Value){
+					answer = option2;
+				} else if(radio3Value){
+					answer = option3;
+				} else if(radio4Value){
+					answer = option4;
+				} else {
+					$("#message").text("Select an answer for the question " + question);
+					$("#message").show();
+					setTimeout(function() {$("#message").hide();}, 5000);
+					return;
+				}
+				
 				$previewElement = $('#questionPreviewTemplate').clone();
 				$previewElement.find("#previewQuestion").text(question);
 				$previewElement.find("#previewOption1").text(option1);
@@ -173,6 +208,120 @@
 			});
 		}
 
+		function saveDialogBox(){
+			if(!validate()){
+				return;
+			}
+			var modal = document.getElementById("myModal");
+			var span = document.getElementsByClassName("saveAssignmentDialog-close")[0];			
+			modal.style.display = "block";
+			span.onclick = function() {
+			  modal.style.display = "none";
+			}
+			window.onclick = function(event) {
+			  if (event.target == modal) {
+			    modal.style.display = "none";
+			  }
+			}			
+		}
+
+		function validate() {
+			$(".performOperation").each(function(index) {
+				var question = $(this).find("#question").val();
+				var option1 = $(this).find("#option1").val().trim();
+				var option2 = $(this).find("#option2").val().trim();
+				var option3 = $(this).find("#option3").val().trim();
+				var option4 = $(this).find("#option4").val().trim();
+				var answer = "";
+				
+				if(question === "") {
+					$("#message").text("One of the question's description is empty ");
+					$("#message").show();
+					setTimeout(function() {$("#message").hide();}, 5000);
+					return false;
+				}
+				if(option1 === "" || option2 === "" || option3 ==="" || option4 ==="" ) {
+					$("#message").text("Enter all 4 options for the question - " + question);
+					$("#message").show();
+					setTimeout(function() {$("#message").hide();}, 5000);
+					return false;
+				}
+			}
+			return true;
+		}
+		function publish() {
+			saveDialogBox();
+			var allQuestions = [];
+			$(".performOperation").each(function(index) {
+				var question = $(this).find("#question").val();
+				var option1 = $(this).find("#option1").val().trim();
+				var option2 = $(this).find("#option2").val().trim();
+				var option3 = $(this).find("#option3").val().trim();
+				var option4 = $(this).find("#option4").val().trim();
+				var answer = "";
+				
+				if(question === "") {
+					$("#message").text("One of the question's description is empty ");
+					$("#message").show();
+					setTimeout(function() {$("#message").hide();}, 5000);
+					return;
+				}
+				if(option1 === "" || option2 === "" || option3 ==="" || option4 ==="" ) {
+					$("#message").text("Enter all 4 options for the question - " + question);
+					$("#message").show();
+					setTimeout(function() {$("#message").hide();}, 5000);
+					return;
+				}
+				
+				
+				var radio1Value = $(this).find("#answerOpt1").is(':checked');
+				var radio2Value = $(this).find("#answerOpt2").is(':checked');
+				var radio3Value = $(this).find("#answerOpt3").is(':checked');
+				var radio4Value = $(this).find("#answerOpt4").is(':checked');
+				
+				if(radio1Value){
+					answer = 1;
+				} else if(radio2Value){
+					answer = 2;
+				} else if(radio3Value){
+					answer = 3;
+				} else if(radio4Value){
+					answer = 4;
+				} else {
+					$("#message").text("Select an answer for the question " + question);
+					$("#message").show();
+					setTimeout(function() {$("#message").hide();}, 5000);
+					return;
+				}
+				
+				var questionObj = new Object();
+				questionObj.question=question;
+				questionObj.option1=option1;
+				questionObj.option2=option2;
+				questionObj.option3=option3;
+				questionObj.option4=option4;
+				questionObj.answer=answer;
+				allQuestions.push(questionObj);
+				var json = new Object();
+				json.questions = allQuestions;
+				
+				var testName = $("#testName").val();
+				var grade = $("#testForGrade").val();
+				var url = "/arithmetic-evaluator/teacher/test/add.action?questionsJSONAsString=" + JSON.stringify(json)
+					+ expression;
+				sendAjaxRequest(url, function(resp) {
+					var response = resp.response;
+					console.log(response);
+					var modal = document.getElementById("myModal");
+					modal.style.display = "none";
+					$("#message").text(response);
+					$("#message").show();
+					setTimeout(function() {$("#message").hide();}, 5000);
+				});
+			});
+			
+			
+		}
 		function selectedButton(id) {
 			selectedBtn = id;
 		}

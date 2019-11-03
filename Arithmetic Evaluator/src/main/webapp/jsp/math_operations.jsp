@@ -227,7 +227,6 @@
 
 			expression = expression.replace("x", "*");
 			expression = encodeURIComponent(expression);
-			console.log("Final Expression is " + expression);
 			var url = "/arithmetic-evaluator/grade1/operations/evaluvate.action?expression="
 					+ expression;
 			sendAjaxRequest(url, function(resp) {
