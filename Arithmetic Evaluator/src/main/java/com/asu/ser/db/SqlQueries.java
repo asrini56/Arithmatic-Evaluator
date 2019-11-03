@@ -1,4 +1,9 @@
 package com.asu.ser.db;
+/**
+ * @author akhilesh
+ * @author Ashwin
+ * @author Srinivasan
+ */
 
 public class SqlQueries {
 
