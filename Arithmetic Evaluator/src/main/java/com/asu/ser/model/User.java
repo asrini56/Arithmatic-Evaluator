@@ -1,4 +1,7 @@
 package com.asu.ser.model;
+/**
+ * @author Srinivasan
+ */
 
 public class User {
 

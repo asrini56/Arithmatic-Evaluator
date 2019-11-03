@@ -1,6 +1,11 @@
 package com.asu.ser.operations;
 
 import org.mariuszgromada.math.mxparser.Expression;
+/**
+ * @author akhilesh
+ * @author Ashwin
+ * @author Srinivasan
+ */
 
 public class OperationsHandler {
 
