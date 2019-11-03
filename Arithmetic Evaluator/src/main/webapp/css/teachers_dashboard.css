@@ -1,0 +1,31 @@
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr; /* Side nav is hidden on mobile */
+    grid-template-rows: 50px 1fr 50px;
+    grid-template-areas:
+      'header'
+      'main'
+      'footer';
+    height: 100vh;
+  }
+  
+  .sidenav {
+    display: none;
+    grid-area: sidenav;
+    background-color: #394263;
+  }
+  
+  .main-cards {
+    column-count: 1;
+    column-gap: 20px;
+    margin: 20px;
+  }
+  
+ 
+  /* Medium-sized screen breakpoint (tablet, 1050px) */
+  @media only screen and (min-width: 65.625em) {
+    /* Break out main cards into two columns */
+    .main-cards {
+      column-count: 2;
+    }
+  }
