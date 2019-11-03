@@ -3,11 +3,16 @@ package com.asu.ser.usermanagement;
  * @author Ashwin
  */
 
+import java.util.List;
+
+import com.asu.ser.model.TestQuestion;
+
 public class TestDetails {
     private Integer testId;
     private String testName;
     private Integer createdByUserId;
     private Integer gradeId;
+    private List<TestQuestion> questions;
 
     public Integer getTestId() {
         return testId;
@@ -40,4 +45,12 @@ public class TestDetails {
     public void setGradeId(Integer gradeId) {
         this.gradeId = gradeId;
     }
+
+	public List<TestQuestion> getQuestions() {
+		return questions;
+	}
+
+	public void setQuestions(List<TestQuestion> questions) {
+		this.questions = questions;
+	}
 }

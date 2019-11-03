@@ -11,8 +11,6 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.asu.ser.util.MailServer;
-
 import java.util.logging.Level;
 import java.util.logging.Logger;
 

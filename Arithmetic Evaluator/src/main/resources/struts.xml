@@ -70,6 +70,10 @@
         <action name="teacher/createtest_page">
             <result type="dispatcher">/jsp/teachers_create_test.jsp</result>
         </action>
+        
+        <action name="teacher/test/add ">
+            <result type="dispatcher">/jsp/teachers_create_test.jsp</result>
+        </action>
 
         <action name="admin/signup" class="com.asu.ser.usermanagement.UserManagementAction" method="signUp">
             <result name="success" type="dispatcher">/jsp/admin_dashboard.jsp</result>
