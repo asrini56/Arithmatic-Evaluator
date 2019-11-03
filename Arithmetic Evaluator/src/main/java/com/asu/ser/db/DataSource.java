@@ -221,10 +221,10 @@ public class DataSource {
         return teachers;
     }
 
-    public static List<TestDetails> fetchTestDetails(int institutionID) throws Exception {
+    public static List<TestDetails> fetchTestDetails(int userID) throws Exception {
         Connection connection = DataSourceConnector.getConnection();
         PreparedStatement statement = connection.prepareStatement(SqlQueries.FETCH_TEST_DETAILS);
-        statement.setInt(1, institutionID);
+        statement.setInt(1, userID);
         ResultSet resultSet = statement.executeQuery();
         List<TestDetails> testDetailsList = new ArrayList<>();
         while(resultSet.next()){

@@ -53,12 +53,13 @@
 	});
 
 	window.onload = function() {
-		fetchTeachers();
+		fetchTestDetails();
  	};
 
-	function testDetails() {
+	function fetchTestDetails() {
 		var url="testdetails.action";
 		sendAjaxRequest(url, function(resp){
+		    console.log(resp);
 	 		var tableContent = '<div class="header">Test Details</div>' +
 	 							'<table cellspacing="0">' +
 	 								'<tr>' +
@@ -68,7 +69,7 @@
 	 	      							'<th></th>' +
 	 	    						'</tr>';
 
-			$.each(resp.teachers, function() {
+			$.each(resp.testDetails, function() {
 	 	    tableContent += '<tr>';
 	 	   	tableContent += '<td>' + this.testId + '</td>';
 	 	  	tableContent += '<td>' + this.testName + '</td>';
