@@ -14,7 +14,7 @@ public class OperationsAction {
 	
 	
 	public String evaluvateExpression() {
-		response = Operations.evaluvateExpression(expression);
+		response = OperationsHandler.evaluvateExpression(expression);
 		return Action.SUCCESS;
 	}
 	
