@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.asu.ser.model.Teacher;
+import com.asu.ser.model.TestQuestion;
 import com.asu.ser.model.User;
 import com.asu.ser.usermanagement.TestDetails;
 
@@ -34,6 +35,7 @@ public class DataSource {
             ResultSet resultSet = statement.getGeneratedKeys();
             resultSet.next();
             lastInsertId = resultSet.getInt(1);
+            resultSet.close();
         }
         statement.close();
         return lastInsertId;
@@ -53,6 +55,7 @@ public class DataSource {
             user.setLastName(resultSet.getString("last_name"));
             userList.add(user);
         }
+        resultSet.close();
         statement.close();
         return userList;
     }
@@ -86,6 +89,7 @@ public class DataSource {
             ResultSet resultSet = statement.getGeneratedKeys();
             resultSet.next();
             lastInsertId = resultSet.getInt(1);
+            resultSet.close();
         }
         statement.close();
         return lastInsertId;
@@ -110,6 +114,7 @@ public class DataSource {
         while(resultSet.next()){
             institutionIdList.add(resultSet.getInt("institution_id"));
         }
+        resultSet.close();
         return institutionIdList;
     }
 
@@ -254,6 +259,63 @@ public class DataSource {
         Connection connection = DataSourceConnector.getConnection();
         PreparedStatement statement = connection.prepareStatement(SqlQueries.DELETE_USER_WITH_EMAIL_ID);
         statement.setString(1, emailID);
+        statement.executeUpdate();
+        statement.close();
+    }
+    
+    public static int getGradeID(String grade) throws Exception {
+    	Connection connection = DataSourceConnector.getConnection();
+        PreparedStatement statement = connection.prepareStatement(SqlQueries.GET_GRADE_ID);
+        statement.setString(1, grade);
+        ResultSet resultSet = statement.executeQuery();
+        Integer gradeID = null;
+        while(resultSet.next()){
+        	gradeID = resultSet.getInt("grade_id");
+        }
+        resultSet.close();
+        statement.close();
+        return gradeID;
+    }
+    
+    public static void inserTest(TestDetails testDetails, int loggedInUserID, int gradeID) throws Exception {
+    	 Connection connection = DataSourceConnector.getConnection();
+         PreparedStatement statement = connection.prepareStatement(SqlQueries.INSERT_TEST, Statement.RETURN_GENERATED_KEYS);
+         statement.setString(1, testDetails.getTestName());
+         statement.setInt(2, gradeID);
+         statement.setInt(3, loggedInUserID);
+         Integer testID = null;
+         int rowsInserted = statement.executeUpdate();
+         if(rowsInserted != 0){
+             ResultSet resultSet = statement.getGeneratedKeys();
+             resultSet.next();
+             testID = resultSet.getInt(1);
+             testDetails.setTestId(testID);
+             resultSet.close();
+         }
+         statement.close();
+    }
+    
+    public static void insertTestQuestion(TestDetails testDetails) throws Exception {
+        Connection connection = DataSourceConnector.getConnection();
+        PreparedStatement statement = connection.prepareStatement(SqlQueries.INSERT_TEST_QUESTION, Statement.RETURN_GENERATED_KEYS);
+        for(TestQuestion question : testDetails.getQuestions()) {
+        	statement.setInt(1, testDetails.getTestId());
+        	statement.setString(2, question.getQuestion());
+            statement.setString(3, question.getOption1());
+            statement.setString(4, question.getOption2());
+            statement.setString(5, question.getOption3());
+            statement.setString(6, question.getOption4());
+            statement.setString(6, question.getOption4());
+            statement.setInt(7, question.getAnswer());
+            statement.executeUpdate();
+        }
+        statement.close();
+    }
+    
+    public static void deleteTest(int testID) throws Exception {
+        Connection connection = DataSourceConnector.getConnection();
+        PreparedStatement statement = connection.prepareStatement(SqlQueries.DELETE_TEST);
+        statement.setInt(1, testID);
         statement.executeUpdate();
         statement.close();
     }

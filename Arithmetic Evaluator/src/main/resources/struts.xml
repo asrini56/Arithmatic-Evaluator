@@ -71,8 +71,8 @@
             <result type="dispatcher">/jsp/teachers_create_test.jsp</result>
         </action>
         
-        <action name="teacher/test/add ">
-            <result type="dispatcher">/jsp/teachers_create_test.jsp</result>
+        <action name="teacher/test/add" class="com.asu.ser.operations.TestAction" method="addTest">
+            <result type="json"/>
         </action>
 
         <action name="admin/signup" class="com.asu.ser.usermanagement.UserManagementAction" method="signUp">
