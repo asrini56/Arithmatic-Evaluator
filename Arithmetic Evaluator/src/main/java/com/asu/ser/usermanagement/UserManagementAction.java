@@ -279,11 +279,11 @@ public class UserManagementAction {
         this.confirmPassword = confirmPassword;
     }
 
-	public List<TestDetails> getTestDetails() {
-		return testDetails;
-	}
+    public List<TestDetails> getTestDetails() {
+        return testDetails;
+    }
 
-	public void setTestDetails(List<TestDetails> testDetails) {
-		this.testDetails = testDetails;
-	}
+    public void setTestDetails(List<TestDetails> testDetails) {
+        this.testDetails = testDetails;
+    }
 }

@@ -4,13 +4,18 @@ import junit.framework.TestCase;
 
 public class OperationsActionTest extends TestCase {
 
-    public void testEvaluateExpression(){
+    public void testEvaluateExpressionSuccess(){
         OperationsAction operationsAction = new OperationsAction();
         operationsAction.setExpression("2+3");
         String result = operationsAction.evaluvateExpression();
         assertEquals("success", result);
+    }
+
+    public void testEvaluateExpressionFailure(){
+        OperationsAction operationsAction = new OperationsAction();
         operationsAction.setExpression("2+");
-        result = operationsAction.evaluvateExpression();
+        String result = operationsAction.evaluvateExpression();
         assertEquals("success", result);
     }
+
 }
