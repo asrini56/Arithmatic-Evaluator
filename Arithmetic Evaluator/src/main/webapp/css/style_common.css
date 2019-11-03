@@ -9,7 +9,7 @@ section {
 
 /* Style the navigation menu */
 nav {
-	min-width: 500px;
+	min-width: 450px;
 	min-height: 600px;
 	-webkit-flex: 1;
 	-ms-flex: 1;

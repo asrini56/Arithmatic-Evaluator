@@ -1,7 +1,5 @@
 package com.asu.ser.db;
 
-import com.asu.ser.model.User;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,7 +10,14 @@ import java.util.List;
 import java.util.Map;
 
 import com.asu.ser.model.Teacher;
+import com.asu.ser.model.User;
 import com.asu.ser.usermanagement.TestDetails;
+
+/**
+ * @author akhilesh
+ * @author Ashwin
+ * @author Srinivasan
+ */
 
 public class DataSource {
 

@@ -1,6 +1,11 @@
 package com.asu.ser.operations;
 
 import com.opensymphony.xwork2.Action;
+/**
+ * @author akhilesh
+ * @author Ashwin
+ * @author Srinivasan
+ */
 
 public class OperationsAction {
 
@@ -9,7 +14,7 @@ public class OperationsAction {
 	
 	
 	public String evaluvateExpression() {
-		response = Operations.evaluvateExpression(expression);
+		response = OperationsHandler.evaluvateExpression(expression);
 		return Action.SUCCESS;
 	}
 	

@@ -1,9 +1,30 @@
 
 
+/* Style the content */
+article {
+  min-width: 100px;
+  min-height: 600px;
+  -webkit-flex: 3;
+  -ms-flex: 3;
+  flex: 3;
+  background-color: #F0FFFF;
+  padding: 10px;
+  border-style: groove;
+}
 
-#boxB { width:450px; height:400px; }
-         
-         
+#boxB { 
+	width:400px; 
+	height:400px;
+	overflow:auto; 
+}
+     
+#previewDiv {
+	width:400px; 
+	height:400px;
+	overflow:auto; 
+}    
+
+    
 .operationsDiv {
 	float:left; 
 }
@@ -138,9 +159,46 @@
   padding:10px;
   margin:10px;
   -moz-user-select:none;
-  width:400px; 
-  height:360px;
+  width:350px; 
+  height:340px;
   border: groove;
+}
+
+.saveAssignmentDialog {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.saveAssignmentDialog-content {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.saveAssignmentDialog-close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.saveAssignmentDialog-close:hover,
+.saveAssignmentDialog-close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 /* The Close Button */

@@ -11,6 +11,11 @@ import java.util.logging.Logger;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 import java.util.regex.Pattern;
+/**
+ * @author akhilesh
+ * @author Ashwin
+ * @author Srinivasan
+ */
 
 @Conversion()
 public class UserManagementAction {
@@ -29,8 +34,6 @@ public class UserManagementAction {
 
     private static Logger LOGGER = Logger.getLogger(UserManagementAction.class.getName());
 
-    private static final String REGEX = "^(.+)@(.+)$";
-    private static final Pattern PATTERN = Pattern.compile(REGEX);
     private static final String EMAIL_REGEX = "^(.+)@(.+)$";
     private static final Pattern EMAIL_PATTERN = Pattern.compile(EMAIL_REGEX);
     private static final String PASSWORD_REGEX = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$";
@@ -275,4 +278,12 @@ public class UserManagementAction {
     public void setConfirmPassword(String confirmPassword) {
         this.confirmPassword = confirmPassword;
     }
+
+	public List<TestDetails> getTestDetails() {
+		return testDetails;
+	}
+
+	public void setTestDetails(List<TestDetails> testDetails) {
+		this.testDetails = testDetails;
+	}
 }

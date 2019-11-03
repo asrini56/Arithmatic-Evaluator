@@ -1,8 +1,13 @@
 package com.asu.ser.operations;
 
 import org.mariuszgromada.math.mxparser.Expression;
+/**
+ * @author akhilesh
+ * @author Ashwin
+ * @author Srinivasan
+ */
 
-public class Operations {
+public class OperationsHandler {
 
 	public static String evaluvateExpression(String expression) {
 		Expression e = new Expression(expression);
