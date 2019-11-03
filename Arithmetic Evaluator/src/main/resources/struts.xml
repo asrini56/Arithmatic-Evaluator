@@ -47,6 +47,10 @@
             <result type="dispatcher">/jsp/teacher_register.jsp</result>
         </action>
 
+		<action name="admin/teacher/remove" class="com.asu.ser.usermanagement.UserManagementAction" method="removeTeacher">
+			 <result type="json"/>
+		</action>
+
         <action name="grade1/operations_page">
             <result type="dispatcher">/jsp/math_operations.jsp</result>
         </action>
@@ -59,11 +63,11 @@
             <result type="dispatcher">/jsp/9th_operations.jsp</result>
         </action>
 
-        <action name="teacher/resetPassword_page">
+        <action name="teacher/resetpassword_page">
             <result type="dispatcher">/jsp/set_teacher_pwd.jsp</result>
         </action>
 
-        <action name="teacher/createTest_page">
+        <action name="teacher/createtest_page">
             <result type="dispatcher">/jsp/teachers_create_test.jsp</result>
         </action>
 

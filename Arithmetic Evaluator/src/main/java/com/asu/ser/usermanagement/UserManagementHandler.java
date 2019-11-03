@@ -6,6 +6,7 @@ import java.util.Map;
 
 import com.asu.ser.authentication.AuthenticationUtil;
 import com.asu.ser.db.DataSource;
+import com.asu.ser.model.Teacher;
 import com.asu.ser.model.User;
 import com.asu.ser.util.MailServer;
 import org.apache.commons.lang3.StringUtils;
@@ -13,8 +14,15 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.annotation.PostConstruct;
+/**
+ * @author akhilesh
+ * @author Ashwin
+ * @author Srinivasan
+ */
 
 public class UserManagementHandler {
+	
+	private static Logger LOGGER = Logger.getLogger(UserManagementHandler.class.getName());
 
 	private static final String ROLE_ADMIN = "admin";
 	private static final String ROLE_TEACHER = "teacher";
@@ -30,7 +38,7 @@ public class UserManagementHandler {
 	}
 
 	@PostConstruct
-	public void init(){
+	public static void init(){
 		try {
 			USER_ROLES = DataSource.fetchRoles();
 		} catch(Exception e) {
@@ -62,7 +70,7 @@ public class UserManagementHandler {
             message = "Incorrect Password. Please provide correct password.";
             return message;
         }
-        System.out.println("Trying to login user " + emailID + " status " + message);
+        LOGGER.log(Level.INFO,"Trying to login user " + emailID + " status " + message);
         return message;
     }
 
@@ -106,7 +114,7 @@ public class UserManagementHandler {
     		sendTeacherAccountPasswordEmail(firstName, lastName, emailID, password, loggedInUser);
     	} catch (Exception e) {
     		if(teacherUserID > 0) {
-    			DataSource.deleteUser(userID);
+    			DataSource.deleteUserWithID(userID);
     		}
     		throw e;
     	}
@@ -118,9 +126,38 @@ public class UserManagementHandler {
     	return DataSource.fetchTeachers(institutionID);
     }
 
+    public static List<TestDetails> fetchTestDetails() throws Exception {
+        String loggedInUser = AuthenticationUtil.getLoggedInUser();
+        if(loggedInUser == null || loggedInUser.isEmpty()) {
+            throw new Exception("No user logged in");
+        }
+        int userID = DataSource.fetchUserID(loggedInUser);
+        int userRoleID = DataSource.fetchUserRole(userID);
+        int teacherRoleID = USER_ROLES.get(ROLE_TEACHER);
+        if(userRoleID != teacherRoleID) {
+            throw new Exception("Illegal operation - user does not have permission to remove teacher");
+        }
+		Integer institutionID = DataSource.fetchUsersInstitutionID(loggedInUser);
+        return DataSource.fetchTestDetails(institutionID);
+    }
+
     public static boolean isInstitutionPresent(String institutionName) throws Exception {
         Integer institutionID = DataSource.fetchInstitutionID(institutionName);
         return institutionID != null;
+    }
+
+    public static void removeTeacher(String teacherEmailID) throws Exception {
+    	String loggedInUser = AuthenticationUtil.getLoggedInUser();
+    	if(loggedInUser == null || loggedInUser.isEmpty()) {
+    		throw new Exception("No user logged in");
+    	}
+    	int userID = DataSource.fetchUserID(loggedInUser);
+    	int userRoleID = DataSource.fetchUserRole(userID);
+    	int adminRoleID = USER_ROLES.get(ROLE_ADMIN);
+    	if(userRoleID != adminRoleID) {
+    		throw new Exception("Illegal operation - user does not have permission to remove teacher");
+    	}
+    	DataSource.deleteUserWithEmailID(teacherEmailID);
     }
 
 	public static void sendTeacherAccountPasswordEmail(String firstName, String lastName, String teacherEmailID,
@@ -134,6 +171,6 @@ public class UserManagementHandler {
     }
 
 	public static String getRoleNameForUser(String emailID) throws Exception {
-		return DataSource. fetchUserRoleName(emailID);
+		return DataSource.fetchUserRoleName(emailID);
 	}
 }

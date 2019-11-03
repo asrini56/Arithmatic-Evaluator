@@ -1,14 +1,21 @@
 package com.asu.ser.usermanagement;
 
 import com.asu.ser.authentication.AuthenticationUtil;
+import com.asu.ser.model.Teacher;
 import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.conversion.annotations.Conversion;
 import org.apache.commons.lang3.StringUtils;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 import java.util.regex.Pattern;
+/**
+ * @author akhilesh
+ * @author Ashwin
+ * @author Srinivasan
+ */
 
 @Conversion()
 public class UserManagementAction {
@@ -23,8 +30,9 @@ public class UserManagementAction {
     private String oldPassword;
     private String newPassword;
     private String confirmPassword;
+    private List<TestDetails> testDetails;
 
-    private Logger LOGGER = Logger.getLogger(UserManagementAction.class.getName());
+    private static Logger LOGGER = Logger.getLogger(UserManagementAction.class.getName());
 
     private static final String REGEX = "^(.+)@(.+)$";
     private static final Pattern PATTERN = Pattern.compile(REGEX);
@@ -36,16 +44,15 @@ public class UserManagementAction {
     public String signUp(){
     	String returnType = Action.SUCCESS;
         try {
-        	System.out.println("Creating admin user  " + emailID + " for institution " + institutionName );
-        	
-            if(!validEmailID(emailID)){
+        	LOGGER.log(Level.INFO, "Creating admin user  " + emailID + " for institution " + institutionName);
+            if(StringUtils.isEmpty(emailID) || !validEmailID(emailID)){
                 message = "Invalid Email ID. Please enter a valid Email ID.";
-                System.out.println(message);
+                LOGGER.log(Level.INFO,message);
                 returnType = Action.ERROR;
-            } else if(!validPassword(password)){
+            } else if(StringUtils.isEmpty(password) || !validPassword(password)){
                 message = "Invalid Password. Please enter a valid Password.";
                 returnType = Action.ERROR;
-            } else if(UserManagementHandler.isInstitutionPresent(institutionName)){
+            } else if(StringUtils.isEmpty(institutionName) || UserManagementHandler.isInstitutionPresent(institutionName)){
                 message = "Institution name exists. Kindly try another name";
                 returnType = Action.ERROR;
             } else {
@@ -57,7 +64,7 @@ public class UserManagementAction {
             LOGGER.log(Level.SEVERE, "Failed to create Admin Account" , e);
             returnType = Action.ERROR;
         }
-        System.out.println(message);
+        LOGGER.log(Level.INFO,message);
         return returnType;
     }
 
@@ -87,31 +94,35 @@ public class UserManagementAction {
     public String addTeacher() {
         if(StringUtils.isEmpty(AuthenticationUtil.getLoggedInUser())){
             message = "Please log in to access the page.";
-            System.out.println(message);
+            LOGGER.log(Level.INFO,message);
             return Action.LOGIN;
         }
     	try {
-    		System.out.println("Creating teacher " + firstName + " " + lastName);
+    		LOGGER.log(Level.INFO,"Creating teacher " + firstName + " " + lastName);
     		if(!validEmailID(emailID)){
                 message = "Invalid Email ID. Please enter a valid Email ID.";
-                System.out.println(message);
+                LOGGER.log(Level.INFO,message);
                 return Action.ERROR;
             } else {
             	UserManagementHandler.addTeacher(firstName, lastName, emailID);
-            	message = "Successfully created teacher account- " + (firstName + lastName) + ". A mail is sent to them";
-            	System.out.println(message);
+            	message = "Successfully created teacher account for " + emailID + ". Their details is mailed to them.";
+                LOGGER.log(Level.INFO,message);
             }
+    	} catch(SQLIntegrityConstraintViolationException sicve) {
+    		message = "An account with email " + emailID + "already exists";
+            LOGGER.log(Level.INFO,message);
+            return Action.ERROR;
     	} catch (Exception e) {
 
 			message = "Failed to add teacher " + e.getMessage();
             LOGGER.log(Level.SEVERE, "Failed to add teacher" , e);
 			if(e.getMessage().equals("No user logged in")) {
 				message = "Login as admin to add teacher";
-				System.out.println(message);
-				return Action.LOGIN;
+                LOGGER.log(Level.INFO,message);
+                return Action.LOGIN;
 			}
-			System.out.println(message);
-			return Action.ERROR;
+            LOGGER.log(Level.INFO,message);
+            return Action.ERROR;
 		}
     	return Action.SUCCESS;
     }
@@ -130,7 +141,18 @@ public class UserManagementAction {
     	return Action.SUCCESS;
     }
 
-    public String resetPassword() throws Exception {
+    public String removeTeacher() {
+    	try {
+    		UserManagementHandler.removeTeacher(emailID);
+    		message = "Successfully removed teacher " + emailID;
+    	} catch(Exception e) {
+    		message = "Failed to remove teacher " + emailID;
+            LOGGER.log(Level.SEVERE, message , e);
+		}
+    	return Action.SUCCESS;
+    }
+
+    public String resetPassword() {
         if(!newPassword.equals(confirmPassword)){
             message = "Passwords does not match. Please re-enter a new password.";
             return Action.ERROR;
@@ -138,17 +160,38 @@ public class UserManagementAction {
             message = "Invalid Password. Please enter a valid Password.";
             return Action.ERROR;
         } else{
-            message = UserManagementHandler.loginUser(emailID, oldPassword);
-            if(StringUtils.equalsIgnoreCase(message, "success")){
-                AuthenticationUtil.setTokenForUser(emailID);
-                message = UserManagementHandler.resetPassword(emailID, newPassword);
-                if(StringUtils.equalsIgnoreCase(message, "success")){
-                    return Action.SUCCESS;
+            try {
+                message = UserManagementHandler.loginUser(emailID, oldPassword);
+                if (StringUtils.equalsIgnoreCase(message, "success")) {
+                    AuthenticationUtil.setTokenForUser(emailID);
+                    message = UserManagementHandler.resetPassword(emailID, newPassword);
+                    if (StringUtils.equalsIgnoreCase(message, "success")) {
+                        return Action.SUCCESS;
+                    }
                 }
+            } catch (Exception e){
+                message = "Error occurred while resetting password. Please try again!!";
+                LOGGER.log(Level.SEVERE, message , e);
+                return Action.ERROR;
             }
         }
         return Action.ERROR;
     }
+
+    public String fetchTestDetails() {
+        if(StringUtils.isEmpty(AuthenticationUtil.getLoggedInUser())){
+            message = "Please log in to access the page.";
+            return Action.ERROR;
+        }
+        try {
+            testDetails = UserManagementHandler.fetchTestDetails();
+        }catch (Exception e) {
+            message = "Failed to fetch test details - " + e.getMessage();
+            LOGGER.log(Level.SEVERE, "Failed to fetch test details" , e);
+        }
+        return Action.SUCCESS;
+    }
+
 
     private boolean validEmailID(String emailID) {
     	return EMAIL_PATTERN.matcher(emailID).matches();

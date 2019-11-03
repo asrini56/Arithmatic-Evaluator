@@ -6,6 +6,11 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.ServletActionContext;
+/**
+ * @author akhilesh
+ * @author Ashwin
+ * @author Srinivasan
+ */
 
 public class AuthenticationUtil {
 

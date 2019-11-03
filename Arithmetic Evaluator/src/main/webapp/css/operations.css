@@ -1,32 +1,4 @@
 
-body {
-  font-family: Arial, Helvetica, sans-serif;
-  
-}
-/* Container for flexboxes */
-section {
-  display: -webkit-flex;
-  display: flex;
-}
-
-/* Style the navigation menu */
-nav {
-  min-width: 500px;
-  min-height: 600px;
-  -webkit-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
-  height:80px; 
-  background: #F0FFFF;
-  padding: 20px;
-  border-style: groove;
-}
-
-/* Style the list inside the menu */
-nav ul {
-  list-style-type: none;
-  padding: 0;
-}
 
 /* Style the content */
 article {
@@ -40,126 +12,21 @@ article {
   border-style: groove;
 }
 
-/* Style the footer */
-footer {
-  background-color: #666;
-  padding: 10px;
-  text-align: center;
-  color: white;
-}
-
-.titleText {
-	font-family: fantasy !important;
-	font-size: x-large !important;
-	
-}
-
-.navbar {
-	border-radius:0px !important;
-}
-.fontSansSerif {
-	font-family: sans-serif !important;
-	font-size: large;
-}
-/* The Modal (background) */
-.modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-}
-
-/* Modal Content/Box */
-.modal-content {
-  background-color: #fefefe;
-  margin: 15% auto; /* 15% from the top and centered */
-  padding: 20px;
-  border: 1px solid #888;
-  width: 30%; /* Could be more or less, depending on screen size */
-}
-
-/* The Close Button */
-.close {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-  color: black;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-/*the form style*/
-.form{
-    position: relative;
-    z-index: 1;
-    background: rgba(7, 40, 195, 0.05);
-    max-width: 360px;
-    margin: 0 auto 30px;
-    padding:0px;
-    text-align: center;
-}
-.form input{
-    font-family: "Roboto", sans-serif;
-    outline: 1;
-    background: #f2f2f2;
-    width: 100%;
-    border: 0;
-    margin: 0 0 15px;
-    padding: 15px;
-    box-sizing: border-box;
-    font-size: 14px;
-}
-
-.form button{
-    font-family: "Roboto", sans-serif;
-    text-transform: uppercase;
-    outline: 0;
-    background: #6E7C9A;
-    width: 100%;
-    border: 0;
-    padding: 15px;
-    color: #FFFFFF;
-    font-size: 14px;
-    cursor: pointer;
-    
-}
-img.avatar {
-  width: 40%;
-  border-radius: 50%;
-}
-
 #boxB { 
-  background-color:#F0FFFF ;
-  width:450px; 
-  height:400px; 
-  overflow: auto;
+	width:400px; 
+	height:400px;
+	overflow:auto; 
 }
-         
-         
-.operationsDiv { 
-	background-color:#F0FFFF ;
+     
+#previewDiv {
+	width:400px; 
+	height:400px;
+	overflow:auto; 
+}    
+
+    
+.operationsDiv {
 	float:left; 
-}
-
-.fl {
-	float:left !important;
-}
-
-.splitHeading{
-	margin-top:0px;
-padding:10px;
-background-color:grey;	
 }
 
 .numbersBox {
@@ -170,16 +37,6 @@ background-color:grey;
 	-moz-user-select:none;
 	width:40px; 
 	height:40px;
-}
-.questionsBox {
-  font-size:20px;
-  float:left !important;
-  padding:10px;
-  margin:10px;
-  -moz-user-select:none;
-  width:400px; 
-  height:360px;
-  border: groove;
 }
 
 .operationsBox {
@@ -214,21 +71,11 @@ background-color:grey;
  visibility: visible;
 }
 
-.btn {
-	float:left !important;
-}
-.btn-grp button:hover{
-  background-color:#337B7C;
-}
-
-.form button:hover,.form button:active{
-    background: #4C669F;
-}
-.dropzone {
-  width: 500px;
-  height: 10px;
-  padding: 10px;
-  border: 1px solid #888;
+.splitHeading {
+	margin-top: 0px;
+	padding: 10px;
+	color:#648ca6;
+	border-bottom: 2px solid grey;
 }
 
 .expressionResultDiv{
@@ -243,38 +90,78 @@ background-color:grey;
 	text-align: center;
 }
 
-.dropbtn {
-  color: white;
-  padding: 16px;
-  font-size: 16px;
-  border: none;
-  margin-left:30px;
+/*the form style*/
+.form {
+	position: relative;
+	z-index: 1;
+	background: rgba(7, 40, 195, 0.05);
+	max-width: 360px;
+	margin: 0 auto 30px;
+	padding: 0px;
+	text-align: center;
 }
 
-.dropdown {
-  position: relative;
-  display: inline-block;
+.form input {
+	font-family: "Roboto", sans-serif;
+	outline: 1;
+	background: #f2f2f2;
+	width: 100%;
+	border: 0;
+	margin: 0 0 15px;
+	padding: 15px;
+	box-sizing: border-box;
+	font-size: 14px;
 }
 
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f1f1f1;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-  margin-right:10px;
+.form button {
+	font-family: "Roboto", sans-serif;
+	text-transform: uppercase;
+	outline: 0;
+	background: #6E7C9A;
+	width: 100%;
+	border: 0;
+	padding: 15px;
+	color: #FFFFFF;
+	font-size: 14px;
+	cursor: pointer;
 }
 
-.dropdown-content a {
-  color: black;
-  padding: 20px 20px;
-  text-decoration: none;
-  display: block;
+.form button:hover, .form button:active {
+	background: #4C669F;
 }
 
-.dropdown-content a:hover {background-color: #ddd;}
+/* The Modal (background) */
+.modal {
+	display: none; /* Hidden by default */
+	position: fixed; /* Stay in place */
+	z-index: 1; /* Sit on top */
+	left: 0;
+	top: 0;
+	width: 100%; /* Full width */
+	height: 100%; /* Full height */
+	overflow: auto; /* Enable scroll if needed */
+	background-color: rgb(0, 0, 0); /* Fallback color */
+	background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
 
-.dropdown:hover .dropdown-content {display: block;}
+/* Modal Content/Box */
+.modal-content {
+	background-color: #fefefe;
+	margin: 15% auto; /* 15% from the top and centered */
+	padding: 20px;
+	border: 1px solid #888;
+	width: 30%; /* Could be more or less, depending on screen size */
+}
 
-.dropdown:hover .dropbtn {background-color: #3e8e41;}
+.questionsBox {
+  font-size:20px;
+  float:left !important;
+  padding:10px;
+  margin:10px;
+  -moz-user-select:none;
+  width:400px; 
+  height:360px;
+  border: groove;
+}
+
+/* The Close Button */

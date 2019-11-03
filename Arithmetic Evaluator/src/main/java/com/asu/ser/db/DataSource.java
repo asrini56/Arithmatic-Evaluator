@@ -11,7 +11,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.asu.ser.usermanagement.Teacher;
+import com.asu.ser.model.Teacher;
+import com.asu.ser.usermanagement.TestDetails;
+/**
+ * @author akhilesh
+ * @author Ashwin
+ * @author Srinivasan
+ */
 
 public class DataSource {
 
@@ -215,10 +221,39 @@ public class DataSource {
         return teachers;
     }
 
-    public static void deleteUser(int userID) throws Exception {
+    public static List<TestDetails> fetchTestDetails(int institutionID) throws Exception {
         Connection connection = DataSourceConnector.getConnection();
-        PreparedStatement statement = connection.prepareStatement(SqlQueries.DELETE_USER);
+        PreparedStatement statement = connection.prepareStatement(SqlQueries.FETCH_TEST_DETAILS);
+        statement.setInt(1, institutionID);
+        ResultSet resultSet = statement.executeQuery();
+        List<TestDetails> testDetailsList = new ArrayList<>();
+        while(resultSet.next()){
+            int id = resultSet.getInt("test_id");
+            String name = resultSet.getString("test_name");
+            int grade = resultSet.getInt("grade_id");
+            TestDetails testDetails = new TestDetails();
+            testDetails.setTestId(id);
+            testDetails.setTestName(name);
+            testDetails.setGradeId(grade);
+            testDetailsList.add(testDetails);
+        }
+        resultSet.close();
+        statement.close();
+        return testDetailsList;
+    }
+
+    public static void deleteUserWithID(int userID) throws Exception {
+        Connection connection = DataSourceConnector.getConnection();
+        PreparedStatement statement = connection.prepareStatement(SqlQueries.DELETE_USER_WITH_ID);
         statement.setInt(1, userID);
+        statement.executeUpdate();
+        statement.close();
+    }
+
+    public static void deleteUserWithEmailID(String emailID) throws Exception {
+        Connection connection = DataSourceConnector.getConnection();
+        PreparedStatement statement = connection.prepareStatement(SqlQueries.DELETE_USER_WITH_EMAIL_ID);
+        statement.setString(1, emailID);
         statement.executeUpdate();
         statement.close();
     }
