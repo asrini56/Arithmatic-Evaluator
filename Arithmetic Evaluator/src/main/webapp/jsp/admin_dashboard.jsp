@@ -50,7 +50,7 @@
 				</div>
 			</div>
 		</main>
-		<footer class="footer"><span class="glyphicon glyphicon-copyright-mark"></span>  Copyright</p></footer>
+		<footer class="footer"><span class="glyphicon glyphicon-copyright-mark"></span>  Copyright</footer>
 	</div>
 	<script>
 

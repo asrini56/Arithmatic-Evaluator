@@ -17,8 +17,8 @@
           	</div>
           	<ul class="nav navbar-nav navbar-right">
     				
-    				<li><a href="/arithmetic-evaluator/admin/dashboard_page.action">Dashboard</a></li>
-    				<li class="#"><a href="#">Tests</a></li>
+    				<li><a href="/arithmetic-evaluator/teacher/dashboard.action">Dashboard</a></li>
+    				<li class="#"><a href="/arithmetic-evaluator/teacher/viewtests_page.action">Tests</a></li>
     				<li class="active fontSansSerif"><a href="#">Create Test</a></li>
     				<li>
     					<div class="dropdown">
@@ -61,8 +61,10 @@
 		<div id="boxB" style ="min-height:600px !important" ondragenter="return dragEnter(event)" ondrop="return dragDrop(event)" ondragover="return dragOver(event)" ondragstart="return dragStart(event)">
 		</div>
 		
-		<div class="deleteAction">
-			<button type="button" id="delete" class="btn btn-success canvasButton deleteButton" onClick="deleteSelectedButton()" >Delete Button</button>
+		<div class="deleteAction" style="margin-top:20px; border-top: 1px solid grey; padding:5px;">
+			<button type="button" id="delete"
+					class="btn btn-success canvasButton deleteButton glyphicon glyphicon-trash"
+					onClick="deleteSelectedButton()"></button>
 		</div>
 		<br><br>
 		<button type="button" id="preview" onClick="preview()" class="btn btn-success canvasButton">Preview</button>
@@ -100,8 +102,8 @@
 					<td>
 						<select id="testForGrade">
  							<option value = "1">Grade 1</option>
-  							<option value ="2">Grade 2</option>
-  							<option value="3">Grade 3</option> 
+  							<option value ="6">Grade 6</option>
+  							<option value="9">Grade 9</option> 
 						</select>
 					</td>
 				</tr>

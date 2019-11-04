@@ -5,13 +5,6 @@ import junit.framework.TestCase;
 
 public class UserManagementActionTest extends TestCase {
 
-    private static String emailID;
-    private static String password;
-    private static String firstName;
-    private static String lastName;
-    private static String message;
-    private static String institutionName;
-
     public void testSignUpValidateEmail(){
         UserManagementAction userManagementAction = new UserManagementAction();
         assertEquals(Action.ERROR, userManagementAction.signUp());
