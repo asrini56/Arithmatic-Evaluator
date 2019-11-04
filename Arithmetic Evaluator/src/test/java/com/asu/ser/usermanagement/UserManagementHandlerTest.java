@@ -80,8 +80,8 @@ public class UserManagementHandlerTest extends TestCase {
 
     public void testGetRoleNameForUser(){
         try {
-            String role = UserManagementHandler.getRoleNameForUser("abc@gmail.com");
-            assertEquals("admin", role);
+            String role = UserManagementHandler.getRoleNameForUser("team8.ser515@gmail.com");
+            assertEquals("teacher", role);
         } catch (Exception e) {
             fail();
         }
