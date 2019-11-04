@@ -63,18 +63,6 @@
             <result type="dispatcher">/jsp/9th_operations.jsp</result>
         </action>
 
-        <action name="teacher/resetpassword_page">
-            <result type="dispatcher">/jsp/set_teacher_pwd.jsp</result>
-        </action>
-
-        <action name="teacher/createtest_page">
-            <result type="dispatcher">/jsp/teachers_create_test.jsp</result>
-        </action>
-        
-        <action name="teacher/test/add ">
-            <result type="dispatcher">/jsp/teachers_create_test.jsp</result>
-        </action>
-
         <action name="admin/signup" class="com.asu.ser.usermanagement.UserManagementAction" method="signUp">
             <result name="success" type="dispatcher">/jsp/admin_dashboard.jsp</result>
             <result name="error" type="dispatcher">/jsp/admin_signup.jsp</result>
@@ -111,9 +99,23 @@
             <result type="json"/>
         </action>
 
-
-        <action name="teacher/testdetails_page">
+		<action name="teacher/dashboard">
+			<result type="dispatcher">/jsp/teachers_dashboard.jsp</result>
+		</action>
+        <action name="teacher/viewtests_page">
             <result type="dispatcher">/jsp/test_details.jsp</result>
+        </action>
+
+		<action name="teacher/resetpassword_page">
+            <result type="dispatcher">/jsp/set_teacher_pwd.jsp</result>
+        </action>
+
+        <action name="teacher/createtest_page">
+            <result type="dispatcher">/jsp/teachers_create_test.jsp</result>
+        </action>
+        
+        <action name="teacher/test/add" class="com.asu.ser.operations.TestAction" method="addTest">
+            <result type="json"/>
         </action>
 
         <action name="grade1/operations/evaluvate" class="com.asu.ser.operations.OperationsAction" method="evaluvateExpression">
