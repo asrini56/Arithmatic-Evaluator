@@ -43,9 +43,9 @@ public class DataSourceTest extends TestCase {
 
     public void testInsertUserToRole(){
         try {
-            DataSource.insertUserToRole(74,1);
+            DataSource.insertUserToRole(58,2);
         } catch (SQLIntegrityConstraintViolationException e) {
-            assertEquals("Duplicate entry '74-1' for key 'PRIMARY'", e.getLocalizedMessage());
+            assertEquals("Duplicate entry '58-2' for key 'PRIMARY'", e.getLocalizedMessage());
         } catch (Exception e) {
             fail();
         }
@@ -110,8 +110,8 @@ public class DataSourceTest extends TestCase {
 
     public void testFetchUserID(){
         try {
-            Integer id = DataSource.fetchUserID("abc@gmail.com");
-            assertEquals(74, id.intValue());
+            Integer id = DataSource.fetchUserID("team8.ser515@gmail.com");
+            assertEquals(58, id.intValue());
         } catch (Exception e) {
             fail();
         }
@@ -119,8 +119,8 @@ public class DataSourceTest extends TestCase {
 
     public void testFetchUserRole(){
         try {
-            Integer id = DataSource.fetchUserRole(6);
-            assertEquals(1, id.intValue());
+            Integer id = DataSource.fetchUserRole(58);
+            assertEquals(2, id.intValue());
         } catch (Exception e) {
             fail();
         }
@@ -128,8 +128,8 @@ public class DataSourceTest extends TestCase {
 
     public void testFetchUserRoleName(){
         try {
-            String role = DataSource.fetchUserRoleName("abc@gmail.com");
-            assertEquals("admin", role);
+            String role = DataSource.fetchUserRoleName("team8.ser515@gmail.com");
+            assertEquals("teacher", role);
         } catch (Exception e) {
             fail();
         }

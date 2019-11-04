@@ -41,19 +41,6 @@ public class UserManagementActionTest extends TestCase {
         assertEquals("Institution name exists. Kindly try another name", userManagementAction.getMessage());
     }
 
-    public void testLogin(){
-        UserManagementAction userManagementAction = new UserManagementAction();
-        userManagementAction.setEmailID("abc@abc.com");
-        userManagementAction.setPassword("Admin123");
-        assertEquals(Action.ERROR, userManagementAction.login());
-        //assertEquals("Username does not exist. Please create an account", userManagementAction.getMessage());
-        userManagementAction.setEmailID("abc@gmail.com");
-        userManagementAction.setPassword("Ssadmin123");
-        userManagementAction.login();
-        assertEquals(Action.ERROR, userManagementAction.login());
-        assertEquals("Error while logging in. Please try again.", userManagementAction.getMessage());
-    }
-
     public void testAddTeacher(){
         try {
             UserManagementAction userManagementAction = new UserManagementAction();

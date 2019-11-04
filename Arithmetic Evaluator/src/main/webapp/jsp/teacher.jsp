@@ -7,6 +7,7 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <link rel="stylesheet" href="/arithmetic-evaluator/css/teachers.css">
 <link rel="stylesheet" href="/arithmetic-evaluator/css/style_common.css">
+<script src="/arithmetic-evaluator/js/common.js"></script>
 
 </head>
    <body>
@@ -40,8 +41,6 @@
 		</section>
 
 		<footer class="footer"><span class="glyphicon glyphicon-copyright-mark"></span>  Copyright</footer>
-		
-	<script src="../js/common.js"></script>
 	<script type="text/javascript">
 	$( document ).ready(function() {
 		var message = "${message}";
