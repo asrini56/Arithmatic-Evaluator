@@ -40,7 +40,7 @@
 			<div class="table-users" id="teacher1"></div>
 		</section>
 
-		<footer class="footer"><span class="glyphicon glyphicon-copyright-mark"></span>  Copyright</footer>
+		<footer class="footer" style="position:absolute !important; bottom:0px !important;"><span class="glyphicon glyphicon-copyright-mark"></span>  Copyright</footer>
 	<script type="text/javascript">
 	$( document ).ready(function() {
 		var message = "${message}";

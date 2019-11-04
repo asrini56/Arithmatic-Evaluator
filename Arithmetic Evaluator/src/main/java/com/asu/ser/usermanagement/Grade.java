@@ -6,8 +6,8 @@ import java.util.Map;
 
 public enum Grade {
 	GRADE_ONE(1, "Grade-1"),
-	GRADE_SIX(6, "Grade-2"),
-	GRADE_NINE(9, "Grade-3");
+	GRADE_SIX(6, "Grade-6"),
+	GRADE_NINE(9, "Grade-9");
 
 	private int grade;
 	private String desc;

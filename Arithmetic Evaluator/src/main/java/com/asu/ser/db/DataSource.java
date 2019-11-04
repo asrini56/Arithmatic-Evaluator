@@ -12,6 +12,7 @@ import java.util.Map;
 import com.asu.ser.model.Teacher;
 import com.asu.ser.model.TestQuestion;
 import com.asu.ser.model.User;
+import com.asu.ser.usermanagement.Grade;
 import com.asu.ser.usermanagement.TestDetails;
 
 /**
@@ -235,11 +236,11 @@ public class DataSource {
         while(resultSet.next()){
             int id = resultSet.getInt("test_id");
             String name = resultSet.getString("test_name");
-            int grade = resultSet.getInt("grade_id");
+            String grade = resultSet.getString("grade_name");
             TestDetails testDetails = new TestDetails();
             testDetails.setTestId(id);
             testDetails.setTestName(name);
-            testDetails.setGradeId(grade);
+            testDetails.setGrade(grade);
             testDetailsList.add(testDetails);
         }
         resultSet.close();

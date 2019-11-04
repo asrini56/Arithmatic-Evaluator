@@ -12,6 +12,7 @@ public class TestDetails {
     private String testName;
     private Integer createdByUserId;
     private Integer gradeId;
+    private String grade;
     private List<TestQuestion> questions;
 
     public Integer getTestId() {
@@ -52,5 +53,13 @@ public class TestDetails {
 
 	public void setQuestions(List<TestQuestion> questions) {
 		this.questions = questions;
+	}
+
+	public String getGrade() {
+		return grade;
+	}
+
+	public void setGrade(String grade) {
+		this.grade = grade;
 	}
 }
