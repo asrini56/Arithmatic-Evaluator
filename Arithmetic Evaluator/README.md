@@ -61,7 +61,7 @@ Quick Build
 -------
 If you want to Maven, you'll need:
 - Java 1.8
-- Maven 3.0.5 or later
+- Maven 3.0.5 or later [How to install maven](https://www.baeldung.com/install-maven-on-windows-linux-mac)
 - Run Maven:
 ```
 mvn clean install
