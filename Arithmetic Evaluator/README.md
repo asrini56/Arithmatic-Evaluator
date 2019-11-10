@@ -99,9 +99,13 @@ Quick Build
 If you want to Maven, you'll need:
 - Java 1.8
 - Maven 3.0.5 or later
-- Run Maven:
+- Build the project using below maven command:
 ```
 mvn clean install
+```
+- Run the project using below maven command:
+```
+mvn tomcat7:run
 ```
 
 Additional Resources
