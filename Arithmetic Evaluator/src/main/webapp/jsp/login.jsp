@@ -31,6 +31,8 @@
                	<input name ="emailID" type="text" placeholder="user name" required />
                	<input name="password" type="password" placeholder="password" required/>
                 <button name="login" onclick="loginFunction()">LOGIN</button>
+                <a href="#" id="myBtn1">Forgot Password</a>
+                <br>
 				<a href="#" id="myBtn">Not Registered. Click here!</a>
 			</form>
 			<div id="myModal" class="modal">
