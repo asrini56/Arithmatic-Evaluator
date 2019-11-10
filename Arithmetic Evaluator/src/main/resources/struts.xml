@@ -39,6 +39,16 @@
             <result type="dispatcher">/jsp/admin_dashboard.jsp</result>
         </action>
 
+        <action name="forgotPassword_page">
+            <result type="dispatcher">/jsp/forgot_password.jsp</result>
+        </action>
+
+        <action name="forgotPassword" class="com.asu.ser.usermanagement.UserManagementAction" method="signUp">
+            <result name="success" type="dispatcher">/jsp/login.jsp</result>
+            <result name="error" type="dispatcher">/jsp/login.jsp</result>
+        </action>
+
+
         <action name="admin/listTeachers_page">
             <result type="dispatcher">/jsp/teacher.jsp</result>
         </action>
