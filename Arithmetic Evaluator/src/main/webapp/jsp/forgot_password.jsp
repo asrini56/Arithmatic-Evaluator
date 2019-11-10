@@ -21,32 +21,36 @@
 		</nav>
 	</header>
 	<header>
-		<h1 style="color: black" align="center">Sign Up Page</h1>
+		<h1 style="color: black" align="center">Forgot Password Page</h1>
 	</header>
-	<form id="myForm" action="signup.action"
-		style="border: 1px solid black;" method="post">
+	<form id="set-password-form" action="forgotPassword.action">
+		<style="border: 1px solid black" method="post">
 		<div class="container">
-			<h1 style="color: black">Institution Admin</h1>
+			<h1 style="color: black">Reset Password</h1>
 			<hr>
-			<label for="InstitutionName"><b style="color: black">Institution Name</b></label> 
-			<input type="text" placeholder="Institution Name" name="institutionName" required/> <br/> 
-			
-			<label for="emailID"> <b style="color: black">Email</b> </label> 
-			<input type="text" placeholder="Enter Email" name="emailID" required/> 
-			
-			<label for="password"><b style="color: black">Password</b></label> 
-			<input type="password" id="password" name="password" placeholder="Enter Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
+			<label for="emailID"><b style="color: black">Email ID</b></label>
+			<input type="text" name = "emailID" placeholder="Email ID" required/>
+
+			<label for="oldPassword"><b style="color: black">Old Password</b></label>
+            <input type="password" name = "oldPassword" placeholder="old password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required/>
+
+			<label for="newPassword"><b style="color: black">New Password</b></label>
+			<input type="password" id="newPassword" placeholder="Enter New Password" name="newPassword" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required/> <br/>
+
+			<label for="confirmPassword"> <b style="color: black">Comfirm Password</b> </label>
+			<input type="password"  id="confirmPassword" placeholder="Confirm Password" name="confirmPassword" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required/>
+
 		</div>
 
 		<div class="clearfix" style="margin-left: 25%;">
 			<button type="button" class="cancelbtn" onclick="cancelFunction()">Cancel</button>
-			<button class="signupbtn" onclick="validateAndSubmitFunction()">Sign Up</button>
+			<button class="signupbtn" onclick="submitFunction()">Submit</button>
 		</div>
 	</form>
 <script>
 
 	function myFunction() {
-		alert("Sign up complete!");
+		alert("Password Set!");
 	}
 
 	$(document).ready(function() {
@@ -66,7 +70,7 @@
 	}
 
 	function submitFunction() {
-		document.getElementById("myForm").submit();
+		document.getElementById("set-password-form").submit();
 	}
 
 	function cancelFunction() {
