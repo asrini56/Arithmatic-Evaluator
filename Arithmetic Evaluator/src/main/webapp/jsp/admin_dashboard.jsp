@@ -59,7 +59,7 @@ function goToListTeachersPage(){
 }
 
 function goToListStudentsPage(){
-    alert("Page under construction, kindly bear with us!")
+    window.location="/arithmetic-evaluator/admin/listStudents_page.action";
 }
 
 </script>

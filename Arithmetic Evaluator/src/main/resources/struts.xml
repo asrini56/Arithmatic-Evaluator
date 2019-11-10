@@ -60,6 +60,15 @@
 			 <result type="json"/>
 		</action>
 
+        <action name="admin/addStudent_page">
+            <result type="dispatcher">/jsp/student_register.jsp</result>
+        </action>
+
+        <action name="admin/listStudents_page">
+            <result type="dispatcher">/jsp/student.jsp</result>
+        </action>
+
+
         <action name="grade1/operations_page">
             <result type="dispatcher">/jsp/math_operations.jsp</result>
         </action>
@@ -94,6 +103,13 @@
             <result name="login" type="dispatcher">/jsp/login.jsp</result>
             <result name="error" type="dispatcher">/jsp/teacher_register.jsp</result>
         </action>
+
+        <action name="admin/addStudents" class="com.asu.ser.usermanagement.UserManagementAction" method="addStudent">
+            <result name="success" type="dispatcher">/jsp/student.jsp</result>
+            <result name="login" type="dispatcher">/jsp/login.jsp</result>
+            <result name="error" type="dispatcher">/jsp/student_register.jsp</result>
+        </action>
+
 
         <action name="teacher/resetPassword" class="com.asu.ser.usermanagement.UserManagementAction" method="resetPassword">
             <result name="success" type="dispatcher">/jsp/login.jsp</result>
