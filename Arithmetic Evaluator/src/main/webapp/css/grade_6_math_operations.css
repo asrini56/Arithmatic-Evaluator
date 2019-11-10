@@ -54,7 +54,6 @@ article {
 
 .canvasButton {
 	width:100%;
-	margin-bottom:10px !important;
 }
 
 .deleteBtnHover {
@@ -227,5 +226,10 @@ article {
 .overAllOperations {
 	border: 1px solid grey;
 	float: left;
+	min-width:470px;
+}
+
+.hide {
+	display:none;
 }
 

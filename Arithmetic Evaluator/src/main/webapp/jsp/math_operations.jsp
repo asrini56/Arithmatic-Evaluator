@@ -155,12 +155,20 @@
 			<div class="deleteAction">
 				<button type="button" id="delete"
 					class="btn btn-success canvasButton deleteButton glyphicon glyphicon-trash"
-					onClick="deleteSelectedButton()"></button>
+					onClick="deleteSelectedButton()" title="Delete button"></button>
 			</div>
 			<br>
 			<br>
 			<button type="button" id="submit" onClick="evaluvate()"
-				class="btn btn-success canvasButton">Submit</button>
+				class="btn btn-success canvasButton">Submit
+			</button>
+			<br/>
+			<br/>
+			<div class="reset">
+				<button type="button" id="delete"
+					class="btn btn-success canvasButton deleteButton glyphicon glyphicon-refresh"
+					onClick="resetButton()" title="Reset Expression"></button>
+			</div>
 		</nav>
 		<nav style="text-align:center;">
 			<h3 class="splitHeading">Result</h3>

@@ -54,121 +54,251 @@
 		<nav style="text-align:center;">
 			<h3 class="splitHeading">Operations</h3>
 			<div class="overAllOperations" >
-			<div id="syllabusDiv" class="syllabusDiv" >
-				<span> <b>Select Syllabus </b></span><br/>
-				<hr>
-				<button class="btn btn-primary active">Basic Math</button> <br/>
-				<button class="btn btn-primary">Bodmass</button><br/>
-				<button class="btn btn-primary">Area</button><br/>
-			</div>
-			<div class="vl">
-			</div>
-			<div id="operationsDiv" class="operationsDiv"
-				ondragenter="return dragEnter(event)"
-				ondrop="return dragDrop(event)" ondragover="return dragOver(event)">
-				<div id="num1" class="numbersBox" draggable="true"
-					ondragenter="return dragEnter(event)"
-					ondragstart="return dragStart(event)"
-					ondrop="return dragDrop(event)" ondragover="return dragOver(event)"">
-					<button style="background-color: #438687">1</button>
+				<div id="syllabusDiv" class="syllabusDiv" >
+					<span> <b>Select Syllabus </b></span><br/>
+					<hr>
+					<button id="basicMathBtn" class="btn btn-primary active" onClick="basicMathClicked()">Basic Math</button> <br/>
+					<button id="pemdasBtn" class="btn btn-primary" onClick="pemdasClicked()">PEMDAS</button><br/>
+					<button id="areasBtn" class="btn btn-primary" onClick="areasClicked()">Areas</button><br/>
 				</div>
-
-				<div id="num2" class="numbersBox" draggable="true"
-					ondragenter="return dragEnter(event)"
-					ondragstart="return dragStart(event)"
-					ondrop="return dragDrop(event)" ondragover="return dragOver(event)">
-					<button type="button" style="background-color: #438687">2</button>
-				</div>
-
-				<div id="num3" class="numbersBox" draggable="true"
-					ondragenter="return dragEnter(event)"
-					ondragstart="return dragStart(event)"
-					ondrop="return dragDrop(event)" ondragover="return dragOver(event)">
-					<button type="button" style="background-color: #438687">3</button>
-				</div>
-
-				<div id="num4" class="numbersBox" draggable="true"
-					ondragenter="return dragEnter(event)"
-					ondragstart="return dragStart(event)"
-					ondrop="return dragDrop(event)" ondragover="return dragOver(event)">
-					<button type="button" style="background-color: #438687">4</button>
-				</div>
-
-				<div id="num5" class="numbersBox" draggable="true"
-					ondragenter="return dragEnter(event)"
-					ondragstart="return dragStart(event)"
-					ondrop="return dragDrop(event)" ondragover="return dragOver(event)">
-					<button type="button" style="background-color: #438687">5</button>
-				</div>
-				<br> <br>
-				<div id="num6" class="numbersBox" draggable="true"
-					ondragenter="return dragEnter(event)"
-					ondragstart="return dragStart(event)"
-					ondrop="return dragDrop(event)" ondragover="return dragOver(event)">
-					<button type="button" style="background-color: #438687">6</button>
-				</div>
-
-				<div id="num7" class="numbersBox" draggable="true"
-					ondragenter="return dragEnter(event)"
-					ondragstart="return dragStart(event)"
-					ondrop="return dragDrop(event)" ondragover="return dragOver(event)">
-					<button type="button" style="background-color: #438687">7</button>
-				</div>
-
-				<div id="num8" class="numbersBox" draggable="true"
-					ondragenter="return dragEnter(event)"
-					ondragstart="return dragStart(event)"
-					ondrop="return dragDrop(event)" ondragover="return dragOver(event)">
-					<button type="button" style="background-color: #438687">8</button>
-				</div>
-
-				<div id="num9" class="numbersBox" draggable="true"
-					ondragenter="return dragEnter(event)"
-					ondragstart="return dragStart(event)"
-					ondrop="return dragDrop(event)" ondragover="return dragOver(event)">
-					<button type="button" style="background-color: #438687">9</button>
-				</div>
-
-				<div id="num10" class="numbersBox" draggable="true"
-					ondragenter="return dragEnter(event)"
-					ondragstart="return dragStart(event)"
-					ondrop="return dragDrop(event)" ondragover="return dragOver(event)">
-					<button type="button" style="background-color: #438687">10</button>
-				</div>
-
-				<br /> <br /> <br /> <br>
-				<hr>
-				<div style="margin-left: 7%">
-					<div id="add" class="operationsBox" draggable="true"
+				<div class="vl"></div>
+				<div id="basicMathDiv">
+					<div id="operationsDiv" class="operationsDiv"
 						ondragenter="return dragEnter(event)"
-						ondragstart="return dragStart(event)"
-						ondrop="return dragDrop(event)"
-						ondragover="return dragOver(event)">
-						<button type="button">+</button>
-					</div>
-					<div id="subtract" class="operationsBox" draggable="true"
-						ondragenter="return dragEnter(event)"
-						ondragstart="return dragStart(event)"
-						ondrop="return dragDrop(event)"
-						ondragover="return dragOver(event)">
-						<button type="button">-</button>
-					</div>
-					<div id="div" class="operationsBox" draggable="true"
-						ondragenter="return dragEnter(event)"
-						ondragstart="return dragStart(event)"
-						ondrop="return dragDrop(event)"
-						ondragover="return dragOver(event)">
-						<button type="button">/</button>
-					</div>
-					<div id="mul" class="operationsBox" draggable="true"
-						ondragenter="return dragEnter(event)"
-						ondragstart="return dragStart(event)"
-						ondrop="return dragDrop(event)"
-						ondragover="return dragOver(event)">
-						<button type="button">x</button>
+						ondrop="return dragDrop(event)" ondragover="return dragOver(event)">
+						<div id="num1" class="numbersBox" draggable="true"
+							ondragenter="return dragEnter(event)"
+							ondragstart="return dragStart(event)"
+							ondrop="return dragDrop(event)" ondragover="return dragOver(event)">
+							<button style="background-color: #438687">1</button>
+						</div>
+		
+						<div id="num2" class="numbersBox" draggable="true"
+							ondragenter="return dragEnter(event)"
+							ondragstart="return dragStart(event)"
+							ondrop="return dragDrop(event)" ondragover="return dragOver(event)">
+							<button type="button" style="background-color: #438687">2</button>
+						</div>
+		
+						<div id="num3" class="numbersBox" draggable="true"
+							ondragenter="return dragEnter(event)"
+							ondragstart="return dragStart(event)"
+							ondrop="return dragDrop(event)" ondragover="return dragOver(event)">
+							<button type="button" style="background-color: #438687">3</button>
+						</div>
+		
+						<div id="num4" class="numbersBox" draggable="true"
+							ondragenter="return dragEnter(event)"
+							ondragstart="return dragStart(event)"
+							ondrop="return dragDrop(event)" ondragover="return dragOver(event)">
+							<button type="button" style="background-color: #438687">4</button>
+						</div>
+		
+						<div id="num5" class="numbersBox" draggable="true"
+							ondragenter="return dragEnter(event)"
+							ondragstart="return dragStart(event)"
+							ondrop="return dragDrop(event)" ondragover="return dragOver(event)">
+							<button type="button" style="background-color: #438687">5</button>
+						</div>
+						<br> <br>
+						<div id="num6" class="numbersBox" draggable="true"
+							ondragenter="return dragEnter(event)"
+							ondragstart="return dragStart(event)"
+							ondrop="return dragDrop(event)" ondragover="return dragOver(event)">
+							<button type="button" style="background-color: #438687">6</button>
+						</div>
+		
+						<div id="num7" class="numbersBox" draggable="true"
+							ondragenter="return dragEnter(event)"
+							ondragstart="return dragStart(event)"
+							ondrop="return dragDrop(event)" ondragover="return dragOver(event)">
+							<button type="button" style="background-color: #438687">7</button>
+						</div>
+		
+						<div id="num8" class="numbersBox" draggable="true"
+							ondragenter="return dragEnter(event)"
+							ondragstart="return dragStart(event)"
+							ondrop="return dragDrop(event)" ondragover="return dragOver(event)">
+							<button type="button" style="background-color: #438687">8</button>
+						</div>
+		
+						<div id="num9" class="numbersBox" draggable="true"
+							ondragenter="return dragEnter(event)"
+							ondragstart="return dragStart(event)"
+							ondrop="return dragDrop(event)" ondragover="return dragOver(event)">
+							<button type="button" style="background-color: #438687">9</button>
+						</div>
+		
+						<div id="num10" class="numbersBox" draggable="true"
+							ondragenter="return dragEnter(event)"
+							ondragstart="return dragStart(event)"
+							ondrop="return dragDrop(event)" ondragover="return dragOver(event)">
+							<button type="button" style="background-color: #438687">0</button>
+						</div>
+		
+						<br /> <br /> <br /> <br>
+						<hr>
+						<div style="margin-left: 7%">
+							<div id="add" class="operationsBox" draggable="true"
+								ondragenter="return dragEnter(event)"
+								ondragstart="return dragStart(event)"
+								ondrop="return dragDrop(event)"
+								ondragover="return dragOver(event)">
+								<button type="button">+</button>
+							</div>
+							<div id="subtract" class="operationsBox" draggable="true"
+								ondragenter="return dragEnter(event)"
+								ondragstart="return dragStart(event)"
+								ondrop="return dragDrop(event)"
+								ondragover="return dragOver(event)">
+								<button type="button">-</button>
+							</div>
+							<div id="div" class="operationsBox" draggable="true"
+								ondragenter="return dragEnter(event)"
+								ondragstart="return dragStart(event)"
+								ondrop="return dragDrop(event)"
+								ondragover="return dragOver(event)">
+								<button type="button">/</button>
+							</div>
+							<div id="mul" class="operationsBox" draggable="true"
+								ondragenter="return dragEnter(event)"
+								ondragstart="return dragStart(event)"
+								ondrop="return dragDrop(event)"
+								ondragover="return dragOver(event)">
+								<button type="button">x</button>
+							</div>
+						</div>
 					</div>
 				</div>
-			</div>
+				<div id="pemdasDiv" class="hide">
+					<div id="operationsDiv" class="operationsDiv"
+						ondragenter="return dragEnter(event)"
+						ondrop="return dragDrop(event)" ondragover="return dragOver(event)">
+						<div id="num1" class="numbersBox" draggable="true"
+							ondragenter="return dragEnter(event)"
+							ondragstart="return dragStart(event)"
+							ondrop="return dragDrop(event)" ondragover="return dragOver(event)">
+							<button style="background-color: #438687">1</button>
+						</div>
+		
+						<div id="num2" class="numbersBox" draggable="true"
+							ondragenter="return dragEnter(event)"
+							ondragstart="return dragStart(event)"
+							ondrop="return dragDrop(event)" ondragover="return dragOver(event)">
+							<button type="button" style="background-color: #438687">2</button>
+						</div>
+		
+						<div id="num3" class="numbersBox" draggable="true"
+							ondragenter="return dragEnter(event)"
+							ondragstart="return dragStart(event)"
+							ondrop="return dragDrop(event)" ondragover="return dragOver(event)">
+							<button type="button" style="background-color: #438687">3</button>
+						</div>
+		
+						<div id="num4" class="numbersBox" draggable="true"
+							ondragenter="return dragEnter(event)"
+							ondragstart="return dragStart(event)"
+							ondrop="return dragDrop(event)" ondragover="return dragOver(event)">
+							<button type="button" style="background-color: #438687">4</button>
+						</div>
+		
+						<div id="num5" class="numbersBox" draggable="true"
+							ondragenter="return dragEnter(event)"
+							ondragstart="return dragStart(event)"
+							ondrop="return dragDrop(event)" ondragover="return dragOver(event)">
+							<button type="button" style="background-color: #438687">5</button>
+						</div>
+						<br> <br>
+						<div id="num6" class="numbersBox" draggable="true"
+							ondragenter="return dragEnter(event)"
+							ondragstart="return dragStart(event)"
+							ondrop="return dragDrop(event)" ondragover="return dragOver(event)">
+							<button type="button" style="background-color: #438687">6</button>
+						</div>
+		
+						<div id="num7" class="numbersBox" draggable="true"
+							ondragenter="return dragEnter(event)"
+							ondragstart="return dragStart(event)"
+							ondrop="return dragDrop(event)" ondragover="return dragOver(event)">
+							<button type="button" style="background-color: #438687">7</button>
+						</div>
+		
+						<div id="num8" class="numbersBox" draggable="true"
+							ondragenter="return dragEnter(event)"
+							ondragstart="return dragStart(event)"
+							ondrop="return dragDrop(event)" ondragover="return dragOver(event)">
+							<button type="button" style="background-color: #438687">8</button>
+						</div>
+		
+						<div id="num9" class="numbersBox" draggable="true"
+							ondragenter="return dragEnter(event)"
+							ondragstart="return dragStart(event)"
+							ondrop="return dragDrop(event)" ondragover="return dragOver(event)">
+							<button type="button" style="background-color: #438687">9</button>
+						</div>
+		
+						<div id="num10" class="numbersBox" draggable="true"
+							ondragenter="return dragEnter(event)"
+							ondragstart="return dragStart(event)"
+							ondrop="return dragDrop(event)" ondragover="return dragOver(event)">
+							<button type="button" style="background-color: #438687">0</button>
+						</div>
+		
+						<br /> <br /> <br /> <br>
+						<hr>
+						<div style="margin-left: 7%">
+							<div id="add" class="operationsBox" draggable="true"
+								ondragenter="return dragEnter(event)"
+								ondragstart="return dragStart(event)"
+								ondrop="return dragDrop(event)"
+								ondragover="return dragOver(event)">
+								<button type="button">+</button>
+							</div>
+							<div id="subtract" class="operationsBox" draggable="true"
+								ondragenter="return dragEnter(event)"
+								ondragstart="return dragStart(event)"
+								ondrop="return dragDrop(event)"
+								ondragover="return dragOver(event)">
+								<button type="button">-</button>
+							</div>
+							<div id="div" class="operationsBox" draggable="true"
+								ondragenter="return dragEnter(event)"
+								ondragstart="return dragStart(event)"
+								ondrop="return dragDrop(event)"
+								ondragover="return dragOver(event)">
+								<button type="button">/</button>
+							</div>
+							<div id="mul" class="operationsBox" draggable="true"
+								ondragenter="return dragEnter(event)"
+								ondragstart="return dragStart(event)"
+								ondrop="return dragDrop(event)"
+								ondragover="return dragOver(event)">
+								<button type="button">x</button>
+							</div>
+							<br>
+							<div id="exp" class="operationsBox" draggable="true"
+								ondragenter="return dragEnter(event)"
+								ondragstart="return dragStart(event)"
+								ondrop="return dragDrop(event)"
+								ondragover="return dragOver(event)">
+								<button type="button">^</button>
+							</div>
+							<div id="paranthesis" class="operationsBox" style="width:60px !important" draggable="true"
+								ondragenter="return dragEnter(event)"
+								ondragstart="return dragStart(event)"
+								ondrop="return dragDrop(event)"
+								ondragover="return dragOver(event)">
+								<button type="button">( ... )</button>
+							</div>
+							<div id="openPara" class="operationsBox hide">
+								<button type="button">(</button>
+							</div>
+							<div id="closePara" class="operationsBox hide">
+								<button type="button">)</button>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</nav>
 		<nav style="text-align:center;">
@@ -180,12 +310,20 @@
 			<div class="deleteAction">
 				<button type="button" id="delete"
 					class="btn btn-success canvasButton deleteButton glyphicon glyphicon-trash"
-					onClick="deleteSelectedButton()"></button>
+					onClick="deleteSelectedButton()"  title="Delete button"></button>
 			</div>
-			<br>
-			<br>
+			<br/>
+			<br/>
 			<button type="button" id="submit" onClick="evaluate1()"
-				class="btn btn-success canvasButton">Submit</button>
+				class="btn btn-success canvasButton">Submit
+			</button>
+			<br/>
+			<br/>
+			<div class="reset">
+				<button type="button" id="delete"
+					class="btn btn-success canvasButton deleteButton glyphicon glyphicon-refresh"
+					onClick="resetButton()" title="Reset Expression"></button>
+			</div>
 		</nav>
 		<nav style="min-width: 400px !important; max-width: 400px !important; text-align:center;">
 			<h3 class="splitHeading">Result</h3>
@@ -214,6 +352,7 @@
 		function dragDrop(ev) {
 			var src = ev.dataTransfer.getData("Text");
 			var $lastVal;
+			console.log(src);
 			$btn = $('#' + src).clone();
 			$btn.attr('id', 'id' + cloneCount)
 			$btn.attr('onClick', 'selectedButton("id' + cloneCount + '")');
@@ -234,9 +373,33 @@
 						$btn.find("button").text(val + $btn.text().trim());
 					}
 				}
+			} else if(src == "paranthesis") {
+				var $lastVal;
+				var firstElement = true;
+				$(".performOperation").each(function(index) {
+					if(firstElement == true) {
+						$openPara = $('#openPara').clone();
+						$openPara.addClass("performOperation");
+						$openPara.removeClass("hide");
+						$openPara.attr('id', 'id' + cloneCount)
+						$openPara.attr('onClick', 'selectedButton("id' + cloneCount + '")');
+						$openPara.insertBefore($(this));
+						firstElement = false;
+					}
+					$lastVal = $(this);
+				});
+				$closePara = $('#closePara').clone();
+				$closePara.removeClass("hide");
+				$closePara.addClass("performOperation");
+				cloneCount++;
+				$closePara.attr('id', 'id' + cloneCount)
+				$closePara.insertAfter($lastVal);
+				$closePara.attr('onClick', 'selectedButton("id' + cloneCount + '")');
+				cloneCount++;
+				cloneCount++;
+				return false;
 			}
 			cloneCount++;
-
 			$("#boxB").append($btn);
 			return false;
 		}
@@ -253,10 +416,40 @@
 					+ expression;
 			sendAjaxRequest(url, function(resp) {
 				var result = resp.response;
-				console.log(result);
-				$("#expressionResult").html(result);
+				$("#expressionResult").html(parseInt(result));
 			});
 
+		}
+
+		function pemdasClicked() {
+			$('#basicMathDiv').addClass('hide');
+			$('#areasDiv').addClass('hide');
+			
+			$('#pemdasDiv').removeClass('hide');
+			
+			$('#pemdasBtn').addClass('active');
+			$('#basicMathBtn').removeClass('active');
+			$('#areasBtn').removeClass('active');
+		}
+		function basicMathClicked(){
+			$('#areasDiv').addClass('hide');
+			$('#pemdasDiv').addClass('hide');
+			
+			$('#basicMathDiv').removeClass('hide');
+			
+			$('#basicMathBtn').addClass('active');
+			$('#areasBtn').removeClass('active');
+			$('#pemdasBtn').removeClass('active');
+		}
+		function areasClicked() {
+			$('#basicMathDiv').addClass('hide');
+			$('#pemdasDiv').addClass('hide');
+			
+			$('#areasDiv').removeClass('hide');
+			
+			$('#areasBtn').addClass('active');
+			$('#basicMathBtn').removeClass('active');
+			$('#pemdasBtn').removeClass('active');
 		}
 
 		function selectedButton(id) {
@@ -270,6 +463,12 @@
 				$('#' + selectedBtn).remove();
 			}
 			selectedBtn = "";
+		}
+		
+		function resetButton() {
+			$(".performOperation").each(function(index) {
+				$(this).remove();
+			});
 		}
 
 		var modal = document.getElementById("myModal");
