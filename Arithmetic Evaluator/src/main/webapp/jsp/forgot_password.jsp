@@ -23,7 +23,7 @@
 	<header>
 		<h1 style="color: black" align="center">Forgot Password Page</h1>
 	</header>
-	<form id="set-password-form" action="resetPassword.action">
+	<form id="set-password-form" action="forgotPassword.action">
 		<style="border: 1px solid black" method="post">
 		<div class="container">
 			<h1 style="color: black">Reset Password</h1>
@@ -32,7 +32,7 @@
 			<input type="text" name = "emailID" placeholder="Email ID" required/>
 
 			<label for="oldPassword"><b style="color: black">Old Password</b></label>
-            <input type="password" name = "oldPassword" placeholder="old password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required/>>
+            <input type="password" name = "oldPassword" placeholder="old password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required/>
 
 			<label for="newPassword"><b style="color: black">New Password</b></label>
 			<input type="password" id="newPassword" placeholder="Enter New Password" name="newPassword" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required/> <br/>

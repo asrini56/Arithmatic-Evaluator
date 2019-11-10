@@ -43,7 +43,7 @@
             <result type="dispatcher">/jsp/forgot_password.jsp</result>
         </action>
 
-        <action name="forgotPasword_page" class="com.asu.ser.usermanagement.UserManagementAction" method="resetPassword">
+        <action name="forgotPassword" class="com.asu.ser.usermanagement.UserManagementAction" method="resetPassword">
             <result name="success" type="dispatcher">/jsp/login.jsp</result>
             <result name="error" type="dispatcher">/jsp/forgot_password.jsp</result>
         </action>
