@@ -56,8 +56,6 @@
 			<button class="button button1" onclick="Function6grade()"> <h4> 6TH GRADE STUDENT </h4></button>
   			<button class="button button1" onclick="Function9grade()"> <h4> 9TH GRADE STUDENT </h4></button>
   		</div>
-  		<br/> <br/><br/><br/><br/>
-  		<footer class="footer"><span class="glyphicon glyphicon-copyright-mark"></span>  Copyright</footer>
 	</div>
 	
 <script>
