@@ -23,11 +23,17 @@
 	<header>
 		<h1 style="color: black" align="center">Forgot Password Page</h1>
 	</header>
-	<form id="myForm" action="resetPassword.action"
-		style="border: 1px solid black">
+	<form id="set-password-form" action="resetPassword.action">
+		<style="border: 1px solid black" method="post">
 		<div class="container">
 			<h1 style="color: black">Reset Password</h1>
 			<hr>
+			<label for="emailID"><b style="color: black">Email ID</b></label>
+			<input type="text" name = "emailID" placeholder="Email ID" required/>
+
+			<label for="oldPassword"><b style="color: black">Old Password</b></label>
+            <input type="password" name = "oldPassword" placeholder="old password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required/>>
+
 			<label for="newPassword"><b style="color: black">New Password</b></label>
 			<input type="password" id="newPassword" placeholder="Enter New Password" name="newPassword" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required/> <br/>
 
@@ -38,7 +44,7 @@
 
 		<div class="clearfix" style="margin-left: 25%;">
 			<button type="button" class="cancelbtn" onclick="cancelFunction()">Cancel</button>
-			<button class="signupbtn" onclick="validateAndSubmitFunction()">Submit</button>
+			<button class="signupbtn" onclick="submitFunction()">Submit</button>
 		</div>
 	</form>
 <script>
@@ -64,7 +70,7 @@
 	}
 
 	function submitFunction() {
-		document.getElementById("myForm").submit();
+		document.getElementById("set-password-form").submit();
 	}
 
 	function cancelFunction() {
