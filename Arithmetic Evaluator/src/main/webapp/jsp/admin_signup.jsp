@@ -24,7 +24,7 @@
 		<h1 style="color: black" align="center">Sign Up Page</h1>
 	</header>
 	<form id="myForm" action="signup.action"
-		style="border: 1px solid black">
+		style="border: 1px solid black;" method="post">
 		<div class="container">
 			<h1 style="color: black">Institution Admin</h1>
 			<hr>
