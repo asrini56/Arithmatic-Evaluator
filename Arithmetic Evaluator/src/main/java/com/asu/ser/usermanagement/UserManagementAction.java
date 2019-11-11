@@ -286,4 +286,18 @@ public class UserManagementAction {
     public void setTestDetails(List<TestDetails> testDetails) {
         this.testDetails = testDetails;
     }
+
+    public String fetchGradeTestDetails() {
+        if(StringUtils.isEmpty(AuthenticationUtil.getLoggedInUser())){
+            message = "Please log in to access the page.";
+            return Action.ERROR;
+        }
+        try {
+            testDetails = UserManagementHandler.fetchGradeTestDetails();
+        }catch (Exception e) {
+            message = "Failed to fetch test details - " + e.getMessage();
+            LOGGER.log(Level.SEVERE, "Failed to fetch test details" , e);
+        }
+        return Action.SUCCESS;
+    }
 }
