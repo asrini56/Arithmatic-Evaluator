@@ -120,6 +120,10 @@
             <result type="json"/>
         </action>
 
+        <action name="admin/listStudents" class="com.asu.ser.usermanagement.UserManagementAction" method="fetchStudents">
+            <result type="json"/>
+        </action>
+
         <action name="teacher/testdetails" class="com.asu.ser.usermanagement.UserManagementAction" method="fetchTestDetails">
             <result type="json"/>
         </action>

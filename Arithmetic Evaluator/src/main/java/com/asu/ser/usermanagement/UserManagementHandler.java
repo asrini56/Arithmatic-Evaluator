@@ -138,20 +138,17 @@ public class UserManagementHandler {
 			throw new Exception("Illegal operation - logged in user does not belong to any instituion");
 		}
 		String password = PasswordGenerator.generatePassword();
-		Integer StudentUserID = -1;
+		Integer studentUserID = -1;
 		try {
-			StudentUserID = DataSource.insertUser(emailID, password, firstName, lastName);
+			studentUserID = DataSource.insertUser(emailID, password, firstName, lastName);
 			Integer studentRoleID = USER_ROLES.get(ROLE_STUDENT);
 			if(studentRoleID == null ) {
 				throw new Exception("Server error - Invalid role " + studentRoleID);
 			}
-			DataSource.insertUserToRole(StudentUserID, studentRoleID);
-			DataSource.insertUserTOInstitution(StudentUserID, institutionID);
+			DataSource.insertUserToRole(studentUserID, studentRoleID);
+			DataSource.insertUserTOInstitution(studentUserID, institutionID);
 			sendStudentAccountPasswordEmail(firstName, lastName, emailID, password, loggedInUser);
 		} catch (Exception e) {
-			if(StudentUserID > 0) {
-				DataSource.deleteUserWithID(userID);
-			}
 			throw e;
 		}
 	}

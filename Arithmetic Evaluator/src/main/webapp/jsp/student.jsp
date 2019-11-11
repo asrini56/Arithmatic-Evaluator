@@ -52,7 +52,7 @@
 	});
 
 	window.onload = function() {
-		fetchTeachers();
+		fetchStudents();
  	};
 
 	function fetchStudents() {
@@ -81,7 +81,7 @@
 
 
  		function buttonclick(){
-         	window.location="addTeacher_page.action";
+         	window.location="addStudent_page.action";
      	}
  	</script>
 	</body>

@@ -25,8 +25,8 @@ $( document ).ready(function() {
           	<ul class="nav navbar-nav navbar-right">
 
     				<li><a href="/arithmetic-evaluator/admin/dashboard_page.action">Dashboard</a></li>
-    				<li><a href="/arithmetic-evaluator/admin/listTeachers_page.action">Student</a></li>
-    				<li class="active fontSansSerif"><a href="addTeacher_page.action">Create Student Account</a></li>
+    				<li><a href="/arithmetic-evaluator/admin/listStudents_page.action">Student</a></li>
+    				<li class="active fontSansSerif"><a href="addStudent_page.action">Create Student Account</a></li>
     				<li>
     					<div class="dropdown">
  							<a href="#" class="dropbtn">
