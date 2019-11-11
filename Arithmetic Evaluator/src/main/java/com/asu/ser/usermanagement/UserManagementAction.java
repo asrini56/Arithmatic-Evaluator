@@ -338,4 +338,12 @@ public class UserManagementAction {
     public void setTestDetails(List<TestDetails> testDetails) {
         this.testDetails = testDetails;
     }
+
+    public List<Student> getStudents() {
+        return students;
+    }
+
+    public void setStudents(List<Student> students) {
+        this.students = students;
+    }
 }
