@@ -26,6 +26,7 @@ public class UserManagementHandler {
 
 	private static final String ROLE_ADMIN = "admin";
 	private static final String ROLE_TEACHER = "teacher";
+    private static final String ROLE_STUDENT = "student";
 	private static Map<String, Integer> USER_ROLES;
 	static {
 		try {
@@ -172,4 +173,18 @@ public class UserManagementHandler {
 	public static String getRoleNameForUser(String emailID) throws Exception {
 		return DataSource.fetchUserRoleName(emailID);
 	}
+
+    public static List<TestDetails> fetchGradeTestDetails() throws Exception {
+        String loggedInUser = AuthenticationUtil.getLoggedInUser();
+        if(loggedInUser == null || loggedInUser.isEmpty()) {
+            throw new Exception("No user logged in");
+        }
+        int userRoleID = DataSource.fetchUserID(loggedInUser);
+        int gradeID = DataSource.fetchGradeID(userRoleID);
+        int studentRoleID = USER_ROLES.get(ROLE_STUDENT);
+        if(userRoleID != studentRoleID) {
+            throw new Exception("Illegal operation - only students have permission to view tests");
+        }
+        return DataSource.fetchGradeTestDetails(gradeID);
+    }
 }
