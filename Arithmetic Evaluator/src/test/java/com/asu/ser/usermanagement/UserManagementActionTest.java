@@ -2,17 +2,8 @@ package com.asu.ser.usermanagement;
 
 import com.opensymphony.xwork2.Action;
 import junit.framework.TestCase;
-import org.junit.Ignore;
-import org.junit.Test;
 
 public class UserManagementActionTest extends TestCase {
-
-    private static String emailID;
-    private static String password;
-    private static String firstName;
-    private static String lastName;
-    private static String message;
-    private static String institutionName;
 
     public void testSignUpValidateEmail(){
         UserManagementAction userManagementAction = new UserManagementAction();
@@ -41,19 +32,6 @@ public class UserManagementActionTest extends TestCase {
         userManagementAction.setPassword("Admin123");
         assertEquals(Action.ERROR, userManagementAction.signUp());
         assertEquals("Institution name exists. Kindly try another name", userManagementAction.getMessage());
-    }
-
-    public void testLogin(){
-        UserManagementAction userManagementAction = new UserManagementAction();
-        userManagementAction.setEmailID("abc@abc.com");
-        userManagementAction.setPassword("Admin123");
-        assertEquals(Action.ERROR, userManagementAction.login());
-        assertEquals("Username does not exist. Please create an account", userManagementAction.getMessage());
-        userManagementAction.setEmailID("abc@gmail.com");
-        userManagementAction.setPassword("Ssadmin123");
-        userManagementAction.login();
-        //assertEquals(Action.ERROR, userManagementAction.login());
-        //assertEquals("Error while logging in. Please try again.", userManagementAction.getMessage());
     }
 
     public void testAddTeacher(){
@@ -87,8 +65,8 @@ public class UserManagementActionTest extends TestCase {
         userManagementAction.setEmailID("abc@gmail.com");
         userManagementAction.setPassword("Ssadmin123");
         userManagementAction.resetPassword();
-        //assertEquals(Action.ERROR, userManagementAction.resetPassword());
-        //assertEquals("Invalid Password. Please enter a valid Password.", userManagementAction.getMessage());
+        assertEquals(Action.ERROR, userManagementAction.resetPassword());
+        assertEquals("Invalid Password. Please enter a valid Password.", userManagementAction.getMessage());
     }
 
 }

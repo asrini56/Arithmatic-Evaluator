@@ -3,7 +3,11 @@ package com.asu.ser.db;
 import com.asu.ser.model.User;
 import com.asu.ser.model.Teacher;
 import junit.framework.TestCase;
+import org.apache.commons.text.RandomStringGenerator;
 
+import java.sql.DataTruncation;
+import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 import java.util.Map;
 
@@ -11,118 +15,123 @@ public class DataSourceTest extends TestCase {
 
     public void testInsertUser(){
         try {
-            Integer count = DataSource.insertUser("abc@gmail.com", "Ssadmin123", "AdminFirst", "AdminLast");
-            //assertEquals(1, count.intValue());
+            DataSource.insertUser("abc@gmail.com", "Ssadmin123", "AdminFirst", "AdminLast");
+        } catch (SQLException e){
+            assertEquals("Duplicate entry 'abc@gmail.com' for key 'email_id_Index'", e.getLocalizedMessage());
         } catch (Exception e) {
-            assertFalse(false);
+            fail();
         }
     }
 
     public void testSelectUser(){
         try {
             List<User> userList = DataSource.selectUser("abc@gmail.com");
-            //assertFalse(userList.isEmpty());
+            assertFalse(userList.isEmpty());
         } catch (Exception e) {
-            assertTrue(true);
+            fail();
         }
     }
 
     public void testResetPassword(){
         try {
             Integer count = DataSource.resetPassword("abc@gmail.com", "Ssadmin123");
-            //assertEquals(1, count.intValue());
+            assertEquals(1, count.intValue());
         } catch (Exception e) {
-            assertTrue(true);
+            fail();
         }
     }
 
     public void testInsertUserToRole(){
         try {
-            DataSource.insertUserToRole(1,1);
-            assertTrue(true);
+            DataSource.insertUserToRole(58,2);
+        } catch (SQLIntegrityConstraintViolationException e) {
+            assertEquals("Duplicate entry '58-2' for key 'PRIMARY'", e.getLocalizedMessage());
         } catch (Exception e) {
-            assertTrue(true);
+            fail();
         }
     }
 
     public void testInsertInstitution(){
         try {
-            Integer count = DataSource.insertInstitution("a@bc");
-            assertNotNull(count);
+            RandomStringGenerator generator = new RandomStringGenerator.Builder().withinRange('a', 'z').build();
+            DataSource.insertInstitution(generator.generate(81));
+        } catch (DataTruncation e) {
+            assertEquals("Data truncation: Data too long for column 'institution_name' at row 1", e.getLocalizedMessage());
         } catch (Exception e) {
-            assertTrue(true);
+            fail();
         }
     }
 
     public void testInsertUserTOInstitution(){
         try {
-            Integer count = DataSource.insertUserTOInstitution(1,1);
-            //assertEquals(1, count.intValue());
+            DataSource.insertUserTOInstitution(6,1);
+        } catch (SQLException e) {
+            assertEquals("Duplicate entry '6-1' for key 'PRIMARY'", e.getLocalizedMessage());
         } catch (Exception e) {
-            assertTrue(true);
+            fail();
         }
     }
 
     public void testSelectInstitutionID(){
         try {
-            List<Integer> integerList = DataSource.selectInstitutionID("abc");
-            //assertFalse(integerList.isEmpty());
+            List<Integer> integerList = DataSource.selectInstitutionID("SRM");
+            assertFalse(integerList.isEmpty());
         } catch (Exception e) {
-            assertTrue(true);
+            fail();
         }
     }
 
     public void testFetchUsersInstitutionID(){
         try {
-            Integer count = DataSource.fetchUsersInstitutionID("abac@gmail.com");
-            //assertEquals(1, count.intValue());
+            Integer count = DataSource.fetchUsersInstitutionID("akrish84@asu.edu");
+            assertEquals(1, count.intValue());
         } catch (Exception e) {
-            assertTrue(true);
+            fail();
         }
     }
 
     public void testFetchInstitutionID(){
         try {
-            Integer id = DataSource.fetchInstitutionID("a!bc");
-            //assertEquals(1, id.intValue());
+            Integer id = DataSource.fetchInstitutionID("SRM");
+            assertEquals(1, id.intValue());
         } catch (Exception e) {
-            assertTrue(true);
+            fail();
         }
     }
 
     public void testFetchRoles(){
         try {
             Map<String, Integer> rolesMap = DataSource.fetchRoles();
-            //assertEquals(3, rolesMap.size());
+            assertEquals(2, rolesMap.size());
         } catch (Exception e) {
-            assertTrue(true);
+            fail();
         }
     }
 
     public void testFetchUserID(){
         try {
-            Integer id = DataSource.fetchUserID("abac@gmail.com");
-            //assertEquals(1, id.intValue());
+            Integer id = DataSource.fetchUserID("team8.ser515@gmail.com");
+            assertEquals(58, id.intValue());
         } catch (Exception e) {
-            assertTrue(true);
+            fail();
         }
     }
 
     public void testFetchUserRole(){
         try {
-            Integer id = DataSource.fetchUserRole(1);
-            //assertEquals(1, id.intValue());
+            Integer id = DataSource.fetchUserRole(58);
+            assertEquals(2, id.intValue());
         } catch (Exception e) {
-            assertTrue(true);
+            fail();
         }
     }
 
     public void testFetchUserRoleName(){
         try {
-            String role = DataSource.fetchUserRoleName("abc@gmail.com");
-            //assertEquals("admin", role);
+            String role = DataSource.fetchUserRoleName("team8.ser515@gmail.com");
+            assertEquals("teacher", role);
         } catch (Exception e) {
-            assertTrue(true);
+            fail();
         }
     }
 
@@ -131,24 +140,23 @@ public class DataSourceTest extends TestCase {
             List<Teacher> teacherList = DataSource.fetchTeachers(3);
             assertNotNull(teacherList);
         } catch (Exception e) {
-            assertTrue(true);
+            fail();
         }
     }
 
     public void testDeleteUser(){
         try {
             DataSource.deleteUserWithID(1);
-            assertTrue(true);
         } catch (Exception e) {
-            assertTrue(true);
+            fail();
         }
     }
 
     public void testDeleteUserWithEmailID(){
         try {
-            DataSource.deleteUserWithEmailID("abc@gmail.com");
+            DataSource.deleteUserWithEmailID("rand@test.ikl");
         } catch (Exception e) {
-            assertFalse(false);
+            fail();
         }
     }
 

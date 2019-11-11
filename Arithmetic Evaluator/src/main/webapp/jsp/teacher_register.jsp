@@ -41,7 +41,7 @@ $( document ).ready(function() {
         	</div>
   		</nav>
  
-<form name="teacherRegisterForm" action="addTeachers.action">
+<form name="teacherRegisterForm" action="addTeachers.action" method="post">
   <div class="container">
     <h1>Register</h1>
     <p>Please fill in this form to create a teacher account.</p>

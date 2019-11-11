@@ -63,14 +63,6 @@
             <result type="dispatcher">/jsp/9th_operations.jsp</result>
         </action>
 
-        <action name="teacher/resetpassword_page">
-            <result type="dispatcher">/jsp/set_teacher_pwd.jsp</result>
-        </action>
-
-        <action name="teacher/createtest_page">
-            <result type="dispatcher">/jsp/teachers_create_test.jsp</result>
-        </action>
-
         <action name="admin/signup" class="com.asu.ser.usermanagement.UserManagementAction" method="signUp">
             <result name="success" type="dispatcher">/jsp/admin_dashboard.jsp</result>
             <result name="error" type="dispatcher">/jsp/admin_signup.jsp</result>
@@ -82,7 +74,7 @@
         
         <action name="login" class="com.asu.ser.usermanagement.UserManagementAction" method="login">
             <result name="admin" type="dispatcher">/jsp/admin_dashboard.jsp</result>
-            <result name="teacher" type="dispatcher">/jsp/math_operations.jsp</result>
+            <result name="teacher" type="dispatcher">/jsp/teachers_dashboard.jsp</result>
             <result name="student" type="dispatcher">/jsp/math_operations.jsp</result>
             <result name="success" type="dispatcher">/jsp/math_operations.jsp</result>
             <result name="error" type="dispatcher">/jsp/login.jsp</result>
@@ -103,11 +95,34 @@
             <result type="json"/>
         </action>
 
+        <action name="teacher/testdetails" class="com.asu.ser.usermanagement.UserManagementAction" method="fetchTestDetails">
+            <result type="json"/>
+        </action>
+
+		<action name="teacher/dashboard">
+			<result type="dispatcher">/jsp/teachers_dashboard.jsp</result>
+		</action>
+        <action name="teacher/viewtests_page">
+            <result type="dispatcher">/jsp/test_details.jsp</result>
+        </action>
+
+		<action name="teacher/resetpassword_page">
+            <result type="dispatcher">/jsp/set_teacher_pwd.jsp</result>
+        </action>
+
+        <action name="teacher/createtest_page">
+            <result type="dispatcher">/jsp/teachers_create_test.jsp</result>
+        </action>
+        
+        <action name="teacher/test/add" class="com.asu.ser.operations.TestAction" method="addTest">
+            <result type="json"/>
+        </action>
+
         <action name="grade1/operations/evaluvate" class="com.asu.ser.operations.OperationsAction" method="evaluvateExpression">
             <result type="json"/>
         </action>
 
-	 <action name="grade6/operations_page">
+	    <action name="grade6/operations_page">
             <result type="dispatcher">/jsp/6th_operations.jsp</result>
         </action>
 

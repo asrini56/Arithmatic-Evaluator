@@ -137,8 +137,7 @@ public class UserManagementHandler {
         if(userRoleID != teacherRoleID) {
             throw new Exception("Illegal operation - user does not have permission to remove teacher");
         }
-		Integer institutionID = DataSource.fetchUsersInstitutionID(loggedInUser);
-        return DataSource.fetchTestDetails(institutionID);
+        return DataSource.fetchTestDetails(userID);
     }
 
     public static boolean isInstitutionPresent(String institutionName) throws Exception {
