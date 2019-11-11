@@ -32,7 +32,6 @@ article {
 .numbersBox {
 	font-size:20px;
 	float:left !important;
-	padding:10px;
 	margin:10px;
 	-moz-user-select:none;
 	min-width:40px; 
@@ -42,7 +41,6 @@ article {
 .operationsBox {
 	font-size:20px;
 	float:left !important;
-	padding:10px;
 	margin:10px;
 	-moz-user-select:none;
 	width:40px; 
@@ -205,4 +203,33 @@ article {
   cursor: pointer;
 }
 
-/* The Close Button */
+.syllabusDiv {
+	float: left;
+    margin-top: 10px;
+    /*background-color:#438687;*/
+	padding:10px;
+}
+
+.syllabusDiv button {
+	margin-top:5px;
+	width:100%;
+	
+}
+
+.vl {
+  border-left: 1px solid grey;
+  height:90%;
+  float:left;
+  margin:8px;
+}
+
+.overAllOperations {
+	border: 1px solid grey;
+	float: left;
+	min-width:470px;
+}
+
+.hide {
+	display:none;
+}
+

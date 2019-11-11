@@ -51,18 +51,6 @@
 			 <result type="json"/>
 		</action>
 
-        <action name="grade1/operations_page">
-            <result type="dispatcher">/jsp/math_operations.jsp</result>
-        </action>
-
-        <action name="grade6/operations_page">
-            <result type="dispatcher">/jsp/6th_operations.jsp</result>
-        </action>
-
-        <action name="grade9/operations_page">
-            <result type="dispatcher">/jsp/9th_operations.jsp</result>
-        </action>
-
         <action name="admin/signup" class="com.asu.ser.usermanagement.UserManagementAction" method="signUp">
             <result name="success" type="dispatcher">/jsp/admin_dashboard.jsp</result>
             <result name="error" type="dispatcher">/jsp/admin_signup.jsp</result>
@@ -118,17 +106,22 @@
             <result type="json"/>
         </action>
 
-        <action name="grade1/operations/evaluvate" class="com.asu.ser.operations.OperationsAction" method="evaluvateExpression">
-            <result type="json"/>
+        <action name="grade1/operations_page">
+            <result type="dispatcher">/jsp/math_operations.jsp</result>
         </action>
 
-	    <action name="grade6/operations_page">
-            <result type="dispatcher">/jsp/6th_operations.jsp</result>
+        <action name="grade6/operations_page">
+            <result type="dispatcher">/jsp/grade_6_math_operations.jsp</result>
         </action>
 
         <action name="grade9/operations_page">
             <result type="dispatcher">/jsp/9th_operations.jsp</result>
         </action>
+
+        <action name="grade1/operations/evaluvate" class="com.asu.ser.operations.OperationsAction" method="evaluvateExpression">
+            <result type="json"/>
+        </action>
+
     </package>
 
 </struts>

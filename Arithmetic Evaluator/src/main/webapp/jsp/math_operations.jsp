@@ -50,7 +50,7 @@
 			</div>
 		</nav>
 		<section>
-		<nav>
+		<nav style="text-align:center;">
 			<h3 class="splitHeading">Operations</h3>
 			<div id="operationsDiv" class="operationsDiv"
 				ondragenter="return dragEnter(event)"
@@ -127,39 +127,26 @@
 
 				<br /> <br /> <br /> <br>
 				<hr>
-				<div style="margin-left: 7%">
+				<div class = "operations_buttons" style="padding-left: 30%; text-align:center">
 					<div id="add" class="operationsBox" draggable="true"
 						ondragenter="return dragEnter(event)"
 						ondragstart="return dragStart(event)"
 						ondrop="return dragDrop(event)"
 						ondragover="return dragOver(event)">
-						<button type="button" style="background-color: #438687">+</button>
+						<button type="button">+</button>
 					</div>
 					<div id="subtract" class="operationsBox" draggable="true"
 						ondragenter="return dragEnter(event)"
 						ondragstart="return dragStart(event)"
 						ondrop="return dragDrop(event)"
 						ondragover="return dragOver(event)">
-						<button type="button" style="background-color: #438687">-</button>
+						<button type="button">-</button>
 					</div>
-					<div id="div" class="operationsBox" draggable="true"
-						ondragenter="return dragEnter(event)"
-						ondragstart="return dragStart(event)"
-						ondrop="return dragDrop(event)"
-						ondragover="return dragOver(event)">
-						<button type="button" style="background-color: #438687">/</button>
-					</div>
-					<div id="mul" class="operationsBox" draggable="true"
-						ondragenter="return dragEnter(event)"
-						ondragstart="return dragStart(event)"
-						ondrop="return dragDrop(event)"
-						ondragover="return dragOver(event)">
-						<button type="button" style="background-color: #438687">x</button>
-					</div>
+					
 				</div>
 			</div>
 		</nav>
-		<nav>
+		<nav style="text-align:center;">
 			<h3 class="splitHeading">Canvas</h3>
 			<div id="boxB" ondragenter="return dragEnter(event)"
 				ondrop="return dragDrop(event)" ondragover="return dragOver(event)"
@@ -168,14 +155,22 @@
 			<div class="deleteAction">
 				<button type="button" id="delete"
 					class="btn btn-success canvasButton deleteButton glyphicon glyphicon-trash"
-					onClick="deleteSelectedButton()"></button>
+					onClick="deleteSelectedButton()" title="Delete button"></button>
 			</div>
 			<br>
 			<br>
 			<button type="button" id="submit" onClick="evaluvate()"
-				class="btn btn-success canvasButton">Submit</button>
+				class="btn btn-success canvasButton">Submit
+			</button>
+			<br/>
+			<br/>
+			<div class="reset">
+				<button type="button" id="delete"
+					class="btn btn-success canvasButton deleteButton glyphicon glyphicon-refresh"
+					onClick="resetButton()" title="Reset Expression"></button>
+			</div>
 		</nav>
-		<nav>
+		<nav style="text-align:center;">
 			<h3 class="splitHeading">Result</h3>
 			<div class="expressionResultDiv">
 				<span id="expressionResult"></span>
@@ -186,7 +181,7 @@
 	<script src="/arithmetic-evaluator/js/common.js"></script>
 	<script>
 		var cloneCount = 0;
-		var selectedBtn;
+		var selectedBtn = "";
 		function dragStart(ev) {
 			ev.dataTransfer.effectAllowed = 'move';
 			ev.dataTransfer.setData("Text", ev.target.getAttribute('id'));
@@ -202,9 +197,8 @@
 		}
 		function dragDrop(ev) {
 			var src = ev.dataTransfer.getData("Text");
-			console.log(src);
+			var $lastVal;
 			$btn = $('#' + src).clone();
-
 			$btn.attr('id', 'id' + cloneCount)
 			$btn.attr('onClick', 'selectedButton("id' + cloneCount + '")');
 			$btn.addClass("performOperation");
@@ -213,6 +207,18 @@
 			$btn.removeAttr("ondragstart");
 			$btn.removeAttr("ondrop");
 			$btn.removeAttr("ondragover");
+			if($.isNumeric(($btn.text().trim()))){
+				$(".performOperation").each(function(index) {
+					$lastVal = $(this);
+				});
+				if($lastVal != null) {
+					if($.isNumeric($lastVal.text().trim())){
+						var val = $lastVal.text().trim();
+						$lastVal.remove();
+						$btn.find("button").text($btn.text().trim());
+					}
+				}
+			}
 			cloneCount++;
 
 			$("#boxB").append($btn);
@@ -231,8 +237,14 @@
 					+ expression;
 			sendAjaxRequest(url, function(resp) {
 				var result = resp.response;
-				console.log(result);
-				$("#expressionResult").html(result);
+				if(result.includes("Invalid")){
+					$("#expressionResult").html(result);
+					return;
+				}
+				else if (result >= 20 || result <= 0) {
+					$("#expressionResult").html(parseInt(result) + " Wow, You are trying advanced maths. Keep up the good work");
+				}
+				$("#expressionResult").html(parseInt(result));
 			});
 
 		}
@@ -242,7 +254,11 @@
 		}
 
 		function deleteSelectedButton() {
-			$('#' + selectedBtn).remove();
+			if(selectedBtn == ""){
+				window.alert("Select a button to delete it");
+			} else {
+				$('#' + selectedBtn).remove();
+			}
 			selectedBtn = "";
 		}
 
