@@ -87,6 +87,10 @@
             <result type="json"/>
         </action>
 
+        <action name="student/gradetestdetails" class="com.asu.ser.usermanagement.UserManagementAction" method="fetchGradeTestDetails">
+            <result type="json"/>
+        </action>
+
 		<action name="teacher/dashboard">
 			<result type="dispatcher">/jsp/teachers_dashboard.jsp</result>
 		</action>
