@@ -5,7 +5,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <link rel="stylesheet" href="/arithmetic-evaluator/css/style_common.css">
-<link rel="stylesheet" href="/arithmetic-evaluator/css/teacher_register.css">
+<link rel="stylesheet" href="/arithmetic-evaluator/css/student_register.css">
 
 <script>
 $( document ).ready(function() {
@@ -23,10 +23,10 @@ $( document ).ready(function() {
               <a class="navbar-brand titleText" href="#">Arithmetic Evaluator</a>
           	</div>
           	<ul class="nav navbar-nav navbar-right">
-    				
+
     				<li><a href="/arithmetic-evaluator/admin/dashboard_page.action">Dashboard</a></li>
-    				<li><a href="/arithmetic-evaluator/admin/listTeachers_page.action">Teachers</a></li>
-    				<li class="active fontSansSerif"><a href="addTeacher_page.action">Create Teacher Account</a></li>
+    				<li><a href="/arithmetic-evaluator/admin/listStudents_page.action">Student</a></li>
+    				<li class="active fontSansSerif"><a href="addStudent_page.action">Create Student Account</a></li>
     				<li>
     					<div class="dropdown">
  							<a href="#" class="dropbtn">
@@ -40,18 +40,18 @@ $( document ).ready(function() {
     			</ul>
         	</div>
   		</nav>
- 
-<form name="teacherRegisterForm" action="addTeachers.action" method="post">
+
+<form name="studentRegisterForm" action="addStudents.action" method="post">
   <div class="container">
     <h1>Register</h1>
-    <p>Please fill in this form to create a teacher account.</p>
+    <p>Please fill in this form to create a student account.</p>
     <hr>
     <input type="text" placeholder="Enter First Name" name="firstName" required>
     <input type="text" placeholder="Enter Last Name" name="lastName" required>
     <input type="text" placeholder="Enter Email" name="emailID" required>
     <hr>
-    <button type="button" class="registerbtn" onclick="location.href ='/arithmetic-evaluator/admin/listTeachers_page.action';" formnovalidate>Cancel</button>
-    <button type="submit" class="registerbtn">Register Teacher</button>
+    <button type="button" class="registerbtn" onclick="location.href ='/arithmetic-evaluator/admin/listStudents_page.action';" formnovalidate>Cancel</button>
+    <button type="submit" class="registerbtn">Register Student</button>
   </div>
   <br/> <br/><br/><br/><br/>
   <footer class="footer"><span class="glyphicon glyphicon-copyright-mark"></span>  Copyright</footer>

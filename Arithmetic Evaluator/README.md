@@ -50,60 +50,24 @@ arithmetic-evaluator
 
 This project aims to help youngsters learn to form valid math expressions. The end user would click on a button, drag it onto a canvas and interpret the formula.
 
-Documentation
--------------
-
-More information can be found on the [arithmetic-evaluator homepage](https://commons.apache.org/proper/commons-chain).
-The [Javadoc](https://commons.apache.org/proper/commons-chain/apidocs) can be browsed.
-Questions related to the usage of arithmetic-evaluator should be posted to the [user mailing list][ml].
-
-Where can I get the latest release?
------------------------------------
-You can download source and binaries from our [download page](https://commons.apache.org/proper/commons-chain/download_chain.cgi).
-
-Alternatively you can pull it from the central Maven repositories:
-
-```xml
-<dependency>
-  <groupId>com.asu.ser</groupId>
-  <artifactId>arithmetic-evaluator</artifactId>
-  <version>1.8</version>
-</dependency>
-```
-
-Contributing
-------------
-
-We accept Pull Requests via GitHub. The [developer mailing list][ml] is the main channel of communication for contributors.
-There are some guidelines which will make applying PRs easier for us:
-+ No tabs! Please use spaces for indentation.
-+ Respect the code style.
-+ Create minimal diffs - disable on save actions like reformat source code or organize imports. If you feel the source code should be reformatted create a separate PR for this change.
-+ Provide JUnit tests for your changes and make sure your changes don't break any existing tests by running ```mvn clean test```.
-
-If you plan to contribute on a regular basis, please consider filing a [contributor license agreement](https://www.apache.org/licenses/#clas).
-You can learn more about contributing via GitHub in our [contribution guidelines](CONTRIBUTING.md).
-
 License
 -------
 This code is under the [Apache Licence v2](https://www.apache.org/licenses/LICENSE-2.0).
 
 See the `NOTICE.txt` file for required notices and attributions.
 
-Donations
----------
-You like arithmetic-evaluator? Then [donate back to the ASF](https://www.apache.org/foundation/contributing.html) to support the development.
 
 Quick Build
 -------
 If you want to Maven, you'll need:
 - Java 1.8
-- Maven 3.0.5 or later
-- Build the project using below maven command:
+- Maven 3.0.5 or later - [How to install maven](https://www.baeldung.com/install-maven-on-windows-linux-mac)
+- Run Maven:
 ```
 mvn clean install
 ```
-- Run the project using below maven command:
+To run the project start tomcat server
+-------
 ```
 mvn tomcat7:run
 ```

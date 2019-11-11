@@ -39,6 +39,15 @@
             <result type="dispatcher">/jsp/admin_dashboard.jsp</result>
         </action>
 
+        <action name="forgotPassword_page">
+            <result type="dispatcher">/jsp/forgot_password.jsp</result>
+        </action>
+
+        <action name="forgotPassword" class="com.asu.ser.usermanagement.UserManagementAction" method="resetPassword">
+            <result name="success" type="dispatcher">/jsp/login.jsp</result>
+            <result name="error" type="dispatcher">/jsp/forgot_password.jsp</result>
+        </action>
+
         <action name="admin/listTeachers_page">
             <result type="dispatcher">/jsp/teacher.jsp</result>
         </action>
@@ -50,6 +59,15 @@
 		<action name="admin/teacher/remove" class="com.asu.ser.usermanagement.UserManagementAction" method="removeTeacher">
 			 <result type="json"/>
 		</action>
+
+        <action name="admin/addStudent_page">
+            <result type="dispatcher">/jsp/student_register.jsp</result>
+        </action>
+
+        <action name="admin/listStudents_page">
+            <result type="dispatcher">/jsp/student.jsp</result>
+        </action>
+
 
         <action name="grade1/operations_page">
             <result type="dispatcher">/jsp/math_operations.jsp</result>
@@ -86,12 +104,23 @@
             <result name="error" type="dispatcher">/jsp/teacher_register.jsp</result>
         </action>
 
+        <action name="admin/addStudents" class="com.asu.ser.usermanagement.UserManagementAction" method="addStudent">
+            <result name="success" type="dispatcher">/jsp/student.jsp</result>
+            <result name="login" type="dispatcher">/jsp/login.jsp</result>
+            <result name="error" type="dispatcher">/jsp/student_register.jsp</result>
+        </action>
+
+
         <action name="teacher/resetPassword" class="com.asu.ser.usermanagement.UserManagementAction" method="resetPassword">
             <result name="success" type="dispatcher">/jsp/login.jsp</result>
             <result name="error" type="dispatcher">/jsp/set_teacher_pwd.jsp</result>
         </action>
 
         <action name="admin/listTeachers" class="com.asu.ser.usermanagement.UserManagementAction" method="fetchTeachers">
+            <result type="json"/>
+        </action>
+
+        <action name="admin/listStudents" class="com.asu.ser.usermanagement.UserManagementAction" method="fetchStudents">
             <result type="json"/>
         </action>
 
