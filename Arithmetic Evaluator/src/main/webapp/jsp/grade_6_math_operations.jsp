@@ -301,26 +301,31 @@
 				</div>
 				<div id="areasDiv" class="hide">
 					<div class="shapesDiv">
-						<table style="border: 2px solid: grey">
-							<tr>
-								<td>
+						<table>
+							<tr style="border-bottom: 1px solid grey;">
+								<td style="padding:10px">
+									<span style="margin-left:15px; font-size:12px !important;">Square</span><br/>
 									<div id="square" class="square shape" draggable="true" ondragenter="return dragEnter(event)"
 								 	ondragstart="return dragStart(event)" ondrop="return dragDrop(event)" ondragover="return dragOver(event)">
 									</div>
+									
 								</td>
 								<td>
+									<span style="margin-left:15px; margin-top:10px; font-size:12px !important;">Rectangle</span><br/>
 									<div id="rectangle" class="rectangle shape" draggable="true" ondragenter="return dragEnter(event)"
 								 	ondragstart="return dragStart(event)" ondrop="return dragDrop(event)" ondragover="return dragOver(event)">
 									</div>
 								</td>
 							</tr>
 						 	<tr>
-							<td>
+							<td style="padding:10px">
+								<span style="margin-left:15px; font-size:12px !important;">Triangle</span><br/>
 								<div id="triangle" class="triangle" draggable="true" ondragenter="return dragEnter(event)"
 								 	ondragstart="return dragStart(event)" ondrop="return dragDrop(event)" ondragover="return dragOver(event)">
 								</div>
 							</td>
 							<td>
+								<span style="margin-left:15px; font-size:12px !important;">Circle</span><br/>
 								<div id="circle" class="circle shape" draggable="true" ondragenter="return dragEnter(event)"
 								 	ondragstart="return dragStart(event)" ondrop="return dragDrop(event)" ondragover="return dragOver(event)">
 								</div>
