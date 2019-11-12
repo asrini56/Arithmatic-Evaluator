@@ -84,7 +84,7 @@
         <action name="login" class="com.asu.ser.usermanagement.UserManagementAction" method="login">
             <result name="admin" type="dispatcher">/jsp/admin_dashboard.jsp</result>
             <result name="teacher" type="dispatcher">/jsp/teachers_dashboard.jsp</result>
-            <result name="student" type="dispatcher">/jsp/math_operations.jsp</result>
+            <result name="student" type="dispatcher">/jsp/students_dashboard.jsp</result>
             <result name="success" type="dispatcher">/jsp/math_operations.jsp</result>
             <result name="error" type="dispatcher">/jsp/login.jsp</result>
         </action>
@@ -115,14 +115,23 @@
             <result type="dispatcher">/jsp/test_details.jsp</result>
         </action>
 
-		<action name="teacher/resetpassword_page">
-            <result type="dispatcher">/jsp/set_teacher_pwd.jsp</result>
-        </action>
-
-        <action name="teacher/createtest_page">
+       <action name="teacher/createtest_page">
             <result type="dispatcher">/jsp/teachers_create_test.jsp</result>
         </action>
         
+      <action name="student/dashboard">
+			      <result type="dispatcher">/jsp/students_dashboard.jsp</result>
+		  </action>
+      
+        <action name="student/taketests_page">
+            <result type="dispatcher">/jsp/student_view_test.jsp</result>
+        </action>
+      
+	   	<action name="teacher/resetpassword_page">
+            <result type="dispatcher">/jsp/set_teacher_pwd.jsp</result>
+        </action>
+
+       
         <action name="teacher/test/add" class="com.asu.ser.operations.TestAction" method="addTest">
             <result type="json"/>
         </action>
