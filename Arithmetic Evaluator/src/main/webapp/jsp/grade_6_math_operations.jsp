@@ -299,6 +299,78 @@
 						</div>
 					</div>
 				</div>
+				<div id="areasDiv" class="hide">
+					<div class="shapesDiv">
+						<table style="border: 2px solid: grey">
+							<tr>
+								<td>
+									<div id="square" class="square shape" draggable="true" ondragenter="return dragEnter(event)"
+								 	ondragstart="return dragStart(event)" ondrop="return dragDrop(event)" ondragover="return dragOver(event)">
+									</div>
+								</td>
+								<td>
+									<div id="rectangle" class="rectangle shape" draggable="true" ondragenter="return dragEnter(event)"
+								 	ondragstart="return dragStart(event)" ondrop="return dragDrop(event)" ondragover="return dragOver(event)">
+									</div>
+								</td>
+							</tr>
+						 	<tr>
+							<td>
+								<div id="triangle" class="triangle" draggable="true" ondragenter="return dragEnter(event)"
+								 	ondragstart="return dragStart(event)" ondrop="return dragDrop(event)" ondragover="return dragOver(event)">
+								</div>
+							</td>
+							<td>
+								<div id="circle" class="circle shape" draggable="true" ondragenter="return dragEnter(event)"
+								 	ondragstart="return dragStart(event)" ondrop="return dragDrop(event)" ondragover="return dragOver(event)">
+								</div>
+							</td>
+							</tr>
+						</table>
+						<div id="square_area_div" class="isShape sq fl hide">
+							<div class="square shape"></div>
+							<div style="margin-top:20px; float:left">
+								<label>side:</label>
+								<input id="sqside" type="text"  size="5" placeholder="1"/>
+								<span>(unit)</span>
+							</div><br/><br/><br/><br/>
+							<span class="fl">Area = side x side</span>
+						</div>
+						<div id="rectangle_area_div" class="isShape rec fl hide">
+							<div class="rectangle shape"></div>
+							<div style="margin-top:10px; float:left">
+								<label>length:</label>
+								<input id="rlength" type="text" placeholder="1" size="5"/>
+								<span>(unit)</span><br/>
+								<label>breadth:</label>
+								<input id="rbreadth" type="text" placeholder="1" size="5"/>
+								<span>(unit)</span>
+							</div><br/><br/><br/>
+							<span class="fl">Area = length x breadth</span>
+						</div>
+						<div id="triangle_area_div" class="isShape tri fl hide">
+							<div class="triangle"></div>
+							<div style="margin-top:10px; float:left">
+								<label>base:</label>
+								<input id="tbase" type="text" placeholder="1" size="5"></input>
+								<span>(unit)</span><br/>
+								<label>height:</label>
+								<input id="theight" type="text" placeholder="1" size="5"/>
+								<span>(unit)</span>
+							</div><br/><br/><br/>
+							<span class="fl">Area = 1/2 (base x height)</span>
+						</div>
+						<div id="circle_area_div" class="isShape cir fl hide">
+							<div class="circle shape"></div>
+							<div style="margin-top:20px; float:left">
+								<label>radius:</label>
+								<input id="cradius" type="text" placeholder="1" size="5"/>
+								<span>(unit)</span>
+							</div><br/><br/><br/>
+							<span class="fl">Area = pi(3.14) * radius x radius</span>
+						</div>
+					</div>
+				</div>
 			</div>
 		</nav>
 		<nav style="text-align:center;">
@@ -349,10 +421,40 @@
 		function dragOver(ev) {
 			return false;
 		}
+		function cloneAndAddShape(shape) {
+			resetButton();
+			$btn = $('#' + shape + '_area_div').clone();
+			$btn.removeClass("hide");
+			$btn.addClass("performOperation");
+			if(shape = "square") {
+				$btn.find("#sqside").attr('id', 'side');
+			}
+			if(shape = "rectangle") {
+				$btn.find("#rlength").attr('id', 'length');
+				$btn.find("#rbreadth").attr('id', 'breadth');
+			}
+			if(shape = "triangle") {
+				$btn.find("#tbase").attr('id', 'base');
+				$btn.find("#theight").attr('id', 'height');
+			}
+			if(shape = "circle") {
+				$btn.find("#cradius").attr('id', 'radius');
+			}
+			$("#boxB").append($btn);
+		}
+
+		function isShapeDiv(shape) {
+			if(shape =="square" || shape=="triangle" || shape == "rectangle" || shape== "circle"){
+				return true;
+			}
+		}
 		function dragDrop(ev) {
 			var src = ev.dataTransfer.getData("Text");
+			if(isShapeDiv(src)){
+				cloneAndAddShape(src);
+				return;
+			}
 			var $lastVal;
-			console.log(src);
 			$btn = $('#' + src).clone();
 			$btn.attr('id', 'id' + cloneCount)
 			$btn.attr('onClick', 'selectedButton("id' + cloneCount + '")');
@@ -406,19 +508,59 @@
 
 		function evaluate1() {
 			var expression = "";
+			var hasShape = false;
 			$(".performOperation").each(function(index) {
-				expression += $(this).text().trim();
+				if($(this).hasClass("isShape")){
+					evaluateArea();
+					hasShape = true;
+					return;
+				} else {
+					expression += $(this).text().trim();
+				}
 			});
-
+			if(hasShape){
+				return;
+			}
 			expression = expression.replace("x", "*");
 			expression = encodeURIComponent(expression);
 			var url = "/arithmetic-evaluator/grade1/operations/evaluvate.action?expression="
 					+ expression;
 			sendAjaxRequest(url, function(resp) {
 				var result = resp.response;
-				$("#expressionResult").html(parseInt(result));
+				$("#expressionResult").html(result);
 			});
 
+		}
+		
+		function evaluateArea() {
+			var expression = "";
+			$(".performOperation").each(function(index) {
+				if($(this).hasClass("sq")) {
+					var side = $('#side').val();
+					expression = side * side;
+					
+				} else if($(this).hasClass("rec")) {
+					var length = $('#length').val();
+					var breadth = $('#breadth').val();
+					expression = length * breadth;
+					
+				} else if($(this).hasClass("tri")) {
+					var base = $('#base').val();
+					var height = $('#height').val();
+					expression = 0.5 * base * height;
+				} else if($(this).hasClass("cir")) {
+					var radius = $('#radius').val();
+					expression = 3.14 * radius;
+				}
+			});
+			
+			expression = encodeURIComponent(expression);
+			var url = "/arithmetic-evaluator/grade1/operations/evaluvate.action?expression="
+					+ expression;
+			sendAjaxRequest(url, function(resp) {
+				var result = resp.response;
+				$("#expressionResult").html(result);
+			});
 		}
 
 		function pemdasClicked() {

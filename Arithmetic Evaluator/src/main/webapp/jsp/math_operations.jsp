@@ -55,6 +55,7 @@
 			<div id="operationsDiv" class="operationsDiv"
 				ondragenter="return dragEnter(event)"
 				ondrop="return dragDrop(event)" ondragover="return dragOver(event)">
+				
 				<div id="num1" class="numbersBox" draggable="true"
 					ondragenter="return dragEnter(event)"
 					ondragstart="return dragStart(event)"
@@ -177,7 +178,6 @@
 			</div>
 		</nav>
 	</section>
-	<footer class="footer"><span class="glyphicon glyphicon-copyright-mark"></span>  Copyright</footer>
 	<script src="/arithmetic-evaluator/js/common.js"></script>
 	<script>
 		var cloneCount = 0;
@@ -241,8 +241,8 @@
 					$("#expressionResult").html(result);
 					return;
 				}
-				else if (result >= 20 || result <= 0) {
-					$("#expressionResult").html(parseInt(result) + " Wow, You are trying advanced maths. Keep up the good work");
+				if(parseInt(result) <= 0) {
+					result = 0;
 				}
 				$("#expressionResult").html(parseInt(result));
 			});
@@ -262,6 +262,12 @@
 			selectedBtn = "";
 		}
 
+		function resetButton() {
+			$(".performOperation").each(function(index) {
+				$(this).remove();
+			});
+		}
+		
 		// Get the modal
 		var modal = document.getElementById("myModal");
 

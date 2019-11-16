@@ -44,7 +44,7 @@ public class DataSourceConnector {
 			String dbName = (String) prop.get(KEY_DB_NAME);
 			String username = (String) prop.get(KEY_USERNAME);
 			String password = (String) prop.get(KEY_PASSWORD);
-			url = url + "/" + dbName;
+			url = url + "/" + dbName+"?autoReconnect=true";
 			Class.forName(driverClassName);
 			con = DriverManager.getConnection(url, username, password);
 		}
