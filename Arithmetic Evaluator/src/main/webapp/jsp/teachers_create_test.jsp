@@ -36,10 +36,22 @@
 	<section>
   	<nav style="min-height:800px !important">
 		<h1 class="splitHeading"> Question Bricks </h1>
-
+		<p style="text-align: center;">Drag test component to Canvas section</p>
 			<div id="operationsDiv" class="operationsDiv" ondragenter="return dragEnter(event)" ondrop="return dragDrop(event)" ondragover="return dragOver(event)">
 			
 				<div id="questionbox1" class="questionsBox" draggable="true" ondragenter="return dragEnter(event)" ondragstart="return dragStart(event)" ondrop="return dragDrop(event)" ondragover="return dragOver(event)" ondragstart="return dragStart(event)">
+     				<form>
+     					<h1>Question #</h1>
+     					<input type="textarea" name="question" id="question" placeholder="Enter question here.." disabled></input><br><br>
+     					
+     					<input type="radio" name="options" id="answerOpt1"/><input type="text" name="option1" id="option1" placeholder="Option1" disabled /><br>
+     					<input type="radio" name="options" id="answerOpt2"/><input type="text" name="option2" id="option2" placeholder="Option2" disabled/><br>
+     					<input type="radio" name="options" id="answerOpt3"/><input type="text" name="option3" id="option3" placeholder="Option3" disabled/><br>
+     					<input type="radio" name="options" id="answerOpt4"/><input type="text" name="option4" id="option4" placeholder="Option4" disabled/><br>
+     					<p> Please choose the right answer!</p>
+     				</form>
+				</div>
+				<div id="questionbox2" class="questionsBox hide" draggable="true" ondragenter="return dragEnter(event)" ondragstart="return dragStart(event)" ondrop="return dragDrop(event)" ondragover="return dragOver(event)" ondragstart="return dragStart(event)">
      				<form>
      					<h1>Question #</h1>
      					<input type="textarea" name="question" id="question" placeholder="Enter question here.."></input><br><br>
@@ -116,7 +128,6 @@
 	</div>
 	
 		
-	<footer class="footer"><span class="glyphicon glyphicon-copyright-mark"></span>  Copyright</footer>
 
 	<script src="/arithmetic-evaluator/js/common.js"></script>
 	<script>
@@ -138,16 +149,18 @@
 		function dragDrop(ev) {
 			var src = ev.dataTransfer.getData("Text");
 			
-			$btn = $('#' + src).clone();
+			$btn = $('#questionbox2').clone();
 
 			$btn.attr('id', 'id' + cloneCount)
 			$btn.attr('onClick', 'selectedButton("id' + cloneCount + '")');
 			$btn.addClass("performOperation");
+			$btn.removeClass("hide");
 			$btn.removeAttr("draggable");
 			$btn.removeAttr("ondragenter");
 			$btn.removeAttr("ondragstart");
 			$btn.removeAttr("ondrop");
 			$btn.removeAttr("ondragover");
+
 			cloneCount++;
 
 			$("#boxB").append($btn);
