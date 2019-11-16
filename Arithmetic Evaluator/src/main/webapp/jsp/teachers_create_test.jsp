@@ -36,19 +36,19 @@
 	<section>
   	<nav style="min-height:800px !important">
 		<h1 class="splitHeading"> Question Bricks </h1>
-		<p style="text-align: center;">Drag test component to Canvas section</p>
+		<h2 style="text-align: center;">Drag test component to Canvas section</h2>
 			<div id="operationsDiv" class="operationsDiv" ondragenter="return dragEnter(event)" ondrop="return dragDrop(event)" ondragover="return dragOver(event)">
 			
 				<div id="questionbox1" class="questionsBox" draggable="true" ondragenter="return dragEnter(event)" ondragstart="return dragStart(event)" ondrop="return dragDrop(event)" ondragover="return dragOver(event)" ondragstart="return dragStart(event)">
      				<form>
      					<h1>Question #</h1>
-     					<input type="textarea" name="question" id="question" placeholder="Enter question here.." disabled></input><br><br>
+     					<input type="textarea" name="question" id="question" disabled></input><br><br>
      					
-     					<input type="radio" name="options" id="answerOpt1"/><input type="text" name="option1" id="option1" placeholder="Option1" disabled /><br>
-     					<input type="radio" name="options" id="answerOpt2"/><input type="text" name="option2" id="option2" placeholder="Option2" disabled/><br>
-     					<input type="radio" name="options" id="answerOpt3"/><input type="text" name="option3" id="option3" placeholder="Option3" disabled/><br>
-     					<input type="radio" name="options" id="answerOpt4"/><input type="text" name="option4" id="option4" placeholder="Option4" disabled/><br>
-     					<p> Please choose the right answer!</p>
+     					<input type="radio" name="options" id="answerOpt1"/><input type="text" name="option1" id="option1" disabled /><br>
+     					<input type="radio" name="options" id="answerOpt2"/><input type="text" name="option2" id="option2" disabled/><br>
+     					<input type="radio" name="options" id="answerOpt3"/><input type="text" name="option3" id="option3" disabled/><br>
+     					<input type="radio" name="options" id="answerOpt4"/><input type="text" name="option4" id="option4"  disabled/><br>
+     					<p> Drag into canvas!</p>
      				</form>
 				</div>
 				<div id="questionbox2" class="questionsBox hide" draggable="true" ondragenter="return dragEnter(event)" ondragstart="return dragStart(event)" ondrop="return dragDrop(event)" ondragover="return dragOver(event)" ondragstart="return dragStart(event)">
@@ -70,7 +70,7 @@
   <nav style="min-height:800px !important">
 	<h1 class="splitHeading">Canvas</h1>
 		<div id="message" class="alert alert-info display-none"></div>
-		<div id="boxB" style ="min-height:600px !important" ondragenter="return dragEnter(event)" ondrop="return dragDrop(event)" ondragover="return dragOver(event)" ondragstart="return dragStart(event)">
+		<div id="boxB" style ="min-height:570px !important" ondragenter="return dragEnter(event)" ondrop="return dragDrop(event)" ondragover="return dragOver(event)" ondragstart="return dragStart(event)">
 		</div>
 		
 		<div class="deleteAction" style="margin-top:20px; border-top: 1px solid grey; padding:5px;">
@@ -83,7 +83,7 @@
   </nav>	
 
   <nav style="min-height:800px !important">
-    <h1 class="splitHeading">Result</h1>
+    <h1 class="splitHeading">preview</h1>
     <div class= "questionPreviewTemplateDiv" style="display:none">
     		<div class="questionPreviewTemplate" id="questionPreviewTemplate">
     			<h2>Question : <span id="previewQuestion"></span></h2>
