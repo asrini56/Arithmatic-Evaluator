@@ -83,7 +83,7 @@
   </nav>	
 
   <nav style="min-height:800px !important">
-    <h1 class="splitHeading">preview</h1>
+    <h1 class="splitHeading">Preview</h1>
     <div class= "questionPreviewTemplateDiv" style="display:none">
     		<div class="questionPreviewTemplate" id="questionPreviewTemplate">
     			<h2>Question : <span id="previewQuestion"></span></h2>
