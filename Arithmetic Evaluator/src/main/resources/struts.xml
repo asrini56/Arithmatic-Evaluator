@@ -60,25 +60,13 @@
 			 <result type="json"/>
 		</action>
 
+
         <action name="admin/addStudent_page">
             <result type="dispatcher">/jsp/student_register.jsp</result>
         </action>
 
         <action name="admin/listStudents_page">
             <result type="dispatcher">/jsp/student.jsp</result>
-        </action>
-
-
-        <action name="grade1/operations_page">
-            <result type="dispatcher">/jsp/math_operations.jsp</result>
-        </action>
-
-        <action name="grade6/operations_page">
-            <result type="dispatcher">/jsp/6th_operations.jsp</result>
-        </action>
-
-        <action name="grade9/operations_page">
-            <result type="dispatcher">/jsp/9th_operations.jsp</result>
         </action>
 
         <action name="admin/signup" class="com.asu.ser.usermanagement.UserManagementAction" method="signUp">
@@ -93,7 +81,7 @@
         <action name="login" class="com.asu.ser.usermanagement.UserManagementAction" method="login">
             <result name="admin" type="dispatcher">/jsp/admin_dashboard.jsp</result>
             <result name="teacher" type="dispatcher">/jsp/teachers_dashboard.jsp</result>
-            <result name="student" type="dispatcher">/jsp/math_operations.jsp</result>
+            <result name="student" type="dispatcher">/jsp/students_dashboard.jsp</result>
             <result name="success" type="dispatcher">/jsp/math_operations.jsp</result>
             <result name="error" type="dispatcher">/jsp/login.jsp</result>
         </action>
@@ -135,29 +123,43 @@
             <result type="dispatcher">/jsp/test_details.jsp</result>
         </action>
 
-		<action name="teacher/resetpassword_page">
-            <result type="dispatcher">/jsp/set_teacher_pwd.jsp</result>
-        </action>
-
-        <action name="teacher/createtest_page">
+       <action name="teacher/createtest_page">
             <result type="dispatcher">/jsp/teachers_create_test.jsp</result>
         </action>
         
+      <action name="student/dashboard">
+			      <result type="dispatcher">/jsp/students_dashboard.jsp</result>
+		  </action>
+      
+        <action name="student/taketests_page">
+            <result type="dispatcher">/jsp/student_view_test.jsp</result>
+        </action>
+      
+	   	<action name="teacher/resetpassword_page">
+            <result type="dispatcher">/jsp/set_teacher_pwd.jsp</result>
+        </action>
+
+       
         <action name="teacher/test/add" class="com.asu.ser.operations.TestAction" method="addTest">
             <result type="json"/>
+        </action>
+
+        <action name="grade1/operations_page">
+            <result type="dispatcher">/jsp/math_operations.jsp</result>
+        </action>
+
+        <action name="grade6/operations_page">
+            <result type="dispatcher">/jsp/grade_6_math_operations.jsp</result>
+        </action>
+
+        <action name="grade9/operations_page">
+            <result type="dispatcher">/jsp/9th_operations.jsp</result>
         </action>
 
         <action name="grade1/operations/evaluvate" class="com.asu.ser.operations.OperationsAction" method="evaluvateExpression">
             <result type="json"/>
         </action>
 
-	    <action name="grade6/operations_page">
-            <result type="dispatcher">/jsp/6th_operations.jsp</result>
-        </action>
-
-        <action name="grade9/operations_page">
-            <result type="dispatcher">/jsp/9th_operations.jsp</result>
-        </action>
     </package>
 
 </struts>

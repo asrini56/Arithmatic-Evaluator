@@ -9,7 +9,7 @@ import org.mariuszgromada.math.mxparser.Expression;
 
 public class OperationsHandler {
 
-	public static String evaluvateExpression(String expression) {
+	public static String evaluateExpression(String expression) {
 		Expression e = new Expression(expression);
 		double output = e.calculate();
 		String response = "";
