@@ -1,7 +1,8 @@
 <html>
 <head>
-<title>admin's dashboard</title>
+<title>student's dashboard</title>
 <link rel="stylesheet" href="/arithmetic-evaluator/css/dashboard.css">
+<link rel="stylesheet" href="/arithmetic-evaluator/css/students_dashboard.css">
 <link rel="stylesheet" href="/arithmetic-evaluator/css/style_common.css">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
@@ -34,34 +35,40 @@
 		</header>
 		<main class="main">
 			<div class="main-cards">
-				<div class="w3-card-4" onclick="goToListTeachersPage()" style="height: 600px">
+                <div class="card" onclick="goToPractiseMathsPage()" style="height: 450px">
 					<div class="w3-container w3-center" style="background-color: whitesmoke">
-						<h1>Manage Teachers</h1>
+						<h1>Practise Maths</h1>
 					</div>
-					<img src="/arithmetic-evaluator/image/teachers.jpg" alt="Alps" style="width: 100%">
+					<img src="/arithmetic-evaluator/image/practisemaths.jpg"alt="Alps" style="width: 100%">
+				</div>
+                
+				<div class="card" onclick="goToTakeTestsPage()" style="height: 450px">
+					<div class="w3-container w3-center" style="background-color: whitesmoke">
+						<h1>Take Tests</h1>
+					</div>
+					<img src="/arithmetic-evaluator/image/taketest.jpg" alt="Alps" style="width: 100%">
 				</div>
 
-				<div class="w3-card-4" onclick="goToListStudentsPage()" style="height: 590">
+				<div class="card" onclick="goToViewScoresPage()" style="height: 450px">
 					<div class="w3-container w3-center" style="background-color: whitesmoke">
-						<h1>Manage Students</h1>
+						<h1>View Test Scores</h1>
 					</div>
-					<img src="/arithmetic-evaluator/image/students.jpg" alt="Alps" style="width: 100%">
-				
+					<img src="/arithmetic-evaluator/image/viewscores.jpg" alt="Alps" style="width: 100%">
 				</div>
 			</div>
 		</main>
-		<footer class="footer"><span class="glyphicon glyphicon-copyright-mark"></span>  Copyright</footer>
+		<footer class="footer"></footer>
 	</div>
 	<script>
-
-function goToListTeachersPage(){
-    window.location="/arithmetic-evaluator/admin/listTeachers_page.action";
+function goToPractiseMathsPage(){
+    window.location="/arithmetic-evaluator/grade1/operations_page.action";
 }
-
-function goToListStudentsPage(){
-    window.location="/arithmetic-evaluator/admin/listStudents_page.action";
+function goToTakeTestsPage(){
+    window.location="/arithmetic-evaluator/student/taketests_page.action";
 }
-
+function goToViewScoresPage(){
+    alert("Page under construction, kindly bear with us!")
+}
 </script>
 
 </body>

@@ -1,6 +1,7 @@
 package com.asu.ser.usermanagement;
 
 import com.asu.ser.authentication.AuthenticationUtil;
+import com.asu.ser.model.Student;
 import com.asu.ser.model.Teacher;
 import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.conversion.annotations.Conversion;
@@ -27,6 +28,7 @@ public class UserManagementAction {
     private String message;
     private String institutionName;
     private List<Teacher> teachers;
+    private List<Student> students;
     private String oldPassword;
     private String newPassword;
     private String confirmPassword;
@@ -139,6 +141,20 @@ public class UserManagementAction {
     	return Action.SUCCESS;
     }
 
+    public String fetchStudents() {
+        if(StringUtils.isEmpty(AuthenticationUtil.getLoggedInUser())){
+            message = "Please log in to access the page.";
+            return Action.ERROR;
+        }
+        try {
+            students = UserManagementHandler.fetchStudents();
+        }catch (Exception e) {
+            message = "Failed to fetch STUDENTS - " + e.getMessage();
+            LOGGER.log(Level.SEVERE, "Failed to fetch students" , e);
+        }
+        return Action.SUCCESS;
+    }
+
     public String removeTeacher() {
     	try {
     		UserManagementHandler.removeTeacher(emailID);
@@ -148,6 +164,42 @@ public class UserManagementAction {
             LOGGER.log(Level.SEVERE, message , e);
 		}
     	return Action.SUCCESS;
+    }
+
+    public String addStudent() {
+        if(StringUtils.isEmpty(AuthenticationUtil.getLoggedInUser())){
+            message = "Please log in to access the page.";
+            LOGGER.log(Level.INFO,message);
+            return Action.LOGIN;
+        }
+        try {
+            LOGGER.log(Level.INFO,"Creating Student " + firstName + " " + lastName);
+            if(!validEmailID(emailID)){
+                message = "Invalid Email ID. Please enter a valid Email ID.";
+                LOGGER.log(Level.INFO,message);
+                return Action.ERROR;
+            } else {
+                UserManagementHandler.addStudent(firstName, lastName, emailID);
+                message = "Successfully created Student account for " + emailID + ". Their details is mailed to them.";
+                LOGGER.log(Level.INFO,message);
+            }
+        } catch(SQLIntegrityConstraintViolationException sicve) {
+            message = "An account with email " + emailID + "already exists";
+            LOGGER.log(Level.INFO,message);
+            return Action.ERROR;
+        } catch (Exception e) {
+
+            message = "Failed to add student " + e.getMessage();
+            LOGGER.log(Level.SEVERE, "Failed to add student" , e);
+            if(e.getMessage().equals("No user logged in")) {
+                message = "Login as admin to add student";
+                LOGGER.log(Level.INFO,message);
+                return Action.LOGIN;
+            }
+            LOGGER.log(Level.INFO,message);
+            return Action.ERROR;
+        }
+        return Action.SUCCESS;
     }
 
     public String resetPassword() {
@@ -287,17 +339,11 @@ public class UserManagementAction {
         this.testDetails = testDetails;
     }
 
-    public String fetchGradeTestDetails() {
-        if(StringUtils.isEmpty(AuthenticationUtil.getLoggedInUser())){
-            message = "Please log in to access the page.";
-            return Action.ERROR;
-        }
-        try {
-            testDetails = UserManagementHandler.fetchGradeTestDetails();
-        }catch (Exception e) {
-            message = "Failed to fetch test details - " + e.getMessage();
-            LOGGER.log(Level.SEVERE, "Failed to fetch test details" , e);
-        }
-        return Action.SUCCESS;
+    public List<Student> getStudents() {
+        return students;
+    }
+
+    public void setStudents(List<Student> students) {
+        this.students = students;
     }
 }

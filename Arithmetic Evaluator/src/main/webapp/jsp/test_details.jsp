@@ -40,8 +40,6 @@
 			<div class="table-users" id="teacher1"></div>
 		</section>
 
-		<footer class="footer" style="position:absolute !important; bottom:0px"><span class="glyphicon glyphicon-copyright-mark"></span>  Copyright</footer>
-
 	
 	<script type="text/javascript">
 	$( document ).ready(function() {
@@ -60,7 +58,6 @@
 	function fetchTestDetails() {
 		var url="testdetails.action";
 		sendAjaxRequest(url, function(resp){
-		    console.log(resp);
 	 		var tableContent = '<div class="header">Test Details</div>' +
 	 							'<table cellspacing="0">' +
 	 								'<tr>' +
