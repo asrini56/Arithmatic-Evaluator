@@ -13,9 +13,11 @@ import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 import java.util.regex.Pattern;
 /**
- * @author akhilesh
+ * @author Akhilesh
  * @author Ashwin
  * @author Srinivasan
+ * @author Deepti
+ * @author Aihaab 
  */
 
 @Conversion()
@@ -345,5 +347,19 @@ public class UserManagementAction {
 
     public void setStudents(List<Student> students) {
         this.students = students;
+    }
+
+    public String fetchGradeTestDetails() {
+        if(StringUtils.isEmpty(AuthenticationUtil.getLoggedInUser())){
+            message = "Please log in to access the page.";
+            return Action.ERROR;
+        }
+        try {
+            testDetails = UserManagementHandler.fetchGradeTestDetails();
+        }catch (Exception e) {
+            message = "Failed to fetch test details - " + e.getMessage();
+            LOGGER.log(Level.SEVERE, "Failed to fetch test details" , e);
+        }
+        return Action.SUCCESS;
     }
 }
