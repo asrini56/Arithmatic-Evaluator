@@ -6,6 +6,7 @@ import java.util.Map;
 
 import com.asu.ser.authentication.AuthenticationUtil;
 import com.asu.ser.db.DataSource;
+import com.asu.ser.model.Student;
 import com.asu.ser.model.Teacher;
 import com.asu.ser.model.User;
 import com.asu.ser.util.MailServer;
@@ -18,6 +19,8 @@ import javax.annotation.PostConstruct;
  * @author akhilesh
  * @author Ashwin
  * @author Srinivasan
+ * @author Deepti
+ * @author Aihaab
  */
 
 public class UserManagementHandler {
@@ -26,6 +29,7 @@ public class UserManagementHandler {
 
 	private static final String ROLE_ADMIN = "admin";
 	private static final String ROLE_TEACHER = "teacher";
+	private static final String ROLE_STUDENT = "student";
 	private static Map<String, Integer> USER_ROLES;
 	static {
 		try {
@@ -120,11 +124,48 @@ public class UserManagementHandler {
     	}
     }
 
+	public static void addStudent(String firstName, String lastName, String emailID) throws Exception {
+		String loggedInUser = AuthenticationUtil.getLoggedInUser();
+		if(loggedInUser == null || loggedInUser.isEmpty()) {
+			throw new Exception("No user logged in");
+		}
+		int userID = DataSource.fetchUserID(loggedInUser);
+		int userRoleID = DataSource.fetchUserRole(userID);
+		int adminRoleID = USER_ROLES.get(ROLE_ADMIN);
+		if(userRoleID != adminRoleID) {
+			throw new Exception("Illegal operation - user does not have permission to add teacher");
+		}
+		Integer institutionID = DataSource.fetchUsersInstitutionID(loggedInUser);
+		if(institutionID == null) {
+			throw new Exception("Illegal operation - logged in user does not belong to any instituion");
+		}
+		String password = PasswordGenerator.generatePassword();
+		Integer studentUserID = -1;
+		try {
+			studentUserID = DataSource.insertUser(emailID, password, firstName, lastName);
+			Integer studentRoleID = USER_ROLES.get(ROLE_STUDENT);
+			if(studentRoleID == null ) {
+				throw new Exception("Server error - Invalid role " + studentRoleID);
+			}
+			DataSource.insertUserToRole(studentUserID, studentRoleID);
+			DataSource.insertUserTOInstitution(studentUserID, institutionID);
+			sendStudentAccountPasswordEmail(firstName, lastName, emailID, password, loggedInUser);
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+
     public static List<Teacher> fetchTeachers() throws Exception {
     	String loggedInUser = AuthenticationUtil.getLoggedInUser();
     	Integer institutionID = DataSource.fetchUsersInstitutionID(loggedInUser);
     	return DataSource.fetchTeachers(institutionID);
     }
+
+	public static List<Student> fetchStudents() throws Exception {
+		String loggedInUser = AuthenticationUtil.getLoggedInUser();
+		Integer institutionID = DataSource.fetchUsersInstitutionID(loggedInUser);
+		return DataSource.fetchStudents(institutionID);
+	}
 
     public static List<TestDetails> fetchTestDetails() throws Exception {
         String loggedInUser = AuthenticationUtil.getLoggedInUser();
@@ -169,7 +210,31 @@ public class UserManagementHandler {
 
     }
 
+	public static void sendStudentAccountPasswordEmail(String firstName, String lastName, String studentEmailID,
+													   String password, String adminEmailID) throws Exception {
+		String subject = "ArithmenticEvaluvator - Account created";
+		String content = "Your account has been created by user - " + adminEmailID + "\n";
+		content += "Your account email is - " + studentEmailID + "\n";
+		content += "Your account password is - " + password;
+		MailServer.sendMail(studentEmailID, subject, content);
+	}
+
 	public static String getRoleNameForUser(String emailID) throws Exception {
 		return DataSource.fetchUserRoleName(emailID);
 	}
+
+    public static List<TestDetails> fetchGradeTestDetails() throws Exception {
+        String loggedInUser = AuthenticationUtil.getLoggedInUser();
+        if(loggedInUser == null || loggedInUser.isEmpty()) {
+            throw new Exception("No user logged in");
+        }
+        int userRoleID = DataSource.fetchUserID(loggedInUser);
+        int gradeID = DataSource.fetchGradeID(userRoleID);
+        int studentRoleID = USER_ROLES.get(ROLE_STUDENT);
+        if(userRoleID != studentRoleID) {
+            throw new Exception("Illegal operation - only students have permission to view tests");
+        }
+        return DataSource.fetchGradeTestDetails(gradeID);
+    }
+
 }

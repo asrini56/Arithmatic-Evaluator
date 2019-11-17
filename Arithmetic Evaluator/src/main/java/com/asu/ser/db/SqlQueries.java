@@ -19,6 +19,10 @@ public class SqlQueries {
     		+ "user_to_role.user_id = users.user_id inner join roles on roles.role_id = user_to_role.role_id inner join user_to_institution on "
     		+ "user_to_institution.user_id = users.user_id where roles.role_name = 'teacher' and user_to_institution.institution_id = ?";
 
+    public static final String FETCH_STUDENT_DETAILS = "SELECT users.user_id, email_id, first_name, last_name from users inner join user_to_role on "
+            + "user_to_role.user_id = users.user_id inner join roles on roles.role_id = user_to_role.role_id inner join user_to_institution on "
+            + "user_to_institution.user_id = users.user_id where roles.role_name = 'student' and user_to_institution.institution_id = ?";
+
     public static final String DELETE_USER_WITH_ID = "DELETE from users where user_id = ?";
     public static final String DELETE_USER_WITH_EMAIL_ID = "DELETE from users where email_id = ?";
 
@@ -51,6 +55,8 @@ public class SqlQueries {
     public static final String INSERT_TEST_QUESTION = "INSERT into test_questions(test_id, question, option1, option2, option3, option4, answer) values(?, ?, ?, ?, ?, ?, ?)";
     public static final String DELETE_TEST = "DELETE from tests where test_id = ?";
     public static final String FETCH_TEST_DETAILS ="SELECT test_id, test_name, tests.grade_id, grade_name from tests inner join grades on tests.grade_id = grades.grade_id where created_by_user_id = ?";
+    public static final String FETCH_TEST_DETAILS_GRADE ="SELECT test_id, test_name, tests.grade_id, grade_name from tests inner join grades on tests.grade_id = grades.grade_id where grade_id = ?";
+    public static final String FETCH_GRADE_ID = "Select grade_id from student_to_grade where user_id = ?";
     // 	END TESTDETAILS RELATED TABLE QUERIES
 
     

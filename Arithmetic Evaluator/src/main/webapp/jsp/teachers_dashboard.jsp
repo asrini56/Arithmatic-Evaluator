@@ -45,7 +45,10 @@
 				style="background-color: white; text-align: center">
 				<br>
 				<h1>CREATE TEST</h1>
+
+
 				<img src="/arithmetic-evaluator/image/createtest.jpg"
+
 					alt="Alps" style="width: 100%; max-height: 510px">
 			</div>
 
@@ -53,7 +56,10 @@
 			<div class="w3-card-4" onclick="goToViewTestsPage()" style="background-color: white; text-align: center">
 				<br>
 				<h1>VIEW TESTS</h1>
+
+
 				<img src="/arithmetic-evaluator/image/viewtest.png"
+
 					alt="Alps" style="width: 100%; max-height: 510px">
 			</div>
 
