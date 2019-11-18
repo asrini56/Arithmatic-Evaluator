@@ -157,9 +157,9 @@ public class UserManagementAction {
         return Action.SUCCESS;
     }
 
-    public String removeTeacher() {
+    public String removeUser() {
     	try {
-    		UserManagementHandler.removeTeacher(emailID);
+    		UserManagementHandler.removeUser(emailID);
     		message = "Successfully removed teacher " + emailID;
     	} catch(Exception e) {
     		message = "Failed to remove teacher " + emailID;
@@ -167,6 +167,7 @@ public class UserManagementAction {
 		}
     	return Action.SUCCESS;
     }
+
 
     public String addStudent() {
         if(StringUtils.isEmpty(AuthenticationUtil.getLoggedInUser())){
