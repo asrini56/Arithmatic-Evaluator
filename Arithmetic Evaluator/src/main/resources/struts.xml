@@ -60,6 +60,15 @@
 			 <result type="json"/>
 		</action>
 
+
+        <action name="admin/addStudent_page">
+            <result type="dispatcher">/jsp/student_register.jsp</result>
+        </action>
+
+        <action name="admin/listStudents_page">
+            <result type="dispatcher">/jsp/student.jsp</result>
+        </action>
+
         <action name="admin/signup" class="com.asu.ser.usermanagement.UserManagementAction" method="signUp">
             <result name="success" type="dispatcher">/jsp/admin_dashboard.jsp</result>
             <result name="error" type="dispatcher">/jsp/admin_signup.jsp</result>
@@ -83,6 +92,13 @@
             <result name="error" type="dispatcher">/jsp/teacher_register.jsp</result>
         </action>
 
+        <action name="admin/addStudents" class="com.asu.ser.usermanagement.UserManagementAction" method="addStudent">
+            <result name="success" type="dispatcher">/jsp/student.jsp</result>
+            <result name="login" type="dispatcher">/jsp/login.jsp</result>
+            <result name="error" type="dispatcher">/jsp/student_register.jsp</result>
+        </action>
+
+
         <action name="teacher/resetPassword" class="com.asu.ser.usermanagement.UserManagementAction" method="resetPassword">
             <result name="success" type="dispatcher">/jsp/login.jsp</result>
             <result name="error" type="dispatcher">/jsp/set_teacher_pwd.jsp</result>
@@ -92,7 +108,15 @@
             <result type="json"/>
         </action>
 
+        <action name="admin/listStudents" class="com.asu.ser.usermanagement.UserManagementAction" method="fetchStudents">
+            <result type="json"/>
+        </action>
+
         <action name="teacher/testdetails" class="com.asu.ser.usermanagement.UserManagementAction" method="fetchTestDetails">
+            <result type="json"/>
+        </action>
+
+        <action name="student/gradetestdetails" class="com.asu.ser.usermanagement.UserManagementAction" method="fetchGradeTestDetails">
             <result type="json"/>
         </action>
 
