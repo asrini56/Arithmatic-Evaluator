@@ -34,3 +34,47 @@
     			</ul>
         	</div>
   		</nav>
+
+  		<section style="display:inline-block; text-align:center; margin-left:23%">
+        			<div id="message" class="alert alert-info display-none"></div>
+        			<div class="table-users" id="student1"></div>
+        		</section>
+<footer class="footer" style="position:absolute !important; bottom:0px"><span class="glyphicon glyphicon-copyright-mark"></span>  Copyright</footer>
+
+
+	<script type="text/javascript">
+	$( document ).ready(function() {
+		var message = "${message}";
+		if(message) {
+			$("#message").text(message);
+			$("#message").show();
+			setTimeout(function() {$("#message").hide();}, 5000);
+		}
+	});
+
+	window.onload = function() {
+		fetchGradeTestDetails();
+ 	};
+
+	function fetchGradeTestDetails() {
+		sendAjaxRequest(url, function(resp){
+		    console.log(resp);
+	 		var tableContent = '<div class="header">Test Score Details</div>' +
+	 							'<table cellspacing="0">' +
+	 								'<tr>' +
+	 	      							'<th>Test Id</th>' +
+	 	      							'<th>Test Name</th>' +
+	 	      							'<th>Test Score</th>' +
+	 	    						'</tr>';
+
+			$.each(resp.testDetails, function() {
+	 	    tableContent += '<tr>';
+	 	   	tableContent += '<td>' + this.testId + '</td>';
+	 	  	tableContent += '<td>' + this.testName + '</td>';
+	 	   	tableContent += '<td>' + this.score + '</td>';
+	 	    tableContent += "</tr>";
+	 	    });
+			tableContent += "</table>";
+			$("#student1").html(tableContent);
+	 	});
+	}
