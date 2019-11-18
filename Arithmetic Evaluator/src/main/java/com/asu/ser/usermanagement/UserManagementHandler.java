@@ -200,6 +200,20 @@ public class UserManagementHandler {
     	DataSource.deleteUserWithEmailID(teacherEmailID);
     }
 
+    public static void removeStudent(String studentEmailID) throws Exception {
+        String loggedInUser = AuthenticationUtil.getLoggedInUser();
+        if(loggedInUser == null || loggedInUser.isEmpty()) {
+            throw new Exception("No user logged in");
+        }
+        int userID = DataSource.fetchUserID(loggedInUser);
+        int userRoleID = DataSource.fetchUserRole(userID);
+        int adminRoleID = USER_ROLES.get(ROLE_ADMIN);
+        if(userRoleID != adminRoleID) {
+            throw new Exception("Illegal operation - user does not have permission to remove student");
+        }
+        DataSource.deleteUserWithEmailID(studentEmailID);
+    }
+
 	public static void sendTeacherAccountPasswordEmail(String firstName, String lastName, String teacherEmailID,
 			String password, String adminEmailID) throws Exception {
     	String subject = "ArithmenticEvaluvator - Account created";
