@@ -57,6 +57,7 @@
  	};
 
 	function fetchGradeTestDetails() {
+	    var url = "viewTestScores.action"
 		sendAjaxRequest(url, function(resp){
 		    console.log(resp);
 	 		var tableContent = '<div class="header">Test Score Details</div>' +
