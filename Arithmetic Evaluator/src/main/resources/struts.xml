@@ -124,6 +124,10 @@
             <result type="json"/>
         </action>
 
+        <action name="student/viewtestscores_page">
+            <result type="dispatcher">/jsp/student_view_test_score.jsp</result>
+        </action>
+
 		<action name="teacher/dashboard">
 			<result type="dispatcher">/jsp/teachers_dashboard.jsp</result>
 		</action>

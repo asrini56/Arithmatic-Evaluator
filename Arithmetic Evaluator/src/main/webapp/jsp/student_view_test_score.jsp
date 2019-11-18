@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<link rel="stylesheet" href="/arithmetic-evaluator/css/test_details.css">
+<link rel="stylesheet" href="/arithmetic-evaluator/css/view_test_score.css">
 <link rel="stylesheet" href="/arithmetic-evaluator/css/style_common.css">
 <script src="/arithmetic-evaluator/js/common.js"></script>
 
@@ -18,9 +18,9 @@
           	</div>
           	<ul class="nav navbar-nav navbar-right">
 
-    				<li><a href="/arithmetic-evaluator/teacher/dashboard.action">Dashboard</a></li>
-    				<li class="active fontSansSerif"><a href="#">Take Test</a></li>
-    				<li class=""><a href="/arithmetic-evaluator/teacher/createtest_page.action">View Scores</a></li>
+    				<li><a href="/arithmetic-evaluator/student/dashboard.action">Dashboard</a></li>
+    				<li class="active fontSansSerif"><a href="/arithmetic-evaluator/student/taketests_page.action">Take Test</a></li>
+    				<li class=""><a href="/arithmetic-evaluator/student/viewtestscores_page.action">View Scores</a></li>
     				<li>
     					<div class="dropdown">
  							<a href="#" class="dropbtn">
@@ -53,10 +53,10 @@
 	});
 
 	window.onload = function() {
-		fetchGradeTestDetails();
+		fetchGradeTesScoreDetails();
  	};
 
-	function fetchGradeTestDetails() {
+	function fetchGradeTestScoreDetails() {
 	    var url = "viewTestScores.action"
 		sendAjaxRequest(url, function(resp){
 		    console.log(resp);
