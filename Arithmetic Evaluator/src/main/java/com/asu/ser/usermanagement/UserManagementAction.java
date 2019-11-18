@@ -160,9 +160,9 @@ public class UserManagementAction {
     public String removeUser() {
     	try {
     		UserManagementHandler.removeUser(emailID);
-    		message = "Successfully removed teacher " + emailID;
+    		message = "Successfully removed user " + emailID;
     	} catch(Exception e) {
-    		message = "Failed to remove teacher " + emailID;
+    		message = "Failed to remove user " + emailID;
             LOGGER.log(Level.SEVERE, message , e);
 		}
     	return Action.SUCCESS;
