@@ -40,7 +40,6 @@
 			<div class="table-users" id="student1"></div>
 		</section>
 
-		<footer class="footer" style="position:absolute !important; bottom:0px !important;"><span class="glyphicon glyphicon-copyright-mark"></span>  Copyright</footer>
 	<script type="text/javascript">
 	$( document ).ready(function() {
 		var message = "${message}";
@@ -72,6 +71,7 @@
 	 	   	tableContent += '<td>' + this.firstName + '</td>';
 	 	  	tableContent += '<td>' + this.lastName + '</td>';
 	 	   	tableContent += '<td>' + this.email + '</td>';
+	 	   	tableContent += '<td> <button onClick="confirmRemoveStudent(\'' + this.email + '\')">Remove Student</button></td>';
 	 	   	tableContent += "</tr>";
 	 	    });
 			tableContent += "</table>";
@@ -79,6 +79,18 @@
 	 	});
 	}
 
+		function confirmRemoveStudent(emailID) {
+     		var deleteStudent = confirm("Are you sure you want to remove user " + emailID + " ? ");
+     		if(deleteStudent) {
+     			var url="/arithmetic-evaluator/admin/student/remove.action?emailID=" + emailID;
+     			sendAjaxRequest(url, function(resp){
+     				$("#message").text(resp.message);
+     				$("#message").show();
+     				setTimeout(function() {$("#message").hide();}, 4000);
+     				fetchStudents();
+     			});
+     		}
+     	}
 
  		function buttonclick(){
          	window.location="addStudent_page.action";
