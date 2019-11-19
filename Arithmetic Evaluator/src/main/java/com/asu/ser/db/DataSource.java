@@ -13,7 +13,6 @@ import com.asu.ser.model.Student;
 import com.asu.ser.model.Teacher;
 import com.asu.ser.model.TestQuestion;
 import com.asu.ser.model.User;
-import com.asu.ser.usermanagement.Grade;
 import com.asu.ser.usermanagement.TestDetails;
 
 /**
@@ -378,5 +377,51 @@ public class DataSource {
         resultSet.close();
         statement.close();
         return testDetailsList;
+    }
+    
+    public static String fetchTestNameForTestID(int testID) throws Exception {
+    	Connection connection = DataSourceConnector.getConnection();
+        PreparedStatement statement = connection.prepareStatement(SqlQueries.FETCH_TEST_DETAILS_FOR_ID);
+        statement.setInt(1, testID);
+        ResultSet resultSet = statement.executeQuery();
+        String testName = "";
+        while(resultSet.next()){
+        	testName = resultSet.getString("test_name");
+        }
+        resultSet.close();
+        statement.close();
+        return testName;
+    }
+    
+    public static TestDetails fetchTestDetailsForID(int testID, boolean hasAnswers) throws Exception {
+    	Connection connection = DataSourceConnector.getConnection();
+        PreparedStatement statement = connection.prepareStatement(SqlQueries.FETCH_TEST_QUESTIONS);
+        statement.setInt(1, testID);
+        ResultSet resultSet = statement.executeQuery();
+        List<TestQuestion> testQuestions = new ArrayList<>();
+        while(resultSet.next()){
+        	String question = resultSet.getString("question");
+        	String option1 = resultSet.getString("option1");
+        	String option2 = resultSet.getString("option2");
+        	String option3 = resultSet.getString("option3");
+        	String option4 = resultSet.getString("option4");
+        	int answer = -1;
+        	if(hasAnswers) {
+        		answer = resultSet.getInt("answer");
+        	}
+        	TestQuestion testQuestion = new TestQuestion();
+        	testQuestion.setQuestion(question);
+        	testQuestion.setOption1(option1);
+        	testQuestion.setOption2(option2);
+        	testQuestion.setOption3(option3);
+        	testQuestion.setOption4(option4);
+        	testQuestion.setAnswer(answer);
+        	testQuestions.add(testQuestion);
+        }
+        TestDetails testDetail = new TestDetails();
+        testDetail.setQuestions(testQuestions);
+        testDetail.setTestName(fetchTestNameForTestID(testID));
+        testDetail.setTestId(testID);
+        return testDetail;
     }
 }
