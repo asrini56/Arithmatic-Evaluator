@@ -5,7 +5,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
+import com.asu.ser.usermanagement.TestDetails;
 import com.opensymphony.xwork2.Action;
 
 /**
@@ -20,7 +20,9 @@ public class TestAction {
 	private String testName;
 	private int testForGrade;
 	private String message;
-	
+	private int testID;
+	private TestDetails testDetail;
+
 	private static Logger LOGGER = Logger.getLogger(TestAction.class.getName());
 	
 	public String addTest() {
@@ -35,6 +37,20 @@ public class TestAction {
 			LOGGER.log(Level.SEVERE, message, e);
 		}
 		
+		return Action.SUCCESS;
+	}
+	
+	public String fetchTest() {
+		try {
+			testDetail = TestHandler.fetchTestDetailsForID(testID);
+		} catch(Exception e) {
+			message = "Unable to fetch test questions for test";
+			LOGGER.log(Level.SEVERE, message + " : " + testID);
+		}
+		return Action.SUCCESS;
+	}
+
+	public String forwardToTakeTest() {
 		return Action.SUCCESS;
 	}
 
@@ -69,5 +85,22 @@ public class TestAction {
 	public void setTestForGrade(int testForGrade) {
 		this.testForGrade = testForGrade;
 	}
+	
+	public int getTestID() {
+		return testID;
+	}
+
+	public void setTestID(int testID) {
+		this.testID = testID;
+	}
+
+	public TestDetails getTestDetail() {
+		return testDetail;
+	}
+
+	public void setTestDetail(TestDetails testDetail) {
+		this.testDetail = testDetail;
+	}
+
 
 }

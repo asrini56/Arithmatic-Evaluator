@@ -164,6 +164,14 @@
             <result type="json"/>
         </action>
 
+        <action name="student/take_test" class="com.asu.ser.operations.TestAction" method="forwardToTakeTest">
+            <result type="dispatcher">/jsp/take_test.jsp</result>
+        </action>
+
+        <action name="student/fetchTest" class="com.asu.ser.operations.TestAction" method="fetchTest">
+            <result type="json"/>
+        </action>
+
     </package>
 
 </struts>

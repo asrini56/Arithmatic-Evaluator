@@ -399,7 +399,7 @@
 			<div class="reset">
 				<button type="button" id="delete"
 					class="btn btn-success canvasButton deleteButton glyphicon glyphicon-refresh"
-					onClick="resetButton()" title="Reset Expression"></button>
+					onClick="resetButton()" title="Reset Expression">&nbsp;<span>Reset</span></button>
 			</div>
 		</nav>
 		<nav style="min-width: 400px !important; max-width: 400px !important; text-align:center;">
@@ -527,6 +527,8 @@
 				return;
 			}
 			expression = expression.replace("x", "*");
+			expression = expression.replace("X", "*");
+			console.log(expression);
 			expression = encodeURIComponent(expression);
 			var url = "/arithmetic-evaluator/grade1/operations/evaluvate.action?expression="
 					+ expression;

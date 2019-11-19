@@ -167,20 +167,6 @@ public class UserManagementHandler {
 		return DataSource.fetchStudents(institutionID);
 	}
 
-    public static List<TestDetails> fetchTestDetails() throws Exception {
-        String loggedInUser = AuthenticationUtil.getLoggedInUser();
-        if(loggedInUser == null || loggedInUser.isEmpty()) {
-            throw new Exception("No user logged in");
-        }
-        int userID = DataSource.fetchUserID(loggedInUser);
-        int userRoleID = DataSource.fetchUserRole(userID);
-        int teacherRoleID = USER_ROLES.get(ROLE_TEACHER);
-        if(userRoleID != teacherRoleID) {
-            throw new Exception("Illegal operation - user does not have permission to remove teacher");
-        }
-        return DataSource.fetchTestDetails(userID);
-    }
-
     public static boolean isInstitutionPresent(String institutionName) throws Exception {
         Integer institutionID = DataSource.fetchInstitutionID(institutionName);
         return institutionID != null;
@@ -237,4 +223,7 @@ public class UserManagementHandler {
         return DataSource.fetchGradeTestDetails(gradeID);
     }
 
+    public static int getTeacherRoleID() {
+    	return USER_ROLES.get(ROLE_TEACHER);
+    }
 }

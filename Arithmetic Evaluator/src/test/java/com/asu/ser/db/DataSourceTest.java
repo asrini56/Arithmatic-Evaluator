@@ -64,9 +64,9 @@ public class DataSourceTest extends TestCase {
 
     public void testInsertUserTOInstitution(){
         try {
-            DataSource.insertUserTOInstitution(6,1);
+            DataSource.insertUserTOInstitution(139,1);
         } catch (SQLException e) {
-            assertEquals("Duplicate entry '6-1' for key 'PRIMARY'", e.getLocalizedMessage());
+            assertEquals("Duplicate entry '139-1' for key 'PRIMARY'", e.getLocalizedMessage());
         } catch (Exception e) {
             fail();
         }
@@ -84,7 +84,7 @@ public class DataSourceTest extends TestCase {
     public void testFetchUsersInstitutionID(){
         try {
             Integer count = DataSource.fetchUsersInstitutionID("akrish84@asu.edu");
-            assertEquals(1, count.intValue());
+            assertEquals(21, count.intValue());
         } catch (Exception e) {
             fail();
         }
@@ -102,7 +102,7 @@ public class DataSourceTest extends TestCase {
     public void testFetchRoles(){
         try {
             Map<String, Integer> rolesMap = DataSource.fetchRoles();
-            assertEquals(2, rolesMap.size());
+            assertEquals(3, rolesMap.size());
         } catch (Exception e) {
             fail();
         }
@@ -146,7 +146,7 @@ public class DataSourceTest extends TestCase {
 
     public void testDeleteUser(){
         try {
-            DataSource.deleteUserWithID(1);
+            DataSource.deleteUserWithID(500);
         } catch (Exception e) {
             fail();
         }

@@ -10,6 +10,7 @@ import com.asu.ser.db.DataSource;
 import com.asu.ser.model.TestQuestion;
 import com.asu.ser.usermanagement.Grade;
 import com.asu.ser.usermanagement.TestDetails;
+import com.asu.ser.usermanagement.UserManagementHandler;
 
 /**
  * 
@@ -67,5 +68,27 @@ public class TestHandler {
 			throw e;
 		}
 	}
+	
+    public static List<TestDetails> fetchTestDetails() throws Exception {
+        String loggedInUser = AuthenticationUtil.getLoggedInUser();
+        if(loggedInUser == null || loggedInUser.isEmpty()) {
+            throw new Exception("No user logged in");
+        }
+        int userID = DataSource.fetchUserID(loggedInUser);
+        int userRoleID = DataSource.fetchUserRole(userID);
+        int teacherRoleID = UserManagementHandler.getTeacherRoleID();
+        if(userRoleID != teacherRoleID) {
+            throw new Exception("Illegal operation - user does not have permission to remove teacher");
+        }
+        return DataSource.fetchTestDetails(userID);
+    }
+    
+    public static TestDetails fetchTestDetailsForID(int testID) throws Exception {
+    	String loggedInUser = AuthenticationUtil.getLoggedInUser();
+        if(loggedInUser == null || loggedInUser.isEmpty()) {
+            throw new Exception("No user logged in");
+        }
+        return DataSource.fetchTestDetailsForID(testID, false);
+    }
 
 }

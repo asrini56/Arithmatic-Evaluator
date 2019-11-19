@@ -3,6 +3,7 @@ package com.asu.ser.usermanagement;
 import com.asu.ser.authentication.AuthenticationUtil;
 import com.asu.ser.model.Student;
 import com.asu.ser.model.Teacher;
+import com.asu.ser.operations.TestHandler;
 import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.conversion.annotations.Conversion;
 import org.apache.commons.lang3.StringUtils;
@@ -236,7 +237,7 @@ public class UserManagementAction {
             return Action.ERROR;
         }
         try {
-            testDetails = UserManagementHandler.fetchTestDetails();
+            testDetails = TestHandler.fetchTestDetails();
         }catch (Exception e) {
             message = "Failed to fetch test details - " + e.getMessage();
             LOGGER.log(Level.SEVERE, "Failed to fetch test details" , e);
@@ -244,6 +245,19 @@ public class UserManagementAction {
         return Action.SUCCESS;
     }
 
+    public String fetchGradeTestDetails() {
+        if(StringUtils.isEmpty(AuthenticationUtil.getLoggedInUser())){
+            message = "Please log in to access the page.";
+            return Action.ERROR;
+        }
+        try {
+            testDetails = UserManagementHandler.fetchGradeTestDetails();
+        }catch (Exception e) {
+            message = "Failed to fetch test details - " + e.getMessage();
+            LOGGER.log(Level.SEVERE, "Failed to fetch test details" , e);
+        }
+        return Action.SUCCESS;
+    }
 
     private boolean validEmailID(String emailID) {
     	return EMAIL_PATTERN.matcher(emailID).matches();
@@ -349,17 +363,4 @@ public class UserManagementAction {
         this.students = students;
     }
 
-    public String fetchGradeTestDetails() {
-        if(StringUtils.isEmpty(AuthenticationUtil.getLoggedInUser())){
-            message = "Please log in to access the page.";
-            return Action.ERROR;
-        }
-        try {
-            testDetails = UserManagementHandler.fetchGradeTestDetails();
-        }catch (Exception e) {
-            message = "Failed to fetch test details - " + e.getMessage();
-            LOGGER.log(Level.SEVERE, "Failed to fetch test details" , e);
-        }
-        return Action.SUCCESS;
-    }
 }
