@@ -12,6 +12,7 @@ import java.util.Map;
 import com.asu.ser.model.Student;
 import com.asu.ser.model.Teacher;
 import com.asu.ser.model.TestQuestion;
+import com.asu.ser.model.TestScore;
 import com.asu.ser.model.User;
 import com.asu.ser.usermanagement.Grade;
 import com.asu.ser.usermanagement.TestDetails;
@@ -406,4 +407,24 @@ public class DataSource {
         statement.close();
         return userGrades;
     }
+
+    public static List<TestScore> fetchStudentTestScore(int userId) throws Exception {
+        Connection connection = DataSourceConnector.getConnection();
+        PreparedStatement statement = connection.prepareStatement(SqlQueries.SELECT_STUDENT_TEST_SCORE);
+        statement.setInt(1, userId);
+        ResultSet resultSet = statement.executeQuery();
+        List<TestScore> testScoreList = new ArrayList<>();
+        while(resultSet.next()){
+            String name = resultSet.getString("test_name");
+            String score = resultSet.getString("score");
+            TestScore testScore = new TestScore();
+            testScore.setTestName(name);
+            testScore.setScore(score);
+            testScoreList.add(testScore);
+        }
+        resultSet.close();
+        statement.close();
+        return testScoreList;
+    }
+
 }
