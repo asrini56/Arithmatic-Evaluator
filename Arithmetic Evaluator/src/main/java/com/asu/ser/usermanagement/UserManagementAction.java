@@ -27,6 +27,7 @@ public class UserManagementAction {
     private String password;
     private String firstName;
     private String lastName;
+    private String grade;
     private String message;
     private String institutionName;
     private List<Teacher> teachers;
@@ -181,7 +182,7 @@ public class UserManagementAction {
                 LOGGER.log(Level.INFO,message);
                 return Action.ERROR;
             } else {
-                UserManagementHandler.addStudent(firstName, lastName, emailID);
+                UserManagementHandler.addStudent(firstName, lastName, emailID, grade);
                 message = "Successfully created Student account for " + emailID + ". Their details is mailed to them.";
                 LOGGER.log(Level.INFO,message);
             }
@@ -347,6 +348,14 @@ public class UserManagementAction {
 
     public void setStudents(List<Student> students) {
         this.students = students;
+    }
+
+    public String getGrade() {
+        return grade;
+    }
+
+    public void setGrade(String grade) {
+        this.grade = grade;
     }
 
     public String fetchGradeTestDetails() {
