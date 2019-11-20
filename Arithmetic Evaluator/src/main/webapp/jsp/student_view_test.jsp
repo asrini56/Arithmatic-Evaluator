@@ -18,9 +18,9 @@
           	</div>
           	<ul class="nav navbar-nav navbar-right">
     				
-    				<li><a href="/arithmetic-evaluator/teacher/dashboard.action">Dashboard</a></li>
+    				<li><a href="/arithmetic-evaluator/student/dashboard.action">Dashboard</a></li>
     				<li class="active fontSansSerif"><a href="#">Take Test</a></li>
-    				<li class=""><a href="/arithmetic-evaluator/teacher/createtest_page.action">View Scores</a></li>
+    				<li class=""><a href="#">View Scores</a></li>
     				<li>
     					<div class="dropdown">
  							<a href="#" class="dropbtn">
