@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<link rel="stylesheet" href="/arithmetic-evaluator/css/test_details.css">
+<link rel="stylesheet" href="/arithmetic-evaluator/css/view_test_score.css">
 <link rel="stylesheet" href="/arithmetic-evaluator/css/style_common.css">
 <script src="/arithmetic-evaluator/js/common.js"></script>
 
@@ -17,10 +17,10 @@
               <a class="navbar-brand titleText" href="#">Arithmetic Evaluator</a>
           	</div>
           	<ul class="nav navbar-nav navbar-right">
-    				
-    				<li><a href="/arithmetic-evaluator/teacher/dashboard.action">Dashboard</a></li>
+
+    				<li><a href="/arithmetic-evaluator/student/dashboard.action">Dashboard</a></li>
     				<li class="active fontSansSerif"><a href="/arithmetic-evaluator/student/taketests_page.action">Take Test</a></li>
-    				<li class=""><a href="/arithmetic-evaluator/teacher/viewtestscores_page.action">View Scores</a></li>
+    				<li class=""><a href="/arithmetic-evaluator/student/viewtestscores_page.action">View Scores</a></li>
     				<li>
     					<div class="dropdown">
  							<a href="#" class="dropbtn">
@@ -35,14 +35,13 @@
         	</div>
   		</nav>
 
-		<section style="display:inline-block; text-align:center; margin-left:23%">
-			<div id="message" class="alert alert-info display-none"></div>
-			<div class="table-users" id="student1"></div>
-		</section>
+  		<section style="display:inline-block; text-align:center; margin-left:23%">
+        			<div id="message" class="alert alert-info display-none"></div>
+        			<div class="table-users" id="student1"></div>
+        		</section>
+<footer class="footer" style="position:absolute !important; bottom:0px"><span class="glyphicon glyphicon-copyright-mark"></span>  Copyright</footer>
 
-		<footer class="footer" style="position:absolute !important; bottom:0px"><span class="glyphicon glyphicon-copyright-mark"></span>  Copyright</footer>
 
-	
 	<script type="text/javascript">
 	$( document ).ready(function() {
 		var message = "${message}";
@@ -54,36 +53,29 @@
 	});
 
 	window.onload = function() {
-		fetchGradeTestDetails();
+		fetchGradeTesScoreDetails();
  	};
 
-	function fetchGradeTestDetails() {
-		var url="gradetestdetails.action";
+	function fetchGradeTestScoreDetails() {
+	    var url = "viewTestScores.action"
 		sendAjaxRequest(url, function(resp){
 		    console.log(resp);
-	 		var tableContent = '<div class="header">Test Details</div>' +
+	 		var tableContent = '<div class="header">Test Score Details</div>' +
 	 							'<table cellspacing="0">' +
 	 								'<tr>' +
 	 	      							'<th>Test Id</th>' +
 	 	      							'<th>Test Name</th>' +
-	 	      							'<th>Test For Grade</th>' +
+	 	      							'<th>Test Score</th>' +
 	 	    						'</tr>';
 
 			$.each(resp.testDetails, function() {
 	 	    tableContent += '<tr>';
 	 	   	tableContent += '<td>' + this.testId + '</td>';
 	 	  	tableContent += '<td>' + this.testName + '</td>';
-	 	   	tableContent += '<td>' + this.grade + '</td>';
+	 	   	tableContent += '<td>' + this.score + '</td>';
 	 	    tableContent += "</tr>";
 	 	    });
 			tableContent += "</table>";
 			$("#student1").html(tableContent);
 	 	});
 	}
-
- 		function buttonclick(){
-         	window.location="addTeacher_page.action";
-     	}
- 	</script>
-	</body>
-</html>
