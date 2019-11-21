@@ -56,11 +56,11 @@
             <result type="dispatcher">/jsp/teacher_register.jsp</result>
         </action>
 
-		<action name="admin/teacher/remove" class="com.asu.ser.usermanagement.UserManagementAction" method="removeTeacher">
+		<action name="admin/teacher/remove" class="com.asu.ser.usermanagement.UserManagementAction" method="removeUser">
 			 <result type="json"/>
 		</action>
 
-        <action name="admin/student/remove" class="com.asu.ser.usermanagement.UserManagementAction" method="removeStudent">
+        <action name="admin/student/remove" class="com.asu.ser.usermanagement.UserManagementAction" method="removeUser">
              <result type="json"/>
         </action>
 
