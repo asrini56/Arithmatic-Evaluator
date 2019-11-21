@@ -117,7 +117,7 @@
 	function preview() {
 		$("#previewDiv").text("");
 		$(".questionTag").each(function(index) {
-			var question = $(this).find("#question").val();
+			var question = $(this).find("#question").text();
 			var option1 = $(this).find("#option1").val().trim();
 			var option2 = $(this).find("#option2").val().trim();
 			var option3 = $(this).find("#option3").val().trim();
