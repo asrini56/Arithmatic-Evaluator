@@ -18,9 +18,9 @@
           	</div>
           	<ul class="nav navbar-nav navbar-right">
     				
-    				<li><a href="/arithmetic-evaluator/teacher/dashboard.action">Dashboard</a></li>
-    				<li class="active fontSansSerif"><a href="#">Take Test</a></li>
-    				<li class=""><a href="/arithmetic-evaluator/teacher/createtest_page.action">View Scores</a></li>
+    				<li><a href="/arithmetic-evaluator/student/dashboard.action">Dashboard</a></li>
+    				<li class="active fontSansSerif"><a href="/arithmetic-evaluator/student/taketests_page.action">Take Test</a></li>
+    				<li class=""><a href="/arithmetic-evaluator/student/viewtestscores_page.action">View Scores</a></li>
     				<li>
     					<div class="dropdown">
  							<a href="#" class="dropbtn">
@@ -37,7 +37,7 @@
 
 		<section style="display:inline-block; text-align:center; margin-left:23%">
 			<div id="message" class="alert alert-info display-none"></div>
-			<div class="table-users" id="teacher1"></div>
+			<div class="table-users" id="student1"></div>
 		</section>
 
 	
@@ -62,7 +62,6 @@
 	 		var tableContent = '<div class="header">Test Details</div>' +
 	 							'<table cellspacing="0">' +
 	 								'<tr>' +
-	 	      							'<th>Test Id</th>' +
 	 	      							'<th>Test Name</th>' +
 	 	      							'<th>Test For Grade</th>' +
                                         '<th></th>' +
@@ -70,14 +69,13 @@
 
 			$.each(resp.testDetails, function() {
 	 	    tableContent += '<tr>';
-	 	   	tableContent += '<td>' + this.testId + '</td>';
 	 	  	tableContent += '<td>' + this.testName + '</td>';
 	 	   	tableContent += '<td>' + this.grade + '</td>';
             tableContent += '<td> <button onClick="viewThisTest(\'' + this.testId + '\')">Remove Student</button></td>';
 	 	    tableContent += "</tr>";
 	 	    });
 			tableContent += "</table>";
-			$("#teacher1").html(tableContent);
+			$("#student1").html(tableContent);
 	 	});
 	}
 

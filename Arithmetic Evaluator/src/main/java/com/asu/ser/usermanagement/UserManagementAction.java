@@ -4,6 +4,7 @@ import com.asu.ser.authentication.AuthenticationUtil;
 import com.asu.ser.model.Student;
 import com.asu.ser.model.Teacher;
 import com.asu.ser.model.TestQuestion;
+import com.asu.ser.model.TestScore;
 import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.conversion.annotations.Conversion;
 import org.apache.commons.lang3.StringUtils;
@@ -29,6 +30,7 @@ public class UserManagementAction {
     private String password;
     private String firstName;
     private String lastName;
+    private String grade;
     private String message;
     private String institutionName;
     private List<Teacher> teachers;
@@ -37,6 +39,7 @@ public class UserManagementAction {
     private String newPassword;
     private String confirmPassword;
     private List<TestDetails> testDetails;
+    private List<TestScore> testScoreList;
 
 
     private static Logger LOGGER = Logger.getLogger(UserManagementAction.class.getName());
@@ -185,7 +188,7 @@ public class UserManagementAction {
                 LOGGER.log(Level.INFO,message);
                 return Action.ERROR;
             } else {
-                UserManagementHandler.addStudent(firstName, lastName, emailID);
+                UserManagementHandler.addStudent(firstName, lastName, emailID, grade);
                 message = "Successfully created Student account for " + emailID + ". Their details is mailed to them.";
                 LOGGER.log(Level.INFO,message);
             }
@@ -248,6 +251,33 @@ public class UserManagementAction {
         return Action.SUCCESS;
     }
 
+    public String fetchGradeTestDetails() {
+        if(StringUtils.isEmpty(AuthenticationUtil.getLoggedInUser())){
+            message = "Please log in to access the page.";
+            return Action.ERROR;
+        }
+        try {
+            testDetails = UserManagementHandler.fetchGradeTestDetails();
+        }catch (Exception e) {
+            message = "Failed to fetch test details - " + e.getMessage();
+            LOGGER.log(Level.SEVERE, "Failed to fetch test details" , e);
+        }
+        return Action.SUCCESS;
+    }
+
+    public String fetchTestScoreDetails() {
+        if(StringUtils.isEmpty(AuthenticationUtil.getLoggedInUser())){
+            message = "Please log in to access the page.";
+            return Action.ERROR;
+        }
+        try {
+            testScoreList = UserManagementHandler.fetchStudentTestScore();
+        }catch (Exception e) {
+            message = "Failed to fetch test details - " + e.getMessage();
+            LOGGER.log(Level.SEVERE, "Failed to fetch test score details" , e);
+        }
+        return Action.SUCCESS;
+    }
 
     private boolean validEmailID(String emailID) {
     	return EMAIL_PATTERN.matcher(emailID).matches();
@@ -353,19 +383,21 @@ public class UserManagementAction {
         this.students = students;
     }
 
-    public String fetchGradeTestDetails() {
-        if(StringUtils.isEmpty(AuthenticationUtil.getLoggedInUser())){
-            message = "Please log in to access the page.";
-            return Action.ERROR;
-        }
-        try {
-            testDetails = UserManagementHandler.fetchGradeTestDetails();
-        }catch (Exception e) {
-            message = "Failed to fetch test details - " + e.getMessage();
-            LOGGER.log(Level.SEVERE, "Failed to fetch test details" , e);
-        }
-        return Action.SUCCESS;
+    public String getGrade() {
+        return grade;
     }
-    
- 
+
+    public void setGrade(String grade) {
+        this.grade = grade;
+    }
+
+
+    public List<TestScore> getTestScoreList() {
+        return testScoreList;
+    }
+
+    public void setTestScoreList(List<TestScore> testScoreList) {
+        this.testScoreList = testScoreList;
+    }
+
 }

@@ -8,6 +8,7 @@ import com.asu.ser.authentication.AuthenticationUtil;
 import com.asu.ser.db.DataSource;
 import com.asu.ser.model.Student;
 import com.asu.ser.model.Teacher;
+import com.asu.ser.model.TestScore;
 import com.asu.ser.model.User;
 import com.asu.ser.model.TestQuestion;
 import com.asu.ser.util.MailServer;
@@ -32,12 +33,15 @@ public class UserManagementHandler {
 	private static final String ROLE_TEACHER = "teacher";
 	private static final String ROLE_STUDENT = "student";
 	private static Map<String, Integer> USER_ROLES;
+	private static Map<String, Integer> USER_GRADES;
 	static {
 		try {
 			USER_ROLES = DataSource.fetchRoles();
+			USER_GRADES = DataSource.fetchGrades();
 		} catch(Exception e) {
 			LOGGER.log(Level.SEVERE, "Error" , e);
 			USER_ROLES = new HashMap<>();
+			USER_GRADES = new HashMap<>();
 		}
 
 	}
@@ -125,7 +129,7 @@ public class UserManagementHandler {
     	}
     }
 
-	public static void addStudent(String firstName, String lastName, String emailID) throws Exception {
+	public static void addStudent(String firstName, String lastName, String emailID, String grade) throws Exception {
 		String loggedInUser = AuthenticationUtil.getLoggedInUser();
 		if(loggedInUser == null || loggedInUser.isEmpty()) {
 			throw new Exception("No user logged in");
@@ -150,6 +154,7 @@ public class UserManagementHandler {
 			}
 			DataSource.insertUserToRole(studentUserID, studentRoleID);
 			DataSource.insertUserTOInstitution(studentUserID, institutionID);
+			DataSource.insertUserTOGrade(studentUserID, USER_GRADES.get(grade));
 			sendStudentAccountPasswordEmail(firstName, lastName, emailID, password, loggedInUser);
 		} catch (Exception e) {
 			throw e;
@@ -238,6 +243,18 @@ public class UserManagementHandler {
         }
         return DataSource.fetchGradeTestDetails(gradeID);
     }
-    
-    
+
+	public static List<TestScore> fetchStudentTestScore() throws Exception {
+		String loggedInUser = AuthenticationUtil.getLoggedInUser();
+		if(loggedInUser == null || loggedInUser.isEmpty()) {
+			throw new Exception("No user logged in");
+		}
+		int userID = DataSource.fetchUserID(loggedInUser);
+		int userRoleID = DataSource.fetchUserRole(userID);
+		int studentRoleID = USER_ROLES.get(ROLE_STUDENT);
+		if(userRoleID != studentRoleID) {
+			throw new Exception("Illegal operation - only students have permission to view test score");
+		}
+		return DataSource.fetchStudentTestScore(userID);
+	}
 }
