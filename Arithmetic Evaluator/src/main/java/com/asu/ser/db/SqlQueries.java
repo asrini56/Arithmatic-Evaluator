@@ -19,9 +19,13 @@ public class SqlQueries {
     		+ "user_to_role.user_id = users.user_id inner join roles on roles.role_id = user_to_role.role_id inner join user_to_institution on "
     		+ "user_to_institution.user_id = users.user_id where roles.role_name = 'teacher' and user_to_institution.institution_id = ?";
 
-    public static final String FETCH_STUDENT_DETAILS = "SELECT users.user_id, email_id, first_name, last_name from users inner join user_to_role on "
-            + "user_to_role.user_id = users.user_id inner join roles on roles.role_id = user_to_role.role_id inner join user_to_institution on "
-            + "user_to_institution.user_id = users.user_id where roles.role_name = 'student' and user_to_institution.institution_id = ?";
+    public static final String FETCH_STUDENT_DETAILS = "SELECT users.user_id, email_id, first_name, last_name, grades.grade_name from users " +
+            "inner join user_to_role on user_to_role.user_id = users.user_id " +
+            "inner join roles on roles.role_id = user_to_role.role_id " +
+            "inner join user_to_institution on user_to_institution.user_id = users.user_id " +
+            "inner join student_to_grade on student_to_grade.user_id = users.user_id " +
+            "inner join grades on student_to_grade.grade_id = grades.grade_id " +
+            "where roles.role_name = 'student' and user_to_institution.institution_id = ?";
 
     public static final String DELETE_USER_WITH_ID = "DELETE from users where user_id = ?";
     public static final String DELETE_USER_WITH_EMAIL_ID = "DELETE from users where email_id = ?";
@@ -68,8 +72,13 @@ public class SqlQueries {
     public static final String INSERT_STUDENT_TEST = "INSERT into student_test(student_id, test_id, score) values(?, ?, ?)";
     public static final String INSERT_STUDENT_TEST_ANSWERS = "INSERT into student_test_answers(student_test_id, question_id, answer) values(?, ?, ?)";
 
-    
 
+    public static final String FETCH_ALL_GRADES = "SELECT grade_id, grade_name from grades";
+
+    public static final String INSERT_STUDENT_TO_GRADE = "INSERT INTO student_to_grade (user_id, grade_id) VALUES (?,?)";
+
+    public static final String SELECT_STUDENT_TEST_SCORE = "SELECT tests.test_name, student_test.score from student_test " +
+            "inner join tests on tests.test_id = student_test.test_id where student_test.student_id = ?";
 
 
 

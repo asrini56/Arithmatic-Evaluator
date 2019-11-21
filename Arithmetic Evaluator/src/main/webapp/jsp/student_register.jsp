@@ -49,6 +49,12 @@ $( document ).ready(function() {
     <input type="text" placeholder="Enter First Name" name="firstName" required>
     <input type="text" placeholder="Enter Last Name" name="lastName" required>
     <input type="text" placeholder="Enter Email" name="emailID" required>
+    <select class="select-css" style="width: auto;" name="grade">
+        <option value = "Grade-1">Select Grade</option>
+        <option value = "Grade-1">Grade-1</option>
+        <option value = "Grade-6">Grade-6</option>
+        <option value = "Grade-9">Grade-9</option>
+    </select></br>
     <hr>
     <button type="button" class="registerbtn" onclick="location.href ='/arithmetic-evaluator/admin/listStudents_page.action';" formnovalidate>Cancel</button>
     <button type="submit" class="registerbtn">Register Student</button>
