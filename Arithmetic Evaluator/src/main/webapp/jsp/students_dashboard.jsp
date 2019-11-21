@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="/arithmetic-evaluator/js/common.js"></script>
 </head>
 <body>
 	
@@ -60,8 +61,13 @@
 		<footer class="footer"></footer>
 	</div>
 	<script>
+
 function goToPractiseMathsPage(){
-    window.location="/arithmetic-evaluator/grade1/operations_page.action";
+    var url="student/fetchStudentGrade.action";
+    sendAjaxRequest(url, function(resp){
+        console.log(resp);
+        window.location = "/arithmetic-evaluator/" + resp.grade + "/operations_page.action";
+    });
 }
 function goToTakeTestsPage(){
     window.location="/arithmetic-evaluator/student/taketests_page.action";
