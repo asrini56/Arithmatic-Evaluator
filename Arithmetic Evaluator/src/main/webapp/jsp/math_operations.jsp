@@ -25,7 +25,7 @@
         						<span class="glyphicon glyphicon-user" style="padding-top:16%; margin-right:30px;"></span>
         					</a>
   							<div class="dropdown-content">
-    							<a href= "/arithmetic-evaluator/" id="myBtn"><span class="glyphicon glyphicon-log-in"></span> Logout</a>
+    							<a href= "/arithmetic-evaluator/landing_page.action" id="myBtn"><span class="glyphicon glyphicon-log-in"></span> Logout</a>
   							</div>
 						</div>
       				</li>
@@ -237,17 +237,19 @@
 					+ expression;
 			sendAjaxRequest(url, function(resp) {
 				var result = resp.response;
+				console.log(result);
 				if(result.includes("Invalid")){
+					console.log("here");
 					$("#expressionResult").html(result);
 					return;
 				}
-				if(parseInt(result) <= 0) {
-					result = 0;
-					$("#expressionResult").html(parseInt(result));
-				} else if(parseInt(result) > 20) {
+				if(parseInt(result) <= 0 || parseInt(result) > 20) {
 					result = "Wow you are trying something hard. The answer to your tough question is " + parseInt(result) 
 					$("#expressionResult").html(result);
+				} else {
+					$("#expressionResult").html(parseInt(result));
 				}
+				
 				
 			});
 

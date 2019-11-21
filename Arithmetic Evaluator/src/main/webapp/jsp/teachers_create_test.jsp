@@ -316,23 +316,24 @@
 				questionObj.option4=option4;
 				questionObj.answer=answer;
 				allQuestions.push(questionObj);
-				var json = new Object();
-				json.questions = allQuestions;
-				
-				var testName = $("#testName").val();
-				var grade = $("#testForGrade").val();
-				var params = "testName="+testName+ "&testForGrade="+ grade + "&questionsJSONAsString=" +  encodeURIComponent(JSON.stringify(json));
-				var url = "/arithmetic-evaluator/teacher/test/add.action?" + params;
-				console.log("url" + url);
-				sendAjaxRequest(url, function(resp) {
-					var response = resp.message;
-					console.log(response);
-					var modal = document.getElementById("myModal");
-					modal.style.display = "none";
-					$("#message").text(response);
-					$("#message").show();
-					setTimeout(function() {$("#message").hide();}, 5000);
-				});
+			});
+			
+			var json = new Object();
+			json.questions = allQuestions;
+			
+			var testName = $("#testName").val();
+			var grade = $("#testForGrade").val();
+			var params = "testName="+testName+ "&testForGrade="+ grade + "&questionsJSONAsString=" +  encodeURIComponent(JSON.stringify(json));
+			var url = "/arithmetic-evaluator/teacher/test/add.action?" + params;
+			console.log("url" + url);
+			sendAjaxRequest(url, function(resp) {
+				var response = resp.message;
+				console.log(response);
+				var modal = document.getElementById("myModal");
+				modal.style.display = "none";
+				$("#message").text(response);
+				$("#message").show();
+				setTimeout(function() {$("#message").hide();}, 5000);
 			});
 			
 			
