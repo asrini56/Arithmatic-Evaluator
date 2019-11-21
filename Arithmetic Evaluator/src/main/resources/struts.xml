@@ -56,11 +56,11 @@
             <result type="dispatcher">/jsp/teacher_register.jsp</result>
         </action>
 
-		<action name="admin/teacher/remove" class="com.asu.ser.usermanagement.UserManagementAction" method="removeTeacher">
+		<action name="admin/teacher/remove" class="com.asu.ser.usermanagement.UserManagementAction" method="removeUser">
 			 <result type="json"/>
 		</action>
 
-        <action name="admin/student/remove" class="com.asu.ser.usermanagement.UserManagementAction" method="removeStudent">
+        <action name="admin/student/remove" class="com.asu.ser.usermanagement.UserManagementAction" method="removeUser">
              <result type="json"/>
         </action>
 
@@ -176,6 +176,18 @@
         </action>
 
         <action name="grade1/operations/evaluvate" class="com.asu.ser.operations.OperationsAction" method="evaluvateExpression">
+            <result type="json"/>
+        </action>
+
+        <action name="student/take_test" class="com.asu.ser.operations.TestAction" method="forwardToTakeTest">
+            <result type="dispatcher">/jsp/take_test.jsp</result>
+        </action>
+
+        <action name="student/fetchTest" class="com.asu.ser.operations.TestAction" method="fetchTest">
+            <result type="json"/>
+        </action>
+
+        <action name="student/test/submit" class="com.asu.ser.operations.TestAction" method="submitTest">
             <result type="json"/>
         </action>
 
