@@ -12,6 +12,7 @@ import java.util.Map;
 import com.asu.ser.model.Student;
 import com.asu.ser.model.Teacher;
 import com.asu.ser.model.TestQuestion;
+import com.asu.ser.model.TestScore;
 import com.asu.ser.model.User;
 import com.asu.ser.usermanagement.Grade;
 import com.asu.ser.usermanagement.TestDetails;
@@ -239,11 +240,13 @@ public class DataSource {
             String emailID = resultSet.getString("email_id");
             String firstName = resultSet.getString("first_name");
             String lastName = resultSet.getString("last_name");
+            String grade = resultSet.getString("grade_name");
             Student student = new Student();
             student.setId(userID);
             student.setEmail(emailID);
             student.setFirstName(firstName);
             student.setLastName(lastName);
+            student.setGrade(grade);
             students.add(student);
         }
         resultSet.close();
@@ -379,4 +382,49 @@ public class DataSource {
         statement.close();
         return testDetailsList;
     }
+
+    public static Integer insertUserTOGrade(Integer studentUserID, Integer grade) throws Exception {
+        Connection connection = DataSourceConnector.getConnection();
+        PreparedStatement statement = connection.prepareStatement(SqlQueries.INSERT_STUDENT_TO_GRADE, Statement.RETURN_GENERATED_KEYS);
+        statement.setInt(1, studentUserID);
+        statement.setInt(2, grade);
+        int rowsInserted = statement.executeUpdate();
+        statement.close();
+        return rowsInserted;
+    }
+
+    public static Map<String, Integer> fetchGrades() throws Exception {
+        Map<String, Integer> userGrades = new HashMap<>();
+        Connection connection = DataSourceConnector.getConnection();
+        PreparedStatement statement = connection.prepareStatement(SqlQueries.FETCH_ALL_GRADES);
+        ResultSet resultSet = statement.executeQuery();
+        while(resultSet.next()){
+            int id = resultSet.getInt("grade_id");
+            String grade = resultSet.getString("grade_name");
+            userGrades.put(grade, id);
+        }
+        resultSet.close();
+        statement.close();
+        return userGrades;
+    }
+
+    public static List<TestScore> fetchStudentTestScore(int userId) throws Exception {
+        Connection connection = DataSourceConnector.getConnection();
+        PreparedStatement statement = connection.prepareStatement(SqlQueries.SELECT_STUDENT_TEST_SCORE);
+        statement.setInt(1, userId);
+        ResultSet resultSet = statement.executeQuery();
+        List<TestScore> testScoreList = new ArrayList<>();
+        while(resultSet.next()){
+            String name = resultSet.getString("test_name");
+            String score = resultSet.getString("score");
+            TestScore testScore = new TestScore();
+            testScore.setTestName(name);
+            testScore.setScore(score);
+            testScoreList.add(testScore);
+        }
+        resultSet.close();
+        statement.close();
+        return testScoreList;
+    }
+
 }

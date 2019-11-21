@@ -62,6 +62,7 @@
 	 								'<tr>' +
 	 	      							'<th>First Name</th>' +
 	 	      							'<th>Last Name</th>' +
+	 	      							'<th>Grade</th>' +
 	 	      							'<th>Email-ID</th>' +
 	 	      							'<th></th>' +
 	 	    						'</tr>';
@@ -70,6 +71,7 @@
 	 	    tableContent += '<tr>';
 	 	   	tableContent += '<td>' + this.firstName + '</td>';
 	 	  	tableContent += '<td>' + this.lastName + '</td>';
+	 	  	tableContent += '<td>' + this.grade + '</td>';
 	 	   	tableContent += '<td>' + this.email + '</td>';
 	 	   	tableContent += '<td> <button onClick="confirmRemoveStudent(\'' + this.email + '\')">Remove Student</button></td>';
 	 	   	tableContent += "</tr>";

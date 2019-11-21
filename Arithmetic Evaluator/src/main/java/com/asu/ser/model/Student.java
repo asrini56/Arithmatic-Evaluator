@@ -9,6 +9,7 @@ public class Student {
         private Integer id;
         private String firstName;
         private String lastName;
+        private String grade;
         private String email;
 
         public Integer getId() {
@@ -35,4 +36,12 @@ public class Student {
         public void setLastName(String lastName) {
             this.lastName = lastName;
         }
+
+    public String getGrade() {
+        return grade;
+    }
+
+    public void setGrade(String grade) {
+        this.grade = grade;
+    }
 }
