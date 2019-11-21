@@ -436,7 +436,6 @@ public class DataSource {
     	statement.setInt(1, studentID);
     	statement.setInt(2, testID);
         statement.setInt(3, score);
-        statement.executeUpdate();
 	    Integer lastInsertId = null;
 	    int rowsInserted = statement.executeUpdate();
 	    if(rowsInserted != 0){

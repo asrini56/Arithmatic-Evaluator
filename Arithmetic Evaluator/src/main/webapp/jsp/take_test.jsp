@@ -193,6 +193,7 @@
 			console.log(questionObj.answer);
 			allQuestions.push(questionObj);
 		});
+
 		var json = new Object();
 		json.questions = allQuestions;
 		console.log(JSON.stringify(json));
