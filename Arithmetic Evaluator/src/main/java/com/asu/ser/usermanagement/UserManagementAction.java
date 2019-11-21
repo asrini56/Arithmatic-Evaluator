@@ -277,6 +277,16 @@ public class UserManagementAction {
         return Action.SUCCESS;
     }
 
+    public String fetchStudentGrade(){
+        try {
+            grade = UserManagementHandler.fetchGrade().toLowerCase().replace("-", "");
+        } catch (Exception e) {
+            message = "Failed to fetch Student Grade - " + e.getMessage();
+            return Action.ERROR;
+        }
+        return Action.SUCCESS;
+    }
+
     private boolean validEmailID(String emailID) {
     	return EMAIL_PATTERN.matcher(emailID).matches();
     }
