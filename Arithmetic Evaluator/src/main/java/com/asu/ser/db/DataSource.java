@@ -427,4 +427,17 @@ public class DataSource {
         return testScoreList;
     }
 
+    public static String fetchStudentGrade(int gradeID) throws Exception {
+        String grade = "Grade-1";
+        Connection connection = DataSourceConnector.getConnection();
+        PreparedStatement statement = connection.prepareStatement(SqlQueries.FETCH_GRADE_NAME);
+        statement.setInt(1, gradeID);
+        ResultSet resultSet = statement.executeQuery();
+        while(resultSet.next()){
+            grade = resultSet.getString("grade_name");
+        }
+        resultSet.close();
+        statement.close();
+        return grade;
+    }
 }

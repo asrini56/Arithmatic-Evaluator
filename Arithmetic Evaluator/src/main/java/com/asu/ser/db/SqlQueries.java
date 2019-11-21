@@ -62,7 +62,7 @@ public class SqlQueries {
     public static final String FETCH_TEST_DETAILS_GRADE ="SELECT test_id, test_name, tests.grade_id, grade_name from tests inner join grades on tests.grade_id = grades.grade_id where grade_id = ?";
     public static final String FETCH_GRADE_ID = "Select grade_id from student_to_grade where user_id = ?";
 
-    
+    public static final String FETCH_GRADE_NAME = "Select grade_name from grades where grade_id = ?";
     // 	END TESTDETAILS RELATED TABLE QUERIES
 
 

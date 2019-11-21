@@ -257,4 +257,15 @@ public class UserManagementHandler {
 		}
 		return DataSource.fetchStudentTestScore(userID);
 	}
+
+	public static String fetchGrade() throws Exception{
+		String loggedInUser = AuthenticationUtil.getLoggedInUser();
+		if(loggedInUser == null || loggedInUser.isEmpty()) {
+			throw new Exception("No user logged in");
+		}
+		int userID = DataSource.fetchUserID(loggedInUser);
+		int gradeID = DataSource.fetchGradeID(userID);
+		return DataSource.fetchStudentGrade(gradeID);
+	}
+
 }
