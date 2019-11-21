@@ -42,11 +42,11 @@
 						<h2>Create an account!</h2>
 					</div>
 					<div class="modal-body">
-						<h4>Are you a student or instructor and have not registered? contact your institute administrator!</h4>
-						<p> Note! institute administrators create an account for their students and instructors</p>
+						<h1>School administrator? <br><a href="admin/signup_page.action">Click here to Sign up and create institution account!</a></h1>
+						<hr>
+						<h3>Teacher or student? Contact your school for an account.</h3>
 						<br>
 						<br>
-						<h4>Are you an institute administrator? <a href="admin/signup_page.action">Click here to Sign up and create institution account!</a></h4>
 					</div>
 				</div>
 			</div>
