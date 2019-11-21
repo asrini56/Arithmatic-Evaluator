@@ -70,7 +70,7 @@ public class SqlQueries {
     		+ "= grades.grade_id where grade_id = ?";
     public static final String FETCH_GRADE_ID = "SELECT grade_id from student_to_grade where user_id = ?";    
     public static final String FETCH_TEST_DETAILS_FOR_USER = "SELECT test_id, test_name, tests.grade_id from tests inner join student_to_grade on student_to_grade.grade_id "
-    		+ "= tests.grade_id inner join users on users.user_id = student_to_grade.user_id where users.email_id=?";
+    		+ "= tests.grade_id inner join users on users.user_id = student_to_grade.user_id where users.email_id=? and tests.created_by_user_id in (select users.user_id from users inner join user_to_institution on user_to_institution.user_id = users.user_id where user_to_institution.institution_id = ?)";
 
     public static final String FETCH_GRADE_NAME = "Select grade_name from grades where grade_id = ?";
 
@@ -86,7 +86,7 @@ public class SqlQueries {
     public static final String INSERT_STUDENT_TO_GRADE = "INSERT INTO student_to_grade (user_id, grade_id) VALUES (?,?)";
 
     public static final String SELECT_STUDENT_TEST_SCORE = "SELECT tests.test_name, student_test.score from student_test " +
-            "inner join tests on tests.test_id = student_test.test_id where student_test.student_id = ?";
+            "inner join tests on tests.test_id = student_test.test_id inner join user_to_institution on user_to_institution.user_id = user.user_id where student_test.student_id = ?";                                          
 
 
 
