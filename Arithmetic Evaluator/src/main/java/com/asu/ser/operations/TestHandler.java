@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.json.*;
 
@@ -30,7 +32,7 @@ public class TestHandler {
 	private static final String JSON_KEY_OPTION3 = "option3";
 	private static final String JSON_KEY_OPTION4 = "option4";
 	private static final String JSON_KEY_ANSWER = "answer";
-	
+	private static Logger LOGGER = Logger.getLogger(TestHandler.class.getName());
 
 	public static void addTest(String questionsJSONAsString, String testName, int testForGrade) throws Exception {
 		JSONObject questionsJSON = new JSONObject(questionsJSONAsString);
@@ -79,8 +81,10 @@ public class TestHandler {
         if(loggedInUser == null || loggedInUser.isEmpty()) {
             throw new Exception("No user logged in");
         }
-        TestDetails details = DataSource.fetchTestDetailsForID(testID, true);
         
+        LOGGER.log(Level.SEVERE, "Test id is " + testID);
+        TestDetails details = DataSource.fetchTestDetailsForID(testID, true);
+        LOGGER.log(Level.SEVERE, "TestID " + testID + "questions are " + details.getQuestions().size());
         
         JSONObject questionsJSON = new JSONObject(questionsJSONAsString);
 		JSONArray questionsArr = questionsJSON.getJSONArray(JSON_KEY_QUESTIONS);

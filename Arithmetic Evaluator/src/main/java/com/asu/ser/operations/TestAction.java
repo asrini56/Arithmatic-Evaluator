@@ -44,13 +44,15 @@ public class TestAction {
 	public String submitTest(){
 		try {
 			questionsJSONAsString = URLDecoder.decode(questionsJSONAsString, StandardCharsets.UTF_8.toString());
+			System.out.println("QuestionsJSON " + questionsJSONAsString);
+			LOGGER.log(Level.INFO, questionsJSONAsString);
 			LOGGER.log(Level.INFO, "Submitting test " + questionsJSONAsString + " for studnet " + AuthenticationUtil.getLoggedInUser());
 			TestHandler.submitTest(questionsJSONAsString, testID);
 			message = "Successfully submitted test";
 			LOGGER.log(Level.INFO, "message");
 		} catch (Exception e) {
 			message = "Failed to submit test: Internal Server Error for student";
-			LOGGER.log(Level.SEVERE, message + AuthenticationUtil.getLoggedInUser(), e);
+			LOGGER.log(Level.SEVERE, questionsJSONAsString + "\n" + message + AuthenticationUtil.getLoggedInUser(), e);
 			e.printStackTrace();
 		}
 		return Action.SUCCESS;

@@ -75,7 +75,7 @@
 
 	<script src="/arithmetic-evaluator/js/common.js"></script>
 	<script>
-	var testID;
+	var testID = 0;
 	$( document ).ready(function() {
 		testID = "${testID}";
 		fetchTestDetails(testID);
@@ -154,15 +154,14 @@
 	}
 	
 	function submitTest() {
-		if(confirm("Press a button!")){
-			alert("Yes");
+		if(confirm("Press Yes to submit test")){
 		} else {
-			alert("No");
+			return
 		}
 		var allQuestions = [];
 		$(".questionTag").each(function(index) {
 			var question = $(this).find("#question").val();
-			var questionID = $(this).find("question").attr('name');
+			var questionID = $(this).find("#question").attr('name');
 			var option1 = $(this).find("#option1").val().trim();
 			var option2 = $(this).find("#option2").val().trim();
 			var option3 = $(this).find("#option3").val().trim();
@@ -191,22 +190,19 @@
 			var questionObj = new Object();
 			questionObj.questionID=questionID;
 			questionObj.answer=answer;
+			console.log(questionObj.questionID);
+			console.log(questionObj.answer);
 			allQuestions.push(questionObj);
 		});
 		var json = new Object();
 		json.questions = allQuestions;
-		var testID = testID;
-		var params = "testID="+testName + "&questionsJSONAsString=" +  encodeURIComponent(JSON.stringify(json));
+		console.log(JSON.stringify(json));
+		var params = "testID=" + testID + "&questionsJSONAsString=" +  encodeURIComponent(JSON.stringify(json));
 		var url = "/arithmetic-evaluator/student/test/submit.action?" + params;
 		console.log("url" + url);
 		sendAjaxRequest(url, function(resp) {
 			var response = resp.message;
-			console.log(response);
-			var modal = document.getElementById("myModal");
-			modal.style.display = "none";
-			$("#message").text(response);
-			$("#message").show();
-			setTimeout(function() {$("#message").hide();}, 5000);
+			alert(response);
 		});
 		
 	}

@@ -65,8 +65,8 @@ public class SqlQueries {
     // 	END TESTDETAILS RELATED TABLE QUERIES
     
     // START STUDENT TEST RELATED TABLE QUERIES
-    public static final String INSERT_STUDENT_TEST = "INSERT into student_test(student_id, test_id, score) values(%, %, %)";
-    public static final String INSERT_STUDENT_TEST_ANSWERS = "INSERT into student_test_answers(student_test_id, question_id, answer) values(%, %, %)";
+    public static final String INSERT_STUDENT_TEST = "INSERT into student_test(student_id, test_id, score) values(?, ?, ?)";
+    public static final String INSERT_STUDENT_TEST_ANSWERS = "INSERT into student_test_answers(student_test_id, question_id, answer) values(?, ?, ?)";
 
     
 

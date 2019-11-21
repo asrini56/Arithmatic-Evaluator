@@ -40,7 +40,6 @@
 			<div class="table-users" id="teacher1"></div>
 		</section>
 
-		<footer class="footer" style="position:absolute !important; bottom:0px"><span class="glyphicon glyphicon-copyright-mark"></span>  Copyright</footer>
 
 	
 	<script type="text/javascript">
@@ -61,29 +60,34 @@
 		var url="gradetestdetails.action";
 		sendAjaxRequest(url, function(resp){
 		    console.log(resp);
+		    var count = 0;
 	 		var tableContent = '<div class="header">Test Details</div>' +
 	 							'<table cellspacing="0">' +
 	 								'<tr>' +
-	 	      							'<th>Test Id</th>' +
+	 	      							'<th>SNo</th>' +
 	 	      							'<th>Test Name</th>' +
-	 	      							'<th>Test For Grade</th>' +
+	 	      							'<th></th>'+
 	 	    						'</tr>';
 
 			$.each(resp.testDetails, function() {
-	 	    tableContent += '<tr>';
-	 	   	tableContent += '<td>' + this.testId + '</td>';
+	 	    tableContent += '<tr> <a href="/arithmetic-evaluator/student/take_test.action?testID=' + this.testId + '">';
+	 	   	tableContent += '<td>' + count++ + '</td>';
 	 	  	tableContent += '<td>' + this.testName + '</td>';
-	 	   	tableContent += '<td>' + this.grade + '</td>';
-	 	    tableContent += "</tr>";
+	 	  	tableContent += '<td> <button onClick="takeTest(\'' + this.testId + '\')">Take Test</button></td>';
+	 	    tableContent += "</a></tr>";
 	 	    });
 			tableContent += "</table>";
 			$("#teacher1").html(tableContent);
 	 	});
 	}
 
- 		function buttonclick(){
-         	window.location="addTeacher_page.action";
-     	}
+	function takeTest(testID) {
+		var url="/arithmetic-evaluator/student/take_test.action?testID=" + testID;
+		window.location=url;
+	}
+	function buttonclick(){
+	      	window.location="addTeacher_page.action";
+	}
  	</script>
 	</body>
 </html>
