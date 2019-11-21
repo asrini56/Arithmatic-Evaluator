@@ -40,8 +40,6 @@
 			<div class="table-users" id="teacher1"></div>
 		</section>
 
-		<footer class="footer" style="position:absolute !important; bottom:0px"><span class="glyphicon glyphicon-copyright-mark"></span>  Copyright</footer>
-
 	
 	<script type="text/javascript">
 	$( document ).ready(function() {
@@ -67,6 +65,7 @@
 	 	      							'<th>Test Id</th>' +
 	 	      							'<th>Test Name</th>' +
 	 	      							'<th>Test For Grade</th>' +
+                                        '<th></th>' +
 	 	    						'</tr>';
 
 			$.each(resp.testDetails, function() {
@@ -74,6 +73,7 @@
 	 	   	tableContent += '<td>' + this.testId + '</td>';
 	 	  	tableContent += '<td>' + this.testName + '</td>';
 	 	   	tableContent += '<td>' + this.grade + '</td>';
+            tableContent += '<td> <button onClick="viewThisTest(\'' + this.testId + '\')">Remove Student</button></td>';
 	 	    tableContent += "</tr>";
 	 	    });
 			tableContent += "</table>";
@@ -84,6 +84,13 @@
  		function buttonclick(){
          	window.location="addTeacher_page.action";
      	}
+        
+        function viewThisTest(testId)
+            var takeTest = confirm("Are you sure you want to take this test " + testId + " ? ");
+     		if(takeTest) {
+     			var url="/arithmetic-evaluator/student/takeThisTest.action?testId=" + testId;
+     			window.location = ""
+     		}
  	</script>
 	</body>
 </html>

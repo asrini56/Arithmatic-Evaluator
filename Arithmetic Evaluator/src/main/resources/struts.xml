@@ -26,7 +26,11 @@
 		</result-types>
 
         <default-action-ref name="index" />
-
+         
+        <action name="landing_page">
+            <result type="dispatcher">/jsp/landing.jsp</result>
+        </action>
+        
         <action name="login_page">
             <result type="dispatcher">/jsp/login.jsp</result>
         </action>
@@ -162,10 +166,16 @@
         <action name="grade9/operations_page">
             <result type="dispatcher">/jsp/9th_operations.jsp</result>
         </action>
+        
+        <action name="student/currentTestPage">
+            <result type="dispatcher">/jsp/currentTest.jsp</result>
+        </action>
 
         <action name="grade1/operations/evaluvate" class="com.asu.ser.operations.OperationsAction" method="evaluvateExpression">
             <result type="json"/>
         </action>
+        
+     
 
     </package>
 
