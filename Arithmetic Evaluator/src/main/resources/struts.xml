@@ -123,7 +123,7 @@
             <result type="json"/>
         </action>
 
-        <action name="student/viewTestScores" class="com.asu.ser.usermanagement.UserManagementAction" method="fetchGradeTestDetails">
+        <action name="student/viewTestScores" class="com.asu.ser.usermanagement.UserManagementAction" method="fetchTestScoreDetails">
             <result type="json"/>
         </action>
 

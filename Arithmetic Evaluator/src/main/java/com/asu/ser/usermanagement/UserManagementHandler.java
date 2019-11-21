@@ -8,6 +8,7 @@ import com.asu.ser.authentication.AuthenticationUtil;
 import com.asu.ser.db.DataSource;
 import com.asu.ser.model.Student;
 import com.asu.ser.model.Teacher;
+import com.asu.ser.model.TestScore;
 import com.asu.ser.model.User;
 import com.asu.ser.util.MailServer;
 import org.apache.commons.lang3.StringUtils;
@@ -241,5 +242,19 @@ public class UserManagementHandler {
         }
         return DataSource.fetchGradeTestDetails(gradeID);
     }
+
+	public static List<TestScore> fetchStudentTestScore() throws Exception {
+		String loggedInUser = AuthenticationUtil.getLoggedInUser();
+		if(loggedInUser == null || loggedInUser.isEmpty()) {
+			throw new Exception("No user logged in");
+		}
+		int userID = DataSource.fetchUserID(loggedInUser);
+		int userRoleID = DataSource.fetchUserRole(userID);
+		int studentRoleID = USER_ROLES.get(ROLE_STUDENT);
+		if(userRoleID != studentRoleID) {
+			throw new Exception("Illegal operation - only students have permission to view test score");
+		}
+		return DataSource.fetchStudentTestScore(userID);
+	}
 
 }
