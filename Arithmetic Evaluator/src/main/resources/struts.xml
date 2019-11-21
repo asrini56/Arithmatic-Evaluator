@@ -120,6 +120,10 @@
             <result type="json"/>
         </action>
 
+        <action name="student/testscoredetails" class="com.asu.ser.usermanagement.UserManagementAction" method="fetchTestScoreDetails">
+            <result type="json"/>
+        </action>
+
 		<action name="teacher/dashboard">
 			<result type="dispatcher">/jsp/teachers_dashboard.jsp</result>
 		</action>
