@@ -31,12 +31,15 @@ public class UserManagementHandler {
 	private static final String ROLE_TEACHER = "teacher";
 	private static final String ROLE_STUDENT = "student";
 	private static Map<String, Integer> USER_ROLES;
+	private static Map<String, Integer> USER_GRADES;
 	static {
 		try {
 			USER_ROLES = DataSource.fetchRoles();
+			USER_GRADES = DataSource.fetchGrades();
 		} catch(Exception e) {
 			LOGGER.log(Level.SEVERE, "Error" , e);
 			USER_ROLES = new HashMap<>();
+			USER_GRADES = new HashMap<>();
 		}
 
 	}
@@ -124,7 +127,7 @@ public class UserManagementHandler {
     	}
     }
 
-	public static void addStudent(String firstName, String lastName, String emailID) throws Exception {
+	public static void addStudent(String firstName, String lastName, String emailID, String grade) throws Exception {
 		String loggedInUser = AuthenticationUtil.getLoggedInUser();
 		if(loggedInUser == null || loggedInUser.isEmpty()) {
 			throw new Exception("No user logged in");
@@ -149,6 +152,7 @@ public class UserManagementHandler {
 			}
 			DataSource.insertUserToRole(studentUserID, studentRoleID);
 			DataSource.insertUserTOInstitution(studentUserID, institutionID);
+			DataSource.insertUserTOGrade(studentUserID, USER_GRADES.get(grade));
 			sendStudentAccountPasswordEmail(firstName, lastName, emailID, password, loggedInUser);
 		} catch (Exception e) {
 			throw e;
