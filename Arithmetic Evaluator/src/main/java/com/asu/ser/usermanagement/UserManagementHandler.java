@@ -14,7 +14,6 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.annotation.PostConstruct;
 /**
  * @author akhilesh
  * @author Ashwin
@@ -41,7 +40,6 @@ public class UserManagementHandler {
 
 	}
 
-	@PostConstruct
 	public static void init(){
 		try {
 			USER_ROLES = DataSource.fetchRoles();

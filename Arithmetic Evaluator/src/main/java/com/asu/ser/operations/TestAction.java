@@ -46,6 +46,7 @@ public class TestAction {
 		} catch(Exception e) {
 			message = "Unable to fetch test questions for test";
 			LOGGER.log(Level.SEVERE, message + " : " + testID);
+			e.printStackTrace();
 		}
 		return Action.SUCCESS;
 	}

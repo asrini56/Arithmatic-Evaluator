@@ -400,6 +400,7 @@ public class DataSource {
         ResultSet resultSet = statement.executeQuery();
         List<TestQuestion> testQuestions = new ArrayList<>();
         while(resultSet.next()){
+        	int questionID = resultSet.getInt("question_id");
         	String question = resultSet.getString("question");
         	String option1 = resultSet.getString("option1");
         	String option2 = resultSet.getString("option2");
@@ -410,6 +411,8 @@ public class DataSource {
         		answer = resultSet.getInt("answer");
         	}
         	TestQuestion testQuestion = new TestQuestion();
+
+        	testQuestion.setId(questionID);
         	testQuestion.setQuestion(question);
         	testQuestion.setOption1(option1);
         	testQuestion.setOption2(option2);

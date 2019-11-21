@@ -2,6 +2,7 @@ package com.asu.ser.model;
 
 public class TestQuestion {
 	
+	private int id;
 	private String question;
 	private String option1;
 	private String option2;
@@ -45,11 +46,11 @@ public class TestQuestion {
 	public void setAnswer(int answer) {
 		this.answer = answer;
 	}
-	
-	@Override
-	public String toString() {
-		return "TestQuestion [question=" + question + ", option1=" + option1 + ", option2=" + option2 + ", option3="
-				+ option3 + ", option4=" + option4 + ", answer=" + answer + "]";
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
 	}
 
 }

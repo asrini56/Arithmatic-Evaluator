@@ -34,105 +34,50 @@
         	</div>
   		</nav>
 	<section>
-  	<nav style="min-height:800px !important">
-		<h1 class="splitHeading"> Question Bricks </h1>
-		<h2 style="text-align: center;">Drag test component to Canvas section</h2>
-			<div id="operationsDiv" class="operationsDiv" ondragenter="return dragEnter(event)" ondrop="return dragDrop(event)" ondragover="return dragOver(event)">
-			
-				<div id="questionbox1" class="questionsBox" draggable="true" ondragenter="return dragEnter(event)" ondragstart="return dragStart(event)" ondrop="return dragDrop(event)" ondragover="return dragOver(event)" ondragstart="return dragStart(event)">
-     				<form>
-     					<h1>Question #</h1>
-     					<input type="textarea" name="question" id="question" disabled></input><br><br>
-     					
-     					<input type="radio" name="options" id="answerOpt1"/><input type="text" name="option1" id="option1" disabled /><br>
-     					<input type="radio" name="options" id="answerOpt2"/><input type="text" name="option2" id="option2" disabled/><br>
-     					<input type="radio" name="options" id="answerOpt3"/><input type="text" name="option3" id="option3" disabled/><br>
-     					<input type="radio" name="options" id="answerOpt4"/><input type="text" name="option4" id="option4"  disabled/><br>
-     					<p> Drag into canvas!</p>
-     				</form>
-				</div>
-				<div id="questionbox2" class="questionsBox hide" draggable="true" ondragenter="return dragEnter(event)" ondragstart="return dragStart(event)" ondrop="return dragDrop(event)" ondragover="return dragOver(event)" ondragstart="return dragStart(event)">
-     				<form>
-     					<h1>Question #</h1>
-     					<input type="textarea" name="question" id="question" placeholder="Enter question here.."></input><br><br>
-     					
-     					<input type="radio" name="options" id="answerOpt1"/><input type="text" name="option1" id="option1" placeholder="Option1" /><br>
-     					<input type="radio" name="options" id="answerOpt2"/><input type="text" name="option2" id="option2" placeholder="Option2"/><br>
-     					<input type="radio" name="options" id="answerOpt3"/><input type="text" name="option3" id="option3" placeholder="Option3"/><br>
-     					<input type="radio" name="options" id="answerOpt4"/><input type="text" name="option4" id="option4" placeholder="Option4"/><br>
-     					<p> Please choose the right answer!</p>
-     				</form>
-				</div>
-		</div>
-
-    			
-  </nav>
   <nav style="min-height:800px !important">
 	<h1 class="splitHeading">Canvas</h1>
-		<div id="message" class="alert alert-info display-none"></div>
-		<div id="boxB" style ="min-height:570px !important" ondragenter="return dragEnter(event)" ondrop="return dragDrop(event)" ondragover="return dragOver(event)" ondragstart="return dragStart(event)">
+		<div style="height:592px; min-height:592px;">
+			<div id="assignmentQuestionsTemplate" class="display-none">
+				<div id="assignmentQuestions">
+						<h3 id="question"></h3>
+						<input type="radio" name="options" id="answerOpt1" />
+						<input type="text" name="option1" id="option1" /><br> 
+						<input type="radio" name="options" id="answerOpt2" />
+						<input type="text" name="option2" id="option2" /><br> 
+						<input type="radio" name="options" id="answerOpt3" />
+						<input type="text" name="option3" id="option3" /><br> 
+						<input type="radio" name="options" id="answerOpt4" />
+						<input type="text" name="option4" id="option4" /><br>
+				</div>
+			</div>
+			<div id="questionsCanvasDiv">
+			<div id="message" class="alert alert-info display-none"></div>
+		</div>
 		</div>
 		
-		<div class="deleteAction" style="margin-top:20px; border-top: 1px solid grey; padding:5px;">
-			<button type="button" id="delete"
-					class="btn btn-success canvasButton deleteButton glyphicon glyphicon-trash"
-					onClick="deleteSelectedButton()"></button>
-		</div>
-		<br><br>
 		<button type="button" id="preview" onClick="preview()" class="btn btn-success canvasButton">Preview</button>
+		
   </nav>	
 
   <nav style="min-height:800px !important">
     <h1 class="splitHeading">Preview</h1>
     <div class= "questionPreviewTemplateDiv" style="display:none">
-    		<div class="questionPreviewTemplate" id="questionPreviewTemplate">
-    			<h2>Question : <span id="previewQuestion"></span></h2>
-    			<h3> Option1: <span id="previewOption1"></span><br></h3>
-    			<h3> Option2: <span id="previewOption2"></span><br></h3>
-    			<h3> Option3: <span id="previewOption3"></span><br></h3>
-    			<h3> Option4: <span id="previewOption4"></span><br></h3>
-    			<h3> Answer is: <span id="previewAnswer"></span><br/></h3>
-    			<hr>
-    		</div>
-    	</div>
-    <div class="previewDiv" id="previewDiv" style ="min-height:600px !important">
+   		<div class="questionPreviewTemplate" id="questionPreviewTemplate">
+   			<h2>Question : <span id="previewQuestion"></span></h2>
+   			<h3> Answer is: <span id="previewAnswer"></span><br/></h3>
+   			<hr>
+   		</div>
     </div>
-    <button type="button" id="publish" onClick="saveDialogBox()" class="btn btn-success canvasButton">Publish</button>
-   	</nav>
+    <div class="previewDiv" id="previewDiv" style ="min-height:600px !important"></div>
+    <button type="button" id="publish" onClick="submitTest()" class="btn btn-success canvasButton">Submit</button>
+  </nav>
 	</section>
-
-	<div id="myModal" class="saveAssignmentDialog">	
-		<div class="saveAssignmentDialog-content">
-			<span class="saveAssignmentDialog-close">&times;</span>
-			<table>
-				<tr style="height:40px">
-					<td><label>Test Name</label></td> 
-					<td><input type="text" id="testName"/></td>
-				</tr>
-				<tr style="height:40px">
-					<td><label>Test for Grade</label></td> 
-					<td>
-						<select id="testForGrade">
- 							<option value = "1">Grade 1</option>
-  							<option value ="6">Grade 6</option>
-  							<option value="9">Grade 9</option> 
-						</select>
-					</td>
-				</tr>
-				<tr style="height:40px">
-					<td></td>
-					<td><button type="button" id="preview" onClick="publish()" class="btn btn-success canvasButton">Save Test</button></td>
-				</tr>
-			</table>
-		</div>
-	</div>
-	
-		
 
 	<script src="/arithmetic-evaluator/js/common.js"></script>
 	<script>
+	var testID;
 	$( document ).ready(function() {
-		var testID = "${testID}";
+		testID = "${testID}";
 		fetchTestDetails(testID);
 	});
 
@@ -142,7 +87,128 @@
 			var result = resp.response;
 			console.log(resp);
 			
+			var qNo = 1;
+			
+			$.each(resp.testDetail.questions, function() {
+				$qts = $('#assignmentQuestions').clone();
+				var question = this.question;
+				var option1 = this.option1;
+				var option2 = this.option2;
+				var option3 = this.option3;
+				var option4 = this.option4;
+				$qts.addClass("questionTag");
+				$qts.find("#question").text("Question " + qNo + " : " +question);
+				$qts.find("#question").attr('name', this.id);
+				$qts.find("#option1").val(option1);
+				$qts.find("#option2").val(option2);
+				$qts.find("#option3").val(option3);
+				$qts.find("#option4").val(option4);
+				$qts.find("#answerOpt1").attr('name', 'question' + qNo)
+				$qts.find("#answerOpt2").attr('name', 'question' + qNo)
+				$qts.find("#answerOpt3").attr('name', 'question' + qNo)
+				$qts.find("#answerOpt4").attr('name', 'question' + qNo)
+				$("#questionsCanvasDiv").append($qts);
+				qNo++;
+			});
+			
+			
 		});
+	}
+	
+	function preview() {
+		$("#previewDiv").text("");
+		$(".questionTag").each(function(index) {
+			var question = $(this).find("#question").val();
+			var option1 = $(this).find("#option1").val().trim();
+			var option2 = $(this).find("#option2").val().trim();
+			var option3 = $(this).find("#option3").val().trim();
+			var option4 = $(this).find("#option4").val().trim();
+
+			console.log
+			var radio1Value = $(this).find("#answerOpt1").is(':checked');
+			var radio2Value = $(this).find("#answerOpt2").is(':checked');
+			var radio3Value = $(this).find("#answerOpt3").is(':checked');
+			var radio4Value = $(this).find("#answerOpt4").is(':checked');
+			
+			if(radio1Value){
+				answer = option1;
+			} else if(radio2Value){
+				answer = option2;
+			} else if(radio3Value){
+				answer = option3;
+			} else if(radio4Value){
+				answer = option4;
+			} else {
+				$("#message").text("Select an answer for the question " + question);
+				$("#message").show();
+				setTimeout(function() {$("#message").hide();}, 5000);
+				return;
+			}
+			
+			console.log(answer);
+			$previewElement = $('#questionPreviewTemplate').clone();
+			$previewElement.find("#previewQuestion").text(question);
+			$previewElement.find("#previewAnswer").text(answer);
+			$("#previewDiv").append($previewElement);
+		});
+	}
+	
+	function submitTest() {
+		if(confirm("Press a button!")){
+			alert("Yes");
+		} else {
+			alert("No");
+		}
+		var allQuestions = [];
+		$(".questionTag").each(function(index) {
+			var question = $(this).find("#question").val();
+			var questionID = $(this).find("question").attr('name');
+			var option1 = $(this).find("#option1").val().trim();
+			var option2 = $(this).find("#option2").val().trim();
+			var option3 = $(this).find("#option3").val().trim();
+			var option4 = $(this).find("#option4").val().trim();
+
+			var radio1Value = $(this).find("#answerOpt1").is(':checked');
+			var radio2Value = $(this).find("#answerOpt2").is(':checked');
+			var radio3Value = $(this).find("#answerOpt3").is(':checked');
+			var radio4Value = $(this).find("#answerOpt4").is(':checked');
+			var answer = 1;
+			if(radio1Value){
+				answer = 1;
+			} else if(radio2Value){
+				answer = 2;
+			} else if(radio3Value){
+				answer = 3;
+			} else if(radio4Value){
+				answer = 4;
+			} else {
+				$("#message").text("Select an answer for the question " + question);
+				$("#message").show();
+				setTimeout(function() {$("#message").hide();}, 5000);
+				return;
+			}
+			
+			var questionObj = new Object();
+			questionObj.questionID=questionID;
+			questionObj.answer=answer;
+			allQuestions.push(questionObj);
+		});
+		var json = new Object();
+		json.questions = allQuestions;
+		var testID = testID;
+		var params = "testID="+testName + "&questionsJSONAsString=" +  encodeURIComponent(JSON.stringify(json));
+		var url = "/arithmetic-evaluator/student/test/submit.action?" + params;
+		console.log("url" + url);
+		sendAjaxRequest(url, function(resp) {
+			var response = resp.message;
+			console.log(response);
+			var modal = document.getElementById("myModal");
+			modal.style.display = "none";
+			$("#message").text(response);
+			$("#message").show();
+			setTimeout(function() {$("#message").hide();}, 5000);
+		});
+		
 	}
 	</script>
 </body>
