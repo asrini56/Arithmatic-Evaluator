@@ -47,9 +47,14 @@
       </div>
     </div>
   </div>
+    <br/>
+    <br/>
+    <br/>
+  <div class="loginDiv">
+      <span>Click here to Login or Register</span>
+      <button type="button" class="loginBtn" style="font-family: fantasy" onclick="loginFunction()">LOGIN or REGISTER </button>
+  </div>
 </section>
-    <p style="text-align: center" class="mess">Already have an account! Click to Login</p>
-    <button type="button" class="block" onclick="loginFunction()">Login</button>
 <script>
 function loginFunction(){
     window.location="login_page.action";
