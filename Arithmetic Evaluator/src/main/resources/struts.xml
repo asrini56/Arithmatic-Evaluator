@@ -127,6 +127,10 @@
             <result type="json"/>
         </action>
 
+        <action name="student/fetchStudentGrade" class="com.asu.ser.usermanagement.UserManagementAction" method="fetchStudentGrade">
+            <result type="json"/>
+        </action>
+
         <action name="student/viewtestscores_page">
             <result type="dispatcher">/jsp/student_view_test_score.jsp</result>
         </action>
@@ -141,7 +145,7 @@
        <action name="teacher/createtest_page">
             <result type="dispatcher">/jsp/teachers_create_test.jsp</result>
         </action>
-        
+
       <action name="student/dashboard">
 			      <result type="dispatcher">/jsp/students_dashboard.jsp</result>
 		  </action>
@@ -172,6 +176,18 @@
         </action>
 
         <action name="grade1/operations/evaluvate" class="com.asu.ser.operations.OperationsAction" method="evaluvateExpression">
+            <result type="json"/>
+        </action>
+
+        <action name="student/take_test" class="com.asu.ser.operations.TestAction" method="forwardToTakeTest">
+            <result type="dispatcher">/jsp/take_test.jsp</result>
+        </action>
+
+        <action name="student/fetchTest" class="com.asu.ser.operations.TestAction" method="fetchTest">
+            <result type="json"/>
+        </action>
+
+        <action name="student/test/submit" class="com.asu.ser.operations.TestAction" method="submitTest">
             <result type="json"/>
         </action>
 

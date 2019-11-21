@@ -18,10 +18,9 @@
           	</div>
           	<ul class="nav navbar-nav navbar-right">
     				
-    				<li><a href="/arithmetic-evaluator/student/dashboard.action">Dashboard</a></li>
-
-    				<li class="active fontSansSerif"><a href="/arithmetic-evaluator/student/taketests_page.action">Take Test</a></li>
-    				<li class=""><a href="/arithmetic-evaluator/student/viewtestscores_page.action">View Scores</a></li>
+    				<li><a href="/arithmetic-evaluator/teacher/dashboard.action">Dashboard</a></li>
+    				<li class="active fontSansSerif"><a href="#">Take Test</a></li>
+    				<li class=""><a href="/arithmetic-evaluator/teacher/createtest_page.action">View Scores</a></li>
 
     				<li>
     					<div class="dropdown">
@@ -39,10 +38,9 @@
 
 		<section style="display:inline-block; text-align:center; margin-left:23%">
 			<div id="message" class="alert alert-info display-none"></div>
-			<div class="table-users" id="student1"></div>
+			<div class="table-users" id="teacher1"></div>
 		</section>
 
-		<footer class="footer" style="position:absolute !important; bottom:0px"><span class="glyphicon glyphicon-copyright-mark"></span>  Copyright</footer>
 
 	
 	<script type="text/javascript">
@@ -63,27 +61,41 @@
 		var url="gradetestdetails.action";
 		sendAjaxRequest(url, function(resp){
 		    console.log(resp);
+		    var count = 0;
 	 		var tableContent = '<div class="header">Test Details</div>' +
 	 							'<table cellspacing="0">' +
 	 								'<tr>' +
-	 	      							'<th>Test Id</th>' +
+	 	      							'<th>SNo</th>' +
 	 	      							'<th>Test Name</th>' +
+<<<<<<< HEAD
+=======
+	 	      							'<th></th>'+
+>>>>>>> a9523805986728c4445fc3efe9a8373992f1a70c
 	 	    						'</tr>';
 
 			$.each(resp.testDetails, function() {
-	 	    tableContent += '<tr>';
-	 	   	tableContent += '<td>' + this.testId + '</td>';
+	 	    tableContent += '<tr> <a href="/arithmetic-evaluator/student/take_test.action?testID=' + this.testId + '">';
+	 	   	tableContent += '<td>' + count++ + '</td>';
 	 	  	tableContent += '<td>' + this.testName + '</td>';
+<<<<<<< HEAD
 	 	    tableContent += "</tr>";
+=======
+	 	  	tableContent += '<td> <button onClick="takeTest(\'' + this.testId + '\')">Take Test</button></td>';
+	 	    tableContent += "</a></tr>";
+>>>>>>> a9523805986728c4445fc3efe9a8373992f1a70c
 	 	    });
 			tableContent += "</table>";
-			$("#student1").html(tableContent);
+			$("#teacher1").html(tableContent);
 	 	});
 	}
 
- 		function buttonclick(){
-         	window.location="addTeacher_page.action";
-     	}
+	function takeTest(testID) {
+		var url="/arithmetic-evaluator/student/take_test.action?testID=" + testID;
+		window.location=url;
+	}
+	function buttonclick(){
+	      	window.location="addTeacher_page.action";
+	}
  	</script>
 	</body>
 </html>
