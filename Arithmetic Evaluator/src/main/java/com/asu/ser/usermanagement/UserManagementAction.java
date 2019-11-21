@@ -3,6 +3,7 @@ package com.asu.ser.usermanagement;
 import com.asu.ser.authentication.AuthenticationUtil;
 import com.asu.ser.model.Student;
 import com.asu.ser.model.Teacher;
+import com.asu.ser.model.TestQuestion;
 import com.asu.ser.operations.TestHandler;
 import com.asu.ser.model.TestScore;
 import com.opensymphony.xwork2.Action;
@@ -26,6 +27,7 @@ import java.util.regex.Pattern;
 public class UserManagementAction {
 
     private String emailID;
+    private int testId;
     private String password;
     private String firstName;
     private String lastName;
@@ -39,6 +41,7 @@ public class UserManagementAction {
     private String confirmPassword;
     private List<TestDetails> testDetails;
     private List<TestScore> testScoreList;
+
 
     private static Logger LOGGER = Logger.getLogger(UserManagementAction.class.getName());
 
@@ -398,6 +401,7 @@ public class UserManagementAction {
     public void setGrade(String grade) {
         this.grade = grade;
     }
+
 
     public List<TestScore> getTestScoreList() {
         return testScoreList;

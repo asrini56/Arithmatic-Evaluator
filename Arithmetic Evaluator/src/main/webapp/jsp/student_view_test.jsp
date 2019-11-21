@@ -41,7 +41,6 @@
 			<div class="table-users" id="teacher1"></div>
 		</section>
 
-
 	
 	<script type="text/javascript">
 	$( document ).ready(function() {
@@ -67,27 +66,32 @@
 	 								'<tr>' +
 	 	      							'<th>SNo</th>' +
 	 	      							'<th>Test Name</th>' +
-<<<<<<< HEAD
-=======
 	 	      							'<th></th>'+
->>>>>>> a9523805986728c4445fc3efe9a8373992f1a70c
+
 	 	    						'</tr>';
 
 			$.each(resp.testDetails, function() {
 	 	    tableContent += '<tr> <a href="/arithmetic-evaluator/student/take_test.action?testID=' + this.testId + '">';
 	 	   	tableContent += '<td>' + count++ + '</td>';
 	 	  	tableContent += '<td>' + this.testName + '</td>';
-<<<<<<< HEAD
-	 	    tableContent += "</tr>";
-=======
 	 	  	tableContent += '<td> <button onClick="takeTest(\'' + this.testId + '\')">Take Test</button></td>';
 	 	    tableContent += "</a></tr>";
->>>>>>> a9523805986728c4445fc3efe9a8373992f1a70c
 	 	    });
 			tableContent += "</table>";
 			$("#teacher1").html(tableContent);
 	 	});
 	}
+
+ 		function buttonclick(){
+         	window.location="addTeacher_page.action";
+     	}
+        
+        function viewThisTest(testId)
+            var takeTest = confirm("Are you sure you want to take this test " + testId + " ? ");
+     		if(takeTest) {
+     			var url="/arithmetic-evaluator/student/takeThisTest.action?testId=" + testId;
+     			window.location = ""
+     		}
 
 	function takeTest(testID) {
 		var url="/arithmetic-evaluator/student/take_test.action?testID=" + testID;
