@@ -16,9 +16,9 @@
               <a class="navbar-brand titleText" href="#">Arithmetic Evaluator</a>
           	</div>
           	<ul class="nav navbar-nav navbar-right">
-    				<li><a href="/arithmetic-evaluator/teacher/dashboard.action">Dashboard</a></li>
-    				<li class="#"><a href="/arithmetic-evaluator/student/taketests_page.action">Take Tests</a></li>
-    				<li class="#"><a href="/arithmetic-evaluator/student/viewtestscores_page.action">View Tests</a></li>
+    				<li><a href="/arithmetic-evaluator/student/dashboard.action">Dashboard</a></li>
+    				<li class=""><a href="/arithmetic-evaluator/student/taketests_page.action">Take Test</a></li>
+    				<li class=""><a href="/arithmetic-evaluator/student/viewtestscores_page.action">View Scores</a></li>
     				<li>
     					<div class="dropdown">
  							<a href="#" class="dropbtn">
