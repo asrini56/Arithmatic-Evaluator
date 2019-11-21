@@ -58,7 +58,7 @@
 		var url="gradetestdetails.action";
 		sendAjaxRequest(url, function(resp){
 		    console.log(resp);
-		    var count = 0;
+		    var count = 1;
 	 		var tableContent = '<div class="header">Test Details</div>' +
 	 							'<table cellspacing="0">' +
 	 								'<tr>' +
