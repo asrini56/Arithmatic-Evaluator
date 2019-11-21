@@ -104,12 +104,15 @@ public class TestHandler {
 			int studentAnswer = testQuestions.get(question.getId()).getAnswer();
 			int actualAnswer = question.getAnswer();
 			totalScore++;
+			System.out.println("student answer " + studentAnswer + " actial " + actualAnswer);
 			if(studentAnswer == actualAnswer) {
 				score++;
 			}
 		}
-		int finalPercent = (score / totalScore) * 100;
-		int studentTestID = DataSource.insertStudentTest(DataSource.fetchUserID(loggedInUser), testID, finalPercent);
+		System.out.println("score " + score + " total " + totalScore);
+		float finalPercent = ((float)score / (float)totalScore) * 100;
+		System.out.println("final percentage");
+		int studentTestID = DataSource.insertStudentTest(DataSource.fetchUserID(loggedInUser), testID, (int)finalPercent);
 		DataSource.insertStudentTestAnswers(studentTestID, testQuestions);
 	}
 	
