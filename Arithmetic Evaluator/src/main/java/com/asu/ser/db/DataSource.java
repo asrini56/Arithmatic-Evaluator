@@ -361,10 +361,11 @@ public class DataSource {
         return gradeID;
     }
     
-    public static List<TestDetails> fetchGradeTestDetails(String  userEmailID) throws Exception {
+    public static List<TestDetails> fetchGradeTestDetails(String  userEmailID, int institutionID) throws Exception {
         Connection connection = DataSourceConnector.getConnection();
         PreparedStatement statement = connection.prepareStatement(SqlQueries.FETCH_TEST_DETAILS_FOR_USER);
         statement.setString(1, userEmailID);
+        statement.setInt(2, institutionID);
         ResultSet resultSet = statement.executeQuery();
         List<TestDetails> testDetailsList = new ArrayList<>();
         while(resultSet.next()){

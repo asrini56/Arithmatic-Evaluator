@@ -219,7 +219,8 @@ public class UserManagementHandler {
         if(loggedInUser == null || loggedInUser.isEmpty()) {
             throw new Exception("No user logged in");
         }
-        return DataSource.fetchGradeTestDetails(loggedInUser);
+        int institutionID = DataSource.fetchUsersInstitutionID(loggedInUser);
+        return DataSource.fetchGradeTestDetails(loggedInUser, institutionID);
     }
 
 	public static List<TestScore> fetchStudentTestScore() throws Exception {
