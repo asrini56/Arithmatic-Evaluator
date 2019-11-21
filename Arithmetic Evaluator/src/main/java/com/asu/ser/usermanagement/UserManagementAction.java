@@ -4,6 +4,7 @@ import com.asu.ser.authentication.AuthenticationUtil;
 import com.asu.ser.model.Student;
 import com.asu.ser.model.Teacher;
 import com.asu.ser.model.TestQuestion;
+import com.asu.ser.operations.TestHandler;
 import com.asu.ser.model.TestScore;
 import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.conversion.annotations.Conversion;
@@ -243,7 +244,7 @@ public class UserManagementAction {
             return Action.ERROR;
         }
         try {
-            testDetails = UserManagementHandler.fetchTestDetails();
+            testDetails = TestHandler.fetchTestDetails();
         }catch (Exception e) {
             message = "Failed to fetch test details - " + e.getMessage();
             LOGGER.log(Level.SEVERE, "Failed to fetch test details" , e);

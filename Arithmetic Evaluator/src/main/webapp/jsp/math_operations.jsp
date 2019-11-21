@@ -243,8 +243,12 @@
 				}
 				if(parseInt(result) <= 0) {
 					result = 0;
+					$("#expressionResult").html(parseInt(result));
+				} else if(parseInt(result) > 20) {
+					result = "Wow you are trying something hard. The answer to your tough question is " + parseInt(result) 
+					$("#expressionResult").html(result);
 				}
-				$("#expressionResult").html(parseInt(result));
+				
 			});
 
 		}
