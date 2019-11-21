@@ -51,7 +51,8 @@
     <br/>
     <br/>
   <div class="loginDiv">
-      <span>Click here to Login or Register</span>
+      <span>Click here to Login or Register!</span>
+      <br>
       <button type="button" class="loginBtn" style="font-family: fantasy" onclick="loginFunction()">LOGIN or REGISTER </button>
   </div>
 </section>
