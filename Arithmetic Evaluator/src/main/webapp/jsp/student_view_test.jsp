@@ -68,14 +68,12 @@
 	 								'<tr>' +
 	 	      							'<th>Test Id</th>' +
 	 	      							'<th>Test Name</th>' +
-	 	      							'<th>Test For Grade</th>' +
 	 	    						'</tr>';
 
 			$.each(resp.testDetails, function() {
 	 	    tableContent += '<tr>';
 	 	   	tableContent += '<td>' + this.testId + '</td>';
 	 	  	tableContent += '<td>' + this.testName + '</td>';
-	 	   	tableContent += '<td>' + this.grade + '</td>';
 	 	    tableContent += "</tr>";
 	 	    });
 			tableContent += "</table>";

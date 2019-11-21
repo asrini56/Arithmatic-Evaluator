@@ -59,7 +59,7 @@ public class SqlQueries {
     public static final String INSERT_TEST_QUESTION = "INSERT into test_questions(test_id, question, option1, option2, option3, option4, answer) values(?, ?, ?, ?, ?, ?, ?)";
     public static final String DELETE_TEST = "DELETE from tests where test_id = ?";
     public static final String FETCH_TEST_DETAILS ="SELECT test_id, test_name, tests.grade_id, grade_name from tests inner join grades on tests.grade_id = grades.grade_id where created_by_user_id = ?";
-    public static final String FETCH_TEST_DETAILS_GRADE ="SELECT test_id, test_name, tests.grade_id, grade_name from tests inner join grades on tests.grade_id = grades.grade_id where grade_id = ?";
+    public static final String FETCH_TEST_DETAILS_GRADE ="SELECT test_id, test_name from tests where grade_id = ?";
     public static final String FETCH_GRADE_ID = "Select grade_id from student_to_grade where user_id = ?";
     // 	END TESTDETAILS RELATED TABLE QUERIES
 

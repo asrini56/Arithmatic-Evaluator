@@ -371,11 +371,9 @@ public class DataSource {
         while(resultSet.next()){
             int id = resultSet.getInt("test_id");
             String name = resultSet.getString("test_name");
-            String grade = resultSet.getString("grade_name");
             TestDetails testDetails = new TestDetails();
             testDetails.setTestId(id);
             testDetails.setTestName(name);
-            testDetails.setGrade(grade);
             testDetailsList.add(testDetails);
         }
         resultSet.close();
