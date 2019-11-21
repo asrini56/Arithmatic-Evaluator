@@ -65,20 +65,15 @@
 	 								'<tr>' +
 	 	      							'<th>SNo</th>' +
 	 	      							'<th>Test Name</th>' +
-	 	      							'<th>Test For Grade</th>' +
-                                        '<th></th>' +
-	 	      							'<th></th>'+
+	 	      							'<th></th>' +
 	 	    						'</tr>';
 
 			$.each(resp.testDetails, function() {
-	 	    tableContent += '<tr> <a href="/arithmetic-evaluator/student/take_test.action?testID=' + this.testId + '">';
-	 	   	tableContent += '<td>' + count++ + '</td>';
+	 	    tableContent += '<tr>';
+	 	   	tableContent += '<td>' + count++  +'</td>';
 	 	  	tableContent += '<td>' + this.testName + '</td>';
-	 	   	tableContent += '<td>' + this.grade + '</td>';
-            tableContent += '<td> <button onClick="viewThisTest(\'' + this.testId + '\')">Remove Student</button></td>';
-	 	    tableContent += "</tr>";
 	 	  	tableContent += '<td> <button onClick="takeTest(\'' + this.testId + '\')">Take Test</button></td>';
-	 	    tableContent += "</a></tr>";
+	 	    tableContent += "</tr>";
 	 	    });
 			tableContent += "</table>";
 			$("#teacher1").html(tableContent);
@@ -89,13 +84,13 @@
          	window.location="addTeacher_page.action";
      	}
         
-        function viewThisTest(testId)
+        function viewThisTest(testId) {
             var takeTest = confirm("Are you sure you want to take this test " + testId + " ? ");
      		if(takeTest) {
      			var url="/arithmetic-evaluator/student/takeThisTest.action?testId=" + testId;
-     			window.location = ""
+     			window.location = url;
      		}
-
+        }
 	function takeTest(testID) {
 		var url="/arithmetic-evaluator/student/take_test.action?testID=" + testID;
 		window.location=url;

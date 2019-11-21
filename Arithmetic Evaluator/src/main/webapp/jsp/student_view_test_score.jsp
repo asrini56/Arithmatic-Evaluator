@@ -70,7 +70,7 @@
 			$.each(resp.testScoreList, function() {
 	 	    tableContent += '<tr>';
 	 	  	tableContent += '<td>' + this.testName + '</td>';
-	 	   	tableContent += '<td>' + this.score + '</td>';
+	 	   	tableContent += '<td>' + this.score + ' %</td>';
 	 	    tableContent += "</tr>";
 	 	    });
 			tableContent += "</table>";
