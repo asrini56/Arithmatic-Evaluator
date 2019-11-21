@@ -1,7 +1,9 @@
 package com.asu.ser.operations;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.json.*;
 
@@ -21,6 +23,7 @@ import com.asu.ser.usermanagement.UserManagementHandler;
 public class TestHandler {
 	
 	private static final String JSON_KEY_QUESTIONS = "questions";
+	private static final String JSON_KEY_QUESTION_ID = "questionID";
 	private static final String JSON_KEY_QUESTION = "question";
 	private static final String JSON_KEY_OPTION1 = "option1";
 	private static final String JSON_KEY_OPTION2 = "option2";
@@ -67,6 +70,43 @@ public class TestHandler {
 			DataSource.deleteTest(details.getTestId());
 			throw e;
 		}
+	}
+	
+	
+	// Here implement iterator for parsing questions
+	public static void submitTest(String questionsJSONAsString, int testID) throws Exception {
+		String loggedInUser = AuthenticationUtil.getLoggedInUser();
+        if(loggedInUser == null || loggedInUser.isEmpty()) {
+            throw new Exception("No user logged in");
+        }
+        TestDetails details = DataSource.fetchTestDetailsForID(testID, true);
+        
+        
+        JSONObject questionsJSON = new JSONObject(questionsJSONAsString);
+		JSONArray questionsArr = questionsJSON.getJSONArray(JSON_KEY_QUESTIONS);
+		Map<Integer, TestQuestion> testQuestions = new HashMap<>();
+		for(int i= 0 ; i < questionsArr.length(); i++) {
+			JSONObject questionObj = questionsArr.getJSONObject(i);
+			int questionID = questionObj.getInt(JSON_KEY_QUESTION_ID);
+			int answer = questionObj.getInt(JSON_KEY_ANSWER);
+			TestQuestion testQuestion = new TestQuestion();
+			
+			testQuestion.setAnswer(answer);
+			testQuestions.put(questionID, testQuestion);
+		}
+		int score = 0;
+		int totalScore = 0;
+		for(TestQuestion question : details.getQuestions()) {
+			int studentAnswer = testQuestions.get(question.getId()).getAnswer();
+			int actualAnswer = question.getAnswer();
+			totalScore++;
+			if(studentAnswer == actualAnswer) {
+				score++;
+			}
+		}
+		int finalPercent = (score / totalScore) * 100;
+		int studentTestID = DataSource.insertStudentTest(DataSource.fetchUserID(loggedInUser), testID, finalPercent);
+		DataSource.insertStudentTestAnswers(studentTestID, testQuestions);
 	}
 	
     public static List<TestDetails> fetchTestDetails() throws Exception {

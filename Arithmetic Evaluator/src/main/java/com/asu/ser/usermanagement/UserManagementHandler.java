@@ -213,13 +213,15 @@ public class UserManagementHandler {
         if(loggedInUser == null || loggedInUser.isEmpty()) {
             throw new Exception("No user logged in");
         }
-        int userRoleID = DataSource.fetchUserID(loggedInUser);
-        int gradeID = DataSource.fetchGradeID(userRoleID);
-        int studentRoleID = USER_ROLES.get(ROLE_STUDENT);
-        if(userRoleID != studentRoleID) {
-            throw new Exception("Illegal operation - only students have permission to view tests");
-        }
-        return DataSource.fetchGradeTestDetails(gradeID);
+//        int userID = DataSource.fetchUserID(loggedInUser);
+//        int userRoleID = DataSource.fetchUserRole(userID);
+//        int gradeID = DataSource.fetchGradeID(userRoleID);
+//        int studentRoleID = USER_ROLES.get(ROLE_STUDENT);
+//        System.out.println("Logged in userid " + userRoleID + " student ID " + studentRoleID);
+//        if(userRoleID != studentRoleID) {
+//            throw new Exception("Illegal operation - only students have permission to view tests ");
+//        }
+        return DataSource.fetchGradeTestDetails(loggedInUser);
     }
 
     public static int getTeacherRoleID() {

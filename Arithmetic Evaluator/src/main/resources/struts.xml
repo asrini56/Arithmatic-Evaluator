@@ -175,6 +175,10 @@
             <result type="json"/>
         </action>
 
+        <action name="student/test/submit" class="com.asu.ser.operations.TestAction" method="submitTest">
+            <result type="json"/>
+        </action>
+
     </package>
 
 </struts>

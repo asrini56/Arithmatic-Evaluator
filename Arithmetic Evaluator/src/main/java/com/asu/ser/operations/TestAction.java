@@ -5,6 +5,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.asu.ser.authentication.AuthenticationUtil;
 import com.asu.ser.usermanagement.TestDetails;
 import com.opensymphony.xwork2.Action;
 
@@ -37,6 +38,21 @@ public class TestAction {
 			LOGGER.log(Level.SEVERE, message, e);
 		}
 		
+		return Action.SUCCESS;
+	}
+	
+	public String submitTest(){
+		try {
+			questionsJSONAsString = URLDecoder.decode(questionsJSONAsString, StandardCharsets.UTF_8.toString());
+			LOGGER.log(Level.INFO, "Submitting test " + questionsJSONAsString + " for studnet " + AuthenticationUtil.getLoggedInUser());
+			TestHandler.submitTest(questionsJSONAsString, testID);
+			message = "Successfully submitted test";
+			LOGGER.log(Level.INFO, "message");
+		} catch (Exception e) {
+			message = "Failed to submit test: Internal Server Error for student";
+			LOGGER.log(Level.SEVERE, message + AuthenticationUtil.getLoggedInUser(), e);
+			e.printStackTrace();
+		}
 		return Action.SUCCESS;
 	}
 	
