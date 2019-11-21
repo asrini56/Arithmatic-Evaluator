@@ -19,8 +19,8 @@
           	<ul class="nav navbar-nav navbar-right">
 
     				<li><a href="/arithmetic-evaluator/student/dashboard.action">Dashboard</a></li>
-    				<li class="active fontSansSerif"><a href="/arithmetic-evaluator/student/taketests_page.action">Take Test</a></li>
-    				<li class=""><a href="/arithmetic-evaluator/student/viewtestscores_page.action">View Scores</a></li>
+    				<li class=""><a href="/arithmetic-evaluator/student/taketests_page.action">Take Test</a></li>
+    				<li class="active fontSansSerif"><a href="/arithmetic-evaluator/student/viewtestscores_page.action">View Scores</a></li>
     				<li>
     					<div class="dropdown">
  							<a href="#" class="dropbtn">
@@ -53,7 +53,7 @@
 	});
 
 	window.onload = function() {
-		fetchGradeTesScoreDetails();
+		fetchGradeTestScoreDetails();
  	};
 
 	function fetchGradeTestScoreDetails() {
@@ -63,14 +63,12 @@
 	 		var tableContent = '<div class="header">Test Score Details</div>' +
 	 							'<table cellspacing="0">' +
 	 								'<tr>' +
-	 	      							'<th>Test Id</th>' +
 	 	      							'<th>Test Name</th>' +
 	 	      							'<th>Test Score</th>' +
 	 	    						'</tr>';
 
-			$.each(resp.testDetails, function() {
+			$.each(resp.testScoreList, function() {
 	 	    tableContent += '<tr>';
-	 	   	tableContent += '<td>' + this.testId + '</td>';
 	 	  	tableContent += '<td>' + this.testName + '</td>';
 	 	   	tableContent += '<td>' + this.score + '</td>';
 	 	    tableContent += "</tr>";
@@ -79,3 +77,6 @@
 			$("#student1").html(tableContent);
 	 	});
 	}
+	</script>
+    </body>
+</html>
