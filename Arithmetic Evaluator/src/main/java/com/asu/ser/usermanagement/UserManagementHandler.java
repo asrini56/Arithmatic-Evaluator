@@ -191,7 +191,7 @@ public class UserManagementHandler {
         return institutionID != null;
     }
 
-    public static void removeTeacher(String teacherEmailID) throws Exception {
+    public static void removeUser(String userEmailID) throws Exception {
     	String loggedInUser = AuthenticationUtil.getLoggedInUser();
     	if(loggedInUser == null || loggedInUser.isEmpty()) {
     		throw new Exception("No user logged in");
@@ -200,10 +200,11 @@ public class UserManagementHandler {
     	int userRoleID = DataSource.fetchUserRole(userID);
     	int adminRoleID = USER_ROLES.get(ROLE_ADMIN);
     	if(userRoleID != adminRoleID) {
-    		throw new Exception("Illegal operation - user does not have permission to remove teacher");
+    		throw new Exception("Illegal operation - user does not have permission to remove user");
     	}
-    	DataSource.deleteUserWithEmailID(teacherEmailID);
+    	DataSource.deleteUserWithEmailID(userEmailID);
     }
+
 
 	public static void sendTeacherAccountPasswordEmail(String firstName, String lastName, String teacherEmailID,
 			String password, String adminEmailID) throws Exception {

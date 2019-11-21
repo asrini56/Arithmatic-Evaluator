@@ -67,7 +67,7 @@ function goToTakeTestsPage(){
     window.location="/arithmetic-evaluator/student/taketests_page.action";
 }
 function goToViewScoresPage(){
-    alert("Page under construction, kindly bear with us!")
+    window.location="/arithmetic-evaluator/student/viewtestscores_page.action";
 }
 </script>
 

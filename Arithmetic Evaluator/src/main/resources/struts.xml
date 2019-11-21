@@ -60,6 +60,9 @@
 			 <result type="json"/>
 		</action>
 
+        <action name="admin/student/remove" class="com.asu.ser.usermanagement.UserManagementAction" method="removeStudent">
+             <result type="json"/>
+        </action>
 
         <action name="admin/addStudent_page">
             <result type="dispatcher">/jsp/student_register.jsp</result>
@@ -120,8 +123,12 @@
             <result type="json"/>
         </action>
 
-        <action name="student/testscoredetails" class="com.asu.ser.usermanagement.UserManagementAction" method="fetchTestScoreDetails">
+        <action name="student/viewTestScores" class="com.asu.ser.usermanagement.UserManagementAction" method="fetchTestScoreDetails">
             <result type="json"/>
+        </action>
+
+        <action name="student/viewtestscores_page">
+            <result type="dispatcher">/jsp/student_view_test_score.jsp</result>
         </action>
 
 		<action name="teacher/dashboard">
