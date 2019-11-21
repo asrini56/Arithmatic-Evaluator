@@ -60,6 +60,11 @@ public class SqlQueries {
     public static final String INSERT_TEST = "INSERT into tests(test_name, grade_id, created_by_user_id) values(?, ?, ?)";
     public static final String INSERT_TEST_QUESTION = "INSERT into test_questions(test_id, question, option1, option2, option3, option4, answer) values(?, ?, ?, ?, ?, ?, ?)";
     public static final String DELETE_TEST = "DELETE from tests where test_id = ?";
+
+    public static final String FETCH_TEST_DETAILS ="SELECT test_id, test_name, tests.grade_id, grade_name from tests inner join grades on tests.grade_id = grades.grade_id where created_by_user_id = ?";
+    public static final String FETCH_TEST_DETAILS_GRADE ="SELECT test_id, test_name, tests.grade_id, grade_name from tests inner join grades on tests.grade_id = grades.grade_id where grade_id = ?";
+    public static final String FETCH_GRADE_ID = "Select grade_id from student_to_grade where user_id = ?";
+
     public static final String FETCH_TEST_DETAILS ="SELECT test_id, test_name, tests.grade_id, grade_name from tests inner join grades on tests.grade_id = grades.grade_id"
     		+ " where created_by_user_id = ?";
     public static final String FETCH_TEST_DETAILS_FOR_ID = "SELECT test_id, test_name from tests where test_id = ?";
@@ -69,6 +74,7 @@ public class SqlQueries {
     public static final String FETCH_GRADE_ID = "SELECT grade_id from student_to_grade where user_id = ?";    
     public static final String FETCH_TEST_DETAILS_FOR_USER = "SELECT test_id, test_name, tests.grade_id from tests inner join student_to_grade on student_to_grade.grade_id "
     		+ "= tests.grade_id inner join users on users.user_id = student_to_grade.user_id where users.email_id=?";
+
     public static final String FETCH_GRADE_NAME = "Select grade_name from grades where grade_id = ?";
 
     // 	END TESTDETAILS RELATED TABLE QUERIES

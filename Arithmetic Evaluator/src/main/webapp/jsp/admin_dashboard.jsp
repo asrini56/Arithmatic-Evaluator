@@ -50,8 +50,7 @@
 				</div>
 			</div>
 		</main>
-		<footer class="footer"><span class="glyphicon glyphicon-copyright-mark"></span>  Copyright</footer>
-	</div>
+			</div>
 	<script>
 
 function goToListTeachersPage(){

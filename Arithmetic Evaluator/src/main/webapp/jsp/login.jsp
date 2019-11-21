@@ -50,14 +50,7 @@
 					</div>
 				</div>
 			</div>
-			<h2>OR</h2>
-   			<p>Try Our site as a</p>
     	</div>
-  		<div class="btn-grp">
-           	<button class="button button1" onclick="Function1grade()"> <h4> 1ST GRADE STUDENT </h4></button>
-			<button class="button button1" onclick="Function6grade()"> <h4> 6TH GRADE STUDENT </h4></button>
-  			<button class="button button1" onclick="Function9grade()"> <h4> 9TH GRADE STUDENT </h4></button>
-  		</div>
 	</div>
 	
 <script>
@@ -91,17 +84,6 @@ function loginFunction() {
 	document.getElementById("register-form").submit();
 }
 
-function Function1grade(){
-	window.location.assign("grade1/operations_page.action")
-}
-
-function Function6grade(){
-	window.location.assign("grade6/operations_page.action")
-}
-
-function Function9grade(){
-	window.location.assign("grade9/operations_page.action")
-}
 var ctx = "<%=request.getContextPath()%>"
 history.pushState(null, null, ctx +"/login_page.action");
 
