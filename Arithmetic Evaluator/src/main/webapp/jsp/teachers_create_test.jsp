@@ -328,12 +328,10 @@
 			console.log("url" + url);
 			sendAjaxRequest(url, function(resp) {
 				var response = resp.message;
-				console.log(response);
-				var modal = document.getElementById("myModal");
-				modal.style.display = "none";
-				$("#message").text(response);
-				$("#message").show();
-				setTimeout(function() {$("#message").hide();}, 5000);
+				if(response.includes("Success")){
+					window.location="/arithmetic-evaluator/teacher/viewtests_page.action";
+				}
+				alert(response);
 			});
 			
 			

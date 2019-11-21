@@ -62,7 +62,7 @@
     <h1 class="splitHeading">Preview</h1>
     <div class= "questionPreviewTemplateDiv" style="display:none">
    		<div class="questionPreviewTemplate" id="questionPreviewTemplate">
-   			<h2>Question : <span id="previewQuestion"></span></h2>
+   			<h2><span id="previewQuestion"></span></h2>
    			<h3> Answer is: <span id="previewAnswer"></span><br/></h3>
    			<hr>
    		</div>
@@ -123,7 +123,6 @@
 			var option3 = $(this).find("#option3").val().trim();
 			var option4 = $(this).find("#option4").val().trim();
 
-			console.log
 			var radio1Value = $(this).find("#answerOpt1").is(':checked');
 			var radio2Value = $(this).find("#answerOpt2").is(':checked');
 			var radio3Value = $(this).find("#answerOpt3").is(':checked');
@@ -144,7 +143,7 @@
 				return;
 			}
 			
-			console.log(answer);
+			console.log(question);
 			$previewElement = $('#questionPreviewTemplate').clone();
 			$previewElement.find("#previewQuestion").text(question);
 			$previewElement.find("#previewAnswer").text(answer);
@@ -202,6 +201,9 @@
 		console.log("url" + url);
 		sendAjaxRequest(url, function(resp) {
 			var response = resp.message;
+			if(response.includes("Success")){
+				window.location="/arithmetic-evaluator/student/viewtestscores_page.action";
+			}
 			alert(response);
 		});
 		
