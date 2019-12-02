@@ -79,18 +79,11 @@
 	 	});
 	}
 	function confirmViewTestDetails(testId) {
-         		var confirmView = confirm("Do you want to view the correct answers for " + testId + " ? ");
+         		var confirmView = confirm("Do you want to view the correct answers"+" ? ");
          		if(confirmView) {
-         			var url="" + testId;
-         			sendAjaxRequest(url, function(resp){
-         				$("#message").text(resp.message);
-         				$("#message").show();
-         				setTimeout(function() {$("#message").hide();}, 4000);
-         				fetchGradeTestScoreDetails();
-         			});
+         			window.location = "viewCorrectAnswers_page.action?testId=" + testId;
          		}
          	}
-
 	</script>
     </body>
 </html>

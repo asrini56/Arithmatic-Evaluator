@@ -55,8 +55,20 @@
         		fetchCorrectAnswers();
          	};
 
+         	function getParameterByName(name) {
+                                url = window.location.href;
+                                name = name.replace(/[\[\]]/g, '\\$&');
+                                var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+                                    results = regex.exec(url);
+                                if (!results) return null;
+                                if (!results[2]) return '';
+                                return decodeURIComponent(results[2].replace(/\+/g, ' '));
+                            }
+
+
         	function fetchCorrectAnswers() {
-        	    var url = ""
+        	    var a = getParameterByName("testId");
+        	    var url = "fetchStudentCorrectAnswers.action?testId=" + a
         		sendAjaxRequest(url, function(resp){
         		    console.log(resp);
         	 		var tableContent = '<div class="header">Test Details</div>' +
@@ -70,8 +82,8 @@
         			$.each(resp.testAnswersList, function() {
         	 	    tableContent += '<tr>';
         	 	  	tableContent += '<td>' + this.question + '</td>';
-        	 	   	tableContent += '<td>' + this.correctAnswer + ' %</td>';
-        	 	   	tableContent += '<td>' + this.actualAnswer + ' %</td>';
+        	 	   	tableContent += '<td>' + this.correctAnswer + ' </td>';
+        	 	   	tableContent += '<td>' + this.actualAnswer + ' </td>';
         	 	    tableContent += "</tr>";
         	 	    });
         			tableContent += "</table>";
