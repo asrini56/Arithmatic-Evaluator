@@ -496,7 +496,9 @@ public class DataSource {
         while(resultSet.next()){
             String name = resultSet.getString("test_name");
             String score = resultSet.getString("score");
+            String testId = resultSet.getString("test_id");
             TestScore testScore = new TestScore();
+            testScore.setTestId(testId);
             testScore.setTestName(name);
             testScore.setScore(score);
             testScoreList.add(testScore);

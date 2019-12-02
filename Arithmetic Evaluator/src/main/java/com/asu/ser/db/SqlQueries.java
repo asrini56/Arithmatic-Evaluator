@@ -85,7 +85,7 @@ public class SqlQueries {
 
     public static final String INSERT_STUDENT_TO_GRADE = "INSERT INTO student_to_grade (user_id, grade_id) VALUES (?,?)";
 
-    public static final String SELECT_STUDENT_TEST_SCORE = "SELECT tests.test_name, student_test.score from student_test " +
+    public static final String SELECT_STUDENT_TEST_SCORE = "SELECT tests.test_name, tests.test_id, student_test.score from student_test " +
             "inner join tests on tests.test_id = student_test.test_id where student_test.student_id = ?";                                          
 
     public static final String SELECT_STUDENT_TEST_CORRECT_ANSWERS = "SELECT t.question, t.answer as correct_answer,t.option1, t.option2, t.option3, t.option4, student_test_answers.answer as actual_answer from test_questions as t " +
