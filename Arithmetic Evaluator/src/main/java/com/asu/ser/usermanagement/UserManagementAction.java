@@ -3,6 +3,7 @@ package com.asu.ser.usermanagement;
 import com.asu.ser.authentication.AuthenticationUtil;
 import com.asu.ser.model.Student;
 import com.asu.ser.model.Teacher;
+import com.asu.ser.model.TestAnswers;
 import com.asu.ser.model.TestQuestion;
 import com.asu.ser.operations.TestHandler;
 import com.asu.ser.model.TestScore;
@@ -41,6 +42,7 @@ public class UserManagementAction {
     private String confirmPassword;
     private List<TestDetails> testDetails;
     private List<TestScore> testScoreList;
+    private List<TestAnswers> testAnswersList;
 
 
     private static Logger LOGGER = Logger.getLogger(UserManagementAction.class.getName());
@@ -280,6 +282,20 @@ public class UserManagementAction {
         return Action.SUCCESS;
     }
 
+    public String fetchStudentTestCorrectAnswers() {
+        if(StringUtils.isEmpty(AuthenticationUtil.getLoggedInUser())){
+            message = "Please log in to access the page.";
+            return Action.ERROR;
+        }
+        try {
+            testAnswersList = UserManagementHandler.fetchStudentTestCorrectAnswers(testId);
+        }catch (Exception e) {
+            message = "Failed to fetch test details - " + e.getMessage();
+            LOGGER.log(Level.SEVERE, "Failed to fetch test score details" , e);
+        }
+        return Action.SUCCESS;
+    }
+
     public String fetchStudentGrade(){
         try {
             grade = UserManagementHandler.fetchGrade().toLowerCase().replace("-", "");
@@ -411,4 +427,19 @@ public class UserManagementAction {
         this.testScoreList = testScoreList;
     }
 
+    public int getTestId() {
+        return testId;
+    }
+
+    public void setTestId(int testId) {
+        this.testId = testId;
+    }
+
+    public List<TestAnswers> getTestAnswersList() {
+        return testAnswersList;
+    }
+
+    public void setTestAnswersList(List<TestAnswers> testAnswersList) {
+        this.testAnswersList = testAnswersList;
+    }
 }
