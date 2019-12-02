@@ -15,6 +15,7 @@ import com.asu.ser.model.TestQuestion;
 import com.asu.ser.usermanagement.Grade;
 import com.asu.ser.usermanagement.TestDetails;
 import com.asu.ser.usermanagement.UserManagementHandler;
+import com.asu.ser.util.MessageConstants;
 
 /**
  * 
@@ -42,7 +43,7 @@ public class TestHandler {
 		details.setGradeId(testForGrade);
 		String loggedInUser = AuthenticationUtil.getLoggedInUser();
     	if(loggedInUser == null || loggedInUser.isEmpty()) {
-    		throw new Exception("No user logged in");
+    		throw new Exception(MessageConstants.NO_USER_LOGGED_IN);
     	}
     	int userID = DataSource.fetchUserID(loggedInUser);
     	int gradeID = DataSource.getGradeID(Grade.get(testForGrade));
@@ -75,11 +76,18 @@ public class TestHandler {
 	}
 	
 	
-	// Here implement iterator for parsing questions
+	/**
+	 * Function saves the questions and answers for a given test in DB
+	 * Uses TestQuestion Iterator to iterate over questions to add into DB.
+	 * 
+	 * @param questionsJSONAsString
+	 * @param testID
+	 * @throws Exception
+	 */
 	public static void submitTest(String questionsJSONAsString, int testID) throws Exception {
 		String loggedInUser = AuthenticationUtil.getLoggedInUser();
         if(loggedInUser == null || loggedInUser.isEmpty()) {
-            throw new Exception("No user logged in");
+            throw new Exception(MessageConstants.NO_USER_LOGGED_IN);
         }
         
         LOGGER.log(Level.SEVERE, "Test id is " + testID);
@@ -100,18 +108,29 @@ public class TestHandler {
 		}
 		int score = 0;
 		int totalScore = 0;
+		
+		TestQuestionsList qL = details.getQuestionsList();
+		if(qL!= null) {
+			int valScored = 0;
+			QuestionsIterator itr = qL.getIterator();
+			while(itr.hasNext()) {
+				TestQuestion question = itr.next();
+				if(question!=null) {
+					valScored += question.getAnswer();
+					totalScore += valScored;
+				}
+			}
+		}
+		
 		for(TestQuestion question : details.getQuestions()) {
 			int studentAnswer = testQuestions.get(question.getId()).getAnswer();
 			int actualAnswer = question.getAnswer();
 			totalScore++;
-			System.out.println("student answer " + studentAnswer + " actial " + actualAnswer);
 			if(studentAnswer == actualAnswer) {
 				score++;
 			}
 		}
-		System.out.println("score " + score + " total " + totalScore);
 		float finalPercent = ((float)score / (float)totalScore) * 100;
-		System.out.println("final percentage");
 		int studentTestID = DataSource.insertStudentTest(DataSource.fetchUserID(loggedInUser), testID, (int)finalPercent);
 		DataSource.insertStudentTestAnswers(studentTestID, testQuestions);
 	}
@@ -119,13 +138,13 @@ public class TestHandler {
     public static List<TestDetails> fetchTestDetails() throws Exception {
         String loggedInUser = AuthenticationUtil.getLoggedInUser();
         if(loggedInUser == null || loggedInUser.isEmpty()) {
-            throw new Exception("No user logged in");
+            throw new Exception(MessageConstants.NO_USER_LOGGED_IN);
         }
         int userID = DataSource.fetchUserID(loggedInUser);
         int userRoleID = DataSource.fetchUserRole(userID);
         int teacherRoleID = UserManagementHandler.getTeacherRoleID();
         if(userRoleID != teacherRoleID) {
-            throw new Exception("Illegal operation - user does not have permission to remove teacher");
+            throw new Exception(MessageConstants.ILLEGAL_OPERATION_NO_PERMISSION);
         }
         return DataSource.fetchTestDetails(userID);
     }
@@ -133,7 +152,7 @@ public class TestHandler {
     public static TestDetails fetchTestDetailsForID(int testID) throws Exception {
     	String loggedInUser = AuthenticationUtil.getLoggedInUser();
         if(loggedInUser == null || loggedInUser.isEmpty()) {
-            throw new Exception("No user logged in");
+            throw new Exception(MessageConstants.NO_USER_LOGGED_IN);
         }
         return DataSource.fetchTestDetailsForID(testID, false);
     }
