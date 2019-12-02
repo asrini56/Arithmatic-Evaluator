@@ -56,6 +56,7 @@
          	};
 
         	function fetchCorrectAnswers() {
+        	    var url = ""
         		sendAjaxRequest(url, function(resp){
         		    console.log(resp);
         	 		var tableContent = '<div class="header">Test Details</div>' +

@@ -64,18 +64,33 @@
 	 								'<tr>' +
 	 	      							'<th>Test Name</th>' +
 	 	      							'<th>Test Score</th>' +
+	 	      							'<th>View Test Details</th' +
 	 	    						'</tr>';
 
 			$.each(resp.testScoreList, function() {
 	 	    tableContent += '<tr>';
 	 	  	tableContent += '<td>' + this.testName + '</td>';
 	 	   	tableContent += '<td>' + this.score + ' %</td>';
+	 	   	tableContent += '<td> <button onClick="confirmViewTestDetails(\'' + this.testId + '\')">View Details</button></td>';
 	 	    tableContent += "</tr>";
 	 	    });
 			tableContent += "</table>";
 			$("#student1").html(tableContent);
 	 	});
 	}
+	function confirmViewTestDetails(testId) {
+         		var confirmView = confirm("Do you want to view the correct answers for " + testId + " ? ");
+         		if(confirmView) {
+         			var url="" + testId;
+         			sendAjaxRequest(url, function(resp){
+         				$("#message").text(resp.message);
+         				$("#message").show();
+         				setTimeout(function() {$("#message").hide();}, 4000);
+         				fetchGradeTestScoreDetails();
+         			});
+         		}
+         	}
+
 	</script>
     </body>
 </html>
