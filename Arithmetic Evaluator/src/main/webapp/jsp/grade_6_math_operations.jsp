@@ -16,10 +16,10 @@
 		<nav class="navbar navbar-inverse" style="margin-bottom:0px !important">
   			<div class="container-fluid">
     			<div class="navbar-header">
-      				<a class="navbar-brand titleText" href="#">Arithmetic Evaluator</a>
+      				<a class="navbar-brand titleText" href="/arithmetic-evaluator/landing_page.action">Arithmetic Evaluator</a>
     			</div>
     			<ul class="nav navbar-nav navbar-right">
-    				<li class="active fontSansSerif"><a href="#">Home</a></li>
+    				<li class="active fontSansSerif"><a href="/arithmetic-evaluator/landing_page.action">Home</a></li>
     				<li>
     					<div class="dropdown">
  							<a href="#" class="dropbtn">
@@ -66,6 +66,15 @@
 					<div id="operationsDiv" class="operationsDiv"
 						ondragenter="return dragEnter(event)"
 						ondrop="return dragDrop(event)" ondragover="return dragOver(event)">
+						
+						<div id="num10" class="numbersBox" draggable="true"
+							ondragenter="return dragEnter(event)"
+							ondragstart="return dragStart(event)"
+							ondrop="return dragDrop(event)" ondragover="return dragOver(event)">
+							<button type="button" style="background-color: #438687">0</button>
+						</div>
+						
+
 						<div id="num1" class="numbersBox" draggable="true"
 							ondragenter="return dragEnter(event)"
 							ondragstart="return dragStart(event)"
@@ -94,13 +103,14 @@
 							<button type="button" style="background-color: #438687">4</button>
 						</div>
 		
+						<br> <br>
 						<div id="num5" class="numbersBox" draggable="true"
 							ondragenter="return dragEnter(event)"
 							ondragstart="return dragStart(event)"
 							ondrop="return dragDrop(event)" ondragover="return dragOver(event)">
 							<button type="button" style="background-color: #438687">5</button>
 						</div>
-						<br> <br>
+						
 						<div id="num6" class="numbersBox" draggable="true"
 							ondragenter="return dragEnter(event)"
 							ondragstart="return dragStart(event)"
@@ -129,12 +139,6 @@
 							<button type="button" style="background-color: #438687">9</button>
 						</div>
 		
-						<div id="num10" class="numbersBox" draggable="true"
-							ondragenter="return dragEnter(event)"
-							ondragstart="return dragStart(event)"
-							ondrop="return dragDrop(event)" ondragover="return dragOver(event)">
-							<button type="button" style="background-color: #438687">0</button>
-						</div>
 		
 						<br /> <br /> <br /> <br>
 						<hr>
@@ -618,6 +622,7 @@
 			$(".performOperation").each(function(index) {
 				$(this).remove();
 			});
+			$("#expressionResult").html("");
 		}
 
 		var modal = document.getElementById("myModal");

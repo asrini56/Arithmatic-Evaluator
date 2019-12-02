@@ -15,10 +15,10 @@
 		<nav class="navbar navbar-inverse" style="margin-bottom:0px !important">
   			<div class="container-fluid">
     			<div class="navbar-header">
-      				<a class="navbar-brand titleText" href="#">Arithmetic Evaluator</a>
+      				<a class="navbar-brand titleText" href="/arithmetic-evaluator/landing_page.action">Arithmetic Evaluator</a>
     			</div>
     			<ul class="nav navbar-nav navbar-right">
-    				<li class="active fontSansSerif"><a href="#">Home</a></li>
+    				<li class="active fontSansSerif"><a href="/arithmetic-evaluator/landing_page.action">Home</a></li>
     				<li>
     					<div class="dropdown">
  							<a href="#" class="dropbtn">
@@ -272,6 +272,7 @@
 			$(".performOperation").each(function(index) {
 				$(this).remove();
 			});
+			$("#expressionResult").html("");
 		}
 		
 		// Get the modal
