@@ -34,3 +34,50 @@
     			</ul>
         	</div>
   		</nav>
+
+  		<section style="display:inline-block; text-align:center; margin-left:23%">
+                			<div id="message" class="alert alert-info display-none"></div>
+                			<div class="table-users" id="student1"></div>
+               </section>
+
+
+        	<script type="text/javascript">
+        	$( document ).ready(function() {
+        		var message = "${message}";
+        		if(message) {
+        			$("#message").text(message);
+        			$("#message").show();
+        			setTimeout(function() {$("#message").hide();}, 5000);
+        		}
+        	});
+
+        	window.onload = function() {
+        		fetchCorrectAnswers();
+         	};
+
+        	function fetchCorrectAnswers() {
+        		sendAjaxRequest(url, function(resp){
+        		    console.log(resp);
+        	 		var tableContent = '<div class="header">Test Details</div>' +
+        	 							'<table cellspacing="0">' +
+        	 								'<tr>' +
+        	 	      							'<th>Question</th>' +
+        	 	      							'<th>Correct Answer</th>' +
+        	 	      							'<th>Your Answer</th>' +
+        	 	    						'</tr>';
+
+        			$.each(resp.testAnswersList, function() {
+        	 	    tableContent += '<tr>';
+        	 	  	tableContent += '<td>' + this.question + '</td>';
+        	 	   	tableContent += '<td>' + this.correctAnswer + ' %</td>';
+        	 	   	tableContent += '<td>' + this.actualAnswer + ' %</td>';
+        	 	    tableContent += "</tr>";
+        	 	    });
+        			tableContent += "</table>";
+        			$("#student1").html(tableContent);
+        	 	});
+        	}
+        	</script>
+            </body>
+        </html>
+
