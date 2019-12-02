@@ -88,6 +88,9 @@ public class SqlQueries {
     public static final String SELECT_STUDENT_TEST_SCORE = "SELECT tests.test_name, student_test.score from student_test " +
             "inner join tests on tests.test_id = student_test.test_id where student_test.student_id = ?";                                          
 
-
+    public static final String SELECT_STUDENT_TEST_CORRECT_ANSWERS = "SELECT t.question, t.answer as correct_answer,t.option1, t.option2, t.option3, t.option4, student_test_answers.answer as actual_answer from test_questions as t " +
+            "inner join student_test_answers on student_test_answers.question_id = t.question_id " +
+            "inner join student_test on student_test.id = student_test_answers.student_test_id " +
+            "where student_test.student_id = ? and student_test.test_id = ?";
 
 }
