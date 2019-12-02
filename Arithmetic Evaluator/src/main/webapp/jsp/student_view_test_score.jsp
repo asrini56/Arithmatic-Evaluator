@@ -64,18 +64,26 @@
 	 								'<tr>' +
 	 	      							'<th>Test Name</th>' +
 	 	      							'<th>Test Score</th>' +
+	 	      							'<th>View Test Details</th' +
 	 	    						'</tr>';
 
 			$.each(resp.testScoreList, function() {
 	 	    tableContent += '<tr>';
 	 	  	tableContent += '<td>' + this.testName + '</td>';
 	 	   	tableContent += '<td>' + this.score + ' %</td>';
+	 	   	tableContent += '<td> <button onClick="confirmViewTestDetails(\'' + this.testId + '\')">View Details</button></td>';
 	 	    tableContent += "</tr>";
 	 	    });
 			tableContent += "</table>";
 			$("#student1").html(tableContent);
 	 	});
 	}
+	function confirmViewTestDetails(testId) {
+         		var confirmView = confirm("Do you want to view the correct answers"+" ? ");
+         		if(confirmView) {
+         			window.location = "viewCorrectAnswers_page.action?testId=" + testId;
+         		}
+         	}
 	</script>
     </body>
 </html>
