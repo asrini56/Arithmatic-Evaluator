@@ -45,7 +45,10 @@
 				style="background-color: white; text-align: center">
 				<br>
 				<h1>CREATE TEST</h1>
-				<img src="https://previews.123rf.com/images/iqoncept/iqoncept1405/iqoncept140500026/28029804-quiz-clipboard-of-questions-and-answers-marked-in-checklist-boxes.jpg"
+
+
+				<img src="/arithmetic-evaluator/image/createtest.jpg"
+
 					alt="Alps" style="width: 100%; max-height: 510px">
 			</div>
 
@@ -53,14 +56,15 @@
 			<div class="w3-card-4" onclick="goToViewTestsPage()" style="background-color: white; text-align: center">
 				<br>
 				<h1>VIEW TESTS</h1>
-				<img src="https://i.dlpng.com/static/png/413588_preview.png"
+
+
+				<img src="/arithmetic-evaluator/image/viewtest.png"
+
 					alt="Alps" style="width: 100%; max-height: 510px">
 			</div>
 
 		</div>
 		</main>
-		<footer class="footer"><span class="glyphicon glyphicon-copyright-mark"></span>  Copyright</footer>
-
 	</div>
 	
 	<script>

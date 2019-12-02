@@ -9,10 +9,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.asu.ser.model.Student;
 import com.asu.ser.model.Teacher;
 import com.asu.ser.model.TestQuestion;
+import com.asu.ser.model.TestScore;
 import com.asu.ser.model.User;
-import com.asu.ser.usermanagement.Grade;
 import com.asu.ser.usermanagement.TestDetails;
 
 /**
@@ -227,6 +228,31 @@ public class DataSource {
         return teachers;
     }
 
+    public static List<Student> fetchStudents(int institutionID) throws Exception {
+        Connection connection = DataSourceConnector.getConnection();
+        PreparedStatement statement = connection.prepareStatement(SqlQueries.FETCH_STUDENT_DETAILS);
+        statement.setInt(1, institutionID);
+        ResultSet resultSet = statement.executeQuery();
+        List<Student> students = new ArrayList<>();
+        while(resultSet.next()){
+            int userID = resultSet.getInt("user_id");
+            String emailID = resultSet.getString("email_id");
+            String firstName = resultSet.getString("first_name");
+            String lastName = resultSet.getString("last_name");
+            String grade = resultSet.getString("grade_name");
+            Student student = new Student();
+            student.setId(userID);
+            student.setEmail(emailID);
+            student.setFirstName(firstName);
+            student.setLastName(lastName);
+            student.setGrade(grade);
+            students.add(student);
+        }
+        resultSet.close();
+        statement.close();
+        return students;
+    }
+
     public static List<TestDetails> fetchTestDetails(int userID) throws Exception {
         Connection connection = DataSourceConnector.getConnection();
         PreparedStatement statement = connection.prepareStatement(SqlQueries.FETCH_TEST_DETAILS);
@@ -319,5 +345,177 @@ public class DataSource {
         statement.setInt(1, testID);
         statement.executeUpdate();
         statement.close();
+    }
+
+    public static int fetchGradeID(int userID) throws Exception {
+        Connection connection = DataSourceConnector.getConnection();
+        PreparedStatement statement = connection.prepareStatement(SqlQueries.FETCH_GRADE_ID);
+        statement.setInt(1, userID);
+        ResultSet resultSet = statement.executeQuery();
+        Integer gradeID = null;
+        while(resultSet.next()){
+            gradeID = resultSet.getInt("grade_id");
+        }
+        resultSet.close();
+        statement.close();
+        return gradeID;
+    }
+    
+    public static List<TestDetails> fetchGradeTestDetails(String  userEmailID, int institutionID) throws Exception {
+        Connection connection = DataSourceConnector.getConnection();
+        PreparedStatement statement = connection.prepareStatement(SqlQueries.FETCH_TEST_DETAILS_FOR_USER);
+        statement.setString(1, userEmailID);
+        statement.setInt(2, institutionID);
+        ResultSet resultSet = statement.executeQuery();
+        List<TestDetails> testDetailsList = new ArrayList<>();
+        while(resultSet.next()){
+            int id = resultSet.getInt("test_id");
+            String name = resultSet.getString("test_name");
+            TestDetails testDetails = new TestDetails();
+            testDetails.setTestId(id);
+            testDetails.setTestName(name);
+            testDetailsList.add(testDetails);
+        }
+        resultSet.close();
+        statement.close();
+        return testDetailsList;
+    }
+    
+    public static String fetchTestNameForTestID(int testID) throws Exception {
+    	Connection connection = DataSourceConnector.getConnection();
+        PreparedStatement statement = connection.prepareStatement(SqlQueries.FETCH_TEST_DETAILS_FOR_ID);
+        statement.setInt(1, testID);
+        ResultSet resultSet = statement.executeQuery();
+        String testName = "";
+        while(resultSet.next()){
+        	testName = resultSet.getString("test_name");
+        }
+        resultSet.close();
+        statement.close();
+        return testName;
+    }
+    
+    public static TestDetails fetchTestDetailsForID(int testID, boolean hasAnswers) throws Exception {
+    	Connection connection = DataSourceConnector.getConnection();
+        PreparedStatement statement = connection.prepareStatement(SqlQueries.FETCH_TEST_QUESTIONS);
+        statement.setInt(1, testID);
+        ResultSet resultSet = statement.executeQuery();
+        List<TestQuestion> testQuestions = new ArrayList<>();
+        while(resultSet.next()){
+        	int questionID = resultSet.getInt("question_id");
+        	String question = resultSet.getString("question");
+        	String option1 = resultSet.getString("option1");
+        	String option2 = resultSet.getString("option2");
+        	String option3 = resultSet.getString("option3");
+        	String option4 = resultSet.getString("option4");
+        	int answer = -1;
+        	if(hasAnswers) {
+        		answer = resultSet.getInt("answer");
+        	}
+        	TestQuestion testQuestion = new TestQuestion();
+
+        	testQuestion.setId(questionID);
+        	testQuestion.setQuestion(question);
+        	testQuestion.setOption1(option1);
+        	testQuestion.setOption2(option2);
+        	testQuestion.setOption3(option3);
+        	testQuestion.setOption4(option4);
+        	testQuestion.setAnswer(answer);
+        	testQuestions.add(testQuestion);
+        }
+        TestDetails testDetail = new TestDetails();
+        testDetail.setQuestions(testQuestions);
+        testDetail.setTestName(fetchTestNameForTestID(testID));
+        testDetail.setTestId(testID);
+        return testDetail;
+    }
+
+    public static int insertStudentTest(int studentID, int testID, int score) throws Exception {
+        Connection connection = DataSourceConnector.getConnection();
+        PreparedStatement statement = connection.prepareStatement(SqlQueries.INSERT_STUDENT_TEST, Statement.RETURN_GENERATED_KEYS);
+    	statement.setInt(1, studentID);
+    	statement.setInt(2, testID);
+        statement.setInt(3, score);
+	    Integer lastInsertId = null;
+	    int rowsInserted = statement.executeUpdate();
+	    if(rowsInserted != 0){
+	        ResultSet resultSet = statement.getGeneratedKeys();
+	        resultSet.next();
+	        lastInsertId = resultSet.getInt(1);
+	        resultSet.close();
+	    }
+	    statement.close();
+	    return lastInsertId;
+    }
+    
+    public static void insertStudentTestAnswers(int studentTestID, Map<Integer, TestQuestion> testQuestions) throws Exception {
+        Connection connection = DataSourceConnector.getConnection();
+        PreparedStatement statement = connection.prepareStatement(SqlQueries.INSERT_STUDENT_TEST_ANSWERS, Statement.RETURN_GENERATED_KEYS);
+        for(Integer questionID : testQuestions.keySet()) {
+        	TestQuestion question = testQuestions.get(questionID);
+        	statement.setInt(1, studentTestID);
+        	statement.setInt(2, questionID);
+        	statement.setInt(3, question.getAnswer());
+            statement.executeUpdate();
+        }
+        statement.close();
+    }
+
+    public static Integer insertUserTOGrade(Integer studentUserID, Integer grade) throws Exception {
+        Connection connection = DataSourceConnector.getConnection();
+        PreparedStatement statement = connection.prepareStatement(SqlQueries.INSERT_STUDENT_TO_GRADE, Statement.RETURN_GENERATED_KEYS);
+        statement.setInt(1, studentUserID);
+        statement.setInt(2, grade);
+        int rowsInserted = statement.executeUpdate();
+        statement.close();
+        return rowsInserted;
+    }
+
+    public static Map<String, Integer> fetchGrades() throws Exception {
+        Map<String, Integer> userGrades = new HashMap<>();
+        Connection connection = DataSourceConnector.getConnection();
+        PreparedStatement statement = connection.prepareStatement(SqlQueries.FETCH_ALL_GRADES);
+        ResultSet resultSet = statement.executeQuery();
+        while(resultSet.next()){
+            int id = resultSet.getInt("grade_id");
+            String grade = resultSet.getString("grade_name");
+            userGrades.put(grade, id);
+        }
+        resultSet.close();
+        statement.close();
+        return userGrades;
+    }
+
+    public static List<TestScore> fetchStudentTestScore(int userId) throws Exception {
+        Connection connection = DataSourceConnector.getConnection();
+        PreparedStatement statement = connection.prepareStatement(SqlQueries.SELECT_STUDENT_TEST_SCORE);
+        statement.setInt(1, userId);
+        ResultSet resultSet = statement.executeQuery();
+        List<TestScore> testScoreList = new ArrayList<>();
+        while(resultSet.next()){
+            String name = resultSet.getString("test_name");
+            String score = resultSet.getString("score");
+            TestScore testScore = new TestScore();
+            testScore.setTestName(name);
+            testScore.setScore(score);
+            testScoreList.add(testScore);
+        }
+        resultSet.close();
+        statement.close();
+        return testScoreList;
+    }
+
+    public static String fetchStudentGrade(int gradeID) throws Exception {
+        String grade = "Grade-1";
+        Connection connection = DataSourceConnector.getConnection();
+        PreparedStatement statement = connection.prepareStatement(SqlQueries.FETCH_GRADE_NAME);
+        statement.setInt(1, gradeID);
+        ResultSet resultSet = statement.executeQuery();
+        while(resultSet.next()){
+            grade = resultSet.getString("grade_name");
+        }
+        resultSet.close();
+        statement.close();
+        return grade;
     }
 }

@@ -17,10 +17,9 @@
               <a class="navbar-brand titleText" href="#">Arithmetic Evaluator</a>
           	</div>
           	<ul class="nav navbar-nav navbar-right">
-    				
-    				<li><a href="/arithmetic-evaluator/teacher/dashboard.action">Dashboard</a></li>
-    				<li class="active fontSansSerif"><a href="#">Tests</a></li>
-    				<li class=""><a href="/arithmetic-evaluator/teacher/createtest_page.action">Create Test</a></li>
+    				<li><a href="/arithmetic-evaluator/student/dashboard.action">Dashboard</a></li>
+    				<li class="active fontSansSerif"><a href="/arithmetic-evaluator/student/taketests_page.action">Take Test</a></li>
+    				<li class=""><a href="/arithmetic-evaluator/student/viewtestscores_page.action">View Scores</a></li>
     				<li>
     					<div class="dropdown">
  							<a href="#" class="dropbtn">
@@ -52,23 +51,27 @@
 	});
 
 	window.onload = function() {
-		fetchTestDetails();
+		fetchGradeTestDetails();
  	};
 
-	function fetchTestDetails() {
-		var url="testdetails.action";
+	function fetchGradeTestDetails() {
+		var url="gradetestdetails.action";
 		sendAjaxRequest(url, function(resp){
+		    console.log(resp);
+		    var count = 1;
 	 		var tableContent = '<div class="header">Test Details</div>' +
 	 							'<table cellspacing="0">' +
 	 								'<tr>' +
+	 	      							'<th>SNo</th>' +
 	 	      							'<th>Test Name</th>' +
-	 	      							'<th>Test For Grade</th>' +
+	 	      							'<th></th>' +
 	 	    						'</tr>';
 
 			$.each(resp.testDetails, function() {
 	 	    tableContent += '<tr>';
+	 	   	tableContent += '<td>' + count++  +'</td>';
 	 	  	tableContent += '<td>' + this.testName + '</td>';
-	 	   	tableContent += '<td>' + this.grade + '</td>';
+	 	  	tableContent += '<td> <button onClick="takeTest(\'' + this.testId + '\')">Take Test</button></td>';
 	 	    tableContent += "</tr>";
 	 	    });
 			tableContent += "</table>";
@@ -79,6 +82,21 @@
  		function buttonclick(){
          	window.location="addTeacher_page.action";
      	}
+        
+        function viewThisTest(testId) {
+            var takeTest = confirm("Are you sure you want to take this test " + testId + " ? ");
+     		if(takeTest) {
+     			var url="/arithmetic-evaluator/student/takeThisTest.action?testId=" + testId;
+     			window.location = url;
+     		}
+        }
+	function takeTest(testID) {
+		var url="/arithmetic-evaluator/student/take_test.action?testID=" + testID;
+		window.location=url;
+	}
+	function buttonclick(){
+	      	window.location="addTeacher_page.action";
+	}
  	</script>
 	</body>
 </html>

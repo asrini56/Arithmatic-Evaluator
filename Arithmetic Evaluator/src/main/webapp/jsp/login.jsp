@@ -31,6 +31,8 @@
                	<input name ="emailID" type="text" placeholder="user name" required />
                	<input name="password" type="password" placeholder="password" required/>
                 <button name="login" onclick="loginFunction()">LOGIN</button>
+                <a href="forgotPassword_page.action" id="myBtn1">Forgot Password</a>
+                <br>
 				<a href="#" id="myBtn">Not Registered. Click here!</a>
 			</form>
 			<div id="myModal" class="modal">
@@ -40,24 +42,15 @@
 						<h2>Create an account!</h2>
 					</div>
 					<div class="modal-body">
-						<h4>Are you a student or instructor and have not registered? contact your institute administrator!</h4>
-						<p> Note! institute administrators create an account for their students and instructors</p>
+						<h1>School administrator? <br><a href="admin/signup_page.action">Click here to Sign up and create institution account!</a></h1>
+						<hr>
+						<h3>Teacher or student? Contact your school for an account.</h3>
 						<br>
 						<br>
-						<h4>Are you an institute administrator? <a href="admin/signup_page.action">Click here to Sign up and create institution account!</a></h4>
 					</div>
 				</div>
 			</div>
-			<h2>OR</h2>
-   			<p>Try Our site as a</p>
     	</div>
-  		<div class="btn-grp">
-           	<button class="button button1" onclick="Function1grade()"> <h4> 1ST GRADE STUDENT </h4></button>
-			<button class="button button1" onclick="Function6grade()"> <h4> 6TH GRADE STUDENT </h4></button>
-  			<button class="button button1" onclick="Function9grade()"> <h4> 9TH GRADE STUDENT </h4></button>
-  		</div>
-  		<br/> <br/><br/><br/><br/>
-  		<footer class="footer"><span class="glyphicon glyphicon-copyright-mark"></span>  Copyright</footer>
 	</div>
 	
 <script>
@@ -91,17 +84,6 @@ function loginFunction() {
 	document.getElementById("register-form").submit();
 }
 
-function Function1grade(){
-	window.location.assign("grade1/operations_page.action")
-}
-
-function Function6grade(){
-	window.location.assign("grade6/operations_page.action")
-}
-
-function Function9grade(){
-	window.location.assign("grade9/operations_page.action")
-}
 var ctx = "<%=request.getContextPath()%>"
 history.pushState(null, null, ctx +"/login_page.action");
 

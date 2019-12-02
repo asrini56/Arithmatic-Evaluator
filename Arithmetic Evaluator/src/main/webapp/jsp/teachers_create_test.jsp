@@ -36,10 +36,22 @@
 	<section>
   	<nav style="min-height:800px !important">
 		<h1 class="splitHeading"> Question Bricks </h1>
-
+		<h2 style="text-align: center;">Drag test component to Canvas section</h2>
 			<div id="operationsDiv" class="operationsDiv" ondragenter="return dragEnter(event)" ondrop="return dragDrop(event)" ondragover="return dragOver(event)">
 			
 				<div id="questionbox1" class="questionsBox" draggable="true" ondragenter="return dragEnter(event)" ondragstart="return dragStart(event)" ondrop="return dragDrop(event)" ondragover="return dragOver(event)" ondragstart="return dragStart(event)">
+     				<form>
+     					<h1>Question #</h1>
+     					<input type="textarea" name="question" id="question" disabled></input><br><br>
+     					
+     					<input type="radio" name="options" id="answerOpt1"/><input type="text" name="option1" id="option1" disabled /><br>
+     					<input type="radio" name="options" id="answerOpt2"/><input type="text" name="option2" id="option2" disabled/><br>
+     					<input type="radio" name="options" id="answerOpt3"/><input type="text" name="option3" id="option3" disabled/><br>
+     					<input type="radio" name="options" id="answerOpt4"/><input type="text" name="option4" id="option4"  disabled/><br>
+     					<p> Drag into canvas!</p>
+     				</form>
+				</div>
+				<div id="questionbox2" class="questionsBox hide" draggable="true" ondragenter="return dragEnter(event)" ondragstart="return dragStart(event)" ondrop="return dragDrop(event)" ondragover="return dragOver(event)" ondragstart="return dragStart(event)">
      				<form>
      					<h1>Question #</h1>
      					<input type="textarea" name="question" id="question" placeholder="Enter question here.."></input><br><br>
@@ -58,7 +70,7 @@
   <nav style="min-height:800px !important">
 	<h1 class="splitHeading">Canvas</h1>
 		<div id="message" class="alert alert-info display-none"></div>
-		<div id="boxB" style ="min-height:600px !important" ondragenter="return dragEnter(event)" ondrop="return dragDrop(event)" ondragover="return dragOver(event)" ondragstart="return dragStart(event)">
+		<div id="boxB" style ="min-height:570px !important" ondragenter="return dragEnter(event)" ondrop="return dragDrop(event)" ondragover="return dragOver(event)" ondragstart="return dragStart(event)">
 		</div>
 		
 		<div class="deleteAction" style="margin-top:20px; border-top: 1px solid grey; padding:5px;">
@@ -71,7 +83,7 @@
   </nav>	
 
   <nav style="min-height:800px !important">
-    <h1 class="splitHeading">Result</h1>
+    <h1 class="splitHeading">Preview</h1>
     <div class= "questionPreviewTemplateDiv" style="display:none">
     		<div class="questionPreviewTemplate" id="questionPreviewTemplate">
     			<h2>Question : <span id="previewQuestion"></span></h2>
@@ -116,7 +128,6 @@
 	</div>
 	
 		
-	<footer class="footer"><span class="glyphicon glyphicon-copyright-mark"></span>  Copyright</footer>
 
 	<script src="/arithmetic-evaluator/js/common.js"></script>
 	<script>
@@ -138,16 +149,18 @@
 		function dragDrop(ev) {
 			var src = ev.dataTransfer.getData("Text");
 			
-			$btn = $('#' + src).clone();
+			$btn = $('#questionbox2').clone();
 
 			$btn.attr('id', 'id' + cloneCount)
 			$btn.attr('onClick', 'selectedButton("id' + cloneCount + '")');
 			$btn.addClass("performOperation");
+			$btn.removeClass("hide");
 			$btn.removeAttr("draggable");
 			$btn.removeAttr("ondragenter");
 			$btn.removeAttr("ondragstart");
 			$btn.removeAttr("ondrop");
 			$btn.removeAttr("ondragover");
+
 			cloneCount++;
 
 			$("#boxB").append($btn);
@@ -303,23 +316,22 @@
 				questionObj.option4=option4;
 				questionObj.answer=answer;
 				allQuestions.push(questionObj);
-				var json = new Object();
-				json.questions = allQuestions;
-				
-				var testName = $("#testName").val();
-				var grade = $("#testForGrade").val();
-				var params = "testName="+testName+ "&testForGrade="+ grade + "&questionsJSONAsString=" +  encodeURIComponent(JSON.stringify(json));
-				var url = "/arithmetic-evaluator/teacher/test/add.action?" + params;
-				console.log("url" + url);
-				sendAjaxRequest(url, function(resp) {
-					var response = resp.message;
-					console.log(response);
-					var modal = document.getElementById("myModal");
-					modal.style.display = "none";
-					$("#message").text(response);
-					$("#message").show();
-					setTimeout(function() {$("#message").hide();}, 5000);
-				});
+			});
+			
+			var json = new Object();
+			json.questions = allQuestions;
+			
+			var testName = $("#testName").val();
+			var grade = $("#testForGrade").val();
+			var params = "testName="+testName+ "&testForGrade="+ grade + "&questionsJSONAsString=" +  encodeURIComponent(JSON.stringify(json));
+			var url = "/arithmetic-evaluator/teacher/test/add.action?" + params;
+			console.log("url" + url);
+			sendAjaxRequest(url, function(resp) {
+				var response = resp.message;
+				if(response.includes("Success")){
+					window.location="/arithmetic-evaluator/teacher/viewtests_page.action";
+				}
+				alert(response);
 			});
 			
 			

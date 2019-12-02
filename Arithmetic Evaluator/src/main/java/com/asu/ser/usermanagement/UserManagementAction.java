@@ -1,7 +1,11 @@
 package com.asu.ser.usermanagement;
 
 import com.asu.ser.authentication.AuthenticationUtil;
+import com.asu.ser.model.Student;
 import com.asu.ser.model.Teacher;
+import com.asu.ser.model.TestQuestion;
+import com.asu.ser.operations.TestHandler;
+import com.asu.ser.model.TestScore;
 import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.conversion.annotations.Conversion;
 import org.apache.commons.lang3.StringUtils;
@@ -12,25 +16,32 @@ import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 import java.util.regex.Pattern;
 /**
- * @author akhilesh
+ * @author Akhilesh
  * @author Ashwin
  * @author Srinivasan
+ * @author Deepti
+ * @author Aihaab 
  */
 
 @Conversion()
 public class UserManagementAction {
 
     private String emailID;
+    private int testId;
     private String password;
     private String firstName;
     private String lastName;
+    private String grade;
     private String message;
     private String institutionName;
     private List<Teacher> teachers;
+    private List<Student> students;
     private String oldPassword;
     private String newPassword;
     private String confirmPassword;
     private List<TestDetails> testDetails;
+    private List<TestScore> testScoreList;
+
 
     private static Logger LOGGER = Logger.getLogger(UserManagementAction.class.getName());
 
@@ -139,15 +150,66 @@ public class UserManagementAction {
     	return Action.SUCCESS;
     }
 
-    public String removeTeacher() {
+    public String fetchStudents() {
+        if(StringUtils.isEmpty(AuthenticationUtil.getLoggedInUser())){
+            message = "Please log in to access the page.";
+            return Action.ERROR;
+        }
+        try {
+            students = UserManagementHandler.fetchStudents();
+        }catch (Exception e) {
+            message = "Failed to fetch STUDENTS - " + e.getMessage();
+            LOGGER.log(Level.SEVERE, "Failed to fetch students" , e);
+        }
+        return Action.SUCCESS;
+    }
+
+    public String removeUser() {
     	try {
-    		UserManagementHandler.removeTeacher(emailID);
-    		message = "Successfully removed teacher " + emailID;
+    		UserManagementHandler.removeUser(emailID);
+    		message = "Successfully removed user " + emailID;
     	} catch(Exception e) {
-    		message = "Failed to remove teacher " + emailID;
+    		message = "Failed to remove user " + emailID;
             LOGGER.log(Level.SEVERE, message , e);
 		}
     	return Action.SUCCESS;
+    }
+
+
+    public String addStudent() {
+        if(StringUtils.isEmpty(AuthenticationUtil.getLoggedInUser())){
+            message = "Please log in to access the page.";
+            LOGGER.log(Level.INFO,message);
+            return Action.LOGIN;
+        }
+        try {
+            LOGGER.log(Level.INFO,"Creating Student " + firstName + " " + lastName);
+            if(!validEmailID(emailID)){
+                message = "Invalid Email ID. Please enter a valid Email ID.";
+                LOGGER.log(Level.INFO,message);
+                return Action.ERROR;
+            } else {
+                UserManagementHandler.addStudent(firstName, lastName, emailID, grade);
+                message = "Successfully created Student account for " + emailID + ". Their details is mailed to them.";
+                LOGGER.log(Level.INFO,message);
+            }
+        } catch(SQLIntegrityConstraintViolationException sicve) {
+            message = "An account with email " + emailID + "already exists";
+            LOGGER.log(Level.INFO,message);
+            return Action.ERROR;
+        } catch (Exception e) {
+
+            message = "Failed to add student " + e.getMessage();
+            LOGGER.log(Level.SEVERE, "Failed to add student" , e);
+            if(e.getMessage().equals("No user logged in")) {
+                message = "Login as admin to add student";
+                LOGGER.log(Level.INFO,message);
+                return Action.LOGIN;
+            }
+            LOGGER.log(Level.INFO,message);
+            return Action.ERROR;
+        }
+        return Action.SUCCESS;
     }
 
     public String resetPassword() {
@@ -182,7 +244,7 @@ public class UserManagementAction {
             return Action.ERROR;
         }
         try {
-            testDetails = UserManagementHandler.fetchTestDetails();
+            testDetails = TestHandler.fetchTestDetails();
         }catch (Exception e) {
             message = "Failed to fetch test details - " + e.getMessage();
             LOGGER.log(Level.SEVERE, "Failed to fetch test details" , e);
@@ -190,6 +252,43 @@ public class UserManagementAction {
         return Action.SUCCESS;
     }
 
+    public String fetchGradeTestDetails() {
+        if(StringUtils.isEmpty(AuthenticationUtil.getLoggedInUser())){
+            message = "Please log in to access the page.";
+            return Action.ERROR;
+        }
+        try {
+            testDetails = UserManagementHandler.fetchGradeTestDetails();
+        }catch (Exception e) {
+            message = "Failed to fetch test details - " + e.getMessage();
+            LOGGER.log(Level.SEVERE, "Failed to fetch test details" , e);
+        }
+        return Action.SUCCESS;
+    }
+
+    public String fetchTestScoreDetails() {
+        if(StringUtils.isEmpty(AuthenticationUtil.getLoggedInUser())){
+            message = "Please log in to access the page.";
+            return Action.ERROR;
+        }
+        try {
+            testScoreList = UserManagementHandler.fetchStudentTestScore();
+        }catch (Exception e) {
+            message = "Failed to fetch test details - " + e.getMessage();
+            LOGGER.log(Level.SEVERE, "Failed to fetch test score details" , e);
+        }
+        return Action.SUCCESS;
+    }
+
+    public String fetchStudentGrade(){
+        try {
+            grade = UserManagementHandler.fetchGrade().toLowerCase().replace("-", "");
+        } catch (Exception e) {
+            message = "Failed to fetch Student Grade - " + e.getMessage();
+            return Action.ERROR;
+        }
+        return Action.SUCCESS;
+    }
 
     private boolean validEmailID(String emailID) {
     	return EMAIL_PATTERN.matcher(emailID).matches();
@@ -286,4 +385,30 @@ public class UserManagementAction {
     public void setTestDetails(List<TestDetails> testDetails) {
         this.testDetails = testDetails;
     }
+
+    public List<Student> getStudents() {
+        return students;
+    }
+
+    public void setStudents(List<Student> students) {
+        this.students = students;
+    }
+
+    public String getGrade() {
+        return grade;
+    }
+
+    public void setGrade(String grade) {
+        this.grade = grade;
+    }
+
+
+    public List<TestScore> getTestScoreList() {
+        return testScoreList;
+    }
+
+    public void setTestScoreList(List<TestScore> testScoreList) {
+        this.testScoreList = testScoreList;
+    }
+
 }
