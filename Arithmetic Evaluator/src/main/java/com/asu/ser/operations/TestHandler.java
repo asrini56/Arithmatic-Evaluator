@@ -35,6 +35,11 @@ public class TestHandler {
 	private static final String JSON_KEY_ANSWER = "answer";
 	private static Logger LOGGER = Logger.getLogger(TestHandler.class.getName());
 
+	/**
+	 * This function is used during add test
+	 * @return
+	 */
+
 	public static void addTest(String questionsJSONAsString, String testName, int testForGrade) throws Exception {
 		JSONObject questionsJSON = new JSONObject(questionsJSONAsString);
 		JSONArray questionsArr = questionsJSON.getJSONArray(JSON_KEY_QUESTIONS);

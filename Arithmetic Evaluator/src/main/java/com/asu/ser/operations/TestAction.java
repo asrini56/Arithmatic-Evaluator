@@ -25,7 +25,11 @@ public class TestAction {
 	private TestDetails testDetail;
 
 	private static Logger LOGGER = Logger.getLogger(TestAction.class.getName());
-	
+
+	/**
+	 * This function is used during add test
+	 * @return
+	 */
 	public String addTest() {
 		try {
 			questionsJSONAsString = URLDecoder.decode(questionsJSONAsString, StandardCharsets.UTF_8.toString());
@@ -40,7 +44,11 @@ public class TestAction {
 		
 		return Action.SUCCESS;
 	}
-	
+
+	/**
+	 * This function is used during submit test
+	 * @return
+	 */
 	public String submitTest(){
 		try {
 			questionsJSONAsString = URLDecoder.decode(questionsJSONAsString, StandardCharsets.UTF_8.toString());

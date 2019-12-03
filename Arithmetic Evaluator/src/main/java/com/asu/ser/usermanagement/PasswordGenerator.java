@@ -2,6 +2,9 @@ package com.asu.ser.usermanagement;
 /**
  * @author akhilesh
  */
+/**
+ * Generates the password for the user during account creation
+ */
 
 public class PasswordGenerator {
 	public static final String AlphaNumericString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" + "0123456789" + "abcdefghijklmnopqrstuvxyz";

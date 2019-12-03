@@ -6,7 +6,7 @@ package com.asu.ser.model;
 
 public class Student extends User {
 
-        private String grade;
+    private String grade;
 
     public String getGrade() {
         return grade;
