@@ -48,6 +48,10 @@ public class UserManagementHandler {
 
 	}
 
+	
+	/**
+	 * Initializes user roles by fetching it from DB and setting it to map.
+	 */
 	public static void init(){
 		try {
 			USER_ROLES = DataSource.fetchRoles();

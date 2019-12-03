@@ -140,6 +140,11 @@ public class TestHandler {
 		DataSource.insertStudentTestAnswers(studentTestID, testQuestions);
 	}
 	
+	/**
+	 * Fetches all test details for the logged in user.
+	 * @return
+	 * @throws Exception
+	 */
     public static List<TestDetails> fetchTestDetails() throws Exception {
         String loggedInUser = AuthenticationUtil.getLoggedInUser();
         if(loggedInUser == null || loggedInUser.isEmpty()) {
@@ -154,6 +159,13 @@ public class TestHandler {
         return DataSource.fetchTestDetails(userID);
     }
     
+    
+    /**
+     * Fetch test details for the given testID
+     * @param testID
+     * @return
+     * @throws Exception
+     */
     public static TestDetails fetchTestDetailsForID(int testID) throws Exception {
     	String loggedInUser = AuthenticationUtil.getLoggedInUser();
         if(loggedInUser == null || loggedInUser.isEmpty()) {

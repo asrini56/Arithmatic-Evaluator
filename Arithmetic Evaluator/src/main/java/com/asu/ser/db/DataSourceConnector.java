@@ -25,7 +25,8 @@ public class DataSourceConnector {
 	private static Connection con = null;
 
 	/**
-	 * Function to create database connection
+	 * Function reads configurations from database.properties and creates a connection to a database.
+	 * This is a singleton class and has only 1 object of Connection
 	 * @throws Exception
 	 */
 	public static void createConnection() throws Exception {
@@ -37,7 +38,6 @@ public class DataSourceConnector {
 		
 		//Uncomment below  two lines to test using java directly.
 		String currentDirectory = System.getProperty("user.dir");
-		//System.out.println("Current dir is " + currentDirectory);
 		File propertyFile = new File(currentDirectory + "/src/main/resources/" + DB_PROPERTY_FILE);
 
 		try (InputStream input = new FileInputStream(propertyFile)) {

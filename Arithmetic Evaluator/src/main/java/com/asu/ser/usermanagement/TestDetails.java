@@ -1,11 +1,7 @@
 package com.asu.ser.usermanagement;
 /**
  * @author Ashwin
- */
-/**
- *
- */
-/**
+ * 
  This file contains information and declarations regarding Test details
  */
 

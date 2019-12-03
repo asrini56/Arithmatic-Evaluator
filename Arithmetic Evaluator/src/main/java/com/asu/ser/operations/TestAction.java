@@ -27,7 +27,7 @@ public class TestAction {
 	private static Logger LOGGER = Logger.getLogger(TestAction.class.getName());
 
 	/**
-	 * This function is used during add test
+	 * Invokes TestHandler to add/create new Test
 	 * @return
 	 */
 	public String addTest() {
@@ -46,7 +46,7 @@ public class TestAction {
 	}
 
 	/**
-	 * This function is used during submit test
+	 * Invokes TestHandler to save a test
 	 * @return
 	 */
 	public String submitTest(){
@@ -66,6 +66,10 @@ public class TestAction {
 		return Action.SUCCESS;
 	}
 	
+	/**
+	 * Invokes TestHandler to fetch a Test.
+	 * @return
+	 */
 	public String fetchTest() {
 		try {
 			testDetail = TestHandler.fetchTestDetailsForID(testID);
