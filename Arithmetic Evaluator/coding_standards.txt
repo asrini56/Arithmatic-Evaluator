@@ -5,6 +5,9 @@ BACKEND CODING:
 2. Static variable - All caps, use underscore "_" to separate words.
 3. Use open brackets "{" in the same line as function name.
 4. Use proper well defined name for variables.
+5. Avoid using magic string [Except for log messages, since these are dynamic messages]
+6. Use enums.
+7. Follow component architecture while designing classes.
 
 
 FRONT ENG CODING:

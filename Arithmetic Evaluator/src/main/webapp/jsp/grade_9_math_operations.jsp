@@ -378,56 +378,76 @@
 						</div>
 					</div>
 				</div>
-				
-                <div id="trigoDiv" class="hide">
-					<br><br>
-                    <div id="sin" class="" draggable="true" ondragenter="return dragEnter(event)"
-								 	ondragstart="return dragStart(event)" ondrop="return dragDrop(event)" ondragover="return dragOver(event)">
+
+				<div id="trigoDiv" class="hide">
+					<br>
+					<br>
+					<div id="sin" class="" draggable="true"
+						ondragenter="return dragEnter(event)"
+						ondragstart="return dragStart(event)"
+						ondrop="return dragDrop(event)"
+						ondragover="return dragOver(event)">
 						<div>
-								<label>sin( </label>
-								<input id="sqside" type="text"  size="5" placeholder="Number" disabled/><label>)</label>	
-				        </div>
-                    
+							<label>sin( </label> <input id="sqside" type="text" size="5"
+								placeholder="Number" disabled /><label>)</label>
+						</div>
+
 					</div>
-                    <br><br>
-                    <div id="cos" class="" draggable="true" ondragenter="return dragEnter(event)"
-								 	ondragstart="return dragStart(event)" ondrop="return dragDrop(event)" ondragover="return dragOver(event)">
+					<br>
+					<br>
+					<div id="cos" class="" draggable="true"
+						ondragenter="return dragEnter(event)"
+						ondragstart="return dragStart(event)"
+						ondrop="return dragDrop(event)"
+						ondragover="return dragOver(event)">
 						<div>
-								<label>cos( </label>
-								<input id="sqside" type="text"  size="5" placeholder="Number" disabled/><label>)</label>		
-				        </div>
+							<label>cos( </label> <input id="sqside" type="text" size="5"
+								placeholder="Number" disabled /><label>)</label>
+						</div>
 					</div>
-                    <br><br>
-                    <div id="tan" class="" draggable="true" ondragenter="return dragEnter(event)"
-								 	ondragstart="return dragStart(event)" ondrop="return dragDrop(event)" ondragover="return dragOver(event)">
+					<br>
+					<br>
+					<div id="tan" class="" draggable="true"
+						ondragenter="return dragEnter(event)"
+						ondragstart="return dragStart(event)"
+						ondrop="return dragDrop(event)"
+						ondragover="return dragOver(event)">
 						<div>
-								<label>tan( </label>
-								<input id="sqside" type="text"  size="5" placeholder="Number" disabled/><label>)</label>		
-				        </div>
+							<label>tan( </label> <input id="sqside" type="text" size="5"
+								placeholder="Number" disabled /><label>)</label>
+						</div>
 					</div>
-                    <div id="sin_copy" draggable="true" ondragenter="return dragEnter(event)"
-                         ondragstart="return dragStart(event)" ondrop="return dragDrop(event)" ondragover="return dragOver(event)" class="sine hide">
-                        <div>
-								<label>sin( </label>
-								<input id="sin_value" type="text"  size="5" placeholder="0"/><label> )</label>		
-				        </div>
-                    </div>
-                    <div id="cos_copy" draggable="true" ondragenter="return dragEnter(event)"
-                         ondragstart="return dragStart(event)" ondrop="return dragDrop(event)" ondragover="return dragOver(event)" class="isTrigo cos hide">
-                        <div>
-								<label>cos( </label>
-								<input id="cos_value" type="text"  size="5" placeholder="0"/><label> )</label>		
-				        </div>
-                    </div>
-                    <div id="tan_copy" draggable="true" ondragenter="return dragEnter(event)"
-                         ondragstart="return dragStart(event)" ondrop="return dragDrop(event)" ondragover="return dragOver(event)" class="isTrigo tan hide">
-                        <div>
-								<label>tan( </label>
-								<input id="tan_value" type="text"  size="5" placeholder="0"/><label> )</label>		
-				        </div>
-                    </div>
-				</div>
-		</nav>
+					<div id="sin_copy" draggable="true"
+						ondragenter="return dragEnter(event)"
+						ondragstart="return dragStart(event)"
+						ondrop="return dragDrop(event)"
+						ondragover="return dragOver(event)" class="sine hide isTrigo">
+						<div>
+							<label>sin( </label> <input id="sin_value" type="text" size="5"
+								placeholder="0" /><label> )</label>
+						</div>
+					</div>
+					<div id="cos_copy" draggable="true"
+						ondragenter="return dragEnter(event)"
+						ondragstart="return dragStart(event)"
+						ondrop="return dragDrop(event)"
+						ondragover="return dragOver(event)" class="isTrigo cos hide">
+						<div>
+							<label>cos( </label> <input id="cos_value" type="text" size="5"
+								placeholder="0" /><label> )</label>
+						</div>
+					</div>
+					<div id="tan_copy" draggable="true"
+						ondragenter="return dragEnter(event)"
+						ondragstart="return dragStart(event)"
+						ondrop="return dragDrop(event)"
+						ondragover="return dragOver(event)" class="isTrigo tan hide">
+						<div>
+							<label>tan( </label> <input id="tan_value" type="text" size="5"
+								placeholder="0" /><label> )</label>
+						</div>
+					</div>
+				</div></nav>
 		<nav style="text-align:center;">
 			<h3 class="splitHeading">Canvas</h3>
 			<div id="boxB" ondragenter="return dragEnter(event)"
@@ -556,8 +576,11 @@
 				cloneCount++;
 				return false;
 			} else if(src == "sin") {
-
+				$(".performOperation").each(function(index) {
+					$(this).remove();
+				});
                 $btn = $('#sin_copy').clone();
+                $btn.find("#sin_value").attr('id', 'sin_value1');
                 $btn.attr('id', 'id' + cloneCount)
                 $btn.attr('onClick', 'selectedButton("id' + cloneCount + '")');
                 $btn.addClass("performOperation");
@@ -569,9 +592,12 @@
                 $btn.removeAttr("ondragover");
                 cloneCount++;
             } else if(src == "cos") {
-
+            	$(".performOperation").each(function(index) {
+					$(this).remove();
+				});
                 $btn = $('#cos_copy').clone();
                 $btn.attr('id', 'id' + cloneCount)
+                $btn.find("#cos_value").attr('id', 'cos_value1');
                 $btn.attr('onClick', 'selectedButton("id' + cloneCount + '")');
                 $btn.addClass("performOperation");
                 $btn.removeClass("hide");
@@ -582,9 +608,12 @@
                 $btn.removeAttr("ondragover");
                 cloneCount++;
             } else if(src == "tan") {
-
+            	$(".performOperation").each(function(index) {
+					$(this).remove();
+				});
                 $btn = $('#tan_copy').clone();
                 $btn.attr('id', 'id' + cloneCount)
+                $btn.find("#tan_value").attr('id', 'tan_value1');
                 $btn.attr('onClick', 'selectedButton("id' + cloneCount + '")');
                 $btn.addClass("performOperation");
                 $btn.removeClass("hide");
@@ -615,6 +644,7 @@
 					return;
 				} else {
 					expression += $(this).text().trim();
+					console.log("Expression is " + expression);
 				}
 			});
 			if(hasShape){
@@ -668,28 +698,25 @@
 		}
         
         function evaluateTrigo() {
-			var expression = "";
+			 var expression = "";
 			$(".performOperation").each(function(index) {
 				if($(this).hasClass("sine")) {
-					var number = $('#sin_value').val();
-					expression = sin(number);
-					
-				} else if($(this).hasClass("cos")) {
-					var number = $('#cos_value').val();
-					expression = cos(number);
-					
-				} else if($(this).hasClass("tan")) {
-					var number = $('#tan').val();
-					expression = tan(number);
-				} 
+					expression = "sin(" + $("#sin_value1").val()+ ")";
+				}
+				if($(this).hasClass("cos")) {
+					expression = "cos(" + $("#cos_value1").val()+ ")";
+				}
+				if($(this).hasClass("tan")) {
+					expression = "tan(" + $("#tan_value1").val()+ ")";
+				}
 			});
-			
+			console.log(expression);
 			expression = encodeURIComponent(expression);
 			var url = "/arithmetic-evaluator/grade1/operations/evaluvate.action?expression="
 					+ expression;
 			sendAjaxRequest(url, function(resp) {
 				var result = resp.response;
-				$("#expressionResult").html(result);
+				$("#expressionResult").html(result.substring(0, 7) + " radians");
 			});
 		}
 

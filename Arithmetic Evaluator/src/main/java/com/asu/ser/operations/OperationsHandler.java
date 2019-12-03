@@ -19,12 +19,16 @@ public class OperationsHandler {
 		double output = e.calculate();
 		String response = "";
 		if(Double.isNaN(output)) {
-			response = MessageConstants.NO_USER_LOGGED_IN + expression;
+			response = "Invalid expression: " + expression;
 			LOGGER.log(Level.INFO, response);
 		} else {
 			LOGGER.log(Level.INFO, "Output for expression " + expression + " is : " + output);
 			response = Double.toString(output);
 		}
 		return response;
+	}
+
+	public static void main(String[] args) {
+		System.out.println(evaluateExpression("sin(30)"));
 	}
 }
