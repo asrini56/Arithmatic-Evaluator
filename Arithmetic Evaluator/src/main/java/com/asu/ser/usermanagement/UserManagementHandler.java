@@ -13,6 +13,8 @@ import com.asu.ser.model.TestScore;
 import com.asu.ser.model.User;
 import com.asu.ser.model.TestQuestion;
 import com.asu.ser.util.MailServer;
+import com.asu.ser.util.MessageConstants;
+
 import org.apache.commons.lang3.StringUtils;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -59,7 +61,7 @@ public class UserManagementHandler {
         Integer userID = DataSource.insertUser(emailID, password, firstName, lastName);
         Integer roleID = USER_ROLES.get(ROLE_ADMIN);
         if(roleID == null ) {
-        	throw new Exception("Server error - Invalid role");
+        	throw new Exception(MessageConstants.SERVER_ERR_INVALID_ROLE);
         }
         DataSource.insertUserToRole(userID, roleID);
         Integer institutionID = DataSource.insertInstitution(institutionName);
@@ -86,10 +88,10 @@ public class UserManagementHandler {
 		String message = "";
 		Integer rowsAffected = DataSource.resetPassword(emailID, password);
 		if(rowsAffected>0){
-			message = "Success";
+			message = MessageConstants.SUCCESS;
 			return message;
 		} else {
-			message = "Failed to update Password.";
+			message = MessageConstants.FAILED_TO_UPDATE_PASSWORD;
 			return message;
 		}
 	}
@@ -97,7 +99,7 @@ public class UserManagementHandler {
     public static void addTeacher(String firstName, String lastName, String emailID) throws Exception {
     	String loggedInUser = AuthenticationUtil.getLoggedInUser();
     	if(loggedInUser == null || loggedInUser.isEmpty()) {
-    		throw new Exception("No user logged in");
+    		throw new Exception(MessageConstants.NO_USER_LOGGED_IN);
     	}
     	int userID = DataSource.fetchUserID(loggedInUser);
     	int userRoleID = DataSource.fetchUserRole(userID);
@@ -131,7 +133,7 @@ public class UserManagementHandler {
 	public static void addStudent(String firstName, String lastName, String emailID, String grade) throws Exception {
 		String loggedInUser = AuthenticationUtil.getLoggedInUser();
 		if(loggedInUser == null || loggedInUser.isEmpty()) {
-			throw new Exception("No user logged in");
+			throw new Exception(MessageConstants.NO_USER_LOGGED_IN);
 		}
 		int userID = DataSource.fetchUserID(loggedInUser);
 		int userRoleID = DataSource.fetchUserRole(userID);
@@ -180,7 +182,7 @@ public class UserManagementHandler {
     public static void removeUser(String userEmailID) throws Exception {
     	String loggedInUser = AuthenticationUtil.getLoggedInUser();
     	if(loggedInUser == null || loggedInUser.isEmpty()) {
-    		throw new Exception("No user logged in");
+    		throw new Exception(MessageConstants.NO_USER_LOGGED_IN);
     	}
     	int userID = DataSource.fetchUserID(loggedInUser);
     	int userRoleID = DataSource.fetchUserRole(userID);
@@ -218,7 +220,7 @@ public class UserManagementHandler {
     public static List<TestDetails> fetchGradeTestDetails() throws Exception {
         String loggedInUser = AuthenticationUtil.getLoggedInUser();
         if(loggedInUser == null || loggedInUser.isEmpty()) {
-            throw new Exception("No user logged in");
+            throw new Exception(MessageConstants.NO_USER_LOGGED_IN);
         }
         int institutionID = DataSource.fetchUsersInstitutionID(loggedInUser);
         return DataSource.fetchGradeTestDetails(loggedInUser, institutionID);
@@ -227,7 +229,7 @@ public class UserManagementHandler {
 	public static List<TestScore> fetchStudentTestScore() throws Exception {
 		String loggedInUser = AuthenticationUtil.getLoggedInUser();
 		if(loggedInUser == null || loggedInUser.isEmpty()) {
-			throw new Exception("No user logged in");
+			throw new Exception(MessageConstants.NO_USER_LOGGED_IN);
 		}
 		int userID = DataSource.fetchUserID(loggedInUser);
 		int userRoleID = DataSource.fetchUserRole(userID);
@@ -241,7 +243,7 @@ public class UserManagementHandler {
 	public static List<TestAnswers> fetchStudentTestCorrectAnswers(int testId) throws Exception {
 		String loggedInUser = AuthenticationUtil.getLoggedInUser();
 		if(loggedInUser == null || loggedInUser.isEmpty()) {
-			throw new Exception("No user logged in");
+			throw new Exception(MessageConstants.NO_USER_LOGGED_IN);
 		}
 		int userID = DataSource.fetchUserID(loggedInUser);
 		int userRoleID = DataSource.fetchUserRole(userID);
@@ -259,7 +261,7 @@ public class UserManagementHandler {
 	public static String fetchGrade() throws Exception{
 		String loggedInUser = AuthenticationUtil.getLoggedInUser();
 		if(loggedInUser == null || loggedInUser.isEmpty()) {
-			throw new Exception("No user logged in");
+			throw new Exception(MessageConstants.NO_USER_LOGGED_IN);
 		}
 		int userID = DataSource.fetchUserID(loggedInUser);
 		int gradeID = DataSource.fetchGradeID(userID);

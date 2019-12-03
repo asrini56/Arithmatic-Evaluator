@@ -3,19 +3,19 @@ package com.asu.ser.model;
  * @author Srinivasan
  */
 
-public class User {
-
-    private String emailId;
+public class User {	
+	private Integer id;	
+    private String email;
     private String password;
     private String firstName;
     private String lastName;
 
-    public String getEmailId() {
-        return emailId;
+    public String getEmail() {
+        return email;
     }
 
-    public void setEmailId(String emailId) {
-        this.emailId = emailId;
+    public void setEmail(String emailId) {
+        this.email = emailId;
     }
 
     public String getPassword() {
@@ -41,4 +41,12 @@ public class User {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
 }
