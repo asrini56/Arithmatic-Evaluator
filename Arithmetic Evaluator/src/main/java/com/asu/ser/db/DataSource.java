@@ -11,6 +11,7 @@ import java.util.Map;
 
 import com.asu.ser.model.Student;
 import com.asu.ser.model.Teacher;
+import com.asu.ser.model.TestAnswers;
 import com.asu.ser.model.TestQuestion;
 import com.asu.ser.model.TestScore;
 import com.asu.ser.model.User;
@@ -495,7 +496,9 @@ public class DataSource {
         while(resultSet.next()){
             String name = resultSet.getString("test_name");
             String score = resultSet.getString("score");
+            String testId = resultSet.getString("test_id");
             TestScore testScore = new TestScore();
+            testScore.setTestId(testId);
             testScore.setTestName(name);
             testScore.setScore(score);
             testScoreList.add(testScore);
@@ -518,4 +521,26 @@ public class DataSource {
         statement.close();
         return grade;
     }
+
+    public static List<TestAnswers> fetchStudentTestCorrectAnswers(int userId, int testId) throws Exception {
+        Connection connection = DataSourceConnector.getConnection();
+        PreparedStatement statement = connection.prepareStatement(SqlQueries.SELECT_STUDENT_TEST_CORRECT_ANSWERS);
+        statement.setInt(1, userId);
+        statement.setInt(2, testId);
+        ResultSet resultSet = statement.executeQuery();
+        List<TestAnswers> testAnswersList = new ArrayList<>();
+        while(resultSet.next()){
+            TestAnswers testAnswers = new TestAnswers();
+            testAnswers.setQuestion(resultSet.getString("question"));
+            String correctAnswer = resultSet.getString("correct_answer");
+            String actualAnswer = resultSet.getString("actual_answer");
+            testAnswers.setCorrectAnswer(resultSet.getString("option"+correctAnswer));
+            testAnswers.setActualAnswer(resultSet.getString("option"+actualAnswer));
+            testAnswersList.add(testAnswers);
+        }
+        resultSet.close();
+        statement.close();
+        return testAnswersList;
+    }
+
 }

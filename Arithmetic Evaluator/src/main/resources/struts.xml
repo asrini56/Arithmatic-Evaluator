@@ -135,6 +135,10 @@
             <result type="json"/>
         </action>
 
+        <action name="student/fetchStudentCorrectAnswers" class="com.asu.ser.usermanagement.UserManagementAction" method="fetchStudentTestCorrectAnswers">
+            <result type="json"/>
+        </action>
+
         <action name="student/viewtestscores_page">
             <result type="dispatcher">/jsp/student_view_test_score.jsp</result>
         </action>
@@ -186,7 +190,11 @@
         <action name="grade1/operations/evaluvate" class="com.asu.ser.operations.OperationsAction" method="evaluvateExpression">
             <result type="json"/>
         </action>
-        
+
+        <action name="student/viewCorrectAnswers_page">
+            <result type="dispatcher">/jsp/student_view_correct_answers.jsp</result>
+        </action>
+  
         <action name="student/take_test" class="com.asu.ser.operations.TestAction" method="forwardToTakeTest">
             <result type="dispatcher">/jsp/take_test.jsp</result>
         </action>
@@ -198,6 +206,7 @@
         <action name="student/test/submit" class="com.asu.ser.operations.TestAction" method="submitTest">
             <result type="json"/>
         </action>
+
 
     </package>
 
