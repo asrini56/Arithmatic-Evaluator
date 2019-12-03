@@ -2,10 +2,17 @@ package com.asu.ser.usermanagement;
 /**
  * @author Ashwin
  */
+/**
+ *
+ */
+/**
+ This file contains information and declarations regarding Test details
+ */
 
 import java.util.List;
 
 import com.asu.ser.model.TestQuestion;
+import com.asu.ser.operations.TestQuestionsList;
 
 public class TestDetails {
     private Integer testId;
@@ -14,6 +21,7 @@ public class TestDetails {
     private Integer gradeId;
     private String grade;
     private List<TestQuestion> questions;
+    private TestQuestionsList questionsList;
 
     public Integer getTestId() {
         return testId;
@@ -61,5 +69,13 @@ public class TestDetails {
 
 	public void setGrade(String grade) {
 		this.grade = grade;
+	}
+
+	public TestQuestionsList getQuestionsList() {
+		return questionsList;
+	}
+
+	public void setQuestionsList(TestQuestionsList questionsList) {
+		this.questionsList = questionsList;
 	}
 }

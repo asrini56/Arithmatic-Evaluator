@@ -69,7 +69,7 @@ public class DataSource {
         List<User> userList = new ArrayList<>();
         while(resultSet.next()){
             User user = new User();
-            user.setEmailId(resultSet.getString("email_id"));
+            user.setEmail(resultSet.getString("email_id"));
             user.setPassword(resultSet.getString("password"));
             user.setFirstName(resultSet.getString("first_name"));
             user.setLastName(resultSet.getString("last_name"));

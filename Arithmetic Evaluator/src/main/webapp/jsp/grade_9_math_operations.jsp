@@ -16,10 +16,10 @@
 		<nav class="navbar navbar-inverse" style="margin-bottom:0px !important">
   			<div class="container-fluid">
     			<div class="navbar-header">
-      				<a class="navbar-brand titleText" href="/arithmetic-evaluator/landing_page.action">Arithmetic Evaluator</a>
+      				<a class="navbar-brand titleText" href="#">Arithmetic Evaluator</a>
     			</div>
     			<ul class="nav navbar-nav navbar-right">
-    				<li class="active fontSansSerif"><a href="/arithmetic-evaluator/landing_page.action">Home</a></li>
+    				<li class="active fontSansSerif"><a href="#">Home</a></li>
     				<li>
     					<div class="dropdown">
  							<a href="#" class="dropbtn">
@@ -60,21 +60,14 @@
 					<button id="basicMathBtn" class="btn btn-primary active" onClick="basicMathClicked()">Basic Math</button> <br/>
 					<button id="pemdasBtn" class="btn btn-primary" onClick="pemdasClicked()">PEMDAS</button><br/>
 					<button id="areasBtn" class="btn btn-primary" onClick="areasClicked()">Areas</button><br/>
+                    <button id="trigonometryBtn" class="btn btn-primary" onClick="trigonometryClicked()">Trigonometry</button><br/>
+					
 				</div>
 				<div class="vl"></div>
 				<div id="basicMathDiv">
 					<div id="operationsDiv" class="operationsDiv"
 						ondragenter="return dragEnter(event)"
 						ondrop="return dragDrop(event)" ondragover="return dragOver(event)">
-						
-						<div id="num10" class="numbersBox" draggable="true"
-							ondragenter="return dragEnter(event)"
-							ondragstart="return dragStart(event)"
-							ondrop="return dragDrop(event)" ondragover="return dragOver(event)">
-							<button type="button" style="background-color: #438687">0</button>
-						</div>
-						
-
 						<div id="num1" class="numbersBox" draggable="true"
 							ondragenter="return dragEnter(event)"
 							ondragstart="return dragStart(event)"
@@ -103,14 +96,13 @@
 							<button type="button" style="background-color: #438687">4</button>
 						</div>
 		
-						<br> <br>
 						<div id="num5" class="numbersBox" draggable="true"
 							ondragenter="return dragEnter(event)"
 							ondragstart="return dragStart(event)"
 							ondrop="return dragDrop(event)" ondragover="return dragOver(event)">
 							<button type="button" style="background-color: #438687">5</button>
 						</div>
-						
+						<br> <br>
 						<div id="num6" class="numbersBox" draggable="true"
 							ondragenter="return dragEnter(event)"
 							ondragstart="return dragStart(event)"
@@ -139,6 +131,12 @@
 							<button type="button" style="background-color: #438687">9</button>
 						</div>
 		
+						<div id="num10" class="numbersBox" draggable="true"
+							ondragenter="return dragEnter(event)"
+							ondragstart="return dragStart(event)"
+							ondrop="return dragDrop(event)" ondragover="return dragOver(event)">
+							<button type="button" style="background-color: #438687">0</button>
+						</div>
 		
 						<br /> <br /> <br /> <br>
 						<hr>
@@ -380,6 +378,55 @@
 						</div>
 					</div>
 				</div>
+				
+                <div id="trigoDiv" class="hide">
+					<br><br>
+                    <div id="sin" class="" draggable="true" ondragenter="return dragEnter(event)"
+								 	ondragstart="return dragStart(event)" ondrop="return dragDrop(event)" ondragover="return dragOver(event)">
+						<div>
+								<label>sin( </label>
+								<input id="sqside" type="text"  size="5" placeholder="Number" disabled/><label>)</label>	
+				        </div>
+                    
+					</div>
+                    <br><br>
+                    <div id="cos" class="" draggable="true" ondragenter="return dragEnter(event)"
+								 	ondragstart="return dragStart(event)" ondrop="return dragDrop(event)" ondragover="return dragOver(event)">
+						<div>
+								<label>cos( </label>
+								<input id="sqside" type="text"  size="5" placeholder="Number" disabled/><label>)</label>		
+				        </div>
+					</div>
+                    <br><br>
+                    <div id="tan" class="" draggable="true" ondragenter="return dragEnter(event)"
+								 	ondragstart="return dragStart(event)" ondrop="return dragDrop(event)" ondragover="return dragOver(event)">
+						<div>
+								<label>tan( </label>
+								<input id="sqside" type="text"  size="5" placeholder="Number" disabled/><label>)</label>		
+				        </div>
+					</div>
+                    <div id="sin_copy" draggable="true" ondragenter="return dragEnter(event)"
+                         ondragstart="return dragStart(event)" ondrop="return dragDrop(event)" ondragover="return dragOver(event)" class="sine hide">
+                        <div>
+								<label>sin( </label>
+								<input id="sin_value" type="text"  size="5" placeholder="0"/><label> )</label>		
+				        </div>
+                    </div>
+                    <div id="cos_copy" draggable="true" ondragenter="return dragEnter(event)"
+                         ondragstart="return dragStart(event)" ondrop="return dragDrop(event)" ondragover="return dragOver(event)" class="isTrigo cos hide">
+                        <div>
+								<label>cos( </label>
+								<input id="cos_value" type="text"  size="5" placeholder="0"/><label> )</label>		
+				        </div>
+                    </div>
+                    <div id="tan_copy" draggable="true" ondragenter="return dragEnter(event)"
+                         ondragstart="return dragStart(event)" ondrop="return dragDrop(event)" ondragover="return dragOver(event)" class="isTrigo tan hide">
+                        <div>
+								<label>tan( </label>
+								<input id="tan_value" type="text"  size="5" placeholder="0"/><label> )</label>		
+				        </div>
+                    </div>
+				</div>
 		</nav>
 		<nav style="text-align:center;">
 			<h3 class="splitHeading">Canvas</h3>
@@ -434,9 +481,6 @@
 			$btn = $('#' + shape + '_area_div').clone();
 			$btn.removeClass("hide");
 			$btn.addClass("performOperation");
-			$btn.attr('id', 'id' + cloneCount);
-			$btn.attr('onClick', 'selectedButton(\'id' + cloneCount + '\')');
-			cloneCount++;
 			if(shape = "square") {
 				$btn.find("#sqside").attr('id', 'side');
 			}
@@ -464,7 +508,7 @@
 			if(isShapeDiv(src)){
 				cloneAndAddShape(src);
 				return;
-			}
+			} 
 			var $lastVal;
 			$btn = $('#' + src).clone();
 			$btn.attr('id', 'id' + cloneCount)
@@ -511,7 +555,46 @@
 				cloneCount++;
 				cloneCount++;
 				return false;
-			}
+			} else if(src == "sin") {
+
+                $btn = $('#sin_copy').clone();
+                $btn.attr('id', 'id' + cloneCount)
+                $btn.attr('onClick', 'selectedButton("id' + cloneCount + '")');
+                $btn.addClass("performOperation");
+                $btn.removeClass("hide");
+                $btn.removeAttr("draggable");
+                $btn.removeAttr("ondragenter");
+                $btn.removeAttr("ondragstart");
+                $btn.removeAttr("ondrop");
+                $btn.removeAttr("ondragover");
+                cloneCount++;
+            } else if(src == "cos") {
+
+                $btn = $('#cos_copy').clone();
+                $btn.attr('id', 'id' + cloneCount)
+                $btn.attr('onClick', 'selectedButton("id' + cloneCount + '")');
+                $btn.addClass("performOperation");
+                $btn.removeClass("hide");
+                $btn.removeAttr("draggable");
+                $btn.removeAttr("ondragenter");
+                $btn.removeAttr("ondragstart");
+                $btn.removeAttr("ondrop");
+                $btn.removeAttr("ondragover");
+                cloneCount++;
+            } else if(src == "tan") {
+
+                $btn = $('#tan_copy').clone();
+                $btn.attr('id', 'id' + cloneCount)
+                $btn.attr('onClick', 'selectedButton("id' + cloneCount + '")');
+                $btn.addClass("performOperation");
+                $btn.removeClass("hide");
+                $btn.removeAttr("draggable");
+                $btn.removeAttr("ondragenter");
+                $btn.removeAttr("ondragstart");
+                $btn.removeAttr("ondrop");
+                $btn.removeAttr("ondragover");
+                cloneCount++;
+            }
 			cloneCount++;
 			$("#boxB").append($btn);
 			return false;
@@ -520,16 +603,24 @@
 		function evaluate1() {
 			var expression = "";
 			var hasShape = false;
+            var hasTrigo = false;
 			$(".performOperation").each(function(index) {
 				if($(this).hasClass("isShape")){
 					evaluateArea();
 					hasShape = true;
+					return;
+				} else if($(this).hasClass("isTrigo")){
+					evaluateTrigo();
+					hasTrigo = true;
 					return;
 				} else {
 					expression += $(this).text().trim();
 				}
 			});
 			if(hasShape){
+				return;
+            }
+            if(hasTrigo){
 				return;
 			}
 			expression = expression.replace("x", "*");
@@ -575,37 +666,79 @@
 				$("#expressionResult").html(result);
 			});
 		}
+        
+        function evaluateTrigo() {
+			var expression = "";
+			$(".performOperation").each(function(index) {
+				if($(this).hasClass("sine")) {
+					var number = $('#sin_value').val();
+					expression = sin(number);
+					
+				} else if($(this).hasClass("cos")) {
+					var number = $('#cos_value').val();
+					expression = cos(number);
+					
+				} else if($(this).hasClass("tan")) {
+					var number = $('#tan').val();
+					expression = tan(number);
+				} 
+			});
+			
+			expression = encodeURIComponent(expression);
+			var url = "/arithmetic-evaluator/grade1/operations/evaluvate.action?expression="
+					+ expression;
+			sendAjaxRequest(url, function(resp) {
+				var result = resp.response;
+				$("#expressionResult").html(result);
+			});
+		}
 
 		function pemdasClicked() {
 			$('#basicMathDiv').addClass('hide');
 			$('#areasDiv').addClass('hide');
-			
+            $('#trigoDiv').addClass('hide');
 			$('#pemdasDiv').removeClass('hide');
 			
 			$('#pemdasBtn').addClass('active');
+            $('#trigonometryBtn').removeClass('active');
 			$('#basicMathBtn').removeClass('active');
 			$('#areasBtn').removeClass('active');
 		}
 		function basicMathClicked(){
 			$('#areasDiv').addClass('hide');
 			$('#pemdasDiv').addClass('hide');
-			
+            $('#trigoDiv').addClass('hide');
 			$('#basicMathDiv').removeClass('hide');
 			
 			$('#basicMathBtn').addClass('active');
 			$('#areasBtn').removeClass('active');
+            $('#trigonometryBtn').removeClass('active');
 			$('#pemdasBtn').removeClass('active');
 		}
 		function areasClicked() {
 			$('#basicMathDiv').addClass('hide');
 			$('#pemdasDiv').addClass('hide');
-			
+            $('#trigoDiv').addClass('hide');
 			$('#areasDiv').removeClass('hide');
 			
 			$('#areasBtn').addClass('active');
+            $('#trigonometryBtn').removeClass('active');
 			$('#basicMathBtn').removeClass('active');
 			$('#pemdasBtn').removeClass('active');
 		}
+		
+        function trigonometryClicked() {
+			$('#basicMathDiv').addClass('hide');
+			$('#pemdasDiv').addClass('hide');
+			$('#trigoDiv').removeClass('hide');
+			$('#areasDiv').addClass('hide');
+           
+            $('#trigonometryBtn').addClass('active');
+			$('#areasBtn').removeClass('active');
+			$('#basicMathBtn').removeClass('active');
+			$('#pemdasBtn').removeClass('active');
+		}
+
 
 		function selectedButton(id) {
 			selectedBtn = id;
@@ -624,7 +757,6 @@
 			$(".performOperation").each(function(index) {
 				$(this).remove();
 			});
-			$("#expressionResult").html("");
 		}
 
 		var modal = document.getElementById("myModal");
