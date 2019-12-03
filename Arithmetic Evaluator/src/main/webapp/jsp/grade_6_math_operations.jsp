@@ -435,6 +435,9 @@
 			$btn = $('#' + shape + '_area_div').clone();
 			$btn.removeClass("hide");
 			$btn.addClass("performOperation");
+			$btn.attr('id', 'id' + cloneCount);
+			$btn.attr('onClick', 'selectedButton(\'id' + cloneCount + '\')');
+			cloneCount++;
 			if(shape = "square") {
 				$btn.find("#sqside").attr('id', 'side');
 			}
