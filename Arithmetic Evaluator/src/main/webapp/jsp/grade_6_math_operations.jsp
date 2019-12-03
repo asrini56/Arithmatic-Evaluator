@@ -376,7 +376,6 @@
 						</div>
 					</div>
 				</div>
-			</div>
 		</nav>
 		<nav style="text-align:center;">
 			<h3 class="splitHeading">Canvas</h3>
