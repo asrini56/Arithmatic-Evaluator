@@ -52,6 +52,10 @@ public class UserManagementAction {
     private static final String PASSWORD_REGEX = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$";
     private static final Pattern PASSWORD_PATTERN = Pattern.compile(PASSWORD_REGEX);
 
+    /**
+     * This function is used to perform the sign up operation
+     * @return
+     */
     public String signUp(){
     	String returnType = Action.SUCCESS;
         try {
@@ -79,6 +83,10 @@ public class UserManagementAction {
         return returnType;
     }
 
+    /**
+     * This function is used to perform the login operation
+     * @return
+     */
     public String login(){
         try {
             message = UserManagementHandler.loginUser(emailID, password);
@@ -94,6 +102,10 @@ public class UserManagementAction {
         return Action.ERROR;
     }
 
+    /**
+     * This function is used to perform the logout operation
+     * @return
+     */
     public String logout(){
         if(StringUtils.isEmpty(AuthenticationUtil.getLoggedInUser())){
             return Action.ERROR;
@@ -102,6 +114,10 @@ public class UserManagementAction {
         return Action.SUCCESS;
     }
 
+    /**
+     * This function is invoked while adding teachers
+     * @return
+     */
     public String addTeacher() {
         if(StringUtils.isEmpty(AuthenticationUtil.getLoggedInUser())){
             message = "Please log in to access the page.";
@@ -138,6 +154,10 @@ public class UserManagementAction {
     	return Action.SUCCESS;
     }
 
+    /**
+     * This function is used to fetch various teacher information
+     * @return
+     */
     public String fetchTeachers() {
         if(StringUtils.isEmpty(AuthenticationUtil.getLoggedInUser())){
             message = "Please log in to access the page.";
@@ -152,6 +172,10 @@ public class UserManagementAction {
     	return Action.SUCCESS;
     }
 
+    /**
+     * This function is used to fetch various student information
+     * @return
+     */
     public String fetchStudents() {
         if(StringUtils.isEmpty(AuthenticationUtil.getLoggedInUser())){
             message = "Please log in to access the page.";
@@ -166,6 +190,10 @@ public class UserManagementAction {
         return Action.SUCCESS;
     }
 
+    /**
+     * This function is used to remove user
+     * @return
+     */
     public String removeUser() {
     	try {
     		UserManagementHandler.removeUser(emailID);
@@ -177,7 +205,10 @@ public class UserManagementAction {
     	return Action.SUCCESS;
     }
 
-
+    /**
+     * This function is used to perform student addition operation
+     * @return
+     */
     public String addStudent() {
         if(StringUtils.isEmpty(AuthenticationUtil.getLoggedInUser())){
             message = "Please log in to access the page.";
@@ -214,6 +245,11 @@ public class UserManagementAction {
         return Action.SUCCESS;
     }
 
+    /**
+     * This function is invoked while password reset
+     * @return
+     */
+
     public String resetPassword() {
         if(!newPassword.equals(confirmPassword)){
             message = "Passwords does not match. Please re-enter a new password.";
@@ -240,6 +276,10 @@ public class UserManagementAction {
         return Action.ERROR;
     }
 
+    /**
+     * This function is used to fetch test details
+     * @return
+     */
     public String fetchTestDetails() {
         if(StringUtils.isEmpty(AuthenticationUtil.getLoggedInUser())){
             message = "Please log in to access the page.";
@@ -253,6 +293,12 @@ public class UserManagementAction {
         }
         return Action.SUCCESS;
     }
+
+
+    /**
+     * This function is used to fetch grade during test details
+     * @return
+     */
 
     public String fetchGradeTestDetails() {
         if(StringUtils.isEmpty(AuthenticationUtil.getLoggedInUser())){
@@ -268,6 +314,10 @@ public class UserManagementAction {
         return Action.SUCCESS;
     }
 
+    /**
+     * This function is used to return test score
+     * @return
+     */
     public String fetchTestScoreDetails() {
         if(StringUtils.isEmpty(AuthenticationUtil.getLoggedInUser())){
             message = "Please log in to access the page.";
@@ -282,6 +332,10 @@ public class UserManagementAction {
         return Action.SUCCESS;
     }
 
+    /**
+     * This function is used to fetch correct answers
+     * @return
+     */
     public String fetchStudentTestCorrectAnswers() {
         if(StringUtils.isEmpty(AuthenticationUtil.getLoggedInUser())){
             message = "Please log in to access the page.";
@@ -296,6 +350,10 @@ public class UserManagementAction {
         return Action.SUCCESS;
     }
 
+    /**
+     * This function is used to fetch student grade
+     * @return
+     */
     public String fetchStudentGrade(){
         try {
             grade = UserManagementHandler.fetchGrade().toLowerCase().replace("-", "");
@@ -306,13 +364,23 @@ public class UserManagementAction {
         return Action.SUCCESS;
     }
 
+    /**
+     * This function is used to validate email id
+     * @return
+     */
+
     private boolean validEmailID(String emailID) {
     	return EMAIL_PATTERN.matcher(emailID).matches();
     }
 
+    /**
+     * This function is used to validate password
+     * @return
+     */
     private boolean validPassword(String password) {
         return PASSWORD_PATTERN.matcher(password).matches();
     }
+
 
     public String getPassword() {
         return password;

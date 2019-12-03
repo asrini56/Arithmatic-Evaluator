@@ -23,6 +23,12 @@ public class MailServer {
 	private static final String USERNAME = "team8.ser515@gmail.com";
 	private static final String PASSWORD = "aujisrmliyexaydg";
 
+
+	/**
+	 * This function is used to send mail to user email address
+	 * @return
+	 */
+
 	public static void sendMail(String toAddress, String subject, String content) throws Exception {
 		Properties prop = new Properties();
 		prop.put("mail.smtp.host", "smtp.gmail.com");

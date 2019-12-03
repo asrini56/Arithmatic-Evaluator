@@ -11,8 +11,12 @@ public class OperationsAction {
 
 	private String expression;
 	private String response;
-	
-	
+
+
+	/**
+	 * Function to evaluate the expression
+	 * @return
+	 */
 	public String evaluvateExpression() {
 		response = OperationsHandler.evaluateExpression(expression);
 		return Action.SUCCESS;

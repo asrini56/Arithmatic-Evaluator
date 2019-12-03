@@ -1,5 +1,7 @@
 package com.asu.ser.model;
-
+/**
+ * @author Ashwin
+ */
 public class TestScore {
 
     private String testId;

@@ -1,5 +1,8 @@
 package com.asu.ser.model;
-
+/**
+ * @author Ashwin
+ * @author Srinivasan
+ */
 public class TestAnswers {
 
     private String question;

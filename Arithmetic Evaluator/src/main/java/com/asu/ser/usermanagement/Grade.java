@@ -1,5 +1,13 @@
 package com.asu.ser.usermanagement;
+/**
+ * @author akhilesh
+ * @author Ashwin
+ * @author Srinivasan
+ */
 
+/**
+ * Function to return the grade of the user
+ */
 import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.Map;
