@@ -7,7 +7,11 @@ import java.net.URL;
  */
 
 public class Util {
-	
+
+    /**
+     * Returns a file instance for the given file name
+     * @return
+     */
 	public static File getFileFromResources(String fileName) {
 		ClassLoader classLoader = new Util().getClass().getClassLoader();
         URL resource = classLoader.getResource(fileName);

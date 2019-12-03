@@ -25,7 +25,11 @@ public class TestAction {
 	private TestDetails testDetail;
 
 	private static Logger LOGGER = Logger.getLogger(TestAction.class.getName());
-	
+
+	/**
+	 * Invokes TestHandler to add/create new Test
+	 * @return
+	 */
 	public String addTest() {
 		try {
 			questionsJSONAsString = URLDecoder.decode(questionsJSONAsString, StandardCharsets.UTF_8.toString());
@@ -40,7 +44,11 @@ public class TestAction {
 		
 		return Action.SUCCESS;
 	}
-	
+
+	/**
+	 * Invokes TestHandler to save a test
+	 * @return
+	 */
 	public String submitTest(){
 		try {
 			questionsJSONAsString = URLDecoder.decode(questionsJSONAsString, StandardCharsets.UTF_8.toString());
@@ -58,6 +66,10 @@ public class TestAction {
 		return Action.SUCCESS;
 	}
 	
+	/**
+	 * Invokes TestHandler to fetch a Test.
+	 * @return
+	 */
 	public String fetchTest() {
 		try {
 			testDetail = TestHandler.fetchTestDetailsForID(testID);

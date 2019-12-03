@@ -8,10 +8,13 @@ import com.asu.ser.authentication.AuthenticationUtil;
 import com.asu.ser.db.DataSource;
 import com.asu.ser.model.Student;
 import com.asu.ser.model.Teacher;
+import com.asu.ser.model.TestAnswers;
 import com.asu.ser.model.TestScore;
 import com.asu.ser.model.User;
 import com.asu.ser.model.TestQuestion;
 import com.asu.ser.util.MailServer;
+import com.asu.ser.util.MessageConstants;
+
 import org.apache.commons.lang3.StringUtils;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -45,6 +48,10 @@ public class UserManagementHandler {
 
 	}
 
+	
+	/**
+	 * Initializes user roles by fetching it from DB and setting it to map.
+	 */
 	public static void init(){
 		try {
 			USER_ROLES = DataSource.fetchRoles();
@@ -54,17 +61,25 @@ public class UserManagementHandler {
 		}
 	}
 
+	/**
+	 * This function is used to during the registration process of admin
+	 * @return
+	 */
     public static void signUpAdminUser(String emailID, String password, String firstName, String lastName, String institutionName) throws Exception {
         Integer userID = DataSource.insertUser(emailID, password, firstName, lastName);
         Integer roleID = USER_ROLES.get(ROLE_ADMIN);
         if(roleID == null ) {
-        	throw new Exception("Server error - Invalid role");
+        	throw new Exception(MessageConstants.SERVER_ERR_INVALID_ROLE);
         }
         DataSource.insertUserToRole(userID, roleID);
         Integer institutionID = DataSource.insertInstitution(institutionName);
         DataSource.insertUserTOInstitution(userID, institutionID);
     }
 
+	/**
+	 * This function is used during login operation
+	 * @return
+	 */
     public static String loginUser(String emailID, String password) throws Exception {
         String message = "";
         List<User> userList = DataSource.selectUser(emailID);
@@ -81,22 +96,30 @@ public class UserManagementHandler {
         return message;
     }
 
+	/**
+	 * This function is used during reset password operation
+	 * @return
+	 */
 	public static String resetPassword(String emailID, String password) throws Exception {
 		String message = "";
 		Integer rowsAffected = DataSource.resetPassword(emailID, password);
 		if(rowsAffected>0){
-			message = "Success";
+			message = MessageConstants.SUCCESS;
 			return message;
 		} else {
-			message = "Failed to update Password.";
+			message = MessageConstants.FAILED_TO_UPDATE_PASSWORD;
 			return message;
 		}
 	}
 
+	/**
+	 * This function is used while adding new teacher
+	 * @return
+	 */
     public static void addTeacher(String firstName, String lastName, String emailID) throws Exception {
     	String loggedInUser = AuthenticationUtil.getLoggedInUser();
     	if(loggedInUser == null || loggedInUser.isEmpty()) {
-    		throw new Exception("No user logged in");
+    		throw new Exception(MessageConstants.NO_USER_LOGGED_IN);
     	}
     	int userID = DataSource.fetchUserID(loggedInUser);
     	int userRoleID = DataSource.fetchUserRole(userID);
@@ -127,10 +150,15 @@ public class UserManagementHandler {
     	}
     }
 
+	/**
+	 * This function is used while adding students
+	 * @return
+	 */
+
 	public static void addStudent(String firstName, String lastName, String emailID, String grade) throws Exception {
 		String loggedInUser = AuthenticationUtil.getLoggedInUser();
 		if(loggedInUser == null || loggedInUser.isEmpty()) {
-			throw new Exception("No user logged in");
+			throw new Exception(MessageConstants.NO_USER_LOGGED_IN);
 		}
 		int userID = DataSource.fetchUserID(loggedInUser);
 		int userRoleID = DataSource.fetchUserRole(userID);
@@ -159,11 +187,22 @@ public class UserManagementHandler {
 		}
 	}
 
+	/**
+	 * This function is used to fetch teachers
+	 * @return
+	 */
+
     public static List<Teacher> fetchTeachers() throws Exception {
     	String loggedInUser = AuthenticationUtil.getLoggedInUser();
     	Integer institutionID = DataSource.fetchUsersInstitutionID(loggedInUser);
     	return DataSource.fetchTeachers(institutionID);
     }
+
+
+	/**
+	 * This function is used to fetch students
+	 * @return
+	 */
 
 	public static List<Student> fetchStudents() throws Exception {
 		String loggedInUser = AuthenticationUtil.getLoggedInUser();
@@ -171,15 +210,25 @@ public class UserManagementHandler {
 		return DataSource.fetchStudents(institutionID);
 	}
 
+	/**
+	 * This function is used to check whether a institution is present or not
+	 * @return
+	 */
+
     public static boolean isInstitutionPresent(String institutionName) throws Exception {
         Integer institutionID = DataSource.fetchInstitutionID(institutionName);
         return institutionID != null;
     }
 
+	/**
+	 * This function is used to remove an user
+	 * @return
+	 */
+
     public static void removeUser(String userEmailID) throws Exception {
     	String loggedInUser = AuthenticationUtil.getLoggedInUser();
     	if(loggedInUser == null || loggedInUser.isEmpty()) {
-    		throw new Exception("No user logged in");
+    		throw new Exception(MessageConstants.NO_USER_LOGGED_IN);
     	}
     	int userID = DataSource.fetchUserID(loggedInUser);
     	int userRoleID = DataSource.fetchUserRole(userID);
@@ -190,6 +239,10 @@ public class UserManagementHandler {
     	DataSource.deleteUserWithEmailID(userEmailID);
     }
 
+	/**
+	 * This function is used to send password
+	 * @return
+	 */
 
 	public static void sendTeacherAccountPasswordEmail(String firstName, String lastName, String teacherEmailID,
 			String password, String adminEmailID) throws Exception {
@@ -201,6 +254,10 @@ public class UserManagementHandler {
 
     }
 
+	/**
+	 * This function is used to send password for students
+	 * @return
+	 */
 	public static void sendStudentAccountPasswordEmail(String firstName, String lastName, String studentEmailID,
 													   String password, String adminEmailID) throws Exception {
 		String subject = "ArithmenticEvaluvator - Account created";
@@ -210,23 +267,37 @@ public class UserManagementHandler {
 		MailServer.sendMail(studentEmailID, subject, content);
 	}
 
+	/**
+	 * This function is used to get role name
+	 * @return
+	 */
+
 	public static String getRoleNameForUser(String emailID) throws Exception {
 		return DataSource.fetchUserRoleName(emailID);
 	}
 
+	/**
+	 * This function is used to fetch grade during test details
+	 * @return
+	 */
     public static List<TestDetails> fetchGradeTestDetails() throws Exception {
         String loggedInUser = AuthenticationUtil.getLoggedInUser();
         if(loggedInUser == null || loggedInUser.isEmpty()) {
-            throw new Exception("No user logged in");
+            throw new Exception(MessageConstants.NO_USER_LOGGED_IN);
         }
         int institutionID = DataSource.fetchUsersInstitutionID(loggedInUser);
         return DataSource.fetchGradeTestDetails(loggedInUser, institutionID);
     }
 
+	/**
+	 * This function is used to fetch student test score
+	 * @return
+	 */
+
 	public static List<TestScore> fetchStudentTestScore() throws Exception {
 		String loggedInUser = AuthenticationUtil.getLoggedInUser();
 		if(loggedInUser == null || loggedInUser.isEmpty()) {
-			throw new Exception("No user logged in");
+			throw new Exception(MessageConstants.NO_USER_LOGGED_IN);
 		}
 		int userID = DataSource.fetchUserID(loggedInUser);
 		int userRoleID = DataSource.fetchUserRole(userID);
@@ -237,14 +308,39 @@ public class UserManagementHandler {
 		return DataSource.fetchStudentTestScore(userID);
 	}
 
+	/**
+	 * This function is used to fetch test correct answers
+	 * @return
+	 */
+
+	public static List<TestAnswers> fetchStudentTestCorrectAnswers(int testId) throws Exception {
+		String loggedInUser = AuthenticationUtil.getLoggedInUser();
+		if(loggedInUser == null || loggedInUser.isEmpty()) {
+			throw new Exception(MessageConstants.NO_USER_LOGGED_IN);
+		}
+		int userID = DataSource.fetchUserID(loggedInUser);
+		int userRoleID = DataSource.fetchUserRole(userID);
+		int studentRoleID = USER_ROLES.get(ROLE_STUDENT);
+		if(userRoleID != studentRoleID) {
+			throw new Exception("Illegal operation - only students have permission to view test score");
+		}
+		return DataSource.fetchStudentTestCorrectAnswers(userID, testId);
+	}
+
     public static int getTeacherRoleID() {
     	return USER_ROLES.get(ROLE_TEACHER);
     }
 
+
+	/**
+	 * This function is used to fetch grade
+	 * @return
+	 */
+
 	public static String fetchGrade() throws Exception{
 		String loggedInUser = AuthenticationUtil.getLoggedInUser();
 		if(loggedInUser == null || loggedInUser.isEmpty()) {
-			throw new Exception("No user logged in");
+			throw new Exception(MessageConstants.NO_USER_LOGGED_IN);
 		}
 		int userID = DataSource.fetchUserID(loggedInUser);
 		int gradeID = DataSource.fetchGradeID(userID);

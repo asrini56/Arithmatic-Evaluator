@@ -27,6 +27,10 @@ public class TableCreationQueries {
 		TABLE_CREATION_QUERIES.add(INSERT_TEST_TABLE);
 	}
 
+	/**
+	 * Function to cold start database and execute sql queries
+	 * @throws Exception
+	 */
 	public static void coldStart() throws Exception {
 		for (String insertQuery : TABLE_CREATION_QUERIES) {
 			try (Connection con = DataSourceConnector.getConnection()) {
@@ -39,8 +43,11 @@ public class TableCreationQueries {
 		}
 	}
 
-	
-	// Run this program to create all tables in the database.
+
+	/**
+	 * Run this program to create all tables in the database.
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		try {
 			coldStart();

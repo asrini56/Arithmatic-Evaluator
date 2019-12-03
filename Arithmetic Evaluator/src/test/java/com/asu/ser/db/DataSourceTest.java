@@ -11,8 +11,15 @@ import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author srini
+ * @author akhilesh
+ */
 public class DataSourceTest extends TestCase {
 
+    /**
+     * Test function to test the functionality of insert user into database
+     */
     public void testInsertUser(){
         try {
             DataSource.insertUser("abc@gmail.com", "Ssadmin123", "AdminFirst", "AdminLast");
@@ -23,6 +30,9 @@ public class DataSourceTest extends TestCase {
         }
     }
 
+    /**
+     * Test function to test the functionality of select user from database
+     */
     public void testSelectUser(){
         try {
             List<User> userList = DataSource.selectUser("abc@gmail.com");
@@ -32,6 +42,9 @@ public class DataSourceTest extends TestCase {
         }
     }
 
+    /**
+     * Test function to test the functionality of reset password in database
+     */
     public void testResetPassword(){
         try {
             Integer count = DataSource.resetPassword("abc@gmail.com", "Ssadmin123");
@@ -41,6 +54,9 @@ public class DataSourceTest extends TestCase {
         }
     }
 
+    /**
+     * Test function to test the functionality of insert user_to_role into database
+     */
     public void testInsertUserToRole(){
         try {
             DataSource.insertUserToRole(58,2);
@@ -51,6 +67,9 @@ public class DataSourceTest extends TestCase {
         }
     }
 
+    /**
+     * Test function to test the functionality of insert institution into database
+     */
     public void testInsertInstitution(){
         try {
             RandomStringGenerator generator = new RandomStringGenerator.Builder().withinRange('a', 'z').build();
@@ -62,6 +81,9 @@ public class DataSourceTest extends TestCase {
         }
     }
 
+    /**
+     * Test function to test the functionality of insert user_to_institution into database
+     */
     public void testInsertUserTOInstitution(){
         try {
             DataSource.insertUserTOInstitution(139,1);
@@ -72,6 +94,9 @@ public class DataSourceTest extends TestCase {
         }
     }
 
+    /**
+     * Test function to test the functionality of select institution from database
+     */
     public void testSelectInstitutionID(){
         try {
             List<Integer> integerList = DataSource.selectInstitutionID("SRM");
@@ -81,6 +106,9 @@ public class DataSourceTest extends TestCase {
         }
     }
 
+    /**
+     * Test function to test the functionality of select institution_id for a given user_id from database
+     */
     public void testFetchUsersInstitutionID(){
         try {
             Integer count = DataSource.fetchUsersInstitutionID("akrish84@asu.edu");
@@ -90,6 +118,9 @@ public class DataSourceTest extends TestCase {
         }
     }
 
+    /**
+     * Test function to test the functionality of fetch institution_id for given institution_name from database
+     */
     public void testFetchInstitutionID(){
         try {
             Integer id = DataSource.fetchInstitutionID("SRM");
@@ -99,6 +130,9 @@ public class DataSourceTest extends TestCase {
         }
     }
 
+    /**
+     * Test function to test the functionality of select roles from database
+     */
     public void testFetchRoles(){
         try {
             Map<String, Integer> rolesMap = DataSource.fetchRoles();
@@ -108,6 +142,9 @@ public class DataSourceTest extends TestCase {
         }
     }
 
+    /**
+     * Test function to test the functionality of select user_id from database
+     */
     public void testFetchUserID(){
         try {
             Integer id = DataSource.fetchUserID("team8.ser515@gmail.com");
@@ -117,6 +154,9 @@ public class DataSourceTest extends TestCase {
         }
     }
 
+    /**
+     * Test function to test the functionality of select  user_role from database
+     */
     public void testFetchUserRole(){
         try {
             Integer id = DataSource.fetchUserRole(58);
@@ -126,6 +166,9 @@ public class DataSourceTest extends TestCase {
         }
     }
 
+    /**
+     * Test function to test the functionality of select user role_name from database
+     */
     public void testFetchUserRoleName(){
         try {
             String role = DataSource.fetchUserRoleName("team8.ser515@gmail.com");
@@ -135,6 +178,9 @@ public class DataSourceTest extends TestCase {
         }
     }
 
+    /**
+     * Test function to test the functionality of select teachers from database
+     */
     public void testFetchTeachers(){
         try {
             List<Teacher> teacherList = DataSource.fetchTeachers(3);
@@ -144,6 +190,9 @@ public class DataSourceTest extends TestCase {
         }
     }
 
+    /**
+     * Test function to test the functionality of delete user from database
+     */
     public void testDeleteUser(){
         try {
             DataSource.deleteUserWithID(500);
@@ -152,6 +201,9 @@ public class DataSourceTest extends TestCase {
         }
     }
 
+    /**
+     * Test function to test the functionality of delete user for given mail_id from database
+     */
     public void testDeleteUserWithEmailID(){
         try {
             DataSource.deleteUserWithEmailID("rand@test.ikl");
