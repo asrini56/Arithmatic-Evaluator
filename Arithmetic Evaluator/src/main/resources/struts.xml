@@ -174,9 +174,9 @@
         <action name="grade6/operations_page">
             <result type="dispatcher">/jsp/grade_6_math_operations.jsp</result>
         </action>
-
+        
         <action name="grade9/operations_page">
-            <result type="dispatcher">/jsp/9th_operations.jsp</result>
+            <result type="dispatcher">/jsp/grade_9_math_operations.jsp</result>
         </action>
         
         <action name="student/currentTestPage">
@@ -187,8 +187,6 @@
             <result type="json"/>
         </action>
         
-     
-
         <action name="student/take_test" class="com.asu.ser.operations.TestAction" method="forwardToTakeTest">
             <result type="dispatcher">/jsp/take_test.jsp</result>
         </action>
