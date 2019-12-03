@@ -24,6 +24,10 @@ public class DataSourceConnector {
 	
 	private static Connection con = null;
 
+	/**
+	 * Function to create database connection
+	 * @throws Exception
+	 */
 	public static void createConnection() throws Exception {
 		if(con != null) {
 			con.close();
@@ -51,6 +55,11 @@ public class DataSourceConnector {
 
 	}
 
+	/**
+	 * Function to get database connection
+	 * @return
+	 * @throws Exception
+	 */
 	public static Connection getConnection() throws Exception {
 		if(con == null) {
 			createConnection();

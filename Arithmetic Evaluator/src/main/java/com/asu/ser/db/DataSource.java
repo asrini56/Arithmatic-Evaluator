@@ -21,10 +21,21 @@ import com.asu.ser.usermanagement.TestDetails;
  * @author akhilesh
  * @author Ashwin
  * @author Srinivasan
+ * @author Aihaab
+ * @author deepti
  */
 
 public class DataSource {
 
+    /**
+     * Function to insert user into database
+     * @param emailID
+     * @param password
+     * @param firstName
+     * @param lastName
+     * @return
+     * @throws Exception
+     */
     public static Integer insertUser(String emailID, String password, String firstName, String lastName) throws Exception {
         Connection connection = DataSourceConnector.getConnection();
         PreparedStatement statement = connection.prepareStatement(SqlQueries.INSERT_USER, Statement.RETURN_GENERATED_KEYS);
@@ -44,6 +55,12 @@ public class DataSource {
         return lastInsertId;
     }
 
+    /**
+     * Function to select user from database
+     * @param emailID
+     * @return
+     * @throws Exception
+     */
     public static List<User> selectUser(String emailID) throws Exception {
         Connection connection = DataSourceConnector.getConnection();
         PreparedStatement statement = connection.prepareStatement(SqlQueries.SELECT_USER_USING_EMAIL_PASSWORD);
@@ -63,6 +80,13 @@ public class DataSource {
         return userList;
     }
 
+    /**
+     * Function to reset password in database
+     * @param emailID
+     * @param password
+     * @return
+     * @throws Exception
+     */
     public static Integer resetPassword(String emailID, String password) throws Exception {
         Connection connection = DataSourceConnector.getConnection();
         PreparedStatement statement = connection.prepareStatement(SqlQueries.UPDATE_PASSWORD_USING_EMAIL);
@@ -73,6 +97,12 @@ public class DataSource {
         return rowsAffected;
     }
 
+    /**
+     * Function to insert user_to_role into database
+     * @param userID
+     * @param roleID
+     * @throws Exception
+     */
     public static void insertUserToRole(int userID, int roleID) throws Exception {
         Connection connection = DataSourceConnector.getConnection();
         PreparedStatement statement = connection.prepareStatement(SqlQueries.INSERT_USER_TO_ROLE);
@@ -82,6 +112,12 @@ public class DataSource {
         statement.close();
     }
 
+    /**
+     * Function to insert institution  into database
+     * @param institutionName
+     * @return
+     * @throws Exception
+     */
     public static Integer insertInstitution(String institutionName) throws Exception {
         Connection connection = DataSourceConnector.getConnection();
         PreparedStatement statement = connection.prepareStatement(SqlQueries.INSERT_INSTITUTION, Statement.RETURN_GENERATED_KEYS);
@@ -98,6 +134,13 @@ public class DataSource {
         return lastInsertId;
     }
 
+    /**
+     * Function to insert user_to_institution into database
+     * @param userID
+     * @param institutionID
+     * @return
+     * @throws Exception
+     */
     public static Integer insertUserTOInstitution(Integer userID, Integer institutionID) throws Exception {
         Connection connection = DataSourceConnector.getConnection();
         PreparedStatement statement = connection.prepareStatement(SqlQueries.INSERT_USER_TO_INSTITUTION, Statement.RETURN_GENERATED_KEYS);
@@ -108,6 +151,12 @@ public class DataSource {
         return rowsInserted;
     }
 
+    /**
+     * Function to select institution_id from database
+     * @param institutionName
+     * @return
+     * @throws Exception
+     */
     public static List<Integer> selectInstitutionID(String institutionName) throws Exception{
         List<Integer> institutionIdList = new ArrayList<>();
         Connection connection = DataSourceConnector.getConnection();
@@ -121,6 +170,12 @@ public class DataSource {
         return institutionIdList;
     }
 
+    /**
+     * Function to select institution_id from database
+     * @param emailID
+     * @return
+     * @throws Exception
+     */
     public static Integer fetchUsersInstitutionID(String emailID) throws Exception {
         Connection connection = DataSourceConnector.getConnection();
         PreparedStatement statement = connection.prepareStatement(SqlQueries.FETCH_INSTITUTION_ID_USING_USER_EMAIL_ID);
@@ -135,6 +190,12 @@ public class DataSource {
         return institutionID;
     }
 
+    /**
+     * Function to select institution_id from database
+     * @param institutionName
+     * @return
+     * @throws Exception
+     */
     public static Integer fetchInstitutionID(String institutionName) throws Exception{
         Connection connection = DataSourceConnector.getConnection();
         PreparedStatement statement = connection.prepareStatement(SqlQueries.SELECT_INSTITUTION_ID_USING_NAME);
@@ -149,6 +210,11 @@ public class DataSource {
         return institutionID;
     }
 
+    /**
+     * Function to fetch roles from database
+     * @return
+     * @throws Exception
+     */
     public static Map<String, Integer> fetchRoles() throws Exception {
         Map<String, Integer> userRoles = new HashMap<>();
         Connection connection = DataSourceConnector.getConnection();
@@ -164,6 +230,12 @@ public class DataSource {
         return userRoles;
     }
 
+    /**
+     * Function to select user_id from database for given email_id
+     * @param emailID
+     * @return
+     * @throws Exception
+     */
     public static Integer fetchUserID(String emailID) throws Exception {
         Connection connection = DataSourceConnector.getConnection();
         PreparedStatement statement = connection.prepareStatement(SqlQueries.FETCH_USER_ID_FROM_EMAIL);
@@ -178,6 +250,12 @@ public class DataSource {
         return userID;
     }
 
+    /**
+     * Function to select user role from database for given user_id
+     * @param userID
+     * @return
+     * @throws Exception
+     */
     public static Integer fetchUserRole(int userID) throws Exception {
         Connection connection = DataSourceConnector.getConnection();
         PreparedStatement statement = connection.prepareStatement(SqlQueries.FETCH_USER_ROLE);
@@ -192,6 +270,12 @@ public class DataSource {
         return roleID;
     }
 
+    /**
+     * Function to select user role_name from database for given email_id
+     * @param emailID
+     * @return
+     * @throws Exception
+     */
     public static String fetchUserRoleName(String emailID) throws Exception {
         Connection connection = DataSourceConnector.getConnection();
         PreparedStatement statement = connection.prepareStatement(SqlQueries.FETCH_USER_ROLE_NAME);
@@ -206,6 +290,12 @@ public class DataSource {
         return roleName;
     }
 
+    /**
+     * Function to  select teacher from database for given institution_id
+     * @param institutionID
+     * @return
+     * @throws Exception
+     */
     public static List<Teacher> fetchTeachers(int institutionID) throws Exception {
         Connection connection = DataSourceConnector.getConnection();
         PreparedStatement statement = connection.prepareStatement(SqlQueries.FETCH_TEACHERS_DETAILS);
@@ -229,6 +319,12 @@ public class DataSource {
         return teachers;
     }
 
+    /**
+     * Function to select Student from database for given institution_id
+     * @param institutionID
+     * @return
+     * @throws Exception
+     */
     public static List<Student> fetchStudents(int institutionID) throws Exception {
         Connection connection = DataSourceConnector.getConnection();
         PreparedStatement statement = connection.prepareStatement(SqlQueries.FETCH_STUDENT_DETAILS);
@@ -254,6 +350,12 @@ public class DataSource {
         return students;
     }
 
+    /**
+     * Function to select test details from database for given user_id
+     * @param userID
+     * @return
+     * @throws Exception
+     */
     public static List<TestDetails> fetchTestDetails(int userID) throws Exception {
         Connection connection = DataSourceConnector.getConnection();
         PreparedStatement statement = connection.prepareStatement(SqlQueries.FETCH_TEST_DETAILS);
@@ -275,6 +377,11 @@ public class DataSource {
         return testDetailsList;
     }
 
+    /**
+     * Function to delete user form database for given user_id
+     * @param userID
+     * @throws Exception
+     */
     public static void deleteUserWithID(int userID) throws Exception {
         Connection connection = DataSourceConnector.getConnection();
         PreparedStatement statement = connection.prepareStatement(SqlQueries.DELETE_USER_WITH_ID);
@@ -283,6 +390,11 @@ public class DataSource {
         statement.close();
     }
 
+    /**
+     * Function to delete user from database for given email_id
+     * @param emailID
+     * @throws Exception
+     */
     public static void deleteUserWithEmailID(String emailID) throws Exception {
         Connection connection = DataSourceConnector.getConnection();
         PreparedStatement statement = connection.prepareStatement(SqlQueries.DELETE_USER_WITH_EMAIL_ID);
@@ -290,7 +402,13 @@ public class DataSource {
         statement.executeUpdate();
         statement.close();
     }
-    
+
+    /**
+     * Function to  select grade_id from database for given grade
+     * @param grade
+     * @return
+     * @throws Exception
+     */
     public static int getGradeID(String grade) throws Exception {
     	Connection connection = DataSourceConnector.getConnection();
         PreparedStatement statement = connection.prepareStatement(SqlQueries.GET_GRADE_ID);
@@ -304,7 +422,14 @@ public class DataSource {
         statement.close();
         return gradeID;
     }
-    
+
+    /**
+     * Function to insert test into database
+     * @param testDetails
+     * @param loggedInUserID
+     * @param gradeID
+     * @throws Exception
+     */
     public static void inserTest(TestDetails testDetails, int loggedInUserID, int gradeID) throws Exception {
     	 Connection connection = DataSourceConnector.getConnection();
          PreparedStatement statement = connection.prepareStatement(SqlQueries.INSERT_TEST, Statement.RETURN_GENERATED_KEYS);
@@ -322,7 +447,12 @@ public class DataSource {
          }
          statement.close();
     }
-    
+
+    /**
+     * Function to insert test question into database
+     * @param testDetails
+     * @throws Exception
+     */
     public static void insertTestQuestion(TestDetails testDetails) throws Exception {
         Connection connection = DataSourceConnector.getConnection();
         PreparedStatement statement = connection.prepareStatement(SqlQueries.INSERT_TEST_QUESTION, Statement.RETURN_GENERATED_KEYS);
@@ -339,7 +469,12 @@ public class DataSource {
         }
         statement.close();
     }
-    
+
+    /**
+     * Function to delete test from database for given test_id
+     * @param testID
+     * @throws Exception
+     */
     public static void deleteTest(int testID) throws Exception {
         Connection connection = DataSourceConnector.getConnection();
         PreparedStatement statement = connection.prepareStatement(SqlQueries.DELETE_TEST);
@@ -348,6 +483,12 @@ public class DataSource {
         statement.close();
     }
 
+    /**
+     * Function to select grade_id from database for given user_id
+     * @param userID
+     * @return
+     * @throws Exception
+     */
     public static int fetchGradeID(int userID) throws Exception {
         Connection connection = DataSourceConnector.getConnection();
         PreparedStatement statement = connection.prepareStatement(SqlQueries.FETCH_GRADE_ID);
@@ -361,7 +502,14 @@ public class DataSource {
         statement.close();
         return gradeID;
     }
-    
+
+    /**
+     * Function to select grade test details from database for given email_id and institution_id
+     * @param userEmailID
+     * @param institutionID
+     * @return
+     * @throws Exception
+     */
     public static List<TestDetails> fetchGradeTestDetails(String  userEmailID, int institutionID) throws Exception {
         Connection connection = DataSourceConnector.getConnection();
         PreparedStatement statement = connection.prepareStatement(SqlQueries.FETCH_TEST_DETAILS_FOR_USER);
@@ -381,7 +529,13 @@ public class DataSource {
         statement.close();
         return testDetailsList;
     }
-    
+
+    /**
+     * Function to select test name from database for given test_id
+     * @param testID
+     * @return
+     * @throws Exception
+     */
     public static String fetchTestNameForTestID(int testID) throws Exception {
     	Connection connection = DataSourceConnector.getConnection();
         PreparedStatement statement = connection.prepareStatement(SqlQueries.FETCH_TEST_DETAILS_FOR_ID);
@@ -395,7 +549,14 @@ public class DataSource {
         statement.close();
         return testName;
     }
-    
+
+    /**
+     * Function to select test details from database for given test_id
+     * @param testID
+     * @param hasAnswers
+     * @return
+     * @throws Exception
+     */
     public static TestDetails fetchTestDetailsForID(int testID, boolean hasAnswers) throws Exception {
     	Connection connection = DataSourceConnector.getConnection();
         PreparedStatement statement = connection.prepareStatement(SqlQueries.FETCH_TEST_QUESTIONS);
@@ -431,6 +592,14 @@ public class DataSource {
         return testDetail;
     }
 
+    /**
+     * Function to insert student_test into database
+     * @param studentID
+     * @param testID
+     * @param score
+     * @return
+     * @throws Exception
+     */
     public static int insertStudentTest(int studentID, int testID, int score) throws Exception {
         Connection connection = DataSourceConnector.getConnection();
         PreparedStatement statement = connection.prepareStatement(SqlQueries.INSERT_STUDENT_TEST, Statement.RETURN_GENERATED_KEYS);
@@ -448,7 +617,13 @@ public class DataSource {
 	    statement.close();
 	    return lastInsertId;
     }
-    
+
+    /**
+     * Function to  insert student_test_answers into database
+     * @param studentTestID
+     * @param testQuestions
+     * @throws Exception
+     */
     public static void insertStudentTestAnswers(int studentTestID, Map<Integer, TestQuestion> testQuestions) throws Exception {
         Connection connection = DataSourceConnector.getConnection();
         PreparedStatement statement = connection.prepareStatement(SqlQueries.INSERT_STUDENT_TEST_ANSWERS, Statement.RETURN_GENERATED_KEYS);
@@ -462,6 +637,13 @@ public class DataSource {
         statement.close();
     }
 
+    /**
+     * Function to insert user_to_grade into database
+     * @param studentUserID
+     * @param grade
+     * @return
+     * @throws Exception
+     */
     public static Integer insertUserTOGrade(Integer studentUserID, Integer grade) throws Exception {
         Connection connection = DataSourceConnector.getConnection();
         PreparedStatement statement = connection.prepareStatement(SqlQueries.INSERT_STUDENT_TO_GRADE, Statement.RETURN_GENERATED_KEYS);
@@ -472,6 +654,11 @@ public class DataSource {
         return rowsInserted;
     }
 
+    /**
+     * Function to select grade from database
+     * @return
+     * @throws Exception
+     */
     public static Map<String, Integer> fetchGrades() throws Exception {
         Map<String, Integer> userGrades = new HashMap<>();
         Connection connection = DataSourceConnector.getConnection();
@@ -487,6 +674,12 @@ public class DataSource {
         return userGrades;
     }
 
+    /**
+     * Function to select student_test_score from database for given user_id
+     * @param userId
+     * @return
+     * @throws Exception
+     */
     public static List<TestScore> fetchStudentTestScore(int userId) throws Exception {
         Connection connection = DataSourceConnector.getConnection();
         PreparedStatement statement = connection.prepareStatement(SqlQueries.SELECT_STUDENT_TEST_SCORE);
@@ -508,6 +701,12 @@ public class DataSource {
         return testScoreList;
     }
 
+    /**
+     * Function to select student_grade from database for given grade_id
+     * @param gradeID
+     * @return
+     * @throws Exception
+     */
     public static String fetchStudentGrade(int gradeID) throws Exception {
         String grade = "Grade-1";
         Connection connection = DataSourceConnector.getConnection();
@@ -522,6 +721,13 @@ public class DataSource {
         return grade;
     }
 
+    /**
+     * Function to select student test correct answers from database for given user_id and test_id
+     * @param userId
+     * @param testId
+     * @return
+     * @throws Exception
+     */
     public static List<TestAnswers> fetchStudentTestCorrectAnswers(int userId, int testId) throws Exception {
         Connection connection = DataSourceConnector.getConnection();
         PreparedStatement statement = connection.prepareStatement(SqlQueries.SELECT_STUDENT_TEST_CORRECT_ANSWERS);

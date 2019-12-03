@@ -3,8 +3,15 @@ package com.asu.ser.usermanagement;
 import com.opensymphony.xwork2.Action;
 import junit.framework.TestCase;
 
+/**
+ * @author srini
+ * @author akhilesh
+ */
 public class UserManagementActionTest extends TestCase {
 
+    /**
+     * Test function to test the functionality to validate email
+     */
     public void testSignUpValidateEmail(){
         UserManagementAction userManagementAction = new UserManagementAction();
         assertEquals(Action.ERROR, userManagementAction.signUp());
@@ -15,6 +22,9 @@ public class UserManagementActionTest extends TestCase {
         assertEquals("Invalid Email ID. Please enter a valid Email ID.", userManagementAction.getMessage());
     }
 
+    /**
+     * Test function to test the functionality to validate password
+     */
     public void testSignUpValidatePassword(){
         UserManagementAction userManagementAction = new UserManagementAction();
         userManagementAction.setEmailID("abc@abc.com");
@@ -26,6 +36,9 @@ public class UserManagementActionTest extends TestCase {
         assertEquals("Invalid Password. Please enter a valid Password.", userManagementAction.getMessage());
     }
 
+    /**
+     * Test function to test the functionality to validate institution
+     */
     public void testSignUpValidateInstitution(){
         UserManagementAction userManagementAction = new UserManagementAction();
         userManagementAction.setEmailID("abc@abc.com");
@@ -34,6 +47,9 @@ public class UserManagementActionTest extends TestCase {
         assertEquals("Institution name exists. Kindly try another name", userManagementAction.getMessage());
     }
 
+    /**
+     * Test function to test the functionality to add teacher
+     */
     public void testAddTeacher(){
         try {
             UserManagementAction userManagementAction = new UserManagementAction();
@@ -43,6 +59,9 @@ public class UserManagementActionTest extends TestCase {
         }
     }
 
+    /**
+     * Test function to test the functionality to fetch teachers
+     */
     public void testFetchTeachers(){
         try {
             UserManagementAction userManagementAction = new UserManagementAction();
@@ -52,6 +71,9 @@ public class UserManagementActionTest extends TestCase {
         }
     }
 
+    /**
+     * Test function to test the functionality to reset password
+     */
     public void testResetPassword(){
         UserManagementAction userManagementAction = new UserManagementAction();
         userManagementAction.setNewPassword("Password123");
